@@ -1,6 +1,6 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
-import {SecurityService} from '../../../../service/security/security.service';
-import {TokenStorageService} from '../../../../service/security/token-storage.service';
+import {Component, Injectable, OnInit} from '@angular/core';
+import {SecurityService} from "../../../../service/security/security.service";
+import {TokenStorageService} from "../../../../service/security/token-storage.service";
 
 @Component({
   selector: 'app-main-header',
@@ -10,7 +10,7 @@ import {TokenStorageService} from '../../../../service/security/token-storage.se
 export class MainHeaderComponent implements OnInit {
 
   roles: string[] = [];
-  username: string = '';
+  username: string = 'abc';
 
   constructor(
     private securityService: SecurityService,
@@ -25,14 +25,10 @@ export class MainHeaderComponent implements OnInit {
       this.securityService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
       this.username = this.tokenStorageService.getUser().username;
+      this.username = 'abc';
     } else {
       console.log('Reset username');
-      this.username = '';
+      this.username = 'abc';
     }
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.ngOnInit();
-  }
-
 }

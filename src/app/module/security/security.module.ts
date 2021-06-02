@@ -7,8 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { LogoutComponent } from './logout/logout.component';
 import { GetBackPasswordComponent } from './get-back-password/get-back-password.component';
 import { RegisterComponent } from './register/register.component';
-
-
+import {MainModule} from "../main/main.module";
 
 @NgModule({
   declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent],
@@ -17,7 +16,8 @@ import { RegisterComponent } from './register/register.component';
     RouterModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MainModule
   ]
 })
 export class SecurityModule { }
