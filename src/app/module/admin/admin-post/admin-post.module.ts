@@ -12,6 +12,7 @@ import {ListWaitComponent} from './list-wait/list-wait.component';
 import {WaitAdminComponent} from './wait-admin/wait-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PostStatisticsComponent } from './post-statistics/post-statistics.component';
+import {ToastrService} from "ngx-toastr";
 
 
 @NgModule({
