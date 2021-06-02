@@ -1,0 +1,58 @@
+<div class="container-fluid body">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Quản lý thành viên</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bg-light" routerLink="/main-category">Quản lý chuyên mục</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Banner</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Mail Server</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <br>
+      <div class="card">
+        <div class="card-body">
+          <p class="title">Chỉnh sửa chuyên mục</p>
+          <form [formGroup]="formEdit" (ngSubmit)="save()">
+            <table class="table table-striped">
+              <tr>
+                <td>Tên chuyên mục cha</td>
+                <td>
+                  <input type="text" formControlName="categoryName" class="form-control">
+                  <div class="error alert alert-danger" role="alert"
+                       *ngIf="formEdit.get('categoryName').invalid && formEdit.get('categoryName').dirty">
+                    <span *ngIf="formEdit.get('categoryName').hasError('required')">Tên chuyên mục cha không được để trống.</span>
+                    <span *ngIf="formEdit.get('categoryName').hasError('pattern')">Tên chuyên mục cha không được có kí tự đặc biệt</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <input type="submit" class="btn btn-success" [disabled]="formEdit.invalid" value="Lưu">
+                </td>
+                <td style="text-align: center">
+                  <a routerLink="/main-category/category" class="btn btn-secondary">Hủy</a>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

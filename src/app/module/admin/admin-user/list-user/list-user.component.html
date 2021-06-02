@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="menu">
+    <div class=".logo col-2 text-center float-left">
+      <a>
+        <div class="row">
+          <h4 class="text-light mt-2 pt-1 ml-5">C1120G1</h4>
+          <img
+            src=""
+            width="50px" class="mt-1">
+        </div>
+      </a>
+    </div>
+
+    <div class="col-2 float-right mt-2">
+      <a class="float-left text-light mr-1 mt-2">Ngọc</a>
+      <a role="button" class="float-left btn btn-light mt-1 btnLogOut" (click)="logout()">Đăng xuất</a>
+    </div>
+  </div>
+  <div class="col-2 float-left menu-left-admin">
+    <div class="row">
+      <ul class="col-12">
+
+        <li class=" pt-2 pb-2 menu-var">
+          <a class="text-decoration-none text-dark  pt-2 pb-2">
+            <i class="fas fa-user-tie mr-2 col-1"></i>Quản Lý Thành Viên
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var">
+          <a class="text-decoration-none text-dark  pt-2 pb-2">
+            <i class="fas fa-file-signature mr-2 col-1"></i>Quản Lý Chuyên Mục
+          </a>
+        </li>
+
+        <li class=" pt-2 pb-2 menu-var">
+          <a class="text-decoration-none text-dark  pt-2 pb-2">
+            <i class="fas fa-car mr-2 col-1"></i>Banner
+          </a>
+        </li>
+
+        <li class=" pt-2 pb-2 menu-var">
+          <a class="text-decoration-none text-dark  pt-2 pb-2">
+            <i class="fas fa-hand-holding-usd mr-2 col-1"></i>Quảng cáo
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-9">
+    <div style="margin: 26px; width: 100%">
+      <div class="table-header">
+        <p class="title">Danh Sách Thành Viên Trong Hệ Thống</p>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <a href="" class="btn btn-success addUser">
+            <i class="fas fa-plus"></i>
+            <span>Thêm mới thành viên</span>
+          </a>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3 float-right d-inline-flex">
+          <input type="text" placeholder="Input Name or Id User To Find" class="form-control rounded-pill inputSearch"
+                 style="width: 80%">
+          <button class="btn btnSearch" (click)="search()"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead class="theadTable">
+        <th>#</th>
+        <th>Id</th>
+        <th>Tên Thành Viên</th>
+        <th>Tên Đăng Nhập</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Các Tuỳ Chọn</th>
+        </thead>
+        <tbody>
+        <tr class="inputTable" *ngFor="let user of users; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{user.userId}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.account}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>
+            <a [routerLink]="['edit', user.userId]">
+              <button class="editButton btn btn-warning"><i class="far fa-edit"></i></button>
+            </a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                    (click)="deleteId = user.userId; deleteName = user.name"><i class="far fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <app-delete-user [deleteId]="deleteId" [deleteName]="deleteName"
+                               (deleteComplete)="deleteSuccess()"></app-delete-user>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End modal -->
+      <!-- pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- end pagination -->
+    </div>
+  </div>
+
+</div>

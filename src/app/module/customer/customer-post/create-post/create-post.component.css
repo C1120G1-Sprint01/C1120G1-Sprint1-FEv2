@@ -1,0 +1,184 @@
+body {
+  font-size: 14px !important;
+  font-family: "Roboto Light", sans-serif;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.btn {
+  font-size: 14px;
+}
+
+.bg-blue {
+  background-color: #027fff; /*navbar background*/
+}
+.btn-blue {
+  background-color: #0d5db6; /*button*/
+}
+.btn-blue:hover {
+  background-color: #688cff;
+}
+
+@media (max-width: 768px) {
+  .menu-left {
+    display: none;
+  }
+
+  .menu-right {
+    display: none;
+  }
+}
+
+.menu-left {
+  height: 80%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.menu-left_item {
+  text-align: left !important;
+}
+
+.menu-left_item:hover {
+  border-bottom: #095484 solid 3px;
+  transition: 0.3s;
+}
+
+.list-group-item:hover {
+  border-left: #095484 solid 5px;
+  transition: 0.3s;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.menu-right {
+  height: 80%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.title-text {
+  font-size: 20px;
+}
+
+.form-control {
+  font-size: 14px !important;
+}
+
+/*Overlay: content menu left under 768px*/
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.list-item-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #818181;
+  cursor: pointer;
+}
+
+.overlay a:hover,
+.overlay a:focus,
+.list-item-overlay:hover {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .closebtn {
+    top: 15px;
+    right: 35px;
+  }
+}
+
+.open-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .open-overlay {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    color: #0d5db6;
+  }
+
+  .open-overlay:hover {
+    color: #688cff;
+  }
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+/* END custom scrollbar */
+
+/*------------------- dangtin below */
+
+.asterisk-red {
+  color: red;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.custom-select-sm {
+  height: calc(1.5em + 0.75rem + 0px) !important;
+}
+.imgAdd {
+  margin-top: 3px;
+}

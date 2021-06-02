@@ -1,0 +1,67 @@
+<div class="fabs">
+  <div class="chat">
+    <div class="chat_header">
+      <div class="chat_option">
+        <div class="header_img">
+          <img src="./assets/image/logoChat.png"/>
+        </div>
+        <span id="chat_head">Trung Tâm Tư Vấn</span>
+        <br>
+        <span class="agent">
+                    <i style="color: #4ffc1e" class="fas fa-circle"></i>
+                </span>
+        <span class="agent">(Đang hoạt động)</span>
+        <span id="chat_fullscreen_loader" class="chat_fullscreen_loader"><i
+          class="fullscreen zmdi zmdi-window-maximize"></i></span>
+      </div>
+    </div>
+    <div class="chat_body chat_login">
+      <a id="chat_first_screen" class="fab"><i class="zmdi zmdi-arrow-right"></i></a>
+      <p>Chúng tôi kết nối việc mua/bán giữa mọi người một cách đơn giản và hiệu quả, hãy hỏi tôi bất cứ
+        điều gì</p>
+    </div>
+    <div id="chat_converse" class="chat_conversion chat_converse">
+      <a id="chat_second_screen" class="fab" style="display: none"><i class="zmdi zmdi-arrow-right"></i></a>
+      <div>
+            <span class="chat_msg_item chat_msg_item_admin">
+            <div class="chat_avatar">
+               <img src="./assets/image/logoChat.png"/>
+            </div>Xin Chào! Tôi có thể giúp gì cho bạn không?
+            </span>
+        <span class="timeChat">15:17 20/05/2021</span>
+      </div>
+      <div>
+            <span class="chat_msg_item chat_msg_item_user">
+            Xin Chào!</span>
+        <span class="timeChat">15:18 20/05/2021</span>
+      </div>
+      <div>
+            <span class="chat_msg_item chat_msg_item_admin">
+            <div class="chat_avatar">
+               <img src="./assets/image/logoChat.png"/>
+            </div>Bạn muốn nói chuyện về vấn đề gì nào?</span>
+        <span class="timeChat">15:19 20/05/2021</span>
+      </div>
+      <div>
+            <span class="chat_msg_item chat_msg_item_user" onclick="hideTime()">
+            Tôi muốn đăng bán một mặt hàng thì làm như thế nào?</span>
+        <span class="timeChat">15:20 20/05/2021</span>
+      </div>
+      <div id="preview"></div>
+    </div>
+    <div class="fab_field">
+      <label>
+        <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
+        <input type="file" id="upload_file" name="upload_file[]"
+               onchange="preview_image();" multiple hidden/>
+      </label>
+      <div class="d-inline-block">
+        <input id="chatSend" name="chat_message" placeholder="Bạn muốn nói gi?"
+               class="chat_field chat_message"/>
+      </div>
+      <a id="fab_send" onclick="displayValue()" class="fab"><i class="zmdi zmdi-mail-send"></i></a>
+      <div id="image_preview"></div>
+    </div>
+  </div>
+  <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
+</div>

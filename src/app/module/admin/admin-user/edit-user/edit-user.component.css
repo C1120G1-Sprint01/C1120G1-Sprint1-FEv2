@@ -1,0 +1,51 @@
+body, form {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+}
+.errorText {
+  font-size: 11px;
+  color: red;
+  margin-top: 7px;
+}
+.menuB {
+  margin-top: 30px;
+  font-size: 14px;
+  margin-left: 50px;
+}
+.inputText {
+  font-size: 13px;
+}
+.title {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 20px;
+  color: #fff;
+}
+.updateBtn {
+  background-color: #0D5DB6;
+}
+.table-header {
+  background-color: #027FFF;
+  border-radius: 3px 3px 0 0;
+  margin-bottom: 10px;
+}
+.menu-left-admin {
+  border-right: solid #095484 1px;
+  height: 700px;
+  margin: 26px;
+}
+
+.menu-left-admin ul li {
+  list-style: none;
+  transition: 0.5s;
+  border-bottom: white solid 2px;
+}
+.menu {
+  width: 100%;
+  height: 60px;
+  background: #095484;
+
+}
+.btnback {
+  margin-bottom: 7px;
+}
