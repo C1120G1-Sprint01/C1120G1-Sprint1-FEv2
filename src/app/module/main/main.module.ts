@@ -8,14 +8,17 @@ import {ViewPostComponent} from './view-post/view-post.component';
 import {RouterModule} from '@angular/router';
 import {MainFooterComponent} from './main-layout/main-footer/main-footer.component';
 import {MainHeaderComponent} from "./main-layout/main-header/main-header.component";
+import {FormsModule} from "@angular/forms";
+import { MainContentComponent } from './main-layout/main-content/main-content.component';
 
 
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule
+    ]
 })
 export class MainModule {
 }
