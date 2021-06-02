@@ -8,13 +8,19 @@ import {ViewPostComponent} from './view-post/view-post.component';
 import {RouterModule} from '@angular/router';
 import {MainFooterComponent} from './main-layout/main-footer/main-footer.component';
 import {MainHeaderComponent} from "./main-layout/main-header/main-header.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
+  exports: [
+    MainHeaderComponent,
+    MainFooterComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule {
