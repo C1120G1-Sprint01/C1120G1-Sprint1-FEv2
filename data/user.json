@@ -1,0 +1,132 @@
+{
+  "account": [
+    {
+      "id": 1,
+      "username": "baongoc093",
+      "password": "123456",
+      "register_date": "2021-05-25"
+    },
+    {
+      "id": 2,
+      "username": "tuongvi12",
+      "password": "123456",
+      "register_date": "2021-05-25"
+    },
+    {
+      "id": 3,
+      "username": "quochoang12",
+      "password": "123456",
+      "register_date": "2021-05-25"
+    },
+    {
+      "id": 4,
+      "username": "ngocthuan12",
+      "password": "123456",
+      "register_date": "2021-05-25"
+    },
+    {
+      "id": 5,
+      "username": "hoangsang12",
+      "password": "123456",
+      "register_date": "2021-05-25"
+    }
+  ],
+  "province": [
+    {
+      "id": 1,
+      "provinceName": "Quang Tri"
+    },
+    {
+      "id": 2,
+      "provinceName": "Da Nang"
+    },
+    {
+      "id": 3,
+      "provinceName": "Hue"
+    },
+    {
+      "id": 4,
+      "provinceName": "Quang Nam"
+    }
+  ],
+  "district": [
+    {
+      "id": 1,
+      "districtName": "Dong Ha"
+    },
+    {
+      "id": 2,
+      "districtName": "A Luoi"
+    },
+    {
+      "id": 3,
+      "districtName": "Hai Chau"
+    },
+    {
+      "id": 4,
+      "districtName": "Thanh Khe"
+    }
+  ],
+  "ward": [
+    {
+      "id": 1,
+      "wardName": "Phuong 5",
+      "districtId": 1
+    },
+    {
+      "id": 2,
+      "wardName": "Binh Thuan",
+      "districtId": 3
+    },
+    {
+      "id": 3,
+      "wardName": "Hoa Tho Dong",
+      "districtId": 4
+    },
+    {
+      "id": 4,
+      "wardName": "Vinh Trung",
+      "districtId": 2
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "email": "baongoc@gmail.com",
+      "name": "Bao Ngoc",
+      "phone": "0918870456",
+      "username": {
+        "id": 1,
+        "username": "baongoc093",
+        "password": "123456",
+        "register_date": "2021-05-25"
+      },
+      "ward":
+        {
+          "id": 1,
+          "wardName": "Phuong 5",
+          "districtId": 1
+        }
+    },
+    {
+      "id": 2,
+      "email": "tuongvi@gmail.com",
+      "name": "Tuong Vi",
+      "phone": "0918870444",
+      "username":
+        {
+          "id": 2,
+          "username": "tuongvi12",
+          "password": "123456",
+          "register_date": "2021-05-25"
+        },
+      "ward":
+        {
+          "id": 2,
+          "wardName": "Binh Thuan",
+          "districtId": 3
+        }
+
+    }
+  ]
+}

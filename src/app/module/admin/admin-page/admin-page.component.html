@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Start of sidebar-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="btn blue" data-toggle="collapse" routerLink="/admin">Trang chủ</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="btn blue" data-toggle="collapse" data-target="#ctgy1">Xem và duyệt tin rao vặt</a>
+            <ul id="ctgy1" class="collapse list-group list-group-flush ml-2">
+              <li class="list-group-item"><a routerLink="/admin/posts/list-detail" class="dropdown-item blue"
+                                             data-toggle="collapse">+&nbsp; Xem
+                tin rao vặt</a></li>
+              <li class="list-group-item"><a routerLink="/admin/posts/list-approve" class="dropdown-item blue"
+                                             data-toggle="collapse">+&nbsp; Duyệt
+                tin rao vặt</a></li>
+              <li class="list-group-item"><a routerLink="/admin/posts/list-wait" class="dropdown-item blue" data-toggle="collapse">+&nbsp; Danh
+                sách
+                để sau</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Start of content-->
+    <div role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

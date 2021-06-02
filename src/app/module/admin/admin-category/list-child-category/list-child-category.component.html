@@ -1,0 +1,82 @@
+<div class="container-fluid body">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Quản lý thành viên</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bg-light" routerLink="/main-category">Quản lý chuyên mục</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Banner</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Mail Server</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <p class="title mt-4">Quản lý chuyên mục cha</p>
+          <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
+            <div class="col-xl-5 col-md-3">
+              <label>Tên chuyên mục</label>
+              <input [(ngModel)]="childCategoryName" class="form-control" type="text"
+                     placeholder="Tên chuyên mục">
+            </div>
+            <div class="col-xl-5 col-md-3">
+              <label>Tên chuyên mục cha</label>
+              <input [(ngModel)]="categoryName" class="form-control" type="text"
+                     placeholder="Tên chuyên mục cha">
+            </div>
+            <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+              <button (click)="getSearch()" class="btn mt-2" style="background-color: #0D5DB6; color: white"><i
+                class="fa fa-search"></i> Tìm kiếm
+              </button>
+            </div>
+          </div>
+          <a href="" class="btn btn-success btn-rounded mb-4" routerLink="create-child-category" data-toggle="modal"
+             data-target="#modalCreateCategories">Thêm chuyên mục <i class="fas fa-plus"></i></a><br>
+          <table class="table table-hover">
+            <tr>
+              <th>#</th>
+              <th>Tên chuyên mục</th>
+              <th>Tên chuyên mục cha</th>
+              <th colspan="2" style="text-align: center">Thao tác</th>
+            </tr>
+            <tr *ngFor="let item of childCategoryList| paginate:{ itemsPerPage: 5, currentPage: p }">
+              <td>{{item.childCategoryId}}</td>
+              <td>{{item.childCategoryName}}</td>
+              <td>{{item.category.categoryName}}</td>
+              <td style="text-align: center">
+                <a [routerLink]="['edit-child-category',item.childCategoryId]"
+                   class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a data-toggle="modal" data-target="#exampleModal"
+                   (click)="deleteId = item.childCategoryId; deleteName = item.childCategoryName" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
+              </td>
+            </tr>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-delete-child-category [deleteId]="deleteId" [deleteName]="deleteName" (deleteComplete)="deleteSuccess()"></app-delete-child-category>
+      </div>
+    </div>
+  </div>
+</div>

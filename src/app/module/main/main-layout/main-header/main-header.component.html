@@ -1,0 +1,42 @@
+<div class="header sticky-top sticky">
+  <nav class="navbar navbar-expand-lg"
+       style="background-color: #027FFF; font-family: 'Roboto Light',sans-serif; font-size: 25px; height: 10vh">
+    <a routerLink="homepage">
+      <img class="navbar brand" src="../../../../../assets/img/logoChat.png" alt="logo" style="max-height: 10vh">
+
+      </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 30px">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item-lg">
+          <a routerLink="post/create" class="nav-link" style="color: white; margin-right: 30px"><span
+            class="fas fa-edit"></span> ĐĂNG TIN</a>
+        </li>
+
+        <li class="nav-item-lg" style="margin-right: 30px">
+          <form class="form-inline my-2 my-lg-0" [formGroup]="searchInput" (ngSubmit)="submit()">
+            <input formControlName="posterName" class="form-control mr-sm-2" type="search" placeholder="Xe máy, Quạt, ..." aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" [disabled]="!searchInput.valid" type="submit">Tìm kiếm</button>
+          </form>
+        </li>
+
+        <li class="nav-item-lg" *ngIf="username == ''">
+          <a class="nav-link"
+             routerLink="login" style="color: white; margin-right: 30px">
+            <span class="fas fa-user"></span> ĐĂNG NHẬP
+          </a>
+        </li>
+        <li class="nav-item-lg" *ngIf="username != ''">
+          <p style="color: white; margin-right: 30px">
+            &nbsp;{{username}}
+          </p>
+          <a class="nav-link" routerLink="logout"
+             style="color: white; margin-right: 30px">
+            ĐĂNG XUẤT
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</div>

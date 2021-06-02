@@ -1,0 +1,38 @@
+.title{
+  font-size: 20px;
+  font-weight: bold;
+}
+.body{
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto Light",sans-serif;
+  font-size: 14px;
+  background: #f7f7ff;
+  margin-top:-20px;
+}
+.col-md-3 {
+  border-right: black 1px solid;
+}
+.error{
+  font-size: 11px;
+  color: red;
+}
+.page{
+  text-align: center;
+}
+.nav-item .nav-link:hover{
+  background-color: lightgray;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: .25rem;
+  /*margin-bottom: 1.5rem;*/
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
