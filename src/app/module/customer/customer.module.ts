@@ -5,7 +5,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {CustomerPageComponent} from './customer-page/customer-page.component';
-import {CustomerHeaderComponent} from './customer-header/customer-header.component';
 import {ShowInfoComponent} from './customer-manager/show-info/show-info.component';
 import {EditInfoComponent} from './customer-manager/edit-info/edit-info.component';
 import {ChangePasswordComponent} from './customer-manager/change-password/change-password.component';
@@ -17,7 +16,7 @@ import {ListPostComponent} from './customer-post/list-post/list-post.component';
 import {RouterModule} from '@angular/router';
 
 @NgModule({
-  declarations: [CustomerPageComponent, CustomerHeaderComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
+  declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
     InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent],
   imports: [
     CommonModule,

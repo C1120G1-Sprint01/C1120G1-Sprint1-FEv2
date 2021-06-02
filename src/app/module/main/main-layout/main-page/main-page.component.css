@@ -23,7 +23,7 @@ input::-webkit-input-placeholder {
   background-color: #688cff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .menu-left {
     display: none;
   }
@@ -31,12 +31,6 @@ input::-webkit-input-placeholder {
   .menu-right {
     display: none;
   }
-}
-
-.menu-left {
-  height: 80%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .menu-left_item {
@@ -57,12 +51,6 @@ input::-webkit-input-placeholder {
   cursor: pointer;
 }
 
-.menu-right {
-  height: 80%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
 .title-text {
   font-size: 20px;
 }
@@ -71,7 +59,7 @@ input::-webkit-input-placeholder {
   font-size: 14px !important;
 }
 
-/*Overlay: content menu left under 768px*/
+/*Overlay: content menu left under 769px*/
 .overlay {
   height: 100%;
   width: 0;
@@ -134,7 +122,7 @@ input::-webkit-input-placeholder {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .open-overlay {
     display: block;
     font-size: 30px;
@@ -144,11 +132,6 @@ input::-webkit-input-placeholder {
 
   .open-overlay:hover {
     color: #688cff;
-  }
-
-  .main-content-frame {
-    margin-left: 3rem !important;
-    margin-right: 3rem !important;
   }
 }
 
@@ -175,11 +158,6 @@ input::-webkit-input-placeholder {
 /* END custom scrollbar */
 
 /* -------------------- custom content */
-.main-content {
-  height: 80%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 
 .list-post {
   overflow-y: scroll;
