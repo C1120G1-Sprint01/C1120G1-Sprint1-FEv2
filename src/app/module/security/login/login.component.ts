@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SecurityService} from "../../../service/security/security.service";
 import {TokenStorageService} from "../../../service/security/token-storage.service";
 import {Router} from "@angular/router";
 import {AuthLogin} from "../../../model/AuthLogin";
+import {MainHeaderComponent} from "../../main/main-layout/main-header/main-header.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers:[MainHeaderComponent]
 })
 export class LoginComponent implements OnInit {
 
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,
               private securityService:SecurityService,
               private tokenStorageService:TokenStorageService,
-              private router:Router)
+              private router:Router,
+              private headerComponent:MainHeaderComponent)
   { }
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class LoginComponent implements OnInit {
           this.tokenStorageService.saveUserLocal(data);
         } else {
           this.tokenStorageService.saveTokenSession(data.accessToken);
-          this.tokenStorageService.saveUserLocal(data);
+          this.tokenStorageService.saveUserSession(data);
         }
 
         this.securityService.isLoggedIn = true;
@@ -68,7 +71,8 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorageService.getUser().roles;
         this.form.reset();
         console.log("Login Success");
-        this.router.navigateByUrl("homepage"); //index
+        this.headerComponent.ngOnInit();
+        this.router.navigateByUrl("/"); //index
 
       },
       err => {
