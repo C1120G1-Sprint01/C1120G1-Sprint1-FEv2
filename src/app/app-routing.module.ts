@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {path: '', component: ListPostComponent},
       {path: 'chat', component: MainChatComponent},
-      {path: 'post/:id', component: ViewPostComponent}
+      // {path: 'post/:id', component: ViewPostComponent}
     ]
   },
   {
@@ -32,7 +32,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'login/getBackPw', component: GetBackPasswordComponent}
+  {path: 'login/getBackPw', component: GetBackPasswordComponent},
+  {path: 'post/:id', component: ViewPostComponent}
 ];
 
 @NgModule({

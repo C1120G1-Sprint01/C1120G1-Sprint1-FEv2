@@ -4,12 +4,12 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
       <li class="breadcrumb-item">
-        <a [routerLink]="['../../../', categorySlug]">
+        <a [routerLink]="['../../', categorySlug]">
           {{post.childCategory.category.categoryName}}
         </a>
       </li>
       <li class="breadcrumb-item">
-        <a [routerLink]="['../../../', categorySlug, childCategorySlug]">
+        <a [routerLink]="['../../', categorySlug, childCategorySlug]">
           {{post.childCategory.childCategoryName}}
         </a>
       </li>

@@ -41,9 +41,11 @@ export class CreatePostComponent implements OnInit {
     private categoryService: CategoryService,
     private toastr: ToastrService
   ) {
+    console.log("constructor");
   }
 
   ngOnInit(): void {
+    console.log("init");
     this.formInit();
 
     this.addressService.findAllProvince().subscribe(data => {
