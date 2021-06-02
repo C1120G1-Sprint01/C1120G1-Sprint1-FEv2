@@ -1,9 +1,10 @@
 <app-main-header></app-main-header>
 <div class="d-inline-flex col-12 px-0">
   <!-- menu left -->
-  <div class="col-md-2 px-0">
+  <div class="col-md-2 px-0 border-right">
     <!-- content menu left full-size -->
-    <div class="position-fixed col-md-2 menu-left border-right">
+    <div class="col-md-12 menu-left">
+      <!--      add content of menu left inside here-->
       <!-- category -->
       <p class="title-text">Chuyên mục</p>
       <div>
@@ -51,13 +52,17 @@
         </ul>
       </div>
       <!-- END category -->
+      <!--      add content of menu left inside here-->
     </div>
     <!--END content menu left full-size -->
-    <!-- content menu left under 768px -->
-    <span class="open-overlay position-fixed col-1 col-sm-1" (click)="openNav()">&#9776;</span>
+
+    <!--CAUTION: if you don't have menu overlay, you needn't add anything in "left menu content under 768px width", and when under 768 width, your left menu will disappear.-->
+    <!-- content menu left under 768px width -->
+    <span class="open-overlay position-fixed col-1 col-sm-1 pt-1" (click)="openNav()">&#9776;</span>
     <div id="myNav" class="overlay">
-      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      <a href="javascript:void(0)" class="closebtn mt-5" (click)="closeNav()">&times;</a>
       <div class="overlay-content">
+        <!--content menu left here-->
         <!-- category -->
         <div>
           <a class="btn title-text" data-toggle="collapse" data-target="#ctgy1"><span>-&nbsp;</span>Xe cộ</a>
@@ -67,25 +72,6 @@
             <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Xe đạp</li>
             <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Xe tải, xe khác</li>
             <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Phụ tùng</li>
-          </ul>
-        </div>
-        <!-- END category -->
-        <!-- category -->
-        <div>
-          <a class="btn title-text" data-toggle="collapse" data-target="#ctgy2"><span>-&nbsp;</span>Bất động sản</a>
-          <ul id="ctgy2" class="collapse list-group list-group-flush ml-2">
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất mặt tiền</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Biệt thự</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Chung cư</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất canh tác</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất mặt tiền</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Biệt thự</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Chung cư</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất canh tác</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất mặt tiền</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Biệt thự</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Chung cư</li>
-            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Đất canh tác</li>
           </ul>
         </div>
         <!-- END category -->
@@ -101,25 +87,30 @@
           </ul>
         </div>
         <!-- END category -->
+        <!--END content menu-->
       </div>
     </div>
     <!--END content menu left under 768px -->
+    <!--END CAUTION-->
   </div>
   <!-- END menu left -->
+
   <!-- main content -->
   <div class="main-content-frame col-md-8 col-sm-10 col-10 px-0">
     <!-- content here -->
-    <div class="main-content bg-light position-fixed col-md-8 col-sm-12">
+    <div class="main-content bg-light col-md-12 col-sm-12">
       <router-outlet></router-outlet>
     </div>
   </div>
   <!-- END main content -->
-  <!-- ads right -->
-  <div class="col-2 pl-0">
-    <div class="position-fixed col-2 menu-right border-left">
-      <p class="text-danger">ADS</p>
+  <!-- menu right -->
+  <div class="col-md-2 pl-0 menu-right border-left">
+    <div class="col-2 ">
+      <!-- ads inside here-->
+      <img src="#" alt="ads">
+      <!-- END add ads inside here-->
     </div>
   </div>
-  <!-- END ads right -->
+  <!-- END menu right -->
 </div>
-<!--<app-main-footer></app-main-footer>-->
+<app-main-footer></app-main-footer>
