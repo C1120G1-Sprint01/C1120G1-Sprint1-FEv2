@@ -1,0 +1,75 @@
+.btnLogOut {
+  font-family: "Roboto Light", sans-serif;
+  font-size: 15px;
+}
+.inputTable {
+  font-family: "Roboto light", sans-serif;
+  font-size: 13px;
+}
+
+.addUser {
+  margin: 20px;
+  font-family: "Roboto Light", sans-serif;
+  font-size: 15px;
+}
+
+.btnSearch {
+  color: #0D5DB6;
+}
+
+.theadTable {
+  font-family: "Roboto Light", sans-serif;
+  font-size: 13px;
+}
+
+.inputSearch {
+  font-size: 13px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+
+.title {
+  font-size: 20px;
+  background-color: #027FFF;
+  margin:  5px;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.menu {
+  width: 100%;
+  height: 60px;
+  background: #095484;
+
+
+}
+
+.menu-left-admin {
+  border-right: solid #095484 1px;
+  height: 700px;
+  margin: 26px;
+}
+
+.menu-left-admin ul li {
+  list-style: none;
+  transition: 0.5s;
+  border-bottom: white solid 2px;
+}
+
+.menu-left-admin .menu-var:hover {
+  border-bottom: #095484 solid 2px;
+  transition: 0.5s;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background: #2196f3;
+}
+.table {
+  width: 100%;
+}

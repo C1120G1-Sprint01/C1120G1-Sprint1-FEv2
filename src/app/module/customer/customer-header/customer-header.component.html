@@ -1,0 +1,39 @@
+<div class="header sticky-top sticky">
+  <nav class="navbar navbar-expand-lg"
+       style="background-color: #027FFF; font-family: 'Roboto Light',sans-serif; font-size: 25px; height: 10vh">
+    <a routerLink="homepage">
+      <img class="navbar brand" src="../../../../../assets/img/logoChat.png" alt="logo" style="max-height: 10vh">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 30px">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item-lg">
+          <a class="nav-link" routerLink="customer/post-add" style="color: white; margin-right: 30px"><span
+            class="fas fa-edit"></span> ĐĂNG TIN</a>
+        </li>
+
+        <li class="nav-item-lg">
+          <a class="nav-link" href="#" style="color: white; margin-right: 30px"><span
+            class="fas fa-search"></span> TÌM KIẾM</a>
+        </li>
+
+        <li class="nav-item-lg" *ngIf="username == ''">
+          <a class="nav-link"
+             routerLink="login" style="color: white; margin-right: 30px">
+            <span class="fas fa-user"></span> ĐĂNG NHẬP
+          </a>
+        </li>
+        <li *ngIf="username != ''" class="d-inline-flex">
+          <p style="color: white; margin-right: 30px">
+            &nbsp;{{username}}
+          </p>
+          <a class="nav-link" routerLink="logout"
+             style="color: white; margin-right: 30px">
+            ĐĂNG XUẤT
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</div>

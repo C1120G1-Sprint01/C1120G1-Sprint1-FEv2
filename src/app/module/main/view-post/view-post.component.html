@@ -1,0 +1,154 @@
+<div class="col-12 col-sm-12 col-md-8 content" *ngIf="post; else notFound">
+  <!-- Start of content-header (breadcrumb) -->
+  <div class="content-header">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['../../../', categorySlug]">
+          {{post.childCategory.category.categoryName}}
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['../../../', categorySlug, childCategorySlug]">
+          {{post.childCategory.childCategoryName}}
+        </a>
+      </li>
+    </ol>
+  </div><!-- End of content-header -->
+  <!-- Start of content-detail -->
+  <div class="content-detail row m-0">
+    <div class="post-detail">
+      <!-- Start of post-img -->
+      <div id="post-img" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let image of post.imageSet; let i = index"
+               [ngClass]="i == 0? 'active': ''">
+            <img class="d-block w-100" [alt]="image.imageName" [src]="image.url">
+          </div>
+          <div class="carousel-caption"><p>{{timeDiff}}</p></div>
+        </div>
+        <a class="carousel-control-prev" href="#post-img" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#post-img" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div><!-- End of post-img -->
+
+      <!-- Start of post-title -->
+      <div class="post-title">{{post.title}}</div><!-- End of post-title -->
+      <!-- Start of price -->
+      <div class="price">{{post.price | currency: 'VND': '': '1.0'}} đ</div><!-- End of price -->
+
+      <!-- Start of contact-panel-2 -->
+      <div class="contact-panel-2">
+        <hr class="divider mx-0 my-3">
+        <div class="user-info">
+          <div class="user row m-0">
+            <!-- Start of avatar -->
+            <div class="img-thumbnail img-circle p-0 border-0">
+              <img alt class="img-thumbnail rounded-circle p-0" [src]="post.user.avatarUrl">
+            </div><!-- End of avatar -->
+            <!-- Start of user-name -->
+            <div class="user-name pl-2 font-weight-bold">{{post.user.name}}</div><!-- End of user-name -->
+          </div>
+          <div class="user-detail row mx-0">
+            <!-- Start of user-phone -->
+            <div class="col-12 col-sm-6 col-md-6 mt-3 px-0">
+              <i class="far fa-phone-alt"></i> Số điện thoại: <b>{{post.user.phone}}</b>
+            </div><!-- End of user-phone -->
+            <!-- Start of user-email -->
+            <div class="col-12 col-sm-6 col-md-6 mt-3 px-0">
+              <i class="far fa-envelope"></i> Email:
+              <a [href]="'mailto:' + post.user.email">{{post.user.email}}</a>
+            </div><!-- End of user-email -->
+            <!-- Start of user-address -->
+            <div class="col-*-12 mt-3 px-0">
+              <i class="fad fa-map-marked-alt"></i> Địa chỉ: {{userAddress}}
+            </div><!-- End of user-address -->
+          </div>
+          <!-- Start of btn-chat -->
+          <button class="btn btn-success mt-3 px-2 w-100" (click)="goToChat()">
+            <span><i class="far fa-comments-alt"></i></span>
+            <span class="btn-message" *ngIf="post.postType == true; else elseBlock">CHAT VỚI NGƯỜI BÁN</span>
+            <ng-template #elseBlock>
+              <span class="btn-message">CHAT VỚI NGƯỜI MUA</span>
+            </ng-template>
+          </button><!-- End of btn-chat -->
+          <hr class="divider">
+        </div>
+      </div><!-- End of contact-panel-2 -->
+
+      <!-- Start of post-description -->
+      <div class="post-description">{{post.description}}</div><!-- End of post-description -->
+
+      <!-- Start of contact-description -->
+      <div class="contact-description my-4 row">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+          <i class="far fa-tag"></i> Loại: {{post.childCategory.childCategoryName}}
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3"
+             *ngIf="post.postType == true; else postTypeElseBlock">
+          <i class="fas fa-paperclip"></i> Tin: Cần bán
+        </div>
+        <ng-template #postTypeElseBlock>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+            <i class="fas fa-paperclip"></i> Tin: Cần mua
+          </div>
+        </ng-template>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3"
+             *ngIf="post.postType == true; else posterElseBlock">
+          <i class="far fa-user-tag"></i>Người bán: {{post.posterName}}
+        </div>
+        <ng-template #posterElseBlock>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+            <i class="far fa-user-tag"></i>Người mua: {{post.posterName}}
+          </div>
+        </ng-template>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+          <i class="far fa-phone-alt"></i> Số điện thoại: <b>{{post.phone}}</b>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+          <i class="far fa-envelope"></i> Email:
+          <a [href]="'mailto:' + post.email">{{post.email}}</a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-6 mb-3">
+          <i class="fad fa-map-marked-alt"></i> Địa chỉ: {{postAddress}}
+        </div>
+      </div><!-- End of contact-description -->
+    </div><!-- End of post-detail -->
+
+    <!-- Start of contact-panel -->
+    <div class="contact-panel">
+      <hr class="divider m-0 mb-3">
+      <div class="user-info">
+        <div class="user row m-0">
+          <div class="img-thumbnail img-circle p-0 border-0">
+            <img class="img-thumbnail rounded-circle p-0" alt [src]="post.user.avatarUrl">
+          </div>
+          <div class="user-name pl-2 font-weight-bold">{{post.user.name}}</div>
+        </div>
+        <div class="user-detail my-2">
+          <p class="mb-2"><i class="far fa-phone-alt"></i> Số điện thoại: <b>{{post.user.phone}}</b></p>
+          <p class="mb-2"><i class="far fa-envelope"></i> Email:
+            <a [href]="'mailto:' + post.user.email">{{post.user.email}}</a>
+          </p>
+          <p class="mb-2"><i class="fad fa-map-marked-alt"></i> Địa chỉ: {{userAddress}}</p>
+        </div>
+        <button class="btn btn-success px-2 w-100" (click)="goToChat()">
+          <span><i class="far fa-comments-alt"></i></span>
+          <span class="btn-message" *ngIf="post.postType == true; else elseBlock ">CHAT VỚI NGƯỜI BÁN</span>
+          <ng-template #elseBlock>
+            <span class="btn-message">CHAT VỚI NGƯỜI MUA</span>
+          </ng-template>
+        </button>
+      </div>
+    </div><!-- End of contact-panel -->
+  </div><!-- End of content-detail -->
+</div><!-- End of content -->
+
+<ng-template #notFound>
+  <img [src]="notFoundImg" alt>
+</ng-template>

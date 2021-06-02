@@ -1,0 +1,39 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sprint01Fe</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous">
+  </script>
+</head>
+<body>
+<app-root></app-root>
+
+<script type="text/javascript">
+  hideChat(0);
+
+  $('#prime').click(function () {
+    toggleFab();
+  });
+
+  //Toggle chat and links
+  function toggleFab() {
+    $('.prime').toggleClass('zmdi-comment-outline');
+    $('.prime').toggleClass('zmdi-close');
+    $('.prime').toggleClass('is-active');
+    $('.prime').toggleClass('is-visible');
+    $('#prime').toggleClass('is-float');
+    $('.chat').toggleClass('is-visible');
+    $('.fab').toggleClass('is-visible');
+  }
+</script>
+</body>
+</html>
