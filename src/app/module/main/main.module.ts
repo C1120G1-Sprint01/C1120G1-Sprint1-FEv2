@@ -9,16 +9,21 @@ import {RouterModule} from '@angular/router';
 import {MainFooterComponent} from './main-layout/main-footer/main-footer.component';
 import {MainHeaderComponent} from "./main-layout/main-header/main-header.component";
 import {FormsModule} from "@angular/forms";
-import { MainContentComponent } from './main-layout/main-content/main-content.component';
+import {MainContentComponent} from './main-layout/main-content/main-content.component';
 
 
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FormsModule
-    ]
+  declarations: [MainPageComponent, MainChatComponent, ListPostComponent,
+    ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule
+  ],
+  exports: [
+    MainHeaderComponent,
+    MainFooterComponent
+  ]
 })
 export class MainModule {
 }
