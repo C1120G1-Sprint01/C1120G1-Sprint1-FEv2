@@ -9,6 +9,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {environment} from '../environments/environment';
 import {MainModule} from './module/main/main.module';
 import {SecurityModule} from './module/security/security.module';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {SecurityModule} from './module/security/security.module';
     AppRoutingModule,
     HttpClientModule,
     MainModule,
-    SecurityModule
+    SecurityModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

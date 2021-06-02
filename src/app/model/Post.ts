@@ -1,8 +1,8 @@
 import {Status} from './Status';
-import {Ward} from './ward';
-import {User} from './user';
 import {Image} from './Image';
 import {ChildCategory} from './ChildCategory';
+import {Ward} from "./Ward";
+import {User} from "./User";
 
 export interface Post {
   postId: number;
