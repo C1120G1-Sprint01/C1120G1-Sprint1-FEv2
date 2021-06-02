@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class CategoryService {
   httpOptions: any;
 
-  private API_URL_CATEGORY = "http://localhost:8080/api/category";
-  private API_URL_CHILD_CATEGORY = "http://localhost:8080/api/child-category";
+  private API_URL_CATEGORY = "http://localhost:8080/main-category/category";
+  private API_URL_CHILD_CATEGORY = "http://localhost:8080/childCategory";
 
   constructor(private _httpClient: HttpClient) {
     this.httpOptions = {
