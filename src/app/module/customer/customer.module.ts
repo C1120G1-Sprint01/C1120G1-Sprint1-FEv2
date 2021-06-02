@@ -14,8 +14,6 @@ import {ListPostComponent} from './customer-post/list-post/list-post.component';
 
 import {CustomerRoutingModule} from "./customer-routing.module";
 
-import {RouterModule} from '@angular/router';
-import { CustomerRoutingModule } from './customer-routing.module';
 import { environment } from './customer-post/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
