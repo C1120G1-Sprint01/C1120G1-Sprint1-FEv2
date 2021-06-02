@@ -7,7 +7,6 @@ const routes: Routes = [
     path: '',
     component: AdminPageComponent,
     children: [
-      {path: '', redirectTo: 'posts', pathMatch: 'full'},
       {
         path: 'posts',
         loadChildren: () => import('./admin-post/admin-post.module').then(module => module.AdminPostModule)
@@ -23,7 +22,8 @@ const routes: Routes = [
       {
         path: 'banners',
         loadChildren: () => import('./admin-banner/admin-banner.module').then(module => module.AdminBannerModule)
-      }
+      },
+      {path: '', redirectTo: 'posts', pathMatch: 'full'},
     ]
   },
   {path: '**', redirectTo: '', pathMatch: 'full'}

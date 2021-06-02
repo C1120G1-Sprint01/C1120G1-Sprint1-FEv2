@@ -64,7 +64,7 @@ export class ViewPostComponent implements OnInit {
 
   goToChat() {
     if (this.securityService.isLoggedIn) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/customer/inbox');
     } else {
       this.router.navigateByUrl('/login');
     }

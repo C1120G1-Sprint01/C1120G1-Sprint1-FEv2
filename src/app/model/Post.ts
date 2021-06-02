@@ -1,6 +1,6 @@
 import {Status} from './Status';
-import {Ward} from './ward';
-import {User} from './user';
+import {Ward} from './Ward';
+import {User} from './User';
 import {Image} from './Image';
 import {ChildCategory} from './ChildCategory';
 
