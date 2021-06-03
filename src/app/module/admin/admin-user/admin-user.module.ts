@@ -6,7 +6,7 @@ import {EditUserComponent} from './edit-user/edit-user.component';
 import {DeleteUserComponent} from './delete-user/delete-user.component';
 import {ListUserComponent} from './list-user/list-user.component';
 import {CreateUserComponent} from './create-user/create-user.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
 
 
@@ -15,7 +15,8 @@ import { UserStatisticsComponent } from './user-statistics/user-statistics.compo
   imports: [
     CommonModule,
     AdminUserRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminUserModule {

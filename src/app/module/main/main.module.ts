@@ -11,11 +11,15 @@ import {MainFooterComponent} from './main-layout/main-footer/main-footer.compone
 
 
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+    declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
+    exports: [
+        MainHeaderComponent,
+        MainFooterComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule
+    ]
 })
 export class MainModule {
 }

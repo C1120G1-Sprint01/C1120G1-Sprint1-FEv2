@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: '', component: ListUserComponent},
   {path: 'create', component: CreateUserComponent},
   {path: 'edit/:id', component: EditUserComponent},
-  {path: 'delete', component: DeleteUserComponent},
+  {path: 'delete/:id', component: DeleteUserComponent},
   {path: 'statistics', component: UserStatisticsComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
