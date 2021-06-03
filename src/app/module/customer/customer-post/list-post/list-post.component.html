@@ -15,6 +15,17 @@
     <div class="card mb-3">
 
       <div class="card-body">
+        <div class="row">
+          <div class="col-9"></div>
+          <div class="col-3">
+            <div class="form-group">
+              <select class="form-control" [(ngModel)]="statusId" (change)="onList(0, username)">
+                <option *ngFor="let statusItem of status" [ngValue]="statusItem.statusId">{{statusItem.statusName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
         <div class="table-responsive">
           <table class="table table-hover tablecustom">
             <thead>
@@ -32,13 +43,14 @@
                 <th scope="row">{{i + 1}}</th>
                 <td><img src="{{post?.imageSet[0]?.url}}" alt="" width="50px" height="50px"></td>
                 <td>{{post.title}}</td>
-                <td>{{post.description}}</td>
+                <td>{{post.description.substring(0, 50)}}<span *ngIf="post.description.length > 50">...</span></td>
                 <td [ngSwitch]="post.status.statusId">
                   <span *ngSwitchCase="1" class="badge badge-primary">{{post.status.statusName}}</span>
                   <span *ngSwitchCase="2" class="badge badge-secondary">{{post.status.statusName}}</span>
                   <span *ngSwitchCase="3" class="badge badge-danger">{{post.status.statusName}}</span>
                   <span *ngSwitchCase="4" class="badge badge-success">{{post.status.statusName}}</span>
                   <span *ngSwitchCase="5" class="badge badge-dark">{{post.status.statusName}}</span>
+                  <span *ngSwitchCase="6" class="badge badge-info">{{post.status.statusName}}</span>
                 </td>
                 <td><button class="btn btn-warning" [routerLink]="['/customer/posts/edit',post.postId]"><i
                       class="fas fa-edit"></i></button></td>
@@ -100,3 +112,4 @@
     ads
   </div>
 </div>
+
