@@ -30,6 +30,7 @@ import { CustomerContentComponent } from './customer-layout/customer-content/cus
     ReactiveFormsModule,
     CustomerRoutingModule,
     RouterModule,
+    CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     MainModule

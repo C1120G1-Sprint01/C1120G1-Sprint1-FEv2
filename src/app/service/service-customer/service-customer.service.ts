@@ -46,4 +46,8 @@ export class ServiceCustomerService {
     return this.httpClient.post<void>(`${this.API_URL_LIST}/createPost`, post);
   }
 
+  public searchPostByName(posterName: string): Observable<any> {
+    return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName );
+  }
+
 }

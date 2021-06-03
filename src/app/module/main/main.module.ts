@@ -25,6 +25,12 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    MainHeaderComponent,
+    MainFooterComponent,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -35,7 +41,8 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     EmojiModule,
     PickerModule,
   ],
-  exports: [MainChatComponent,MainHeaderComponent,MainFooterComponent]
+
+
 })
 export class MainModule {
 }
