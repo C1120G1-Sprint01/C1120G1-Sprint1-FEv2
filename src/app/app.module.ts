@@ -13,6 +13,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AdminModule} from "./module/admin/admin.module";
+import {DatePipe} from "@angular/common";
+import {RouterModule} from "@angular/router";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -30,9 +37,15 @@ import {AdminModule} from "./module/admin/admin.module";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule,
-    AdminModule
+    AdminModule,
+    RouterModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 
