@@ -30,7 +30,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     RouterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
-
   ]
 })
 export class CustomerModule {
