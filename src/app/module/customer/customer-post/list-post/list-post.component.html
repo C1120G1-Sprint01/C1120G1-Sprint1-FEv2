@@ -29,7 +29,10 @@
         <tbody *ngIf="posts; else nodata">
           <tr *ngFor="let post of posts.content; let i = index;">
             <th scope="row">{{i + 1}}</th>
-            <td><img src="{{post?.imageSet[0]?.url}}" alt="" width="50px" height="50px"></td>
+            <td>
+              <img *ngIf="post?.imageSet[0] == null" src="{{noImage}}" alt="" width="50px" height="50px">
+              <img *ngIf="post?.imageSet[0] != null" src="{{post?.imageSet[0]?.url}}" alt="" width="50px" height="50px">
+            </td>
             <td>{{post.title}}</td>
             <td>{{post.description.substring(0, 50)}}<span *ngIf="post.description.length > 50">...</span></td>
             <td [ngSwitch]="post.status.statusId">
