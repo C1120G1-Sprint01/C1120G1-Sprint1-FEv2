@@ -6,18 +6,19 @@
     <div class="card-body">
       <form method="post" class="ml-4" ngNoForm [formGroup]="formCreateBanner" (ngSubmit)="createBanner()">
         <div class="form-row">
-          <div class="name">Kích thước:</div>
+          <div class="name">Vị trí:</div>
           <div class="value">
             <div class="input-group">
               <div class="rs-select2 js-select-simple select--no-search">
                 <mat-form-field class="form-select" appearance="fill">
-                  <mat-label>Chọn Kích Thước</mat-label>
-                  <mat-select formControlName="sizeId">
-                    <mat-option *ngFor="let size of listSize" [value]="size.sizeId">{{size.sizeName}}</mat-option>
+                  <mat-label>Chọn vị trí hiển thị banner</mat-label>
+                  <mat-select [(ngModel)]="positionChoose" formControlName="positionId">
+                    <mat-option *ngFor="let position of listPosition" (click)="chooseSize(position.positionId)"
+                                [value]="position.positionId">{{position.positionName}}</mat-option>
                   </mat-select>
-                  <div *ngIf="size.invalid && (size.dirty||size.touched)">
-                    <p [hidden]="!size.errors.required" style="color: red; font-size: 11px">
-                      *Bạn vẫn chưa chọn size banner
+                  <div *ngIf="position.invalid && (position.dirty||position.touched)">
+                    <p [hidden]="!position.errors.required" style="color: red; font-size: 11px">
+                      *Bạn vẫn chưa chọn vị trí banner
                     </p>
                   </div>
                 </mat-form-field>
@@ -45,7 +46,7 @@
             <div class="input-group">
               <mat-form-field class="form-select" appearance="fill">
                 <mat-label>Chọn thời hạn banner</mat-label>
-                <mat-select formControlName="duration">
+                <mat-select  formControlName="duration">
                   <mat-option value="1">1 - tuần</mat-option>
                   <mat-option value="2">2 - tuần</mat-option>
                   <mat-option value="3">1 - tháng</mat-option>
@@ -62,21 +63,15 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="name">Vị trí:</div>
+          <div class="name">Kích thước:</div>
           <div class="value">
             <div class="input-group">
               <div class="rs-select2 js-select-simple select--no-search">
                 <mat-form-field class="form-select" appearance="fill">
-                  <mat-label>Chọn vị trí hiển thị banner</mat-label>
-                  <mat-select formControlName="positionId">
-                    <mat-option *ngFor="let position of listPosition"
-                                [value]="position.positionId">{{position.positionName}}</mat-option>
+                  <mat-label>Chọn Kích Thước</mat-label>
+                  <mat-select [(value)]="sizeAuto"  formControlName="sizeId">
+                    <mat-option [disabled]="position" *ngFor="let size of listSize" [value]="size.sizeId">{{size.sizeName}}</mat-option>
                   </mat-select>
-                  <div *ngIf="position.invalid && (position.dirty||position.touched)">
-                    <p [hidden]="!position.errors.required" style="color: red; font-size: 11px">
-                      *Bạn vẫn chưa chọn vị trí banner
-                    </p>
-                  </div>
                 </mat-form-field>
               </div>
             </div>

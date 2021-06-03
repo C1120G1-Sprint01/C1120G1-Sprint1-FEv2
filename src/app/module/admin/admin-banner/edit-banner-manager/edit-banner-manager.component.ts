@@ -1,12 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ServiceBannerService} from '../../../../service/service-banner/service-banner.service';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {LoadingComponent} from '../loading/loading.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Size} from "../../../../model/Size";
 import {Banner} from "../../../../model/Banner";
 import {Position} from "../../../../model/Position";
@@ -35,8 +33,13 @@ export class EditBannerManagerComponent implements OnInit {
   public formEditBanner: FormGroup;
   public listBannerTop: number;
   public listBannerBot: number;
-  public listBannerLeft: number;
-  public listBannerRight: number;
+  public listBannerLeftOne: number;
+  public listBannerLeftTwo: number;
+  public listBannerLeftThree: number;
+  public listBannerRightOne: number;
+  public listBannerRightTwo: number;
+  public listBannerRightThree: number;
+  public sizeAuto: number;
 
   ngOnInit(): void {
     this.bannerManagementService.showAllAdvertiseBannerByPosition(1).subscribe((data) => {
@@ -46,10 +49,22 @@ export class EditBannerManagerComponent implements OnInit {
       this.listBannerBot = data.length;
     });
     this.bannerManagementService.showAllAdvertiseBannerByPosition(3).subscribe((data) => {
-      this.listBannerRight = data.length;
+      this.listBannerRightOne = data.length;
     });
     this.bannerManagementService.showAllAdvertiseBannerByPosition(4).subscribe((data) => {
-      this.listBannerLeft = data.length;
+      this.listBannerRightTwo = data.length;
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(5).subscribe((data) => {
+      this.listBannerRightThree = data.length;
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(6).subscribe((data) => {
+      this.listBannerLeftOne = data.length;
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(7).subscribe((data) => {
+      this.listBannerLeftTwo = data.length;
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(8).subscribe((data) => {
+      this.listBannerLeftThree = data.length;
     });
     this.bannerManagementService.findBannerById(this.data).subscribe((data) => {
       this.banner = data;
@@ -186,19 +201,43 @@ export class EditBannerManagerComponent implements OnInit {
     if (this.banner.position.positionId !== positionId) {
       switch (positionId) {
         case 1:
-          return this.listBannerTop <  13;
+          return this.listBannerTop < 13;
         case 2:
           return this.listBannerBot === 0;
         case 3:
-          return this.listBannerRight === 0;
+          return this.listBannerRightOne === 0;
         case 4:
-          return this.listBannerLeft === 0;
+          return this.listBannerRightTwo === 0;
+        case 5:
+          return this.listBannerRightThree === 0;
+        case 6:
+          return this.listBannerLeftOne === 0;
+        case 7:
+          return this.listBannerLeftTwo === 0;
+        case 8:
+          return this.listBannerLeftThree === 0;
         default:
       }
     }
     return true;
   }
-
+  chooseSize(positionId: number) {
+    switch (positionId) {
+      case 1:
+      case 2:
+        this.sizeAuto = 2;
+        break;
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+        this.sizeAuto = 1;
+        break;
+      default:
+    }
+  }
   get duration() {
     return this.formEditBanner.get('duration');
   }

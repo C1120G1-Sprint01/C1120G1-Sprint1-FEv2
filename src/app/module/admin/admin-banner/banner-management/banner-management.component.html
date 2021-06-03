@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class="text-center mt-2" style="font-size: 40px">Banner Management</h1>
+  <h1 class="text-center mt-2" style="font-size: 40px">Quản Lí Banner</h1>
   <button (click)="openFormAddBanner()" class="btn btn-success mb-2 ml-1"><i style="color: white" class="fa fa-plus"></i>
     Thêm Mới Banner
   </button>
@@ -15,7 +15,7 @@
         <th scope="col">Thao Tác</th>
       </tr>
       </thead>
-      <tbody *ngFor="let banner of listBanner | paginate: { itemsPerPage: 5, currentPage: page };,let i = index"
+      <tbody *ngFor="let banner of listBanner | paginate: { itemsPerPage: 4, currentPage: page },let i = index"
              [attr.data-index]="i">
       <tr class="text-center">
         <td>{{i + 1}}</td>

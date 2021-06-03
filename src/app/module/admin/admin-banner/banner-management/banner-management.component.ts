@@ -55,7 +55,7 @@ export class BannerManagementComponent implements OnInit {
   openFormEditBanner(bannerId) {
     const dialogRef = this.dialog.open(EditBannerManagerComponent, {
       data: bannerId,
-      disableClose: true
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe((data) => {
       this.ngOnInit();

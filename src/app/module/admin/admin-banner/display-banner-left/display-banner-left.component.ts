@@ -13,13 +13,25 @@ export class DisplayBannerLeftComponent implements OnInit {
   constructor(private bannerManagementService: ServiceBannerService) {
   }
 
-  public listBanner: Banner[];
-  public banner: Banner;
+  public listBannerOne: Banner[];
+  public listBannerTwo: Banner[];
+  public listBannerThree: Banner[];
+  public bannerLeftOne: Banner;
+  public bannerLeftTwo: Banner;
+  public bannerLeftThree: Banner;
 
   ngOnInit(): void {
-    this.bannerManagementService.showAllAdvertiseBannerByPosition(4).subscribe((data) => {
-      this.listBanner = data;
-      this.banner = this.listBanner[0];
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(6).subscribe((data) => {
+      this.listBannerOne = data;
+      this.bannerLeftOne = this.listBannerOne[0];
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(7).subscribe((data) => {
+      this.listBannerTwo = data;
+      this.bannerLeftTwo = this.listBannerTwo[0];
+    });
+    this.bannerManagementService.showAllAdvertiseBannerByPosition(8).subscribe((data) => {
+      this.listBannerThree = data;
+      this.bannerLeftThree = this.listBannerThree[0];
     });
   }
 }

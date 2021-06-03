@@ -1,3 +1,18 @@
-<div *ngIf="banner">
-  <img [src]="banner.image" class="img-fluid border border-secondary" alt="..." style="width: 250px; height: 350px">
+<div style="height: 340px">
+  <div class="mt-2" *ngIf="bannerRightOne" style="height: 340px">
+    <img [src]="bannerRightOne.image" class="img-fluid border border-secondary" alt="..."
+         style="width: 250px; height: 300px">
+  </div>
+</div>
+<div style="height: 340px">
+  <div *ngIf="bannerRightTwo" style="height: 340px">
+    <img [src]="bannerRightTwo.image" class="img-fluid border border-secondary" alt="..."
+         style="width: 250px; height: 300px">
+  </div>
+</div>
+<div style="height: 340px">
+  <div *ngIf="bannerRightThree" style="height: 340px">
+    <img [src]="bannerRightThree.image" class="img-fluid border border-secondary" alt="..."
+         style="width: 250px; height: 300px">
+  </div>
 </div>
