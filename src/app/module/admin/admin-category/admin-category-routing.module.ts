@@ -20,7 +20,6 @@ const routes: Routes = [
   {path: 'child-categories/create', component: CreateChildCategoryComponent},
   {path: 'child-categories/edit/:id', component: EditChildCategoryComponent},
   {path: 'child-categories/delete/:id', component: DeleteChildCategoryComponent},
-
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 

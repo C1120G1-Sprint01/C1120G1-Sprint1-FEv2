@@ -11,8 +11,8 @@ import {CreatePostComponent} from './customer-post/create-post/create-post.compo
 import {DeletePostComponent} from './customer-post/delete-post/delete-post.component';
 import {EditPostComponent} from './customer-post/edit-post/edit-post.component';
 import {ListPostComponent} from './customer-post/list-post/list-post.component';
-import {CustomerRoutingModule} from "./customer-routing.module";
-
+import {RouterModule} from '@angular/router';
+import {CustomerRoutingModule} from './customer-routing.module';
 import {environment} from './customer-post/environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
@@ -26,6 +26,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
     FormsModule,
     ReactiveFormsModule,
     CustomerRoutingModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ]
