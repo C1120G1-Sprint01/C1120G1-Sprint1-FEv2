@@ -59,9 +59,9 @@ export class ChatRoomAdminComponent implements OnInit, OnChanges {
   }
 
   async ngOnInit() {
-    // let username = this.tokenStorage.getUser();
+    let username = this.tokenStorage.getUser();
     await new Promise((resolve) => {
-      this.chatService.findAccountByUserName('sonblack2').subscribe(data => {
+      this.chatService.findAccountByUserName(username.username).subscribe(data => {
         this.account = {
           username: data.username,
           password: data.password,

@@ -29,9 +29,9 @@ export class AdminChatComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // let username = this.tokenStorage.getUser();
+    let username = this.tokenStorage.getUser();
     await new Promise((resolve) => {
-      this.chatService.findAccountByUserName('sonblack').subscribe(data => {
+      this.chatService.findAccountByUserName(username.username).subscribe(data => {
         this.account = {
           username: data.username,
           password: data.password,

@@ -16,10 +16,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
+import {MainContentComponent} from './main-layout/main-content/main-content.component';
 
 
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
+  declarations: [MainPageComponent, MainChatComponent, ListPostComponent,
+    ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -33,7 +35,7 @@ import {PickerModule} from "@ctrl/ngx-emoji-mart";
     EmojiModule,
     PickerModule,
   ],
-  exports: [MainChatComponent]
+  exports: [MainChatComponent,MainHeaderComponent,MainFooterComponent]
 })
 export class MainModule {
 }

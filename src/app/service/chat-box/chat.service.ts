@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Room} from "../../model/room";
 import {Chat} from "../../model/chat";
 import {Notification} from "../../model/notification";
+import {Account} from "../../model/Account";
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,15 @@ export class ChatService {
   }
 
   studyForBot(bot: any): Observable<any> {
-    console.log(bot);
     return this.http.post<any>(this.baseUrl + '/study', bot);
   }
 
   findAccountByUserName(userName: string): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/account', userName);
+  }
+
+  findAccountRoleByAccount(account: Account): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/accountRole', account);
   }
 
   snapshotToArray = (snapshot: any) => {

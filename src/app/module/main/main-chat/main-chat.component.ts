@@ -57,18 +57,21 @@ export class MainChatComponent implements OnInit {
       message: [null, [Validators.required, Validators.maxLength(50)]]
     });
     let username = this.tokenStorage.getUser();
-    await new Promise((resolve) => {
-      this.chatService.findAccountByUserName('sonblack').subscribe(data => {
-        this.account = {
-          username: data.username,
-          password: data.password,
-          registerDate: data.registerDate,
-          user: data.user
-        };
-        this.user = data.user;
-        return resolve(1);
+      await new Promise((resolve) => {
+        if (username != null) {
+          this.chatService.findAccountByUserName(username.username).subscribe(data => {
+            this.account = {
+              username: data.username,
+              password: data.password,
+              registerDate: data.registerDate,
+              user: data.user
+            };
+            this.user = data.user;
+            return resolve(1);
+          });
+        }
       });
-    });
+
     this.chatService.refChats.on('value', resp => {
       this.chats = this.chatService.snapshotToArray(resp).filter(x => x.roomName === this.account.username);
       let index = this.chats.length;
