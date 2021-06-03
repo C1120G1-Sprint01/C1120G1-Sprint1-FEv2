@@ -8,14 +8,32 @@ import {ViewPostComponent} from './view-post/view-post.component';
 import {RouterModule} from '@angular/router';
 import {MainFooterComponent} from './main-layout/main-footer/main-footer.component';
 import {MainHeaderComponent} from "./main-layout/main-header/main-header.component";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
+import {PickerModule} from "@ctrl/ngx-emoji-mart";
 
 
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
   imports: [
     CommonModule,
-    RouterModule
-  ]
+    RouterModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    EmojiModule,
+    PickerModule,
+  ],
+  exports: [MainChatComponent]
 })
 export class MainModule {
 }
