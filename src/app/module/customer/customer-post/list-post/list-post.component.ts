@@ -9,20 +9,21 @@ import {ServiceCustomerService} from '../../../../service/service-customer/servi
 export class ListPostComponent implements OnInit {
 
   posts: any;
+  username: string = "username";
 
   constructor(private serviceCustomer: ServiceCustomerService) {
   }
 
   ngOnInit(): void {
-    this.onList(0);
+    this.onList(0, this.username);
   }
 
-  onList(page: number) {
-    this.serviceCustomer.findAllPostByUsername(page).subscribe(data => {
+  onList(page: number, username: string) {
+    this.serviceCustomer.findAllPostByUsername(page, username).subscribe(data => {
       this.posts = data;
-      console.log('List post', this.posts);
+      console.log("List post", this.posts);
     }, error => {
-      console.log('error');
+      console.log("error");
     });
   }
 

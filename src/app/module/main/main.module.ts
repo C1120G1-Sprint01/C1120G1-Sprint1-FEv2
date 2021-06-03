@@ -11,16 +11,23 @@ import {MainHeaderComponent} from "./main-layout/main-header/main-header.compone
 import {ReactiveFormsModule} from "@angular/forms";
 
 
+import {FormsModule} from "@angular/forms";
+import {MainContentComponent} from './main-layout/main-content/main-content.component';
+
+
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, ViewPostComponent, MainHeaderComponent, MainFooterComponent],
-  exports: [
-    MainHeaderComponent,
-    MainFooterComponent
-  ],
+  declarations: [MainPageComponent, MainChatComponent, ListPostComponent,
+    ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    MainHeaderComponent,
+    MainFooterComponent
+
   ]
 })
 export class MainModule {
