@@ -18,39 +18,37 @@
         <div class="table-responsive">
           <table class="table table-hover tablecustom">
             <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Hình ảnh</th>
-              <th scope="col">Tiêu đề</th>
-              <th scope="col">Nội dung</th>
-              <th scope="col">Trạng thái</th>
-              <th scope="col">Thao tác</th>
-            </tr>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác</th>
+              </tr>
             </thead>
             <tbody *ngIf="posts; else nodata">
-            <tr *ngFor="let post of posts.content; let i = index;">
-              <th scope="row">{{i + 1}}</th>
-              <td><img src="{{post?.imageSet[0]?.url}}" alt="" width="50px" height="50px"></td>
-              <td>{{post.title}}</td>
-              <td>{{post.description}}</td>
-              <td [ngSwitch]="post.status.statusId">
-                <span *ngSwitchCase="1" class="badge badge-primary">{{post.status.statusName}}</span>
-                <span *ngSwitchCase="2" class="badge badge-secondary">{{post.status.statusName}}</span>
-                <span *ngSwitchCase="3" class="badge badge-danger">{{post.status.statusName}}</span>
-                <span *ngSwitchCase="4" class="badge badge-success">{{post.status.statusName}}</span>
-                <span *ngSwitchCase="5" class="badge badge-dark">{{post.status.statusName}}</span>
-              </td>
-              <td>
-                <button class="btn btn-warning" [routerLink]="['/customer/post-edit',post.postId]"><i
-                  class="fas fa-edit"></i></button>
-              </td>
-            </tr>
+              <tr *ngFor="let post of posts.content; let i = index;">
+                <th scope="row">{{i + 1}}</th>
+                <td><img src="{{post?.imageSet[0]?.url}}" alt="" width="50px" height="50px"></td>
+                <td>{{post.title}}</td>
+                <td>{{post.description}}</td>
+                <td [ngSwitch]="post.status.statusId">
+                  <span *ngSwitchCase="1" class="badge badge-primary">{{post.status.statusName}}</span>
+                  <span *ngSwitchCase="2" class="badge badge-secondary">{{post.status.statusName}}</span>
+                  <span *ngSwitchCase="3" class="badge badge-danger">{{post.status.statusName}}</span>
+                  <span *ngSwitchCase="4" class="badge badge-success">{{post.status.statusName}}</span>
+                  <span *ngSwitchCase="5" class="badge badge-dark">{{post.status.statusName}}</span>
+                </td>
+                <td><button class="btn btn-warning" [routerLink]="['/customer/posts/edit',post.postId]"><i
+                      class="fas fa-edit"></i></button></td>
+              </tr>
             </tbody>
             <ng-template #nodata>
               <tbody>
-              <tr>
-                <td style="color: red; text-align: center;" colspan="9">No data available in table</td>
-              </tr>
+                <tr>
+                  <td style="color: red; text-align: center;" colspan="9">No data available in table</td>
+                </tr>
               </tbody>
             </ng-template>
           </table>
@@ -58,24 +56,37 @@
         <nav aria-label="Page navigation example" class="float-right">
           <ul class="pagination">
             <li class="page-item">
-              <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0"
-                      (click)="onList(posts.pageable.pageNumber - 1)">Trước
+              <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0 || posts == null"
+                (click)="onList(0, username)"><i class="fas fa-angle-double-left"></i>
               </button>
             </li>
             <li class="page-item">
-              <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0"
-                      (click)="onList(posts.pageable.pageNumber - 1)">{{posts?.pageable?.pageNumber}}</button>
+              <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0 || posts == null"
+                (click)="onList((posts.pageable.pageNumber - 1), username)"><i class="fas fa-angle-left"></i>
+              </button>
+            </li>
+            <li class="page-item">
+              <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0 || posts == null"
+                (click)="onList((posts.pageable.pageNumber - 1), username)">{{posts?.pageable?.pageNumber}}</button>
             </li>
             <li class="page-item active">
-              <button class="page-link">{{posts?.pageable?.pageNumber + 1}}</button>
+              <button class="page-link" [hidden]="posts == null">{{posts?.pageable?.pageNumber + 1}}</button>
             </li>
             <li class="page-item">
-              <button class="page-link" [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1"
-                      (click)="onList(posts.pageable.pageNumber + 1)">{{posts?.pageable?.pageNumber + 2}}</button>
+              <button class="page-link"
+                [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1 || posts == null"
+                (click)="onList((posts.pageable.pageNumber + 1), username)">{{posts?.pageable?.pageNumber + 2}}</button>
             </li>
             <li class="page-item">
-              <button class="page-link" [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1"
-                      (click)="onList(posts.pageable.pageNumber + 1)">Tiếp
+              <button class="page-link"
+                [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1 || posts == null"
+                (click)="onList((posts.pageable.pageNumber + 1), username)"><i class="fas fa-angle-right"></i>
+              </button>
+            </li>
+            <li class="page-item">
+              <button class="page-link"
+                [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1 || posts == null"
+                (click)="onList((posts?.totalPages - 1), username)"><i class="fas fa-angle-double-right"></i>
               </button>
             </li>
           </ul>
@@ -88,8 +99,4 @@
   <div class="col-2" style="background-color: grey;">
     ads
   </div>
-</div>
-
-<div style="background-color: yellowgreen; height: 100px;">
-  footer
 </div>
