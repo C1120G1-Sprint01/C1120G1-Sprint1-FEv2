@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {MainPageComponent} from './main-layout/main-page/main-page.component';
@@ -40,9 +40,11 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     MatInputModule,
     EmojiModule,
     PickerModule,
+    MainChatComponent,
   ],
-
-
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class MainModule {
 }
