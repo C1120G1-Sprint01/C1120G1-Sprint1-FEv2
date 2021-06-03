@@ -12,28 +12,32 @@ import {DeletePostComponent} from './customer-post/delete-post/delete-post.compo
 import {EditPostComponent} from './customer-post/edit-post/edit-post.component';
 import {ListPostComponent} from './customer-post/list-post/list-post.component';
 import {RouterModule} from '@angular/router';
-import { CustomerRoutingModule } from './customer-routing.module';
-import { environment } from './customer-post/environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { MainModule } from '../main/main.module';
+import {CustomerRoutingModule} from "./customer-routing.module";
+import {MainModule} from "../main/main.module";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {environment} from "../../../environments/environment";
 import { CustomerContentComponent } from './customer-layout/customer-content/customer-content.component';
-
-
+import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
-    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent, CustomerContentComponent],
+    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent,CustomerContentComponent],
   imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    RouterModule,
+    MainModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     CustomerRoutingModule,
     RouterModule,
-    CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule,
-    MainModule
+    AngularFireStorageModule
   ]
 })
 export class CustomerModule {
