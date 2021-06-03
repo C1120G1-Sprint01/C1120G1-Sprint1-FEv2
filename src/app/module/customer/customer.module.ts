@@ -15,20 +15,31 @@ import {EditPostComponent} from './customer-post/edit-post/edit-post.component';
 import {ListPostComponent} from './customer-post/list-post/list-post.component';
 import {RouterModule} from '@angular/router';
 import {CustomerRoutingModule} from "./customer-routing.module";
+import {MainModule} from "../main/main.module";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {environment} from "../../../environments/environment";
 
 @NgModule({
   declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
     InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    RouterModule,
-    CustomerRoutingModule
-  ]
+    imports: [
+      CommonModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      ToastrModule.forRoot(),
+      RouterModule,
+      MainModule,
+      CommonModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      CustomerRoutingModule,
+      RouterModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireStorageModule
+    ]
 })
 export class CustomerModule {
 }
