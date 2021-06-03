@@ -11,6 +11,8 @@ import {Post} from '../../../../model/Post';
 export class ListDetailComponent implements OnInit {
   postList: Post[] = [];
   p: number = 1;
+  cancelId: number;
+  cancelTitle: string;
 
   constructor(private postService: ServicePostService,
               private router: Router) {
@@ -26,4 +28,7 @@ export class ListDetailComponent implements OnInit {
     });
   }
 
+  cancelSuccess() {
+    this.ngOnInit();
+  }
 }
