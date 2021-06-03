@@ -8,6 +8,7 @@
   height: 100%;
   font-family: "Roboto Light",sans-serif;
   font-size: 14px;
+  background: #f7f7ff;
 }
 .col-md-3 {
   border-right: black 1px solid;

@@ -10,7 +10,8 @@ const routes: Routes = [
       {path: 'posts', loadChildren: () => import('./admin-post/admin-post.module').then(module => module.AdminPostModule)},
       {path: 'categories', loadChildren: () => import('./admin-category/admin-category.module').then(module => module.AdminCategoryModule)},
       {path: 'users', loadChildren: () => import('./admin-user/admin-user.module').then(module => module.AdminUserModule)},
-      {path: 'banners', loadChildren: () => import('./admin-banner/admin-banner.module').then(module => module.AdminBannerModule)}
+      {path: 'banners', loadChildren: () => import('./admin-banner/admin-banner.module').then(module => module.AdminBannerModule)},
+      {path: 'chat', loadChildren: () => import('./admin-chat/admin-chat.module').then(module => module.AdminChatModule)}
     ]
   },
   {path: '**', redirectTo: '', pathMatch: 'full'}

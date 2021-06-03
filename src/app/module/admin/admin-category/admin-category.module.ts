@@ -13,6 +13,7 @@ import {ListCategoryComponent} from './list-category/list-category.component';
 import {ListChildCategoryComponent} from './list-child-category/list-child-category.component';
 import {MainCategoryComponent} from './main-category/main-category.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MainModule} from "../../main/main.module";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AdminCategoryRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MainModule
   ]
 })
 export class AdminCategoryModule {
