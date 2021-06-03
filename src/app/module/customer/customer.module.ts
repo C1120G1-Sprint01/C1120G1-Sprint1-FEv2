@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {CustomerPageComponent} from './customer-page/customer-page.component';
+import {CustomerPageComponent} from './customer-layout/customer-page/customer-page.component';
 import {ShowInfoComponent} from './customer-manager/show-info/show-info.component';
 import {EditInfoComponent} from './customer-manager/edit-info/edit-info.component';
 import {ChangePasswordComponent} from './customer-manager/change-password/change-password.component';
@@ -16,11 +16,13 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { environment } from './customer-post/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { MainModule } from '../main/main.module';
+import { CustomerContentComponent } from './customer-layout/customer-content/customer-content.component';
 
 
 @NgModule({
   declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
-    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent],
+    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent, CustomerContentComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -28,9 +30,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     ReactiveFormsModule,
     CustomerRoutingModule,
     RouterModule,
+    CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
-
+    AngularFireStorageModule,
+    MainModule
   ]
 })
 export class CustomerModule {
