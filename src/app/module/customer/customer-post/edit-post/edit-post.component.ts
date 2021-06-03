@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceCustomerService } from '../../../../service/service-customer/service-customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from '../../../../service/service-customer/address.service';
@@ -117,7 +117,7 @@ export class EditPostComponent implements OnInit {
 
   submitForm() {
     if (this.refPost.valid) {
-      this._serviceCustomer.updatePost(this.id, this.refPost.value).subscribe(data => {
+      this._serviceCustomer.updatePost(this.refPost.value).subscribe(data => {
         this._router.navigateByUrl("/customer/posts");
         this._toastr.success("Chỉnh sửa bài đăng thành công!", "Thành công!");
       }, error => {
@@ -187,6 +187,10 @@ export class EditPostComponent implements OnInit {
 
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
+  }
+
+  openImage(url: string) {
+    window.open(url, "_blank");
   }
 
   compareProvinces(o1: any, o2: any): boolean {
