@@ -7,17 +7,14 @@ import {LogoutComponent} from './module/security/logout/logout.component';
 import {MainPageComponent} from './module/main/main-layout/main-page/main-page.component';
 import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
-import {MainChatComponent} from './module/main/main-chat/main-chat.component';
 import {RegisterComponent} from './module/security/register/register.component';
 
 const routes: Routes = [
 
   {
-    path: '',
-    component: MainPageComponent,
+    path: '', component: MainPageComponent,
     children: [
       {path: '', component: ListPostComponent},
-      {path: 'chat', component: MainChatComponent},
       {path: 'post/:id', component: ViewPostComponent}
     ]
   },

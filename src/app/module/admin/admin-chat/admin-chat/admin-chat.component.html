@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="card" style="background: #293a48 !important; width: 100%">
+    <div class="card-header card-header-primary">
+      <h3 class="card-title">Tư Vấn Khách Hàng</h3>
+    </div>
+    <div class="card-body">
+      <div id="typography">
+        <div class="row">
+          <div class="col-lg-12" style="position: relative;width: 100%;min-height: 1px;padding-right: 0px;padding-left: 0px;">
+            <div class="card chat-app" style="border: 0;margin-bottom: -3px;margin-top: -7px;border-radius: 6px;color: #343a40;width: 100%;">
+              <div id="plist" class="people-list">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" (click)="search()"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Tìm Kiếm..."
+                         (keyup.enter)="search()"
+                         [(ngModel)]="searchValue" name="searchRoom">
+                </div>
+                <ul class="list-unstyled chat-list mt-2 mb-0" *ngIf="rooms.length != 0">
+                  <li *ngIf="isLoadingResults">
+                    <div class="spinner-border text-white" style="margin-left: 5rem !important;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </li>
+                  <li class="clearfix" *ngFor="let room of rooms" (click)="enterChatRoom(room)"
+                      [ngClass]="{'active': room.active}">
+                    <img *ngIf="room.user"
+                         src="{{room.user.avatarUrl}}"
+                         alt="avatar">
+                    <div class="about">
+                      <div *ngIf="room.user" class="name">{{room.user.name}}</div>
+                      <div *ngIf="!room.user" class="name">{{room.roomName}}</div>
+                      <div class="status" *ngIf="room.user"><i class="fa fa-circle online"></i> Thành Viên
+                      </div>
+                      <div class="status" *ngIf="!room.user"><i class="fa fa-circle offline"></i> Khách
+                      </div>
+                    </div>
+                    <span class="badge badge-danger float-right mt-3"
+                          *ngIf="room.newMess != 0">{{room.newMess}}</span>
+                  </li>
+                </ul>
+                <h3 class="name" style="text-align: center; color: red"
+                    *ngIf="rooms.length == 0 && isLoadingResults == false"> Không tìm thấy thành viên nào </h3>
+              </div>
+              <div class="chat-admin">
+                <app-chat-room-admin [roomName]="roomName"></app-chat-room-admin>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
