@@ -69,14 +69,14 @@
               <i class="fad fa-map-marked-alt"></i> Địa chỉ: {{userAddress}}
             </div><!-- End of user-address -->
           </div>
-          <!-- Start of btn-chat -->
+          <!-- Start of btn-chat-box -->
           <button class="btn btn-success mt-3 px-2 w-100" (click)="goToChat()">
             <span><i class="far fa-comments-alt"></i></span>
             <span class="btn-message" *ngIf="post.postType == true; else elseBlock">CHAT VỚI NGƯỜI BÁN</span>
             <ng-template #elseBlock>
               <span class="btn-message">CHAT VỚI NGƯỜI MUA</span>
             </ng-template>
-          </button><!-- End of btn-chat -->
+          </button><!-- End of btn-chat-box -->
           <hr class="divider">
         </div>
       </div><!-- End of contact-panel-2 -->

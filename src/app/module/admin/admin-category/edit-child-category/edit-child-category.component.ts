@@ -61,13 +61,10 @@ export class EditChildCategoryComponent implements OnInit {
   save() {
     console.log(this.formEdit.getRawValue());
     //Khi submit thì form sẽ được đưa xuống gồm child_name và thằng category
-    this.serviceAdminService.updateChildCategory(this.formEdit.getRawValue()).subscribe(data => {
-      this.toast.success('Chuyên mục đã được chỉnh sửa');
-      this.router.navigateByUrl('main-category/child-category');
-    });
-  }
+    this.serviceAdminService.updateChildCategory(this.childCategoryEdit.childCategoryId,this.formEdit.getRawValue()).subscribe(data => {
+      this.toast.success("Chuyên mục đã được chỉnh sửa");
+      this.router.navigateByUrl('admin/categories/child-categories')
+    })
 
-  back() {
-    this.formEdit.patchValue(this.childCategoryEdit);
   }
 }

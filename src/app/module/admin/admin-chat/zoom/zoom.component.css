@@ -1,0 +1,18 @@
+img {
+  width: auto;
+  height: 600px;
+}
+.delete-icon{
+  cursor: pointer;
+  color: black;
+  float: right;
+}
+
+.delete-icon:hover {
+  color: #fa6342;
+}
+
+.delete-icon:focus {
+  outline-color: #dc3545;
+}
+

@@ -1,46 +1,14 @@
 <div class="container-fluid body">
-  <div class="row">
-    <div class="col-md-3">
       <div class="card">
         <div class="card-body">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Quản lý thành viên</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link bg-light" routerLink="/main-category">Quản lý chuyên mục</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Banner</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Mail Server</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <br>
-      <form class="form-inline">
-
-      </form>
-      <div class="card">
-        <div class="card-body">
-
           <p class="title">Chỉnh sửa chuyên mục</p>
           <form [formGroup]="formEdit" (ngSubmit)="save()">
             <table class="table table-striped">
               <tr>
                 <td>Tên chuyên mục cha</td>
                 <td>
-                  <!--                  chỗ này khai báo thêm cái formcontrolname để lấy giá trị khi input có thay dổi giá trị
-                                       và nó sẽ lấy giá trị trong ngValue -->
                   <select [compareWith]="compareFn" formControlName="category" class="form-control">
-<!--                    <option value="" disabled>Chọn chuyên mục</option>-->
+                    <option value="" disabled>Chọn chuyên mục</option>
                     <option *ngFor="let category of categoryList"
                             [ngValue]="category"
                             style="color: blue">
@@ -67,13 +35,11 @@
                   <input type="submit" class="btn btn-success" [disabled]="formEdit.invalid" value="Lưu">
                 </td>
                 <td style="text-align: center">
-                  <a routerLink="/main-category/child-category" class="btn btn-secondary">Hủy</a>
+                  <a routerLink="/admin/categories/child-categories" class="btn btn-secondary">Hủy</a>
                 </td>
               </tr>
             </table>
           </form>
         </div>
-      </div>
-    </div>
   </div>
 </div>

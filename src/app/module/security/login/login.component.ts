@@ -30,8 +30,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$'),
+        Validators.minLength(6), Validators.maxLength(45)]],
+      password: ['', [Validators.required,
+        Validators.minLength(6), Validators.maxLength(45)]],
       remember_me: ['']
     });
 
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
           this.tokenStorageService.saveUserLocal(data);
         } else {
           this.tokenStorageService.saveTokenSession(data.accessToken);
-          this.tokenStorageService.saveUserSession(data);
+          this.tokenStorageService.saveUserLocal(data);
         }
 
         this.securityService.isLoggedIn = true;
@@ -77,7 +79,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log("Error at login function on LoginComponent")
-        this.errorMessage = err.error.message;
+        this.errorMessage = "Tên đăng nhập hoặc mật khẩu không chính xác.Vui lòng nhập lại.";
         this.securityService.isLoggedIn = false;
       }
     );
