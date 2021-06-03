@@ -1,22 +1,10 @@
-<div class="row">
-  <div class="col-2 pr-0" style="background-color: grey;">
-    <div class="sidebar">
-      <a href="#">Thông tin cá nhân</a>
-      <a class="active" href="#">Quản lý bài đăng</a>
-      <a href="#">Hộp tin nhắn</a>
-      <a href="#about">Đổi mật khẩu</a>
-    </div>
-  </div>
-
-  <div class="container col-8">
-
     <h3 class="my-3">Chỉnh sửa bài đăng</h3>
 
     <div class="card mb-3">
 
       <div class="card-body">
         <form [formGroup]="refPost" (ngSubmit)="submitForm()">
-          <table class="table borderless" style="width: 100%">
+          <table class="table table-borderless" style="width: 100%">
             <tbody>
               <tr>
                 <td>
@@ -31,7 +19,7 @@
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.pattern">
-                      Họ tên không hợp lệ 
+                      Họ tên không được chứa số và ký tự đặc biệt
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.maxlength">
@@ -51,7 +39,7 @@
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('phone').touched && refPost.controls.phone.errors?.pattern">
-                      Số điện thoại không hợp lệ
+                      Số điện thoại phải gồm 10-11 số
                     </span>
                   </div>
                 </td>
@@ -67,7 +55,7 @@
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('email').touched && refPost.controls.email.errors?.email">
-                      Email không hợp lệ 
+                      Email không hợp lệ, ví dụ: abc@abc.abc
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('email').touched && refPost.controls.email.errors?.maxlength">
@@ -149,9 +137,9 @@
                     </label>
                   </div>
                   <span class="small text-danger mt-1"
-                      *ngIf="refPost.get('postType').touched && refPost.controls.postType.errors?.required">
-                      Vui lòng chọn tin bán hay tin mua
-                    </span>
+                    *ngIf="refPost.get('postType').touched && refPost.controls.postType.errors?.required">
+                    Vui lòng chọn tin bán hay tin mua
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -161,7 +149,7 @@
                     <input type="text" class="form-control" placeholder="Nhập tiêu đề" formControlName="title">
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('title').touched && refPost.controls.title.errors?.required">
-                      Tiêu đề không được để trống 
+                      Tiêu đề không được để trống
                     </span>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('title').touched && refPost.controls.title.errors?.maxlength">
@@ -176,7 +164,7 @@
                   <div class="form-group">
                     <textarea class="form-control" rows="3" placeholder="Nhập nội dung tin"
                       formControlName="description"></textarea>
-                      <span class="small text-danger mt-1"
+                    <span class="small text-danger mt-1"
                       *ngIf="refPost.get('description').touched && refPost.controls.description.errors?.required">
                       Nội dung tin không được để trống
                     </span>
@@ -228,7 +216,7 @@
                   <div class="custom-file">
                     <input type="file" class="form-control-file pb-1" (change)="showPreview($event)">
                     <img *ngFor="let img of images" src="{{img.url}}" width="50px" height="50px"
-                      class="img-thumbnail rounded mr-1" alt="...">
+                      class="img-thumbnail rounded mr-1" alt="..." (click)="openImage(img.url)">
                   </div>
                 </td>
               </tr>
@@ -240,10 +228,3 @@
         </form>
       </div>
     </div>
-
-  </div>
-
-  <div class="col-2" style="background-color: grey;">
-    ads
-  </div>
-</div>
