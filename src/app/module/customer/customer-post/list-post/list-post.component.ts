@@ -43,6 +43,8 @@ export class ListPostComponent implements OnInit {
 
   statusId = "";
 
+  noImage: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93";
+
   constructor(private serviceCustomer: ServiceCustomerService) {
   }
 
