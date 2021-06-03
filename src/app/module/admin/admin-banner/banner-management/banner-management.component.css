@@ -1,0 +1,19 @@
+.image-content-1 {
+  width: 120px;
+  height: 84px;
+}
+
+.col-md-9 {
+  padding: 0;
+}
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0px !important;
+}
+
+

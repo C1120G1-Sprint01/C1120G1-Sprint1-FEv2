@@ -11,6 +11,8 @@ import {MainModule} from './module/main/main.module';
 import {SecurityModule} from './module/security/security.module';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AdminModule} from "./module/admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {ToastrModule} from "ngx-toastr";
     MainModule,
     SecurityModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
