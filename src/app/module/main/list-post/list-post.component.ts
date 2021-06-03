@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../service/service-post/service-post.service';
 import {differenceInDays, differenceInHours, differenceInMinutes} from 'date-fns';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-list-post',
@@ -9,13 +10,14 @@ import {differenceInDays, differenceInHours, differenceInMinutes} from 'date-fns
 })
 export class ListPostComponent implements OnInit {
 
-  posts;
+  posts: any;
   listTime: string[] = [];
   private now: Date;
   private diff: Date;
   resultTime: number = 0;
 
-  constructor(private postService: ServicePostService) {
+  constructor(private postService: ServicePostService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -23,15 +25,40 @@ export class ListPostComponent implements OnInit {
   }
 
   onList(page: number) {
-    this.postService.getListPost(page).subscribe(data => {
-      this.posts = data;
-      for (let post of this.posts.content) {
-        this.listTime.push(this.calculateTime(post.postDateTime));
+    let category = this.activatedRoute.snapshot.params['category'];
+    let childCategory = this.activatedRoute.snapshot.params['childCategory'];
+    console.log(category);
+    console.log(childCategory);
+
+    if (category) {
+      if (childCategory) {
+        this.postService.getAllByCategoryNameAndChildCategoryName(category, childCategory, page).subscribe(data => {
+          this.initData(data);
+        }, error => {
+          console.log('error: ' + error);
+        });
+      } else {
+        this.postService.getAllByCategoryName(category, page).subscribe(data => {
+          this.initData(data);
+        }, error => {
+          console.log('error: ' + error);
+        });
       }
-      console.log(this.listTime);
-    }, error => {
-      console.log('error: ' + error);
-    });
+    } else {
+      this.postService.getListPost(page).subscribe(data => {
+        this.initData(data);
+      }, error => {
+        console.log('error: ' + error);
+      });
+    }
+  }
+
+  initData(data: any) {
+    this.posts = data;
+    for (let post of this.posts.content) {
+      this.listTime.push(this.calculateTime(post.postDateTime));
+    }
+    console.log(this.listTime);
   }
 
   calculateTime(diff: string): string {

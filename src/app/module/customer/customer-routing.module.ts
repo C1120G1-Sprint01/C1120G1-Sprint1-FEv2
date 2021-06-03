@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {path: '', component: ShowInfoComponent},
       {path: 'edit', component: EditInfoComponent},
-      {path: 'inbox', component: ChangePasswordComponent},
+      {path: 'inbox/:id', component: ChangePasswordComponent},
       {path: 'change-password', component: ChangePasswordComponent},
       {path: 'posts', component: ListPostComponent},
       {path: 'posts/create', component: CreatePostComponent},

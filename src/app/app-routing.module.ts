@@ -18,7 +18,9 @@ const routes: Routes = [
     children: [
       {path: '', component: ListPostComponent},
       {path: 'chat', component: MainChatComponent},
-      {path: 'post/:id', component: ViewPostComponent}
+      {path: 'post/:id', component: ViewPostComponent},
+      {path: ':category', component: ListPostComponent},
+      {path: ':category/:childCategory', component: ListPostComponent},
     ]
   },
   {

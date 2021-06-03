@@ -26,6 +26,10 @@ export class ServicePostService {
     return this.httpClient.get<Post[]>(`${this.API_POST_LIST_URL}?page=${page}`);
   }
 
+  /**
+   * Author: ViNTT
+   * Get data for Post Details Page
+   */
   getPostById(id: number): Observable<Post> {
     return this.httpClient.get<Post>(`${this.API_BASE_URL}/${id}`);
   }
@@ -76,6 +80,22 @@ export class ServicePostService {
 
   deleteWait(postId: number): Observable<any> {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listWait/delete/' + postId, this.httpOptions);
+  }
+
+  /**
+   * Author: ViNTT
+   * Get data for List Post By Category Page
+   */
+  getAllByCategoryName(category: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}?page=${page}`);
+  }
+
+  /**
+   * Author: ViNTT
+   * Get data for List Post By Child Category Page
+   */
+  getAllByCategoryNameAndChildCategoryName(category: string, childCategory: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}/${childCategory}?page=${page}`);
   }
 
 }
