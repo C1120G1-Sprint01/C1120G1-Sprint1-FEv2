@@ -17,17 +17,19 @@ import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {MainContentComponent} from './main-layout/main-content/main-content.component';
+import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
 
 
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent,
     ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AdminBannerModule
+    ],
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
