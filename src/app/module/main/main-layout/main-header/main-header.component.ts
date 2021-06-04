@@ -37,6 +37,6 @@ export class MainHeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorageService.signOut();
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl("/login");
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../service/service-post/service-post.service';
-import {differenceInDays, differenceInHours, differenceInMinutes} from 'date-fns';
 import {ActivatedRoute} from "@angular/router";
+import {DateUtilService} from "../../../service/date-util/date-util.service";
 
 @Component({
   selector: 'app-list-post',
@@ -10,14 +10,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ListPostComponent implements OnInit {
 
+  defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
+    + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
+
   posts: any;
   listTime: string[] = [];
-  private now: Date;
-  private diff: Date;
-  resultTime: number = 0;
 
   constructor(private postService: ServicePostService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private dateUtilService: DateUtilService) {
   }
 
   ngOnInit(): void {
@@ -27,8 +28,6 @@ export class ListPostComponent implements OnInit {
   onList(page: number) {
     let category = this.activatedRoute.snapshot.params['category'];
     let childCategory = this.activatedRoute.snapshot.params['childCategory'];
-    console.log(category);
-    console.log(childCategory);
 
     if (category) {
       if (childCategory) {
@@ -56,22 +55,9 @@ export class ListPostComponent implements OnInit {
   initData(data: any) {
     this.posts = data;
     for (let post of this.posts.content) {
-      this.listTime.push(this.calculateTime(post.postDateTime));
+      this.listTime.push(this.dateUtilService.getDiffToNow(post.postDateTime));
     }
     console.log(this.listTime);
-  }
-
-  calculateTime(diff: string): string {
-    console.log('Get Time');
-    this.now = new Date();
-    this.diff = new Date(diff);
-    this.resultTime = differenceInMinutes(this.now, this.diff);
-    if (this.resultTime >= (24 * 60)) {
-      return differenceInDays(this.now, this.diff) + ' ngày trước';
-    } else if (this.resultTime >= 60) {
-      return differenceInHours(this.now, this.diff) + ' giờ trước';
-    }
-    return this.resultTime + ' phút trước';
   }
 
 }

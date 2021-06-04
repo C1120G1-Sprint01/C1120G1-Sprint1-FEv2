@@ -24,9 +24,9 @@ const routes: Routes = [
         loadChildren: () => import('./admin-banner/admin-banner.module').then(module => module.AdminBannerModule)
       },
       {path: '', redirectTo: 'posts', pathMatch: 'full'},
+      {path: '**', redirectTo: 'posts', pathMatch: 'full'}
     ]
-  },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  }
 ];
 
 @NgModule({

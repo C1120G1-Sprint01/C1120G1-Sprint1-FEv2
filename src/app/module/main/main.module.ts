@@ -22,7 +22,8 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
   ],
   exports: [
     MainHeaderComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    MainChatComponent
   ]
 })
 export class MainModule {

@@ -9,20 +9,10 @@ import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
 import {MainChatComponent} from './module/main/main-chat/main-chat.component';
 import {RegisterComponent} from './module/security/register/register.component';
+import {CreatePostComponent} from "./module/customer/customer-post/create-post/create-post.component";
 
 const routes: Routes = [
 
-  {
-    path: '',
-    component: MainPageComponent,
-    children: [
-      {path: '', component: ListPostComponent},
-      {path: 'chat', component: MainChatComponent},
-      {path: 'post/:id', component: ViewPostComponent},
-      {path: ':category', component: ListPostComponent},
-      {path: ':category/:childCategory', component: ListPostComponent},
-    ]
-  },
   {
     path: 'admin',
     loadChildren: () => import('./module/admin/admin.module').then(module => module.AdminModule)
@@ -34,7 +24,19 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'login/getBackPw', component: GetBackPasswordComponent}
+  {path: 'login/getBackPw', component: GetBackPasswordComponent},
+  {
+    path: '',
+    component: MainPageComponent,
+    children: [
+      {path: '', component: ListPostComponent},
+      {path: 'chat', component: MainChatComponent},
+      {path: 'post/create', component: CreatePostComponent},
+      {path: 'post/:id', component: ViewPostComponent},
+      {path: ':category', component: ListPostComponent},
+      {path: ':category/:childCategory', component: ListPostComponent},
+    ]
+  }
 ];
 
 @NgModule({

@@ -19,12 +19,11 @@ const routes: Routes = [
       {path: 'inbox/:id', component: ChangePasswordComponent},
       {path: 'change-password', component: ChangePasswordComponent},
       {path: 'posts', component: ListPostComponent},
-      {path: 'posts/create', component: CreatePostComponent},
       {path: 'posts/edit/:id', component: EditPostComponent},
       {path: 'posts/delete/:id', component: DeletePostComponent},
+      {path: '**', redirectTo: '', pathMatch: 'full'}
     ]
-  },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  }
 ];
 
 @NgModule({
