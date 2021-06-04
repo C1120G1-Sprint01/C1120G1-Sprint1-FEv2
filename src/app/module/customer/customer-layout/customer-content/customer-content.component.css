@@ -1,0 +1,52 @@
+body {
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+textarea::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.tablecustom th,
+.tablecustom td {
+  vertical-align: inherit;
+}
+
+.borderless td,
+.borderless th {
+  border: none;
+}
+
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  background-color: #f1f1f1;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #53C8ED;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #808080;
+  color: white;
+}

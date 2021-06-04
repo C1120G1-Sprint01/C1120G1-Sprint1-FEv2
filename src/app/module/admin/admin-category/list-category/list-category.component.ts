@@ -13,7 +13,6 @@ export class ListCategoryComponent implements OnInit {
   p = 1;
   deleteId: number;
   deleteName: string;
-  public lengthListCategory: number;
 
   constructor(private serviceAdminService: ServiceAdminService,
               private toast: ToastrService) {
@@ -25,6 +24,9 @@ export class ListCategoryComponent implements OnInit {
 
   getDataCategory() {
     this.serviceAdminService.getAllCategory().subscribe(data => {
+      if (data === null) {
+        this.toast.warning("Dữ liệu không có","Thông báo")
+      }
       this.categoryList = data;
       if (this.categoryList === null) {
         this.toast.warning('Thông tin dữ liệu hiện không có trong hệ thống ', 'Thông báo !');

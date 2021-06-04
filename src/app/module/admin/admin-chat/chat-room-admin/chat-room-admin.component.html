@@ -1,0 +1,95 @@
+<div class="chat-admin" *ngIf="roomName">
+  <div class="chat-header-admin clearfix">
+    <div class="row">
+      <div class="col-lg-6" *ngIf="user">
+        <a href="" data-toggle="modal"
+           data-target="#view_info">
+          <img src="{{user.avatarUrl}}"
+               alt="avatar">
+        </a>
+        <div class="chat-about">
+          <p class="m-b-0" style="color: white; font-size: 15px">{{user.name}}</p>
+          <span class="agent">
+                    <i style="color: #4ffc1e" class="fas fa-circle"></i>
+                </span>
+          <span class="agent">(Đang hoạt động)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-history" style="height: 320px !important;" (scroll)="readAllNoti()">
+    <ul class="m-b-0">
+      <li class="clearfix" *ngFor="let chat of chats">
+        <div class="message-data text-right" *ngIf="chat.nickname === roomName">
+          <span class="message-data-time">{{chat.timeSkip}} </span>
+          <img src="{{user.avatarUrl}}"
+               alt="avatar">
+        </div>
+        <div class="message other-message float-right"
+             *ngIf="chat.nickname === roomName && chat.type === 'message'">{{chat.message}}
+        </div>
+        <div class="float-right" *ngIf="chat.nickname === roomName && chat.type === 'image'">
+          <div *ngIf="chat.nickname === roomName && chat.type === 'image'">
+            <img class="message other-message float-right" (click)="zoom(chat.message)" style="width: 20%;height: 20%;"
+                 src="{{chat.message}}"
+                 alt="">
+          </div>
+        </div>
+        <div class="message-data" *ngIf="chat.nickname !== roomName">
+          <span class="message-data-time">{{chat.timeSkip}} </span>
+        </div>
+        <div class="message my-message"
+             *ngIf="chat.nickname !== roomName && chat.type === 'message'">{{chat.message}}</div>
+        <div *ngIf="chat.nickname !== roomName && chat.type === 'image'">
+          <img class="message my-message" (click)="zoom(chat.message)" style="width: 20%;height: 20%;"
+               src="{{chat.message}}" alt="">
+        </div>
+      </li>
+      <li *ngIf="loadImage">
+        <div class="message my-message">
+          <div class="spinner-border" style="text-align: center" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="chat-message clearfix">
+    <div class="input-group mb-0">
+      <form action="" [formGroup]="chatForm" (ngSubmit)="onFormSubmit(chatForm.value, 'message')" style="width: 80%">
+        <input type="text" class="form-control m-0 text-white" formControlName="message"
+               placeholder="Nhập tin nhắn..." style="width: 111% !important;">
+      </form>
+      <div class="input-group-prepend text-right" style="margin-left: 64px">
+        <label class=""
+               for="file-input">
+          <i class="fa fa-image fa-2x"></i>
+          <input type="file" (change)="importImages($event)" id="file-input" multiple class="inputfile">
+        </label>
+        <div class="custom-dropdown "
+             (click)="show()" style="margin-left: 12px">
+          <i class="far fa-smile-wink fa-2x" style="color: white"></i>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix" style="overflow: auto; height: 100px" *ngIf="selectedImages.length !== 0">
+      <div *ngFor="let file of selectedImages; let i = index" class="d-inline-block"
+           style="margin: 0; overflow: auto;">
+          <span>
+            <i class="fas fa-backspace fa-lg" style="color: #ff3200" (click)="deleteUpdateImage($event)"
+               [attr.data-index]="i"></i>
+          </span>
+        <img [src]="file.url" style="margin:3px; height: 100px; width: auto; float: left">
+      </div>
+    </div>
+    <emoji-mart class="dropdown-content {{emojiPickerVisible}}" [darkMode]="false" set="google"
+                (emojiSelect)="addEmoji($event)"></emoji-mart>
+  </div>
+</div>
+<div class="chat-admin" *ngIf="!roomName">
+  <div class="chat-header-admin clearfix border-0"></div>
+  <div class="chat-history border-0">
+    <p class="custom-p">Select a thread or start a new conversation</p>
+  </div>
+  <div class="chat-message clearfix border-0"></div>
+</div>

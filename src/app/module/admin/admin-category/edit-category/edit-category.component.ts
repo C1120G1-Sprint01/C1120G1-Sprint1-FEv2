@@ -39,7 +39,7 @@ export class EditCategoryComponent implements OnInit {
     this.serviceAdminService.updateCategory(this.categoryEdit.categoryId,this.formEdit.getRawValue()).subscribe(data => {
       this.toast.success("Chuyên mục cha đã được chỉnh sửa");
       this.router.navigateByUrl('admin/categories/categories');
-      if (data === null) {
+      if (this.categoryEdit.categoryId === null) {
         this.toast.warning("Chuyên mục này không có","Thông báo")
       }
     })

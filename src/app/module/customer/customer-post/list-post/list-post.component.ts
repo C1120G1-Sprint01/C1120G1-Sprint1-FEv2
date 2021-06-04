@@ -9,20 +9,64 @@ import {ServiceCustomerService} from '../../../../service/service-customer/servi
 export class ListPostComponent implements OnInit {
 
   posts: any;
+  username: string = "username";
+  status = [
+    {
+      "statusId": "",
+      "statusName": "Tất cả trạng thái"
+    },
+    {
+      "statusId": 1,
+      "statusName": "Đang bán"
+    },
+    {
+      "statusId": 2,
+      "statusName": "Đợi duyệt"
+    },
+    {
+      "statusId": 3,
+      "statusName": "Bị từ chối"
+    },
+    {
+      "statusId": 4,
+      "statusName": "Thành công"
+    },
+    {
+      "statusId": 5,
+      "statusName": "Thất bại"
+    },
+    {
+      "statusId": 6,
+      "statusName": "Để sau"
+    },
+  ];
+
+  statusId = "";
+
+  noImage: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93";
 
   constructor(private serviceCustomer: ServiceCustomerService) {
   }
 
   ngOnInit(): void {
-    this.onList(0);
+    this.onList(0, this.username);
   }
 
-  onList(page: number) {
-    this.serviceCustomer.findAllPostByUsername(page).subscribe(data => {
+  // onList(page: number, username: string) {
+  //   this.serviceCustomer.findAllPostByUsername(page, username).subscribe(data => {
+  //     this.posts = data;
+  //     console.log("List post", this.posts);
+  //   }, error => {
+  //     console.log("error");
+  //   });
+  // }
+
+  onList(page: number, username: string) {
+    this.serviceCustomer.findAllPostByUsername(page, username, this.statusId).subscribe(data => {
       this.posts = data;
-      console.log('List post', this.posts);
+      console.log("List post", this.posts);
     }, error => {
-      console.log('error');
+      console.log("error");
     });
   }
 

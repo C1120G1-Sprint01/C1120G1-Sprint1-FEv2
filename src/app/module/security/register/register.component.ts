@@ -8,6 +8,7 @@ import {UserCustomerService} from '../../../service/service-customer/user-custom
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -17,10 +18,9 @@ import {finalize} from 'rxjs/operators';
 export class RegisterComponent implements OnInit {
 
   formAddNewCustomer: FormGroup;
-
   selectedImg: any = null;
   isMessage: any;
-  listError: any;
+  listError: any = "";
   isMessage2: any;
   isMessage3: any;
   isMessage1: any;
@@ -31,81 +31,87 @@ export class RegisterComponent implements OnInit {
   public districts: District[];
   id: number = 0;
   loading = false;
-  private isCheck = false;
-  selectedImage: any = null;
 
 
-  constructor(private userService: UserCustomerService,
+  constructor(private userCustomerService: UserCustomerService,
               private router: Router,
               private storage: AngularFireStorage,
-              private formBuilder: FormBuilder) {
-  }
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
-    this.userService.getAllProvince().subscribe(data => {
+    this.userCustomerService.getAllProvince().subscribe(data => {
       this.provinces = data;
       console.log(data);
-    });
-    this.userService.getAllDistrictByProvinceId(this.id).subscribe(data => {
-      this.districts = data;
-      console.log(data);
-    });
-    this.userService.getAllWardtByDistrictId(this.id).subscribe(data => {
-      this.wards = data;
-      console.log(data);
-    });
+    })
+
     this.formAddNewCustomer = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\{}\\[\\]:;"\'<>,.?\/]+$')]],
+      name: ['', [Validators.required,Validators.pattern('^[A-Za-z\\s]{6,}$')]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^\\d{10,11}$')]],
-      ward: ['', [Validators.required]],
-      province: ['', [Validators.required]],
-      district: ['', [Validators.required]],
-      account: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\{}\\[\\]:;"\'<>,.?\/]+$')]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]],
+      ward: [''],
+      province: [''],
+      district: [''],
+      username: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
       confirmPassword: ['', [Validators.required]],
       avatarUrl: ['']
-    });
+    })
   }
 
-  // Register
-  addNewCustomer(formValue) {
-    this.isCheck = false;
+  // create new user
+  addNewCustomer(formRegister) {
     this.isMessage = false;
     this.loading = true;
+    this.isMessage1 = false;
+    this.isMessage2 = false;
+    this.isMessage3 = false;
     if (this.formAddNewCustomer.valid) {
-      const filePath = `user/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            formValue.img = url;
-            this.userService.createUser(formValue).subscribe(data => {
-              this.router.navigateByUrl('');
-              setTimeout(() => {
-                alert('Them moi ok');
-              }, 400);
-            }, error => {
-              alert('nhap sai');
-              if (error.status === 400) {
-                console.log(error.error);
-                this.listError = error.error;
-              } else if (error.status === 404) {
-                this.isMessage = true;
-              }
-            }, () => {
-              this.loading = false;
+      if (this.formAddNewCustomer.value.password === this.formAddNewCustomer.value.confirmPassword) {
+        const  filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              formRegister.img = url;
+              console.log(url);
+              console.log(this.formAddNewCustomer);
+              this.userCustomerService.createUser(formRegister).subscribe(data => {
+                this.router.navigateByUrl('');
+                this.toastr.success( "Them moi thanh cong", "Notification",{
+                  timeOut: 1000,
+                  progressBar: true,
+                  progressAnimation: 'increasing'
+                });
+              }, error => {
+                if (error.status === 400) {
+                  console.log(error.error);
+                  this.listError = error.error;
+                } else if (error.status === 404) {
+                  this.isMessage = true;
+                }
+              }, () => {
+                this.loading = false;
+              });
             });
-          });
-        })).subscribe();
+          })).subscribe()
+      } else {
+        this.isMessage = true;
+      }
     } else {
-      this.userService.createUser(formValue).subscribe(data => {
+      this.userCustomerService.createUser(formRegister).subscribe(data => {
+        this.router.navigateByUrl('/');
+        this.toastr.success("Them moi thanh cong", "Notification", {
+          timeOut: 1000,
+          progressBar: true,
+          progressAnimation: 'increasing'
+        })
       }, error => {
-        alert('nhap sai');
         if (error.status === 400) {
           console.log(error.error);
           this.listError = error.error;
+        } else if (error.status === 404) {
+          this.isMessage = true;
         }
       }, () => {
         this.loading = false;
@@ -113,20 +119,55 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onReset() {
-    this.formAddNewCustomer.reset();
-  }
-
-  // upload anh fire base
+  //    upload anh fire base
   showPreview(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
+      this.selectedImg = event.target.files[0];
     } else {
       this.imgSrc = 'src/assets/img/avatar-2.png';
-      this.selectedImage = null;
+      this.selectedImg = null;
+    }
+  }
+  compareProvince(province1: Province, province2: Province): boolean {
+    return province1 && province2 ? province1.provinceId === province2.provinceId : province1 === province2
+  }
+
+  compareDistrict(district1: District, district2: District): boolean {
+    return district1 && district2 ? district1.districtId === district2.districtId : district1 === district2
+  }
+
+  compareWard(ward1: Ward, ward2: Ward): boolean {
+    return ward1 && ward2 ? ward1.wardId === ward2.wardId : ward1 === ward2
+  }
+
+  onchangeProvince(event) {
+    let userProfile = this.formAddNewCustomer.controls['province'].value;
+    const provinceId = userProfile.provinceId;
+    if (provinceId) {
+      this.userCustomerService.getAllDistrictByProvinceId(provinceId).subscribe(data => {
+        this.districts = data;
+        console.log(data);
+        this.wards = null;
+      })
+    } else {
+      this.districts = null;
+      this.wards = null;
+    }
+  }
+
+  onchangeDistrict(event) {
+    let userInfo = this.formAddNewCustomer.controls['district'].value;
+    const districtId = userInfo.districtId;
+    if (districtId) {
+      this.userCustomerService.getAllWardByDistrictId(districtId).subscribe(data => {
+        this.wards = data;
+        console.log(data);
+      })
+    } else {
+      this.wards = null;
     }
   }
 
