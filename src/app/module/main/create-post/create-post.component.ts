@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Status} from '../../../../model/Status';
-import {Image} from '../../../../model/Image';
-import {User} from '../../../../model/User';
-import {ServiceCustomerService} from '../../../../service/service-customer/service-customer.service';
+import {Status} from '../../../model/Status';
+import {Image} from '../../../model/Image';
+import {User} from '../../../model/User';
+import {ServiceCustomerService} from '../../../service/service-customer/service-customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AddressService} from '../../../../service/service-customer/address.service';
-import {CategoryService} from '../../../../service/service-customer/category.service';
+import {AddressService} from '../../../service/service-customer/address.service';
+import {CategoryService} from '../../../service/service-customer/category.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({

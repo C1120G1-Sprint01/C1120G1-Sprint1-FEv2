@@ -1,4 +1,7 @@
-
+.content {
+  font-family: "Roboto Light", sans-serif;
+  font-size: 14px;
+}
 
 .red_asterisk {
   color: red;
@@ -46,9 +49,8 @@ input::-webkit-input-placeholder {
 }
 
 .main-center {
-  margin-top: 30px;
-  margin: 0 auto;
-  padding: 40px 40px;
+  margin: 30px auto 0 auto;
+  padding: 40px;
 
 }
 
@@ -62,4 +64,14 @@ input::-webkit-input-placeholder {
   background-color: yellow;
   margin-left: 10px;
 }
+.errMessage {
+  font-size: 11px;
+  color: red;
+}
 
+#title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+}

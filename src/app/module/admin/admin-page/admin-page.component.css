@@ -22,3 +22,23 @@
   border-bottom: #095484 solid 2px;
   transition: 0.5s;
 }
+.menu-left-admin {
+  border-right: solid #095484 1px;
+  height: 750px;
+  padding: 10px;
+}
+.menu-left-admin ul li {
+  list-style: none;
+  transition: 0.5s;
+  border-bottom: white solid 2px;
+}
+.menu-left-admin .menu-var:hover {
+  border-bottom: #095484 solid 2px;
+  transition: 0.5s;
+}
+.col-md-10{
+  padding-right: 0;
+}
+.bg-lightgray{
+  background-color: lightgray;
+}

@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./admin-user/admin-user.module').then(module => module.AdminUserModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('./admin-chat/admin-chat.module').then(module => module.AdminChatModule)
+      },
+      {
         path: 'banners',
         loadChildren: () => import('./admin-banner/admin-banner.module').then(module => module.AdminBannerModule)
       },

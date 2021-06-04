@@ -11,12 +11,14 @@ import {ListDetailComponent} from './list-detail/list-detail.component';
 import {ListWaitComponent} from './list-wait/list-wait.component';
 import {WaitAdminComponent} from './wait-admin/wait-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { PostStatisticsComponent } from './post-statistics/post-statistics.component';
-
+import {PostStatisticsComponent} from './post-statistics/post-statistics.component';
+import {DetailApproveComponent} from './detail-approve/detail-approve.component';
+import {DetailWaitComponent} from './detail-wait/detail-wait.component';
+import {CancelApproveComponent} from './cancel-approve/cancel-approve.component';
 
 @NgModule({
   declarations: [ConfirmAdminComponent, ConfirmWaitComponent, DeletePostAdminComponent, DeleteWaitComponent, DetailAdminComponent,
-    ListApproveComponent, ListDetailComponent, ListWaitComponent, WaitAdminComponent, PostStatisticsComponent],
+    ListApproveComponent, ListDetailComponent, ListWaitComponent, WaitAdminComponent, PostStatisticsComponent, DetailApproveComponent, DetailWaitComponent, CancelApproveComponent],
   imports: [
     CommonModule,
     AdminPostRoutingModule,

@@ -62,6 +62,10 @@ export class ServicePostService {
     return this.httpClient.put(this.API_BASE_URL + '/listApprove/approve/' + postId, this.httpOptions);
   }
 
+  cancelApprovePost(postId: number): Observable<any> {
+    return this.httpClient.put(this.API_BASE_URL + '/listDetail/cancelApprove/' + postId, this.httpOptions);
+  }
+
   deletePost(postId: number): Observable<any> {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listApprove/delete/' + postId, this.httpOptions);
   }
