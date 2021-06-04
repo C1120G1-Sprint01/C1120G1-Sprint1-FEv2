@@ -20,7 +20,7 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCreate = this.fb.group({
-      categoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      categoryName: ['', [Validators.required,Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ|\s]*$/)]],
       category: [''],
     });
   }
@@ -29,7 +29,7 @@ export class CreateCategoryComponent implements OnInit {
     console.log(this.formCreate.getRawValue());
     this.serviceAdminService.createCategory(this.formCreate.getRawValue()).subscribe(data => {
       this.toast.success('Chuyên mục đã cha đã được tạo');
-      this.router.navigateByUrl('main-category/category');
+      this.router.navigateByUrl('admin/categories/categories');
     });
   }
 }

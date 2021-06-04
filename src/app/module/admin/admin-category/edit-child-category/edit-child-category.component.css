@@ -7,7 +7,8 @@
   height: 100%;
   font-family: "Roboto Light",sans-serif;
   font-size: 14px;
-  margin-top:-20px;
+  background: #f7f7ff;
+  /*margin-top:-20px;*/
 }
 .col-md-3 {
   border-right: black 1px solid;
@@ -34,4 +35,18 @@
   border-radius: .25rem;
   /*margin-bottom: 1.5rem;*/
   box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.menu-left-admin {
+  border-right: solid #095484 1px;
+  height: 700px;
+  padding: 20px;
+}
+.menu-left-admin ul li {
+  list-style: none;
+  transition: 0.5s;
+  border-bottom: white solid 2px;
+}
+.menu-left-admin .menu-var:hover {
+  border-bottom: #095484 solid 2px;
+  transition: 0.5s;
 }
