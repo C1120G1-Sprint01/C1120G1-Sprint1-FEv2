@@ -45,6 +45,7 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     PickerModule,
     MainChatComponent,
   ]
+
 })
 export class MainModule {
 }
