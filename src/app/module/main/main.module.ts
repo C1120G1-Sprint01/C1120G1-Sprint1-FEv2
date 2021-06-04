@@ -33,6 +33,7 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
+    MainChatComponent,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -43,9 +44,6 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     EmojiModule,
     PickerModule,
     MainChatComponent,
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class MainModule {
