@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {User} from "../../model/User";
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Province} from "../../model/Province";
 import {District} from "../../model/District";
 import {Ward} from "../../model/Ward";
@@ -10,9 +10,21 @@ import {Ward} from "../../model/Ward";
   providedIn: 'root'
 })
 export class UserCustomerService {
-  private API_URL_USER_CUSTOMER = "http://localhost:8080/user";
+
+  httpOptions:any;
+
+  private API_URL_USER_CUSTOMER = "http://localhost:8080/user/";
   private API_UPDATE_PASSWORD="http://localhost:8080/user/resetpassword"
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      'Access-Control-Allow-Credentials': "true"
+    }
+  }
 
 
 
@@ -28,8 +40,8 @@ export class UserCustomerService {
     return this.httpClient.get<Ward[]>(this.API_URL_USER_CUSTOMER + '/ward/' + id);
   }
 
-  getUserById(id: number): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.API_URL_USER_CUSTOMER + '/' + id);
+  getUserById(username:string): Observable<any> {
+    return this.httpClient.get<any>(this.API_URL_USER_CUSTOMER + username, this.httpOptions);
   }
 
   createUser(user: User): Observable<any> {

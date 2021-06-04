@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MainModule } from '../main/main.module';
 import { CustomerContentComponent } from './customer-layout/customer-content/customer-content.component';
+import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CustomerContentComponent } from './customer-layout/customer-content/cus
     CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    MainModule
+    MainModule,
+    EmojiModule
   ]
 })
 export class CustomerModule {

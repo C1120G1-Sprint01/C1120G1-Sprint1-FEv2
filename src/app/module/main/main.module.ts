@@ -40,6 +40,7 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     MatInputModule,
     EmojiModule,
     PickerModule,
+    MainChatComponent
   ],
 
 
