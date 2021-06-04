@@ -31,6 +31,7 @@ import {CreatePostComponent} from "./create-post/create-post.component";
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
+    MainChatComponent,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -41,10 +42,8 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     EmojiModule,
     PickerModule,
     MainChatComponent,
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ]
+
 })
 export class MainModule {
 }

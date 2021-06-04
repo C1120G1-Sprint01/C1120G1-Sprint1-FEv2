@@ -36,6 +36,7 @@ import {ToastrModule} from "ngx-toastr";
     ReactiveFormsModule,
     CustomerRoutingModule,
     RouterModule,
+    CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ]
