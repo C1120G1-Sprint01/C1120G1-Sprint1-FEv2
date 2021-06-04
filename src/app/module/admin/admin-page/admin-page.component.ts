@@ -19,7 +19,6 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   activeNavZero() {
     this.activeZero = 'bg-lightgray';
     this.activeOne = '';
@@ -37,7 +36,6 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
-
   }
   activeNavTwo() {
     this.activeZero = '';
@@ -47,7 +45,6 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
-
   }
   activeNavThree() {
     this.activeZero = '';
@@ -57,7 +54,6 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
-
   }
   activeNavFour() {
     this.activeZero = '';
@@ -67,7 +63,6 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = 'bg-lightgray';
     this.activeFive = '';
     this.activeSix = '';
-
   }activeNavFive() {
     this.activeZero = '';
     this.activeOne = '';
@@ -76,7 +71,6 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = 'bg-lightgray';
     this.activeSix = '';
-
   }
   activeNavSix() {
     this.activeZero = '';

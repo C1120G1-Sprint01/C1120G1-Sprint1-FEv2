@@ -1,4 +1,4 @@
-body, form {
+form {
   font-family: "Roboto", sans-serif;
   font-size: 13px;
 }
@@ -17,9 +17,11 @@ body, form {
 }
 .title {
   font-size: 20px;
+  background-color: #027FFF;
+  margin:  5px;
+  color: white;
   text-transform: uppercase;
-  margin: 20px;
-  color: #fff;
+  padding: 10px;
 }
 .updateBtn {
   background-color: #0D5DB6;
@@ -48,4 +50,65 @@ body, form {
 }
 .btnback {
   margin-bottom: 7px;
+}
+.menu-left-admin {
+  border-right: solid #095484 1px;
+  height: 700px;
+  margin: 26px;
+}
+
+.menu-left-admin ul li {
+  list-style: none;
+  transition: 0.5s;
+  border-bottom: white solid 2px;
+}
+
+.menu-left-admin .menu-var:hover {
+  border-bottom: #095484 solid 2px;
+  transition: 0.5s;
+}
+
+.container {
+  position: relative;
+  width: 20%;
+  float: left;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.1;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  font-size: 0.6em;
+  font-weight: bold;
+}
+.pointer {
+  cursor: pointer;
+}
+.selectoption {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
 }
