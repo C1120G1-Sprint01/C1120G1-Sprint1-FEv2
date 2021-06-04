@@ -9,17 +9,15 @@
       <ul class="navbar-nav ml-auto">
 
         <li class="nav-item-lg">
-          <a class="nav-link" routerLink="customer/post-add">
-            <span class="fas fa-edit"></span>
-            ĐĂNG TIN
-          </a>
+          <a routerLink="post/create" class="nav-link" style="color: white; margin-right: 30px"><span
+            class="fas fa-edit"></span> ĐĂNG TIN</a>
         </li>
 
-        <li class="nav-item-lg">
-          <a class="nav-link">
-            <span class="fas fa-search"></span>
-            TÌM KIẾM
-          </a>
+        <li class="nav-item-lg" style="margin-right: 30px">
+          <form class="form-inline my-2 my-lg-0" [formGroup]="searchInput" (ngSubmit)="submit()">
+            <input formControlName="posterName" class="form-control mr-sm-2" type="search" placeholder="Xe máy, Quạt, ..." aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" [disabled]="!searchInput.valid" type="submit">Tìm kiếm</button>
+          </form>
         </li>
 
 

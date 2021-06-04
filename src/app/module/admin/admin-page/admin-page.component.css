@@ -23,8 +23,8 @@
   transition: 0.5s;
 }
 
-.col-md-10{
-  padding-right: 18px;
+.col-md-10 {
+  padding-right: 20px;
 }
 .bg-lightgray{
   background-color: lightgray;

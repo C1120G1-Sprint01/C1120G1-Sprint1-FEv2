@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-admin-page',
@@ -81,6 +81,4 @@ export class AdminPageComponent implements OnInit {
     this.activeFive = '';
     this.activeSix = 'bg-lightgray';
   }
-
-
 }
