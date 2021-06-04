@@ -33,6 +33,7 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
+    MainChatComponent,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

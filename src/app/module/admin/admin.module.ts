@@ -6,11 +6,11 @@ import {MainModule} from "../main/main.module";
 
 @NgModule({
   declarations: [AdminPageComponent],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MainModule
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MainModule
+    ]
 })
 export class AdminModule {
 }
