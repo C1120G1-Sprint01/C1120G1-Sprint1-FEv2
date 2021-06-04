@@ -13,14 +13,12 @@ export class DeleteUserComponent implements OnInit {
   deleteName: string;
 
   @Input()
-  deleteId: number;
+  deleteId: number
 
   @Output()
   deleteComplete = new EventEmitter<boolean>();
-
   constructor(private serviceAdminService: ServiceAdminService,
-              private router: Router) {
-  }
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +27,9 @@ export class DeleteUserComponent implements OnInit {
     this.serviceAdminService.deleteUser(this.deleteId).subscribe(data => {
       document.getElementById('closeModal').click();
       this.deleteComplete.emit(true);
+      console.log(data);
     });
+
   }
 
 }

@@ -21,11 +21,12 @@ import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
     declarations: [BannerManagementComponent, EditBannerManagerComponent, AddBannerManagerComponent, LoadingComponent, DisplayBannerTopComponent, DisplayBannerBotComponent, DisplayBannerLeftComponent, DisplayBannerRightComponent],
-  exports: [
-    DisplayBannerRightComponent,
-    DisplayBannerTopComponent,
-    DisplayBannerLeftComponent
-  ],
+    exports: [
+        DisplayBannerRightComponent,
+        DisplayBannerTopComponent,
+        DisplayBannerLeftComponent,
+        DisplayBannerBotComponent
+    ],
     imports: [
         CommonModule,
         AdminBannerRoutingModule,

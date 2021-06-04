@@ -358,7 +358,7 @@ export class MainChatComponent implements OnInit {
     }
   }
 
-  show() {
+  showEmoji() {
     if (this.isEmojiPickerVisible) {
       this.emojiPickerVisible = "show";
       this.isEmojiPickerVisible = false
