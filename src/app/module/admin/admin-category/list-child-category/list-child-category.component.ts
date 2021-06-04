@@ -15,6 +15,7 @@ export class ListChildCategoryComponent implements OnInit {
   childCategoryName: string = '';
   categoryName: string = '';
   p = 1;
+  lengthChildList: number;
 
   constructor(private serviceAdminService: ServiceAdminService,
               private toastrService: ToastrService) {
@@ -26,10 +27,10 @@ export class ListChildCategoryComponent implements OnInit {
 
   getDataChildCategory() {
     this.serviceAdminService.getAllChildCategory().subscribe(data => {
-      console.log(data);
       this.childCategoryList = data;
-    }, error => {
-      console.log('lấy dữ liệu bị lỗi');
+      if (this.childCategoryList === null) {
+        this.toastrService.warning('Thông tin dữ liệu hiện không có trong hệ thống ', 'Thông báo !');
+      }
     });
   }
 

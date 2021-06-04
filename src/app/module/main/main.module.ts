@@ -42,8 +42,7 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     EmojiModule,
     PickerModule,
     MainChatComponent,
-  ]
-
+  ],
 })
 export class MainModule {
 }
