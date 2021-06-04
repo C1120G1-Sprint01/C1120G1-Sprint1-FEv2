@@ -14,6 +14,7 @@ import {ListPostComponent} from './customer-post/list-post/list-post.component';
 
 import {RouterModule} from '@angular/router';
 
+
 import { CustomerRoutingModule } from './customer-routing.module';
 import { environment } from './customer-post/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -23,10 +24,21 @@ import { CustomerContentComponent } from './customer-layout/customer-content/cus
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 
 
+
+
+import {ToastrModule} from "ngx-toastr";
+
 @NgModule({
   declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
-    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent, CustomerContentComponent],
+    InboxComponent, CreatePostComponent, DeletePostComponent, EditPostComponent, ListPostComponent,CustomerContentComponent],
   imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    RouterModule,
+    MainModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
@@ -36,8 +48,9 @@ import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
     CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    MainModule,
-    EmojiModule
+    EmojiModule,
+    AngularFireStorageModule
+
   ]
 })
 export class CustomerModule {

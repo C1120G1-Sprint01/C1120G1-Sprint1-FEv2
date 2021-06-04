@@ -57,6 +57,7 @@
 <!--    <div class="fab_field">-->
 <!--      <form action="" [formGroup]="chatFormUser" style="width: 90%" class="m-auto">-->
 
+
 <!--        <div class="custom-dropdown">-->
 <!--          <label id="fab_camera" class="fab-abc" for="file-input">-->
 <!--            <i class="fas fa-images" style="font-size: medium;margin-right: 4px;margin-top: 2px; color: #efb508"></i>-->
@@ -90,4 +91,39 @@
 <!--    <i class="prime zmdi zmdi-comment-outline"></i>-->
 <!--  </a>-->
 <!--</div>-->
+
+<!--        <div class="custom-dropdown">-->
+<!--          <label id="fab_camera" class="fab-abc" for="file-input">-->
+<!--            <i class="fas fa-images" style="font-size: medium;margin-right: 4px;margin-top: 2px; color: #efb508"></i>-->
+<!--            <input type="file" (change)="importImages($event)" id="file-input" multiple hidden>-->
+<!--          </label>-->
+<!--          <i class="far fa-smile-wink fa-lg custom-hover" (click)="showEmoji()" style="margin-left: 2px; color: #efb508"></i>-->
+<!--          <button id="fab_send" class="fab-abc btn-sm" (click)="onFormSubmit(chatFormUser.value, 'message')">-->
+<!--            <i style="font-size: 21px !important; color: #f9bc05"-->
+<!--               class="zmdi zmdi-mail-send"></i>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <input id="chatSend" name="chat_message"-->
+<!--               placeholder="Nhập tin nhắn..." formControlName="message"-->
+<!--               class="chat_field chat_message"/>-->
+<!--      </form>-->
+<!--      <div *ngIf="selectedImages.length != 0" style="overflow: auto; height: 75px">-->
+<!--        <div *ngFor="let file of selectedImages; let i = index" class="d-inline-block"-->
+<!--             style="margin: 0; overflow: auto">-->
+<!--          <span>-->
+<!--            <i class="fas fa-backspace fa-lg" (click)="deleteUpdateImage($event)" [attr.data-index]="i"></i>-->
+<!--          </span>-->
+<!--          <img [src]="file.url" style="margin:3px; height: 70px; width: auto; float: left">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <emoji-mart class="dropdown-content {{emojiPickerVisible}}" [darkMode]="false" set="google"-->
+<!--              (emojiSelect)="addEmoji($event)"></emoji-mart>-->
+<!--  <p class="badge badge-danger position-absolute ml-5" *ngIf="notifications.length !== 0">{{notifications.length}}</p>-->
+<!--  <a id="primeCustom" class="fab mt-1" (click)="toggleFab()">-->
+<!--    <i class="prime zmdi zmdi-comment-outline"></i>-->
+<!--  </a>-->
+<!--</div>-->
+
 
