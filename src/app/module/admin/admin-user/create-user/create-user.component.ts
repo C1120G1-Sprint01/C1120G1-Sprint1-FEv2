@@ -51,7 +51,7 @@ export class CreateUserComponent implements OnInit {
       province: ['', [Validators.required]],
       district: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/), Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required]],
       avatarUrl: ['']
     })

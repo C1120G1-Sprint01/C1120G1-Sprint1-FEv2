@@ -8,16 +8,18 @@ import {ListUserComponent} from './list-user/list-user.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
   declarations: [EditUserComponent, DeleteUserComponent, ListUserComponent, CreateUserComponent, UserStatisticsComponent],
-  imports: [
-    CommonModule,
-    AdminUserRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        AdminUserRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgxPaginationModule
+    ]
 })
 export class AdminUserModule {
 }

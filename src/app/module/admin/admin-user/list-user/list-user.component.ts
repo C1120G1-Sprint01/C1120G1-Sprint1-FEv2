@@ -23,7 +23,7 @@ export class ListUserComponent implements OnInit {
   totalPages = 1;
   textSorting = '';
   onSorting = false;
-
+  p: number = 1;
   constructor(private serviceAdminService: ServiceAdminService,
               private toastr: ToastrService) {
   }
@@ -32,6 +32,7 @@ export class ListUserComponent implements OnInit {
     this.onSubmit(0);
   }
   // ngoc - seearch + pagination
+
   search(page){
     this.serviceAdminService.searchUserBySomething(this.keySearch , this.size).subscribe(data => {
       if (data === null) {
@@ -103,4 +104,10 @@ export class ListUserComponent implements OnInit {
     this.ngOnInit();
   }
 
+  onKeyDown(event) {
+    if (event.key === "Enter") {
+      console.log(event);
+      this.onSubmit(0);
+    }
+  }
 }

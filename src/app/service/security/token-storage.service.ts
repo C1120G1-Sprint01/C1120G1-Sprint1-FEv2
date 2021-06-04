@@ -31,7 +31,7 @@ export class TokenStorageService {
     if(localStorage.getItem(TOKEN_KEY)!==null){
       return localStorage.getItem(TOKEN_KEY);
     }else {
-      return sessionStorage .getItem(TOKEN_KEY);
+      return sessionStorage.getItem(TOKEN_KEY);
     }
   }
 

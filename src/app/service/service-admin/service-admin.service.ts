@@ -60,16 +60,15 @@ export class ServiceAdminService {
     return this.httpClient.post<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/create-child-category', childCategory);
   }
 
-  updateCategory(category): Observable<Category> {
-    return this.httpClient.put<Category>(this.baseUrl + '/main-category/category' + '/edit-category', category);
+  updateCategory(id,category): Observable<Category> {
+    return this.httpClient.put<Category>(this.baseUrl + '/main-category/category' + '/edit-category/' + id ,category);
+  }
+  updateChildCategory(id,childCategory): Observable<ChildCategory> {
+    return this.httpClient.put<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/edit-child-category/' + id, childCategory);
   }
 
-  updateChildCategory(childCategory): Observable<ChildCategory> {
-    return this.httpClient.put<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/edit-child-category', childCategory);
-  }
-
-  deleteCategory(id: number) {
-    return this.httpClient.delete<Category>(this.baseUrl + '/main-category/category/delete-category/' + id);
+  deleteCategory(id: number): Observable<Category> {
+    return this.httpClient.get<Category>(this.baseUrl + '/main-category/category/delete-category/' + id);
   }
 
   deleteChildCategory(id: number): Observable<ChildCategory> {

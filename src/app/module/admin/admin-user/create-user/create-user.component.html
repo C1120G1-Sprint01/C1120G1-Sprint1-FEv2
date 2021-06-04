@@ -49,6 +49,9 @@
             <p
               *ngIf="formAddNewCustomer.get('password').hasError('pattern') && formAddNewCustomer.get('password').touched"
               class="text-danger">Mật khẩu tối thiểu 8 kí tự gồm cả chữ và số</p>
+            <p *ngIf="formAddNewCustomer.get('password').hasError('maxLength') && formAddNewCustomer.get('password').touched"
+            class="text-danger">Mật khẩu tối đa 50 kí tự gồm cả chữ và số
+            </p>
           </div>
 
 

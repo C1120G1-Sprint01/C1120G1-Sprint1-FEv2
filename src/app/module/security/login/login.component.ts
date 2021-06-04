@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SecurityService} from "../../../service/security/security.service";
 import {TokenStorageService} from "../../../service/security/token-storage.service";
 import {Router} from "@angular/router";
 import {AuthLogin} from "../../../model/AuthLogin";
+import {MainHeaderComponent} from "../../main/main-layout/main-header/main-header.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers:[MainHeaderComponent]
 })
 export class LoginComponent implements OnInit {
 
@@ -22,13 +24,16 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,
               private securityService:SecurityService,
               private tokenStorageService:TokenStorageService,
-              private router:Router)
+              private router:Router,
+              private headerComponent:MainHeaderComponent)
   { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$'),
+        Validators.minLength(6), Validators.maxLength(45)]],
+      password: ['', [Validators.required,
+        Validators.minLength(6), Validators.maxLength(45)]],
       remember_me: ['']
     });
 
@@ -68,12 +73,13 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorageService.getUser().roles;
         this.form.reset();
         console.log("Login Success");
-        this.router.navigateByUrl("homepage"); //index
+        this.headerComponent.ngOnInit();
+        this.router.navigateByUrl("/"); //index
 
       },
       err => {
         console.log("Error at login function on LoginComponent")
-        this.errorMessage = err.error.message;
+        this.errorMessage = "Tên đăng nhập hoặc mật khẩu không chính xác.Vui lòng nhập lại.";
         this.securityService.isLoggedIn = false;
       }
     );

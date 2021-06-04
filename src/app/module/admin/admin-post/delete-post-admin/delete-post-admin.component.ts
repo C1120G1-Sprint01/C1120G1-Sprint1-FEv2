@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ServicePostService} from '../../../../service/service-post/service-post.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
 import {Post} from '../../../../model/Post';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-delete-post-admin',
@@ -28,6 +28,7 @@ export class DeletePostAdminComponent implements OnInit {
     // let index = this._activatedRoute.snapshot.params["postId"];
     // this._postService.getPostApproveByIndex(index).subscribe(data => {
     //   this.postDelete = data;
+
     // });
   }
 

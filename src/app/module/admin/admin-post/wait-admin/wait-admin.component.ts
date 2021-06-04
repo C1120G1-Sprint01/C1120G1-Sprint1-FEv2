@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Injector, Input, OnInit, Output} from '@angular/core';
 import {ServicePostService} from '../../../../service/service-post/service-post.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -17,11 +17,14 @@ export class WaitAdminComponent implements OnInit {
   @Output()
   waitComplete = new EventEmitter<boolean>();
   public postWait: Post;
+  private get toastr(): ToastrService {
+    return this.injector.get(ToastrService);
+  }
 
   constructor(private _postService: ServicePostService,
               private _activatedRoute: ActivatedRoute,
               private _router: Router,
-              private toastr: ToastrService) {
+              @Inject(Injector) private injector: Injector) {
   }
 
   ngOnInit(): void {

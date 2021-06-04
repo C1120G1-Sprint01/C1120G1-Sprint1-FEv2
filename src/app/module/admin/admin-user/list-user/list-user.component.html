@@ -13,7 +13,7 @@
         <div class="col-6"></div>
         <div class="col-3 float-right d-inline-flex">
           <input type="text" [(ngModel)]="keySearch"   placeholder="Input Name or Id User To Find" class="form-control rounded-pill inputSearch" style="width: 80%">
-          <button class="btn btnSearch" (click)="search(0)"><i class="fas fa-search"></i></button>
+          <button class="btn btnSearch" (keydown)="onKeyDown($event)" (click)="search(0)" ><i class="fas fa-search"></i></button>
         </div>
       </div>
       <table class="table table-hover">
@@ -64,6 +64,9 @@
       </div>
       <!-- End modal -->
       <!-- pagination -->
+<!--      <div>-->
+<!--        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+<!--      </div>-->
       <div class="col-12">
         <nav aria-label="Page navigation example" class="float-right">
           <ul class="pagination">

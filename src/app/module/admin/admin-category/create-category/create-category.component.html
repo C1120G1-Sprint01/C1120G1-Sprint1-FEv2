@@ -1,32 +1,7 @@
 <div class="container-fluid body">
-  <div class="row">
-    <div class="col-md-3">
       <div class="card">
         <div class="card-body">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Quản lý thành viên</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link bg-light" routerLink="/main-category">Quản lý chuyên mục</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Banner</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Mail Server</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="card">
-        <div class="card-body">
-          <p class="title mt-2">Thêm mới chuyên mục</p>
+          <p class="title">Thêm mới chuyên mục</p>
           <form [formGroup]="formCreate" (ngSubmit)="save()">
             <table class="table table-striped">
               <tr>
@@ -45,13 +20,11 @@
                   <input type="submit" class="btn btn-success" [disabled]="formCreate.invalid" value="Lưu">
                 </td>
                 <td style="text-align: center">
-                  <a routerLink="/main-category/category" class="btn btn-secondary">Hủy</a>
+                  <a routerLink="/admin/categories/categories" class="btn btn-secondary">Hủy</a>
                 </td>
               </tr>
             </table>
           </form>
         </div>
       </div>
-    </div>
-  </div>
 </div>

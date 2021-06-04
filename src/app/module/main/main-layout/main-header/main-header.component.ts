@@ -1,7 +1,10 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
-import {SecurityService} from '../../../../service/security/security.service';
-import {TokenStorageService} from '../../../../service/security/token-storage.service';
-
+import {Component, Injectable, OnInit} from '@angular/core';
+import {SecurityService} from "../../../../service/security/security.service";
+import {TokenStorageService} from "../../../../service/security/token-storage.service";
+import {Router} from "@angular/router";
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
@@ -10,11 +13,12 @@ import {TokenStorageService} from '../../../../service/security/token-storage.se
 export class MainHeaderComponent implements OnInit {
 
   roles: string[] = [];
-  username: string = '';
+  username: any = '';
 
   constructor(
     private securityService: SecurityService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private router:Router
   ) {
   }
 
@@ -23,16 +27,16 @@ export class MainHeaderComponent implements OnInit {
       console.log('Getting username...');
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
-      this.roles = this.tokenStorageService.getUser().roles;
-      this.username = this.tokenStorageService.getUser().username;
+      this.roles = user.roles;
+      this.username = user.username;
+      console.log(this.username);
     } else {
       console.log('Reset username');
-      this.username = '';
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.ngOnInit();
+  logout() {
+    this.tokenStorageService.signOut();
+    this.router.navigateByUrl("login");
   }
-
 }
