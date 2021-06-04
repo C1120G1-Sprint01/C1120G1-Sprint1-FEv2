@@ -16,19 +16,17 @@ import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {MainContentComponent} from './main-layout/main-content/main-content.component';
+import {CreatePostComponent} from "./create-post/create-post.component";
 
 
 @NgModule({
-  declarations: [MainPageComponent, MainChatComponent, ListPostComponent,
+  declarations: [MainPageComponent, MainChatComponent, ListPostComponent, CreatePostComponent,
     ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ],
   exports: [
     MainHeaderComponent,
