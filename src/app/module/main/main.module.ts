@@ -1,6 +1,5 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {MainPageComponent} from './main-layout/main-page/main-page.component';
 import {MainChatComponent} from './main-chat/main-chat.component';
 import {ListPostComponent} from './list-post/list-post.component';
@@ -28,6 +27,9 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     FormsModule,
     ReactiveFormsModule
   ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
@@ -40,9 +42,11 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     MatInputModule,
     EmojiModule,
     PickerModule,
+    MainChatComponent,
   ],
-
-
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class MainModule {
 }
