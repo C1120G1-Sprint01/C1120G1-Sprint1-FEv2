@@ -15,14 +15,28 @@ import {PostStatisticsComponent} from './post-statistics/post-statistics.compone
 import {DetailApproveComponent} from './detail-approve/detail-approve.component';
 import {DetailWaitComponent} from './detail-wait/detail-wait.component';
 import {CancelApproveComponent} from './cancel-approve/cancel-approve.component';
+import {ChartsModule} from "ng2-charts";
+import {HttpClientModule} from "@angular/common/http";
+import {RouterModule} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MainModule} from "../../main/main.module";
+import { PostListAdminComponent } from './post-list-admin/post-list-admin.component';
+import { PostDeleteAdminComponent } from './post-delete-admin/post-delete-admin.component';
 
 @NgModule({
   declarations: [ConfirmAdminComponent, ConfirmWaitComponent, DeletePostAdminComponent, DeleteWaitComponent, DetailAdminComponent,
-    ListApproveComponent, ListDetailComponent, ListWaitComponent, WaitAdminComponent, PostStatisticsComponent, DetailApproveComponent, DetailWaitComponent, CancelApproveComponent],
+    ListApproveComponent, ListDetailComponent, ListWaitComponent, WaitAdminComponent, PostStatisticsComponent, DetailApproveComponent, DetailWaitComponent, CancelApproveComponent, PostListAdminComponent, PostDeleteAdminComponent],
   imports: [
     CommonModule,
     AdminPostRoutingModule,
     NgxPaginationModule,
+    ChartsModule,
+    HttpClientModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MainModule,
+
   ]
 })
 export class AdminPostModule {

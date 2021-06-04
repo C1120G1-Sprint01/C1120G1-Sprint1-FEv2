@@ -1,0 +1,102 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">DANH SÁCH BÀI ĐĂNG</h1><br>
+          <table class="table table-hover">
+            <thead style="background:rgba(2,127,255,0.21)">
+            <tr>
+              <th>STT</th>
+              <th>Hình Ảnh Minh Họa</th>
+              <th scope="col" style="width: 15%" (click)="onSortingChange('title')">Tiêu Đề <i
+                class="fas fa-sort"></i></th>
+              <th>Ngày Đăng</th>
+              <th scope="col" style="width: 15%">Tên</th>
+              <th>Giá</th>
+              <th style="width: 110px">Chức Năng</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of postList; let i = index">
+              <td>{{i + 1}}</td>
+              <!--                <td>{{post.postId}}</td>-->
+              <td>
+                  <span *ngFor="let image of post.imageSet">
+                  <a [routerLink]="['/post/'+post.postId]">
+
+                    <img [src]="image.url" width="80" height="60" alt="">
+                    <!-- <span *ngIf="post.imageSet[0].url== true"><img [src]="post.imageSet[0].url" width="80" height="60" ></span>-->
+                  </a>
+                    <!-- <span *ngIf="post.imageSet[0].url==false">Not Image </span>-->
+                    </span>
+              </td>
+              <td>{{post.title | titlecase}}</td>
+              <td>{{post.postDateTime | date:'dd/MM/yyyy'}}</td>
+              <td>{{post.posterName | titlecase}}</td>
+              <td>{{post.price | currency:'VND':true}}</td>
+              <td>
+                <button class="btn btn-info" [routerLink]="['/post/'+post.postId]"><i class="far fa-eye"></i></button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                        (click)="deleteId = post.postId; deleteTitle = post.title"><i
+                  class="far fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!--      <!phân trang start&#45;&#45;&ndash;&gt;-->
+    <div>
+      <nav aria-label="Page navigation example" style="float: right">
+        <ul class="pagination">
+          <li class="page-item" (click)="onFirst()" [ngClass]="pageClicked==0?'disabled':''">
+            <a class="page-link">Đầu</a>
+          </li>
+          <li class="page-item" (click)="onPrevious()" [ngClass]="pageClicked==0?'disabled':''">
+            <a class="page-link">Sau</a>
+          </li>
+          <li *ngIf="pageClicked != 0" class="page-item" (click)="onSubmit(pages[pageClicked-1])">
+            <a class="page-link">{{pageClicked}}</a>
+          </li>
+          <li [ngClass]="(pageClicked == pages[pageClicked]) ? 'active' : ''" class="page-item"
+              (click)="onSubmit(pages[pageClicked])">
+            <a class="page-link">{{pageClicked + 1}}</a>
+          </li>
+          <li *ngIf="pageClicked < pages.length -1" class="page-item" (click)="onSubmit(pages[pageClicked+1])">
+            <a class="page-link">{{pageClicked + 2}}</a>
+          </li>
+          <li *ngIf="pageClicked < pages.length -2" class="page-item">
+            <a class="page-link">...</a>
+          </li>
+          <li *ngIf="pageClicked < pages.length-2" class="page-item" (click)="onLast()">
+            <a class="page-link">{{pages[pages.length - 1] + 1}}</a>
+          </li>
+          <li class="page-item" (click)="onNext()" [ngClass]="pageClicked==totalPages-1?'disabled':''">
+            <a class="page-link">Trước</a>
+          </li>
+          <li class="page-item" (click)="onLast()" [ngClass]="pageClicked==totalPages-1?'disabled':''"><a
+            class="page-link">Cuối</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!--      <!phân trang end&#45;&#45;&ndash;&gt;-->
+
+  </div>
+</div>
+<!-- Modal delete start-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-post-delete-admin [deleteId]="deleteId" [deleteTitle]="deleteTitle"
+                               (deleteComplete)="deleteSuccess()"></app-post-delete-admin>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal delete end-->
+
