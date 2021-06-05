@@ -1,0 +1,94 @@
+<div class="wrapper wrapper--w790">
+  <div class="card card-5">
+    <div class="card-heading">
+      <h2 class="title">Chỉnh Sửa Banner Quảng Cáo</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" class="ml-4" ngNoForm *ngIf="formEditBanner" [formGroup]="formEditBanner"
+            (ngSubmit)="editBanner()">
+        <div class="form-row">
+          <div class="name">Vị trí:</div>
+          <div class="value">
+            <div class="input-group">
+              <div class="rs-select2 js-select-simple select--no-search">
+                <mat-form-field class="form-select" appearance="fill">
+                  <mat-label>Chọn vị trí hiển thị banner</mat-label>
+                  <mat-select formControlName="positionId">
+                    <mat-option *ngFor="let position of listPosition"
+                                (click)="chooseSize(position.positionId)" [value]="position.positionId">{{position.positionName}}</mat-option>
+                  </mat-select>
+                  <div *ngIf="position.invalid && (position.dirty||position.touched)">
+                    <p [hidden]="!position.errors.required" style="color: red; font-size: 11px">
+                      *Bạn vẫn chưa chọn vị trí banner
+                    </p>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="name">Hình ảnh:</div>
+          <label id="input-image" *ngIf="imageBanner === null">
+            <i style="font-size: 26px" class="fa fa-image"></i>
+            <input type="file" name="myfile" accept="*.png.jpg" (change)="showImage($event)"
+                   style="display:none">
+          </label>
+          <p style="color:red; font-size: 11px" class="ml-2">{{messageImageError}}</p>
+          <div *ngIf="imageBanner !== null">
+            <img class="border border-dark" [src]="imageBanner" style="width: 174px; height: 110px">
+            <div class="icon-hide">
+              <i (click)="removeImage()" class="fa fa-times-circle"></i>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="name">Thời hạn:</div>
+          <div class="value">
+            <div class="input-group">
+              <mat-form-field class="form-select" appearance="fill">
+                <mat-label>Chọn thời hạn banner</mat-label>
+                <mat-select formControlName="duration">
+                  <mat-option value="1">1 - tuần</mat-option>
+                  <mat-option value="2">2 - tuần</mat-option>
+                  <mat-option value="3">1 - tháng</mat-option>
+                  <mat-option value="4">2 - tháng</mat-option>
+                  <mat-option value="5">6 - tháng</mat-option>
+                </mat-select>
+                <div *ngIf="duration.invalid && (duration.dirty||duration.touched)">
+                  <p [hidden]="!duration.errors.required" style="color: red; font-size: 11px">
+                    *Bạn vẫn chưa chọn thời hạn banner
+                  </p>
+                </div>
+                <p [hidden]="formEditBanner.value.duration !== banner.duration"
+                   style="color: red;font-size: 11px">
+                  *{{banner.duration| date: 'dd/MM/yyyy'}}<span style="color: black"> (Thời hạn cũ)</span>
+                </p>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="name">Kích thước:</div>
+          <div class="value">
+            <div class="input-group">
+              <div class="rs-select2 js-select-simple select--no-search">
+                <mat-form-field class="form-select" appearance="fill">
+                  <mat-label>Chọn Kích Thước</mat-label>
+                  <mat-select [(value)]="sizeAuto" formControlName="sizeId">
+                    <mat-option [disabled]="size" *ngFor="let size of listSize" [value]="size.sizeId">{{size.sizeName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button [disabled]="checkFormEdit() === false" class="btn btn-warning ml-3 mb-1" type="submit">Chỉnh sửa
+          </button>
+          <button (click)="closeEditFormBanner()" class="btn btn-secondary ml-3 mb-1" type="button">Đóng</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

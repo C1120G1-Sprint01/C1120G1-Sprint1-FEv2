@@ -28,8 +28,9 @@ export class ListCategoryComponent implements OnInit {
         this.toast.warning("Dữ liệu không có","Thông báo")
       }
       this.categoryList = data;
-    }, error => {
-      console.log('lấy dữ liệu bị lỗi');
+      if (this.categoryList === null) {
+        this.toast.warning('Thông tin dữ liệu hiện không có trong hệ thống ', 'Thông báo !');
+      }
     });
   }
 

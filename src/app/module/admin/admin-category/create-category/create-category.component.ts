@@ -20,7 +20,7 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCreate = this.fb.group({
-      categoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      categoryName: ['', [Validators.required,Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ|\s]*$/)]],
       category: [''],
     });
   }
