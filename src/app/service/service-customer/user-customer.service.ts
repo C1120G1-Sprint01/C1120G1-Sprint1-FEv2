@@ -10,6 +10,7 @@ import {Ward} from "../../model/Ward";
   providedIn: 'root'
 })
 export class UserCustomerService {
+  private API_URL_USER_CUSTOMER = "http://localhost:8080/user/";
   API_USER: string = "http://localhost:8080/user";
   API_URL_ADDRESS: string = "http://localhost:8080/api/address";
   httpOptions: any;
@@ -38,9 +39,9 @@ export class UserCustomerService {
     return this.httpClient.get<Ward[]>(this.API_URL_ADDRESS + '/ward/' + id);
   }
 
-  getUserById(id: number): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.API_URL_ADDRESS + '/' + id);
-  }
+  getUserByUserName(username: string): Observable<User> {
+    return this.httpClient.get<User>(this.API_URL_USER_CUSTOMER + username);
+  };
 
   createUser(user: User): Observable<any> {
     return this.httpClient.post(this.API_USER + '/create', user);

@@ -22,7 +22,7 @@
                 <i class="far fa-home mr-2"></i>
                 <span>Trang chủ</span>
               </a>
-              <a routerLink="/" class="ml-lg-4 ml-md-3">
+              <a routerLink="/customer/posts" class="ml-lg-4 ml-md-3">
                 <i class="fas fa-tasks mr-2"></i>
                 <span>Quản lý tin</span>
               </a>
@@ -30,62 +30,56 @@
                 <i class="far fa-comments mr-2"></i>
                 <span>Chat</span>
               </a>
-              <a routerLink="/" class="ml-lg-4 ml-md-3">
-                <i class="far fa-bell mr-2"></i>
-                <span>Thông báo</span>
-              </a>
               <a class="ml-lg-4 ml-md-3 dropdown"
+                 *ngIf="role == 'ROLE_USER' || role == 'ROLE_ADMIN'"
                  (click)="showProfile()">
                 <i class="far fa-ellipsis-h mr-2"></i>
                 <span>Thêm</span>
                 <div class="dropdown-menu" id="profile"
                      (mouseleave)="hideProfile()">
-                  <!--not log in yet-->
-                  <ul *ngIf="!username">
-                    <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fn-user.png?alt=media&token=962f0b50-470f-43ab-a7b2-9cb30b325247"
-                           width="50" height="50" alt="sign-up">
-                      <span class="ml-3">Đăng nhập / Đăng ký</span>
-                    </li>
-                    <hr style="padding: 0; margin: auto 0">
-                    <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fhelp.png?alt=media&token=c3b56dbd-a9cc-43f2-8de7-0e2d786be99b"
-                           width="30" height="30" alt="account">
-                      <span class="ml-3">Trợ giúp</span>
-                    </li>
-                  </ul>
 
                   <!--user-->
                   <ul *ngIf="username && role == 'ROLE_USER'">
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fn-user.png?alt=media&token=962f0b50-470f-43ab-a7b2-9cb30b325247"
+                      <img [src]="avatarUrl" class="circle-acc"
                            width="50" height="50" alt="sign-up">
                       <span class="ml-3 name-acc">{{username}}</span>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
-                           width="30" height="30" alt="profile">
-                      <span class="ml-3">Hồ sơ của tôi</span>
+                      <a routerLink="/customer/show-info">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
+                             width="30" height="30" alt="profile">
+                        <span class="ml-3">Hồ sơ của tôi</span>
+                      </a>
                     </li>
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpostbox.png?alt=media&token=1899f4ef-789c-4a47-9d26-fef15563ddea"
-                           width="30" height="30" alt="post">
-                      <span class="ml-3">Bài đăng của tôi</span>
-                    </li>
-                    <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fshield.png?alt=media&token=18e2435b-9d23-4460-b112-240921416078"
-                           width="30" height="30" alt="account">
-                      <span class="ml-3">Kiểm tra tài khoản</span>
+                      <a routerLink="/customer/posts">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpostbox.png?alt=media&token=1899f4ef-789c-4a47-9d26-fef15563ddea"
+                             width="30" height="30" alt="post">
+                        <span class="ml-3">Bài đăng của tôi</span>
+                      </a>
                     </li>
                     <li>
                       <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ftransaction-offer.png?alt=media&token=5e106bf1-2bf0-408b-934d-eb8b63fcf18f"
-                           width="30" height="30" alt="account">
+                           width="30" height="30" alt="transaction">
                       <span class="ml-3">Giao dịch của tôi</span>
                     </li>
                     <li>
+                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Frating.png?alt=media&token=f3f498be-3101-40cc-96dd-e17cb0271fc8"
+                           width="30" height="30" alt="rating">
+                      <span class="ml-3">Đánh giá</span>
+                    </li>
+                    <li>
+                      <a routerLink="/customer/change-password">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fshield.png?alt=media&token=18e2435b-9d23-4460-b112-240921416078"
+                             width="30" height="30" alt="password">
+                        <span class="ml-3">Thay đổi mật khẩu</span>
+                      </a>
+                    </li>
+                    <li>
                       <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fhelp.png?alt=media&token=c3b56dbd-a9cc-43f2-8de7-0e2d786be99b"
-                           width="30" height="30" alt="account">
+                           width="30" height="30" alt="help">
                       <span class="ml-3">Trợ giúp</span>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
@@ -99,15 +93,59 @@
                   <!--admin-->
                   <ul *ngIf="username && role == 'ROLE_ADMIN'">
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fn-user.png?alt=media&token=962f0b50-470f-43ab-a7b2-9cb30b325247"
+                      <img [src]="avatarUrl" class="circle-acc"
                            width="50" height="50" alt="sign-up">
                       <span class="ml-3 name-acc">{{username}}</span>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fshield.png?alt=media&token=18e2435b-9d23-4460-b112-240921416078"
-                           width="30" height="30" alt="account">
-                      <span class="ml-3">Quản lý bài đăng</span>
+                      <a routerLink="/customer/show-info">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
+                             width="30" height="30" alt="profile">
+                        <span class="ml-3">Hồ sơ Admin</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/posts/list-detail">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-manager.png?alt=media&token=d211d001-e087-401e-9106-72754d91c395"
+                             width="30" height="30" alt="post">
+                        <span class="ml-3">Quản lý bài đăng</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/users">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-management.png?alt=media&token=6c32ce9f-5678-4908-a91f-f3520f476760"
+                             width="30" height="30" alt="user">
+                        <span class="ml-3">Quản lý user</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/banners">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fclover-banner.png?alt=media&token=81abcc2e-4660-4593-9b0e-84ed7ffffbd6"
+                             width="30" height="30" alt="banner">
+                        <span class="ml-3">Quản lý banner</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/categories">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fcategory.png?alt=media&token=03707aa2-780b-4577-a14d-448bbd9abedb"
+                             width="30" height="30" alt="category">
+                        <span class="ml-3">Quản lý chuyên mục</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/posts/statistics">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-chart.png?alt=media&token=61592866-af5f-4bc9-9e79-499ad75d7008"
+                             width="30" height="30" alt="analytic">
+                        <span class="ml-3">Thống kê bài đăng</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/admin/users/statistics">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-chart.png?alt=media&token=5998ce36-c4da-405f-8173-9d1ef4efb280"
+                             width="30" height="30" alt="analytic">
+                        <span class="ml-3">Thống kê user</span>
+                      </a>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
                     <li (click)="logout()">
@@ -118,6 +156,10 @@
                   </ul>
 
                 </div>
+              </a>
+              <a routerLink="/" class="ml-lg-4 ml-md-3">
+                <i class="far fa-bell mr-2"></i>
+                <span>Thông báo</span>
               </a>
             </div>
           </div>
@@ -151,17 +193,17 @@
           <div class="col-lg-6 col-md-6" id="logBtn">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 m-0 p-0">
-                <button class="btn bg-transparent w-100" *ngIf="!username">
-                  <img [src]="avatarUrl"
-                       width="30" height="30" class="icon-user"
+                <button class="btn bg-transparent w-100 btnAcc" *ngIf="!username">
+                  <img [src]="avatarUrl" class="icon-user"
+                       width="40" height="40"
                        alt="user">
                   <a routerLink="/login" class="pl-3">
                     <strong class="name-acc">Đăng nhập</strong>
                   </a>
                 </button>
-                <button class="btn bg-transparent w-100" *ngIf="username">
-                  <img [src]="avatarUrl"
-                       width="30" height="30" class="icon-user"
+                <button class="btn bg-transparent w-100 btnAcc" *ngIf="username">
+                  <img [src]="avatarUrl" class="icon-user"
+                       width="40" height="40"
                        alt="user">
                   <strong class="pl-3 name-acc">{{username}}</strong>
                 </button>

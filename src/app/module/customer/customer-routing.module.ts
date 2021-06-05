@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: CustomerPageComponent,
     children: [
-      {path: '', component: ShowInfoComponent},
+      {path: 'show-info', component: ShowInfoComponent},
       {path: 'edit', component: EditInfoComponent},
       {path: 'inbox/:id', component: ChangePasswordComponent},
       {path: 'change-password', component: ChangePasswordComponent},

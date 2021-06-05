@@ -4,6 +4,8 @@ import {TokenStorageService} from "../../../../service/security/token-storage.se
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ServiceCustomerService} from "../../../../service/service-customer/service-customer.service";
 import {Router} from "@angular/router";
+import {UserCustomerService} from "../../../../service/service-customer/user-customer.service";
+import {User} from "../../../../model/User";
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +19,18 @@ import {Router} from "@angular/router";
 
 export class MainHeaderComponent implements OnInit {
 
-  roles: string[] = [];
   public searchInput: FormGroup;
   username: any = '';
-  role:string = 'a';
-  avatarUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.png?alt=media&token=17b5d64b-f4fc-4723-a694-3acc51abe7b3';
-
+  role:string = '';
+  user:User;
+  avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fn-user.png?alt=media&token=962f0b50-470f-43ab-a7b2-9cb30b325247";
 
   constructor(
     private securityService: SecurityService,
     private tokenStorageService: TokenStorageService,
     private headerService: ServiceCustomerService,
-    private router: Router
+    private router: Router,
+    private userCustomerService:UserCustomerService
   ) {
   }
 
@@ -44,6 +46,7 @@ export class MainHeaderComponent implements OnInit {
       this.role = user.authorities[0].authority;
       this.username = user.username;
       console.log("Getting username... : "+this.username);
+      this.getAvatarUrl(this.username);
     } else {
       console.log('Not log in yet');
     }
@@ -75,9 +78,19 @@ export class MainHeaderComponent implements OnInit {
   hideHeaderOnscroll() {
     let header = document.getElementById('header');
     if (document.documentElement.scrollTop > 50) {
-      header.style.display = 'none'
+      header.style.display = 'none';
     } else {
-      header.style.display = 'block'
+      header.style.display = 'block';
     }
+  }
+
+  getAvatarUrl(username:string) {
+    this.userCustomerService.getUserByUserName(username).subscribe(data => {
+      this.user = data;
+      this.avatarUrl = this.user.avatarUrl;
+      console.log("URL : "+this.avatarUrl)
+    }, error => {
+      console.log("get "+error+" at getAvatarUrl()");
+    })
   }
 }

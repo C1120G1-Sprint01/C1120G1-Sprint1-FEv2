@@ -24,6 +24,11 @@ export class SecurityService {
     }
   }
 
+  /**
+   * Author: HoangTQ
+   * login, checkEmail, saveNewPw
+   */
+
   login(authLogin: AuthLogin): Observable<any> {
     return this.http.post<any>(API_URL + 'login', authLogin, this.httpOptions);
   }
