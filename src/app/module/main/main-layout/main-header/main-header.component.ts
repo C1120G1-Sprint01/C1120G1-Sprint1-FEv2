@@ -23,7 +23,7 @@ export class MainHeaderComponent implements OnInit {
   username: any = '';
   role:string = '';
   user:User;
-  avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fn-user.png?alt=media&token=962f0b50-470f-43ab-a7b2-9cb30b325247";
+  avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.jpg?alt=media&token=d3149a38-f6f3-42d2-b8bf-b79d78049b89";
 
   constructor(
     private securityService: SecurityService,
