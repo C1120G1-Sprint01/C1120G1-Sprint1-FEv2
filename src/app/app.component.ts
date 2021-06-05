@@ -29,6 +29,8 @@ export class AppComponent {
             this.role = data.roleName;
           })
         });
+        this.role = this.tokenStorage.getUser().authorities[0].authority;
+        console.log("ROLE for chat : "+this.role)
       } else {
         this.role = 'ROLE_ADMIN';
       }

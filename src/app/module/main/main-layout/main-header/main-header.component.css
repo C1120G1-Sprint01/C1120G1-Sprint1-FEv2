@@ -3,7 +3,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 812px){
+@media screen and (max-width: 832px){
   .icon-user {
     display: none;
   }
@@ -41,25 +41,25 @@ input::-webkit-input-placeholder {
 .dropdown:hover {
    transition: all 0.5s ease-out;
 }
-.dropdown div ul {
-  width: 20rem;
+.dropdown-menu ul {
+  width: 12.5rem;
   height: 100%;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.dropdown ul li {
+.dropdown-menu ul li {
   line-height: 2.4rem;
   padding-left: 0.6rem;
 }
-.dropdown ul li:first-child, li:last-child {
+.dropdown-menu ul li:first-child, li:last-child {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.dropdown ul li:hover {
+.dropdown-menu ul li:hover {
   background-color: #f0f0f0;
 }
-.dropdown ul li:first-child:hover {
+.dropdown-menu ul li:first-child:hover {
   background-color: white;
 }
 #profile {
@@ -72,16 +72,16 @@ input::-webkit-input-placeholder {
   font-size: 1.5rem;
   color: #0D5DB6;
 }
-
-
-
-.nav-item-lg {
-  cursor: pointer;
+.col-lg-6 .btn:focus {
+  box-shadow: none;
 }
-.showUsername {
-  color: white;
-  padding-top: 7px;
+.circle-acc, .icon-user {
+  border-radius: 50%;
 }
-.nav-link {
-  color: white;
+.icon-user {
+  margin-bottom: 0.5rem;
+  margin-top: -0.5rem;
+}
+.btnAcc {
+  cursor: none;
 }
