@@ -9,7 +9,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./post-list-admin.component.css']
 })
 export class PostListAdminComponent implements OnInit {
-
+  defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
+    + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
   postList: Post [] = [];
 
   deleteId: number;
@@ -18,7 +19,7 @@ export class PostListAdminComponent implements OnInit {
   public posterName = '';
 
   textSorting = "";
-  size = 5;
+  size = 2;
   pageClicked = 0;
   pages = [];
   totalPages = 1;
