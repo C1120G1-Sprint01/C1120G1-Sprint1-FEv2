@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../../service/service-post/service-post.service';
-import {Router} from '@angular/router';
 import {Post} from '../../../../model/Post';
 declare var $: any;
 
@@ -20,12 +19,13 @@ export class ListApproveComponent implements OnInit {
   waitId: number;
   waitTitle: string;
 
-  constructor(private postService: ServicePostService,
-              private router: Router) {
+  constructor(private postService: ServicePostService) {
+    console.log("constructor");
   }
 
   ngOnInit(): void {
     this.getListPostListApprove();
+    console.log("init");
   }
 
   getListPostListApprove() {

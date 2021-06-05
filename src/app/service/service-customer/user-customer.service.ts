@@ -52,4 +52,5 @@ export class UserCustomerService {
   setNewPassword(username: string, newPassword: string): Observable<void> {
     return this.httpClient.post<void>(this.API_USER + '/setPass/' + username + '/' + newPassword, this.httpOptions);
   }
+
 }

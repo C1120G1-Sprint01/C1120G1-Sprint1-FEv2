@@ -20,17 +20,23 @@ import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
-  declarations: [BannerManagementComponent,  EditBannerManagerComponent,  AddBannerManagerComponent, LoadingComponent, DisplayBannerTopComponent, DisplayBannerBotComponent, DisplayBannerLeftComponent, DisplayBannerRightComponent],
-  imports: [
-    CommonModule,
-    AdminBannerRoutingModule,
-    NgbCarouselModule,
-    ReactiveFormsModule,
-    MatOptionModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDialogModule,
-    NgxPaginationModule
-  ]
+    declarations: [BannerManagementComponent, EditBannerManagerComponent, AddBannerManagerComponent, LoadingComponent, DisplayBannerTopComponent, DisplayBannerBotComponent, DisplayBannerLeftComponent, DisplayBannerRightComponent],
+    exports: [
+        DisplayBannerRightComponent,
+        DisplayBannerTopComponent,
+        DisplayBannerLeftComponent,
+        DisplayBannerBotComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminBannerRoutingModule,
+        NgbCarouselModule,
+        ReactiveFormsModule,
+        MatOptionModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatDialogModule,
+        NgxPaginationModule
+    ]
 })
 export class AdminBannerModule { }

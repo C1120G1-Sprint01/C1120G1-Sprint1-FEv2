@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddBannerManagerComponent } from './add-banner-manager.component';
+import { PostDeleteAdminComponent } from './post-delete-admin.component';
 
-describe('AddBannerManagerComponent', () => {
-  let component: AddBannerManagerComponent;
-  let fixture: ComponentFixture<AddBannerManagerComponent>;
+describe('PostDeleteAdminComponent', () => {
+  let component: PostDeleteAdminComponent;
+  let fixture: ComponentFixture<PostDeleteAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddBannerManagerComponent ]
+      declarations: [ PostDeleteAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddBannerManagerComponent);
+    fixture = TestBed.createComponent(PostDeleteAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

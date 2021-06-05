@@ -1,45 +1,41 @@
 <div class="container-fluid body">
-      <div class="card">
-        <div class="card-body">
-          <p class="title">Chỉnh sửa chuyên mục</p>
-          <form [formGroup]="formEdit" (ngSubmit)="save()">
-            <table class="table table-striped">
-              <tr>
-                <td>Tên chuyên mục cha</td>
-                <td>
-                  <select [compareWith]="compareFn" formControlName="category" class="form-control">
-                    <option value="" disabled>Chọn chuyên mục</option>
-                    <option *ngFor="let category of categoryList"
-                            [ngValue]="category"
-                            style="color: blue">
-                      {{category.categoryName}}
-                    </option>
-                  </select>
-
-                </td>
-              </tr>
-              <tr>
-                <td>Tên chuyên mục</td>
-                <td>
-                  <input type="text" formControlName="childCategoryName" class="form-control">
-                  <div class="error alert alert-danger" role="alert"
-                       *ngIf="formEdit.get('childCategoryName').invalid && formEdit.get('childCategoryName').dirty">
-                    <span *ngIf="formEdit.get('childCategoryName').hasError('required')">Tên chuyên mục không được để trống.</span>
-                    <span *ngIf="formEdit.get('childCategoryName').hasError('pattern')">Tên chuyên mục không được có kí tự đặc biệt</span>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td style="text-align: center">
-                  <input type="submit" class="btn btn-success" [disabled]="formEdit.invalid" value="Lưu">
-                </td>
-                <td style="text-align: center">
-                  <a routerLink="/admin/categories/child-categories" class="btn btn-secondary">Hủy</a>
-                </td>
-              </tr>
-            </table>
-          </form>
-        </div>
+  <div class="card">
+    <div class="card-body">
+      <p class="title">Chỉnh sửa chuyên mục</p>
+      <form [formGroup]="formEdit" (ngSubmit)="save()">
+        <table class="table table-striped">
+          <tr>
+            <td>Tên chuyên mục cha</td>
+            <td>
+              <select [compareWith]="compareFn" formControlName="category" class="form-control">
+                <option *ngFor="let category of categoryList"
+                        [ngValue]="category"
+                        style="color: blue">
+                  {{category.categoryName}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Tên chuyên mục</td>
+            <td>
+              <input type="text" formControlName="childCategoryName" maxlength="30" class="form-control">
+              <div class="error mt-2" role="alert"
+                   *ngIf="formEdit.get('childCategoryName').invalid && formEdit.get('childCategoryName').dirty">
+                <span *ngIf="formEdit.get('childCategoryName').hasError('required')">Tên chuyên mục không được để trống.</span>
+                <span *ngIf="formEdit.get('childCategoryName').hasError('pattern')">Tên chuyên mục không được có kí tự đặc biệt</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" class="btn btn-success" [disabled]="formEdit.invalid" value="Lưu">
+              <a routerLink="/admin/categories/child-categories" class="btn btn-secondary ml-2">Hủy</a>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
 </div>

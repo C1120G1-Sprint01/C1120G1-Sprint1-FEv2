@@ -26,7 +26,7 @@ export class CreateChildCategoryComponent implements OnInit {
     });
 
     this.formCreate = this.fb.group({
-      childCategoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      childCategoryName: ['', [Validators.required,Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
       // nơi chưa đối tương category cha
       category: [''],
     });

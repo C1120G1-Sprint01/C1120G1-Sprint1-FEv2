@@ -28,14 +28,15 @@ export class MainHeaderComponent implements OnInit {
     private securityService: SecurityService,
     private tokenStorageService: TokenStorageService,
     private headerService: ServiceCustomerService,
-    private router:Router
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
 
     this.searchInput = new FormGroup({
-      posterName:new FormControl('', [Validators.required])});
+      posterName: new FormControl('', [Validators.required])
+    });
 
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
@@ -52,15 +53,15 @@ export class MainHeaderComponent implements OnInit {
     })
   }
 
-  submit(){
+  submit() {
     this.headerService.searchPostByName(this.searchInput.controls['posterName'].value).subscribe(data => {
-    console.log(data)
+      console.log(data)
     });
   }
 
-  logout(){
+  logout() {
     this.tokenStorageService.signOut();
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl("/login");
   }
 
   showProfile() {
