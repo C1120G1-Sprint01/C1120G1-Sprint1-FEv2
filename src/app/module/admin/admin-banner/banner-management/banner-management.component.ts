@@ -45,7 +45,8 @@ export class BannerManagementComponent implements OnInit {
 
   openFormAddBanner() {
     const dialogRef = this.dialog.open(AddBannerManagerComponent, {
-      disableClose: true
+      disableClose: true,
+      position: { top: '76px'}
     });
     dialogRef.afterClosed().subscribe((data) => {
       this.ngOnInit();
@@ -56,6 +57,7 @@ export class BannerManagementComponent implements OnInit {
     const dialogRef = this.dialog.open(EditBannerManagerComponent, {
       data: bannerId,
       disableClose: true,
+      position: { top: '76px'}
     });
     dialogRef.afterClosed().subscribe((data) => {
       this.ngOnInit();
