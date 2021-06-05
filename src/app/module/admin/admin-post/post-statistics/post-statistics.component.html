@@ -15,7 +15,8 @@
         </thead>
         <tbody>
         <tr>
-          <td><input type="date" class="form-control" [(ngModel)]="startDate"></td>
+<!--          <input type="date" data-date="" data-date-format="dd/MM/yyyy" value="12/12/2021" class="form-control" [(ngModel)]="startDate">-->
+          <td><input type="date" placeholder="dd/MM/yyyy" class="form-control" [(ngModel)]="startDate"></td>
           <td><input type="date" class="form-control" [(ngModel)]="endDate">
           <td>
             <button type="submit" class="btn btn-primary" (click)="onSubmit()">Thống Kê</button>
