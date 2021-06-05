@@ -20,6 +20,8 @@ export class MainHeaderComponent implements OnInit {
   roles: string[] = [];
   public searchInput: FormGroup;
   username: any = '';
+  role:string = 'a';
+  avatarUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.png?alt=media&token=17b5d64b-f4fc-4723-a694-3acc51abe7b3';
 
 
   constructor(
@@ -36,17 +38,19 @@ export class MainHeaderComponent implements OnInit {
       posterName:new FormControl('', [Validators.required])});
 
     if (this.tokenStorageService.getToken()) {
-      console.log('Getting username...');
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
-      this.roles = user.roles;
+      this.role = user.authorities[0].authority;
       this.username = user.username;
-      console.log(this.username);
+      console.log("Getting username... : "+this.username);
     } else {
-      console.log('Reset username');
+      console.log('Not log in yet');
     }
-  }
 
+    window.onscroll = (x => {
+      this.hideHeaderOnscroll();
+    })
+  }
 
   submit(){
     this.headerService.searchPostByName(this.searchInput.controls['posterName'].value).subscribe(data => {
@@ -57,5 +61,22 @@ export class MainHeaderComponent implements OnInit {
   logout(){
     this.tokenStorageService.signOut();
     this.router.navigateByUrl("login");
+  }
+
+  showProfile() {
+    document.getElementById("profile").style.display = 'block';
+  }
+
+  hideProfile() {
+    document.getElementById("profile").style.display = 'none';
+  }
+
+  hideHeaderOnscroll() {
+    let header = document.getElementById('header');
+    if (document.documentElement.scrollTop > 50) {
+      header.style.display = 'none'
+    } else {
+      header.style.display = 'block'
+    }
   }
 }
