@@ -30,7 +30,7 @@ export class AppComponent {
           })
         });
       } else {
-        this.role = 'ADMIN';
+        this.role = 'ROLE_ADMIN';
       }
       return resolve(1);
     })
