@@ -34,13 +34,15 @@
 }
 
 @media (max-width: 1024px) {
-  .menu-var a span{
+  .menu-var a span {
     font-size: 0 !important;
   }
+
   .menu-var a {
     font-size: 30px;
   }
-  .menu-var{
+
+  .menu-var {
     text-align: center;
   }
 }
