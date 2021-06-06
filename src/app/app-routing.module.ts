@@ -8,6 +8,7 @@ import {MainPageComponent} from './module/main/main-layout/main-page/main-page.c
 import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
 import {RegisterComponent} from './module/security/register/register.component';
+import {SearchPostComponent} from "./module/main/search-post/search-post.component";
 import {CreatePostComponent} from "./module/main/create-post/create-post.component";
 import {LoginGoogleComponent} from "./module/security/login-google/login-google.component";
 
@@ -46,10 +47,11 @@ const routes: Routes = [
     component: MainPageComponent,
     children: [
       {path: '', component: ListPostComponent},
-      {path: 'post/create', component: CreatePostComponent},
       {path: 'post/:id', component: ViewPostComponent},
       {path: ':category', component: ListPostComponent},
       {path: ':category/:childCategory', component: ListPostComponent},
+      {path: 'search', component: SearchPostComponent},
+      {path: 'createPost', component: CreatePostComponent},
     ]
   }
 ];
