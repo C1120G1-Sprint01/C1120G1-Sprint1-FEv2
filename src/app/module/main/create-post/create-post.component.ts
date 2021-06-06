@@ -71,7 +71,7 @@ export class CreatePostComponent implements OnInit {
       province: [""],
       category: [""],
       childCategory: ["", [Validators.required]],
-      postType: [true, [Validators.required]],
+      postType: ["true", [Validators.required]],
       title: ["Bán xe", [Validators.required]],
       description: ["Bán xe", [Validators.required]],
       price: [10000000, [Validators.pattern('^[\\d]+$')]],
@@ -83,6 +83,7 @@ export class CreatePostComponent implements OnInit {
   onFileSelected(event: any) {
     if (event.target.files && event.target.files[0]) {
       const filesAmount = event.target.files.length;
+
       for (let i = 0; i < filesAmount; i++) {
         let image = event.target.files[i];
 
@@ -95,6 +96,7 @@ export class CreatePostComponent implements OnInit {
           this.images.push(image);
         }
       }
+      this.form.controls['file'].reset("");
     }
   }
 
@@ -103,13 +105,12 @@ export class CreatePostComponent implements OnInit {
     this.imagesSource.splice(index, 1);
   }
 
-  uploadImages(images: any[]): Promise<any> {
+  uploadImages(images: File[]): Promise<any> {
     return new Promise<any>((resolve) => {
       const imagesAmount = images.length;
 
       if (imagesAmount > 0) {
-        for (let i = 0; i < imagesAmount; i++) {
-          const image = images[i];
+        images.map(image => {
           const filePath = `test/${image.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
           const fileRef = this.storage.ref(filePath);
 
@@ -124,7 +125,7 @@ export class CreatePostComponent implements OnInit {
               });
             })
           ).subscribe();
-        }
+        });
       }
     });
   }
@@ -132,10 +133,10 @@ export class CreatePostComponent implements OnInit {
   submitForm(form: FormGroup) {
     this.username = this.tokenStorageService.getUser().username;
     this.uploadImages(this.images).then((resolve) => {
-      console.log(resolve);
       this.form.patchValue({
         imageSet: resolve
       });
+
       this.serviceCustomer.savePost(form.value, this.username).subscribe(result => {
         this.router.navigateByUrl("/");
         this.toastr.success("Tin của bạn đang chờ được duyệt", "Đăng tin thành công!", {
@@ -147,8 +148,8 @@ export class CreatePostComponent implements OnInit {
         this.toastr.error("Đã có lỗi xảy ra!", "Lỗi!");
         console.log("error is: " + error);
       });
+
       this.imageSet = [];
-      console.log(this.imageSet);
     });
   }
 
