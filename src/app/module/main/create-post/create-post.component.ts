@@ -95,7 +95,7 @@ export class CreatePostComponent implements OnInit {
   submitForm(form: FormGroup) {
     console.log('Value : abc');
     this.serviceCustomer.savePost(form.value).subscribe(data => {
-      this.router.navigateByUrl('/homepage');
+      this.router.navigateByUrl('/');
       this.toastr.success('Đăng tin thành công!', 'Thành công!');
     }, error => {
       this.toastr.error('Đã có lỗi xảy ra!', 'Lỗi!');

@@ -11,7 +11,7 @@ export const environment = {
     projectId: "chatexample-bc311",
     storageBucket: "chatexample-bc311.appspot.com",
     messagingSenderId: "115124339533",
-    appId: "1:115124339533:web:154653575b34a81e7ced04"
+    appId: "1:115124339533:web:a92bf95010a58faa7ced04"
   }
 };
 

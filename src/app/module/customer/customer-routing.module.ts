@@ -7,20 +7,22 @@ import {ChangePasswordComponent} from './customer-manager/change-password/change
 import {ListPostComponent} from './customer-post/list-post/list-post.component';
 import {EditPostComponent} from './customer-post/edit-post/edit-post.component';
 import {DeletePostComponent} from './customer-post/delete-post/delete-post.component';
+import { InboxComponent } from './customer-manager/inbox/inbox.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CustomerPageComponent,
     children: [
-      {path: '', component: ShowInfoComponent},
+      {path: 'show-info', component: ShowInfoComponent},
       {path: 'edit', component: EditInfoComponent},
-      {path: 'inbox/:id', component: ChangePasswordComponent},
+      {path: 'inbox', component: InboxComponent},
       {path: 'change-password', component: ChangePasswordComponent},
       {path: 'posts', component: ListPostComponent},
       {path: 'posts/edit/:id', component: EditPostComponent},
       {path: 'posts/delete/:id', component: DeletePostComponent},
-      {path: '**', redirectTo: '', pathMatch: 'full'}
+      {path: '**', redirectTo: 'show-info', pathMatch: 'full'},
+      {path: '/', redirectTo: 'show-info', pathMatch: 'full'}
     ]
   }
 ];

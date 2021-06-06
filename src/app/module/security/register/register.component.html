@@ -1,9 +1,9 @@
 
 <app-main-header></app-main-header>
-<div class="wrapper wrapper--w790">
+<div class="wrapper wrapper--w790 mt-3">
   <div class="card card-5">
     <div class="card-heading">
-      <h2 class="title">Thêm Mới Khách Hàng</h2>
+      <h2 class="title">Thêm Mới Thông Tin Đăng Kí Khách Hàng</h2>
     </div>
     <div class="card-body">
       <form [formGroup]="formAddNewCustomer" (ngSubmit)="addNewCustomer(formAddNewCustomer.value)">
@@ -29,7 +29,7 @@
           <div class="name">Mật khẩu<span class="text-red"> (*)</span>:</div>
           <div class="value">
             <div class="input-group">
-              <input class="input--style-5" type="email" formControlName="password">
+              <input class="input--style-5" type="password" formControlName="password">
             </div>
           </div>
           <p
@@ -44,7 +44,7 @@
           <div class="name">Xác Nhận<span class="text-red"> (*)</span>:</div>
           <div class="value">
             <div class="input-group">
-              <input class="input--style-5" type="text" formControlName="confirmPassword">
+              <input class="input--style-5" type="password" formControlName="confirmPassword">
             </div>
           </div>
           <p class="text-error " *ngIf="isMessage">Mật khẩu không trùng khớp !</p>
@@ -167,8 +167,8 @@
           </div>
         </div>
         <div>
-          <button class="btn btn-success" type="submit">Đăng kí</button>
-          <button class="btn btn-danger " type="button" routerLink="/">Huỷ</button>
+          <button class="btn btn-success ml-5 mb-1 mt-3" type="submit">Đăng kí</button>
+          <button class="btn btn-secondary ml-5 mt-3" type="button" routerLink="/">Huỷ</button>
         </div>
       </form>
     </div>

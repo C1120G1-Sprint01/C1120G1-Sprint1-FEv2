@@ -9,6 +9,7 @@ import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
 import {RegisterComponent} from './module/security/register/register.component';
 import {CreatePostComponent} from "./module/main/create-post/create-post.component";
+import {LoginGoogleComponent} from "./module/security/login-google/login-google.component";
 
 const routes: Routes = [
 
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'login/getBackPw',
     component: GetBackPasswordComponent
+  },
+  {
+    path: 'login/google',
+    component: LoginGoogleComponent
   },
   {
     path: '',
