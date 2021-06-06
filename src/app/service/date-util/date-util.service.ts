@@ -16,6 +16,10 @@ export class DateUtilService {
   constructor() {
   }
 
+  /**
+   * Author: ViNTT
+   * Get time difference from a date to now
+   */
   getDiffToNow(startDate: string | number | Date): string {
     let result = '';
     const now = new Date();

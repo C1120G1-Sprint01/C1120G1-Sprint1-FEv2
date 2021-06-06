@@ -11,7 +11,7 @@ import {MainModule} from './module/main/main.module';
 import {SecurityModule} from './module/security/security.module';
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminModule} from "./module/admin/admin.module";
 import {DatePipe} from "@angular/common";
 import {RouterModule} from "@angular/router";

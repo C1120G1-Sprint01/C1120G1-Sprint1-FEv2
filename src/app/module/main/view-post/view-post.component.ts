@@ -42,7 +42,7 @@ export class ViewPostComponent implements OnInit {
   initData() {
     const id = this.activatedRoute.snapshot.params['id'];
 
-    this.postService.getPostById(id).subscribe(data => {
+    this.postService.getActivePostById(id).subscribe(data => {
       let userWard = data.user.ward.wardName;
       let userDistrict = data.user.ward.district.districtName;
       let userProvince = data.user.ward.district.province.provinceName;
@@ -66,11 +66,7 @@ export class ViewPostComponent implements OnInit {
   }
 
   goToChat() {
-    if (this.securityService.isLoggedIn) {
-      this.router.navigateByUrl('/customer/inbox/' + this.post.user.userId);
-    } else {
-      this.router.navigateByUrl('/login');
-    }
+    this.router.navigateByUrl('/customer/inbox/' + this.post.user.userId);
   }
 
 }

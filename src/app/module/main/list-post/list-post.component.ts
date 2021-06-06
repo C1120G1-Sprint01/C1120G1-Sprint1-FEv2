@@ -11,18 +11,19 @@ import {Post} from "../../../model/Post";
   styleUrls: ['./list-post.component.css']
 })
 export class ListPostComponent implements OnInit {
+
+  defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
+    + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
+
   listPost: any;
   listTime: string[] = [];
   listPostData: Post[] = [];
-  defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
-    + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
 
   constructor(
     private postService: ServicePostService,
     private activatedRoute: ActivatedRoute,
     private mainContentComponent: MainContentComponent,
-    private dateUtilService: DateUtilService
-  ) {
+    private dateUtilService: DateUtilService) {
   }
 
   ngOnInit() {
@@ -31,12 +32,12 @@ export class ListPostComponent implements OnInit {
   }
 
   initData(data: any) {
-    this.listPost = data.content;
-    for (let post of this.listPost) {
+    this.listPost = data;
+    this.listPostData = data.content;
+    for (let post of this.listPostData) {
       this.listTime.push(this.dateUtilService.getDiffToNow(post.postDateTime));
     }
     // console.log(this.listTime);
-    this.listPostData = this.listPost;
   }
 
   onList(page: number) {
@@ -65,4 +66,5 @@ export class ListPostComponent implements OnInit {
       });
     }
   }
+
 }
