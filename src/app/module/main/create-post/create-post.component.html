@@ -1,26 +1,26 @@
 <!-- main content -->
 <div class="d-flex justify-content-center col-12 col-sm-12 col-md-12">
   <!-- content here -->
-  <div class="d-flex justify-content-center col-12 mt-5 pt-3">
+  <div class="d-flex justify-content-center col-12 pt-3">
     <div class="col-sm-12 col-md-9">
       <p class="title-text text-uppercase">Đăng tin</p>
-      <!--      <form>-->
       <form [formGroup]="form" (ngSubmit)=submitForm(form)>
-        <table class="table">
+        <table class="table table-hover table-borderless">
           <tbody>
           <tr>
-            <td>
+            <td class="col-4">
               <label for="name">
-                Tên
+                Tên người bán
                 <span class="asterisk-red">*</span>
               </label>
             </td>
-            <td>
-              <input type="text" class="form-control" placeholder="Nhập vào tên của bạn" id="name"
+            <td class="col-8">
+              <input type="text" class="form-control" placeholder="Nhập vào tên người bán" id="name"
                      formControlName="posterName"/>
               <p class="invalid-feedback" *ngIf="form.controls.posterName.touched">
-                <span *ngIf="form.controls.posterName.errors?.required">Hãy nhập dữ liệu vào trường bắt buộc.</span>
+                <span *ngIf="form.controls.posterName.errors?.required">Hãy nhập tên người bán.</span>
                 <span *ngIf="form.controls.posterName.errors?.pattern">Tên không hợp lệ.</span>
+                <span *ngIf="form.controls.posterName.errors?.maxlength">Tên quá dài.</span>
               </p>
             </td>
           </tr>
@@ -39,7 +39,7 @@
                   Hãy nhập dữ liệu vào trường bắt buộc.
                 </span>
                 <span *ngIf="form.controls.phone.errors?.pattern">
-                  Số điện thoại là số và phải từ 10-11 số. Vui lòng nhập lại.
+                  Số điện thoại không đúng. Vui lòng nhập lại 10-11 số.
                 </span>
               </p>
             </td>
@@ -59,7 +59,10 @@
                   Hãy nhập dữ liệu vào trường bắt buộc.
                 </span>
                 <span *ngIf="form.controls.email.errors?.pattern">
-                  Email có dạng somebody@gmail.com, somebody@yahoo.com
+                  Email có dạng [somebody@gmail.com] hoặc [somebody@yahoo.com].
+                </span>
+                <span *ngIf="form.controls.email.errors?.maxlength">
+                  Email quá dài.
                 </span>
               </p>
             </td>
@@ -73,26 +76,26 @@
             </td>
             <td>
             <span>
-                <select class="custom-select custom-select-sm mb-1" [(ngModel)]="province" (change)="onChangeProvince()"
-                        [ngModelOptions]="{standalone: true}">
-                    <option selected disabled>Chọn tỉnh thành</option>
+                <select class="custom-select custom-select-sm mb-1" formControlName="province"
+                        (change)="onChangeProvince()">
+                    <option value="" selected disabled>Chọn tỉnh thành</option>
                     <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
                 </select>
                 <br/>
-                <select class="custom-select custom-select-sm mb-1" [(ngModel)]="district" (change)="onChangeDistrict()"
-                        [ngModelOptions]="{standalone: true}">
-                    <option selected disabled>Chọn quận/huyện</option>
+                <select class="custom-select custom-select-sm mb-1" formControlName="district"
+                        (change)="onChangeDistrict()">
+                    <option value="" selected disabled>Chọn quận/huyện</option>
                     <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
                 </select>
                 <br/>
                 <select class="custom-select custom-select-sm mb-1" formControlName="ward">
-                    <option selected disabled>Chọn xã/phường</option>
+                    <option value="" selected disabled>Chọn xã/phường</option>
                     <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
                 </select>
             </span>
               <p class="invalid-feedback" *ngIf="form.controls.ward.touched">
                 <span *ngIf="form.controls.ward.errors?.required">
-                  Hãy nhập dữ liệu vào trường bắt buộc.
+                  Hãy nhập đầy đủ địa chỉ.
                 </span>
               </p>
             </td>
@@ -105,34 +108,44 @@
               </label>
             </td>
             <td>
-              <select class="form-control" id="category" [(ngModel)]="category"
-                      [ngModelOptions]="{standalone: true}"
-                      (change)="onChangeCategory()">
-                <option selected disabled>Chọn chuyên mục</option>
+              <!--category-->
+              <select class="form-control" id="category" formControlName="category" (change)="onChangeCategory()">
+                <option value="" selected disabled>Chọn chuyên mục</option>
                 <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}</option>
               </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="child_category">
-                Chuyên mục con
-                <span class="asterisk-red">*</span>
-              </label>
-            </td>
-            <td>
+              <!--child_category-->
               <select class="form-control" id="child_category" formControlName="childCategory">
-                <option selected disabled>Chọn chuyên mục</option>
+                <option value="" disabled>Chọn chuyên mục con</option>
                 <option *ngFor="let childCategory of childCategories" [ngValue]="childCategory">
                   {{childCategory.childCategoryName}}</option>
               </select>
               <p class="invalid-feedback" *ngIf="form.controls.childCategory.touched">
                 <span *ngIf="form.controls.childCategory.errors?.required">
-                  Bạn chưa chọn chuyên mục. Vui lòng chọn chuyên mục cần đăng.
+                  Bạn chưa chọn đủ chuyên mục. Vui lòng chọn chuyên mục cần đăng.
                 </span>
               </p>
             </td>
           </tr>
+          <!--          <tr>-->
+          <!--            <td>-->
+          <!--              <label for="child_category">-->
+          <!--                Chuyên mục con-->
+          <!--                <span class="asterisk-red">*</span>-->
+          <!--              </label>-->
+          <!--            </td>-->
+          <!--            <td>-->
+          <!--              <select class="form-control" id="child_category" formControlName="childCategory">-->
+          <!--                <option value="" disabled>Chọn chuyên mục con</option>-->
+          <!--                <option *ngFor="let childCategory of childCategories" [ngValue]="childCategory">-->
+          <!--                  {{childCategory.childCategoryName}}</option>-->
+          <!--              </select>-->
+          <!--              <p class="invalid-feedback" *ngIf="form.controls.childCategory.touched">-->
+          <!--                <span *ngIf="form.controls.childCategory.errors?.required">-->
+          <!--                  Bạn chưa chọn chuyên mục. Vui lòng chọn chuyên mục cần đăng.-->
+          <!--                </span>-->
+          <!--              </p>-->
+          <!--            </td>-->
+          <!--          </tr>-->
           <tr>
             <td>
               <label>
@@ -174,6 +187,9 @@
                 <span *ngIf="form.controls.title.errors?.required">
                   Vui lòng nhập tiêu đề bài viết.
                 </span>
+                <span *ngIf="form.controls.title.errors?.maxlength">
+                  Tiêu đề bài viết không quá 256 kí tự.
+                </span>
               </p>
             </td>
           </tr>
@@ -190,7 +206,10 @@
             </textarea>
               <p class="invalid-feedback" *ngIf="form.controls.description.touched">
                 <span *ngIf="form.controls.description.errors?.required">
-                  Hãy nhập dữ liệu vào trường bắt buộc.
+                  Hãy nhập nội dung tin.
+                </span>
+                <span *ngIf="form.controls.description.errors?.maxlength">
+                  Nội dung tin quá dài.
                 </span>
               </p>
             </td>
@@ -206,7 +225,8 @@
               <input type="number" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
                      formControlName="price"/>
               <p class="invalid-feedback" *ngIf="form.controls.price.touched">
-                <span *ngIf="form.controls.price.errors?.pattern">Giá không hợp lệ.</span>
+                <span *ngIf="form.controls.price.errors?.pattern">Giá tiền không hợp lệ.</span>
+                <span *ngIf="form.controls.price.errors?.maxlength">Giá tiền quá lớn.</span>
               </p>
             </td>
           </tr>
@@ -221,40 +241,44 @@
               <button class="btn btn-success" (click)="addImage()" type="button">
                 <i class="fas fa-folder-plus"></i>
               </button>
-              <section class="d-block">
-                <section style="display: none" id="addImg1">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg1')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg2">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg2')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg3">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg3')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg4">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg4')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-              </section>
+              <!--              <section class="d-block">-->
+              <!--                <section style="display: none" id="addImg1">-->
+              <!--                  <section class="d-inline-flex imgAdd">-->
+              <!--                    <input class="form-control col-md-10" type="file" accept="image/*" formControlName="img1"-->
+              <!--                           (change)="showPreview($event, 1)"/>-->
+              <!--                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg1')">-->
+              <!--                      <i class="fas fa-folder-minus"></i>-->
+              <!--                    </button>-->
+              <!--                  </section>-->
+              <!--                </section>-->
+              <!--                <section style="display: none" id="addImg2">-->
+              <!--                  <section class="d-inline-flex imgAdd">-->
+              <!--                    <input class="form-control col-md-10" type="file" accept="image/*" formControlName="img2"-->
+              <!--                           (change)="showPreview($event, 2)"/>-->
+              <!--                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg2')">-->
+              <!--                      <i class="fas fa-folder-minus"></i>-->
+              <!--                    </button>-->
+              <!--                  </section>-->
+              <!--                </section>-->
+              <!--                <section style="display: none" id="addImg3">-->
+              <!--                  <section class="d-inline-flex imgAdd">-->
+              <!--                    <input class="form-control col-md-10" type="file" accept="image/*" formControlName="img3"-->
+              <!--                           (change)="showPreview($event, 3)"/>-->
+              <!--                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg3')">-->
+              <!--                      <i class="fas fa-folder-minus"></i>-->
+              <!--                    </button>-->
+              <!--                  </section>-->
+              <!--                </section>-->
+              <!--                <section style="display: none" id="addImg4">-->
+              <!--                  <section class="d-inline-flex imgAdd">-->
+              <!--                    <input class="form-control col-md-10" type="file" accept="image/*" formControlName="img4"-->
+              <!--                           (change)="showPreview($event, 4)"/>-->
+              <!--                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg4')">-->
+              <!--                      <i class="fas fa-folder-minus"></i>-->
+              <!--                    </button>-->
+              <!--                  </section>-->
+              <!--                </section>-->
+              <!--              </section>-->
             </td>
           </tr>
           <tr>
@@ -263,7 +287,6 @@
             </td>
             <td class="d-flex justify-content-center">
               <button type="submit" class="btn btn-success col-md-6" [disabled]="form.invalid">Đăng tin</button>
-              <!--              <button type="submit" class="btn btn-success col-md-6">Đăng tin</button>-->
             </td>
           </tr>
           </tbody>
@@ -273,24 +296,3 @@
   </div>
 </div>
 <!-- END main content -->
-<a href="#notificationModal" data-toggle="modal" style="display: none"></a>
-<!-- Modal notification -->
-<div id="notificationModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div>
-        <div class="modal-header">
-          <h4 class="modal-title">Đăng tin thành công</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Bạn có muốn tiếp tục đăng tin mới?</p>
-          <div class="d-inline-flex col-md-12">
-            <button type="button" class="btn btn-success col-md-6 mr-1" data-dismiss="modal">Có</button>
-            <a routerLink="../.." class="btn btn-primary col-md-6" data-dismiss="modal">Không, đưa tôi về trang chủ</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

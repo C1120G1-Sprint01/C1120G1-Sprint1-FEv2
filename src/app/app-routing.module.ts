@@ -9,6 +9,8 @@ import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
 import {RegisterComponent} from './module/security/register/register.component';
 import {LoginGoogleComponent} from "./module/security/login-google/login-google.component";
+import {SearchPostComponent} from "./module/main/search-post/search-post.component";
+import {CreatePostComponent} from "./module/main/create-post/create-post.component";
 
 const routes: Routes = [
 
@@ -48,6 +50,8 @@ const routes: Routes = [
       {path: 'post/:id', component: ViewPostComponent},
       {path: ':category', component: ListPostComponent},
       {path: ':category/:childCategory', component: ListPostComponent},
+      {path: 'search', component: SearchPostComponent},
+      {path: 'createPost', component: CreatePostComponent},
     ]
   }
 ];
