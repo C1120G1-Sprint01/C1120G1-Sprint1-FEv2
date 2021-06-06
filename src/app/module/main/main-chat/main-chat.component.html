@@ -3,65 +3,91 @@
     <div class="chat_header">
       <div class="chat_option">
         <div class="header_img">
-          <img src="./assets/image/logoChat.png"/>
+          <img src="./assets/image/chatbot+avatar+Cute_V1.png"/>
         </div>
         <span id="chat_head">Trung Tâm Tư Vấn</span>
         <br>
         <span class="agent">
-                    <i style="color: #4ffc1e" class="fas fa-circle"></i>
-                </span>
+          <i style="color: #4ffc1e" class="fas fa-circle"></i>
+        </span>
         <span class="agent">(Đang hoạt động)</span>
-        <span id="chat_fullscreen_loader" class="chat_fullscreen_loader"><i
+        <span id="chat_fullscreen_loader" class="chat_fullscreen_loader" (click)="fullscreen()"><i
           class="fullscreen zmdi zmdi-window-maximize"></i></span>
       </div>
     </div>
     <div class="chat_body chat_login">
-      <a id="chat_first_screen" class="fab"><i class="zmdi zmdi-arrow-right"></i></a>
-      <p>Chúng tôi kết nối việc mua/bán giữa mọi người một cách đơn giản và hiệu quả, hãy hỏi tôi bất cứ
-        điều gì</p>
+      <a id="chat_first_screen" class="fab" (click)="hideChat(1)"><i class="zmdi zmdi-arrow-right"></i></a>
+      <p>Chúng tôi kết nối doanh nghiệp với mọi người một cách đơn giản và hiệu quả, hãy hỏi bất cứ điều gì</p>
     </div>
-    <div id="chat_converse" class="chat_conversion chat_converse">
-      <a id="chat_second_screen" class="fab" style="display: none"><i class="zmdi zmdi-arrow-right"></i></a>
-      <div>
-            <span class="chat_msg_item chat_msg_item_admin">
+    <div id="chat_converse" class="chat_conversion chat_converse" (scroll)="readAllNoti()">
+      <div class="m-0" *ngFor="let chat of chats">
+        <div class="m-0" *ngIf="chat.nickname === account.username">
+          <div class="clearfix">
+            <p class="chat_msg_item chat_msg_item_user clearfix mb-0 mt-3" *ngIf="chat.type === 'message'">
+              {{chat.message}}</p>
+            <img class="chat_msg_item chat_msg_item_user clearfix mb-0 mt-3" style="width: 60%; height: 60%"
+                 *ngIf="chat.type === 'image'" src="{{chat.message}}" (click)="zoom(chat.message)">
+          </div>
+          <div><p class="status mr-4 mb-0">{{chat.timeSkip}}</p></div>
+        </div>
+        <div class="m-0" *ngIf="chat.nickname !== account.username">
+          <div class="chat_msg_item chat_msg_item_admin mb-0 mt-3" *ngIf="chat.type === 'message'">
             <div class="chat_avatar">
-               <img src="./assets/image/logoChat.png"/>
-            </div>Xin Chào! Tôi có thể giúp gì cho bạn không?
-            </span>
-        <span class="timeChat">15:17 20/05/2021</span>
-      </div>
-      <div>
-            <span class="chat_msg_item chat_msg_item_user">
-            Xin Chào!</span>
-        <span class="timeChat">15:18 20/05/2021</span>
-      </div>
-      <div>
-            <span class="chat_msg_item chat_msg_item_admin">
+              <img src="./assets/image/chatbot+avatar+Cute_V1.png"/>
+            </div>
+            {{chat.message}}
+          </div>
+          <div class="chat_msg_item chat_msg_item_admin mb-0 mt-3 p-0 bg-white" style="content: inherit"
+               *ngIf="chat.type === 'image'">
             <div class="chat_avatar">
-               <img src="./assets/image/logoChat.png"/>
-            </div>Bạn muốn nói chuyện về vấn đề gì nào?</span>
-        <span class="timeChat">15:19 20/05/2021</span>
+              <img src="./assets/image/chatbot+avatar+Cute_V1.png"/>
+            </div>
+            <img src="{{chat.message}}" class="custom-img" alt="" style="width: 60%; height: 60%"
+                 (click)="zoom(chat.message)">
+            <div *ngIf="loadImage" class="spinner-border text-black-50"
+                 style="margin-left: 5rem !important; text-align: center" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div><p class="status2" style="margin-left: 39px">{{chat.timeSkip}}</p></div>
+        </div>
       </div>
-      <div>
-            <span class="chat_msg_item chat_msg_item_user" onclick="hideTime()">
-            Tôi muốn đăng bán một mặt hàng thì làm như thế nào?</span>
-        <span class="timeChat">15:20 20/05/2021</span>
-      </div>
-      <div id="preview"></div>
     </div>
     <div class="fab_field">
-      <label>
-        <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
-        <input type="file" id="upload_file" name="upload_file[]"
-               onchange="preview_image();" multiple hidden/>
-      </label>
-      <div class="d-inline-block">
-        <input id="chatSend" name="chat_message" placeholder="Bạn muốn nói gi?"
+      <form action="" [formGroup]="chatFormUser" style="width: 90%" class="m-auto">
+
+        <div class="custom-dropdown">
+          <label id="fab_camera" class="fab-abc" for="file-input">
+            <i class="fas fa-images" style="font-size: medium;margin-right: 4px;margin-top: 2px; color: #efb508"></i>
+            <input type="file" (change)="importImages($event)" id="file-input" multiple hidden>
+          </label>
+          <i class="far fa-smile-wink fa-lg custom-hover" (click)="showEmoji()" style="margin-left: 2px; color: #efb508"></i>
+          <button id="fab_send" class="fab-abc btn-sm" (click)="onFormSubmit(chatFormUser.value, 'message')">
+            <i style="font-size: 21px !important; color: #f9bc05"
+               class="zmdi zmdi-mail-send"></i>
+          </button>
+        </div>
+        <input id="chatSend" name="chat_message"
+               placeholder="Nhập tin nhắn..." formControlName="message"
                class="chat_field chat_message"/>
+      </form>
+      <div *ngIf="selectedImages.length != 0" style="overflow: auto; height: 75px">
+        <div *ngFor="let file of selectedImages; let i = index" class="d-inline-block"
+             style="margin: 0; overflow: auto">
+          <span>
+            <i class="fas fa-backspace fa-lg" (click)="deleteUpdateImage($event)" [attr.data-index]="i"></i>
+          </span>
+          <img [src]="file.url" style="margin:3px; height: 70px; width: auto; float: left">
+        </div>
       </div>
-      <a id="fab_send" onclick="displayValue()" class="fab"><i class="zmdi zmdi-mail-send"></i></a>
-      <div id="image_preview"></div>
     </div>
   </div>
-  <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
+  <emoji-mart class="dropdown-content {{emojiPickerVisible}}" [darkMode]="false" set="google"
+              (emojiSelect)="addEmoji($event)"></emoji-mart>
+  <p class="badge badge-danger position-absolute ml-5" *ngIf="notifications.length !== 0">{{notifications.length}}</p>
+  <a id="primeCustom" class="fab mt-1" (click)="toggleFab()">
+    <i class="prime zmdi zmdi-comment-outline"></i>
+  </a>
 </div>
+

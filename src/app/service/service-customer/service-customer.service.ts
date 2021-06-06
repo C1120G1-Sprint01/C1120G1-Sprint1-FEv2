@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Post} from 'src/app/model/Post';
+import { PostDTO } from 'src/app/model/PostDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +26,16 @@ export class ServiceCustomerService {
     }
   }
 
-  findAllPostByUsername(page: number): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${this.API_URL_LIST}/cus-post-list?page=${page}`);
+  findAllPostByUsername(page: number, username: string, statusId): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(`${this.API_URL_LIST}/cus-post-list?page=${page}&&username=${username}&&statusId=${statusId}`);
   }
 
   findPostById(id: number): Observable<Post> {
     return this.httpClient.get<Post>(`${this.API_URL_LIST}/cus-post/${id}`);
   }
 
-  updatePost(id: number, post: Post): Observable<Post> {
-    return this.httpClient.post<Post>(`${this.API_URL_LIST}/cus-post-edit/${id}`, post);
+  updatePost(postDTO: PostDTO): Observable<PostDTO> {
+    return this.httpClient.post<PostDTO>(`${this.API_URL_LIST}/cus-post-edit`, postDTO);
   }
 
   savePost(username: string, post: Post): Observable<any> {
@@ -45,5 +46,9 @@ export class ServiceCustomerService {
     return this.httpClient.get<any>(
       this.API_URL_LIST + "/search/" + keyword + "/" + category + "/" + province + "?page=" + page, this.httpOptions
     );
+  }
+
+  public searchPostByName(posterName: string): Observable<any> {
+    return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName );
   }
 }

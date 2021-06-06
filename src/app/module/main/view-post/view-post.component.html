@@ -21,10 +21,17 @@
       <!-- Start of post-img -->
       <div id="post-img" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item" *ngFor="let image of post.imageSet; let i = index"
-               [ngClass]="i == 0? 'active': ''">
-            <img class="d-block w-100" [alt]="image.imageName" [src]="image.url">
+          <div *ngIf="post.imageSet.length > 0; else defaultImg">
+            <div class="carousel-item" *ngFor="let image of post.imageSet; let i = index"
+                 [ngClass]="i == 0? 'active': ''">
+              <img class="d-block w-100" [alt]="image.imageName" [src]="image.url">
+            </div>
           </div>
+          <ng-template #defaultImg>
+            <div class="carousel-item active">
+              <img class="d-block w-100" alt [src]="defaultImgUrl">
+            </div>
+          </ng-template>
           <div class="carousel-caption"><p>{{timeDiff}}</p></div>
         </div>
         <a class="carousel-control-prev" href="#post-img" role="button" data-slide="prev">
@@ -40,7 +47,10 @@
       <!-- Start of post-title -->
       <div class="post-title">{{post.title}}</div><!-- End of post-title -->
       <!-- Start of price -->
-      <div class="price">{{post.price | currency: 'VND': '': '1.0'}} đ</div><!-- End of price -->
+      <div class="price">
+        <span *ngIf="post.price">{{post.price | currency: 'VND': '': '1.0'}} đ</span>
+        <span *ngIf="!post.price">Liên hệ</span>
+      </div><!-- End of price -->
 
       <!-- Start of contact-panel-2 -->
       <div class="contact-panel-2">
@@ -49,7 +59,11 @@
           <div class="user row m-0">
             <!-- Start of avatar -->
             <div class="img-thumbnail img-circle p-0 border-0">
-              <img alt class="img-thumbnail rounded-circle p-0" [src]="post.user.avatarUrl">
+              <img alt class="img-thumbnail rounded-circle p-0" [src]="post.user.avatarUrl"
+                   *ngIf="post.user.avatarUrl; else defaultAvatar">
+              <ng-template #defaultAvatar>
+                <img alt class="img-thumbnail rounded-circle p-0" [src]="defaultAvatarUrl">
+              </ng-template>
             </div><!-- End of avatar -->
             <!-- Start of user-name -->
             <div class="user-name pl-2 font-weight-bold">{{post.user.name}}</div><!-- End of user-name -->
@@ -69,14 +83,14 @@
               <i class="fad fa-map-marked-alt"></i> Địa chỉ: {{userAddress}}
             </div><!-- End of user-address -->
           </div>
-          <!-- Start of btn-chat -->
+          <!-- Start of btn-chat-box -->
           <button class="btn btn-success mt-3 px-2 w-100" (click)="goToChat()">
             <span><i class="far fa-comments-alt"></i></span>
             <span class="btn-message" *ngIf="post.postType == true; else elseBlock">CHAT VỚI NGƯỜI BÁN</span>
             <ng-template #elseBlock>
               <span class="btn-message">CHAT VỚI NGƯỜI MUA</span>
             </ng-template>
-          </button><!-- End of btn-chat -->
+          </button><!-- End of btn-chat-box -->
           <hr class="divider">
         </div>
       </div><!-- End of contact-panel-2 -->
@@ -126,7 +140,11 @@
       <div class="user-info">
         <div class="user row m-0">
           <div class="img-thumbnail img-circle p-0 border-0">
-            <img class="img-thumbnail rounded-circle p-0" alt [src]="post.user.avatarUrl">
+            <img alt class="img-thumbnail rounded-circle p-0" [src]="post.user.avatarUrl"
+                 *ngIf="post.user.avatarUrl; else defaultAvatar">
+            <ng-template #defaultAvatar>
+              <img alt class="img-thumbnail rounded-circle p-0" [src]="defaultAvatarUrl">
+            </ng-template>
           </div>
           <div class="user-name pl-2 font-weight-bold">{{post.user.name}}</div>
         </div>
@@ -150,5 +168,14 @@
 </div><!-- End of content -->
 
 <ng-template #notFound>
-  <img [src]="notFoundImg" alt>
+  <div class="notFound text-center">
+    <div class="notification">
+      <img [src]="notFoundImgUrl" alt>
+    </div>
+    <h4>Tin đăng không tồn tại hoặc bị ẩn</h4>
+    <p>Tin đăng này đã hết hạn, đã bán hoặc bị ẩn. Hãy tiếp tục xem những tin đăng khác.</p>
+    <a routerLink="/">
+      <button class="btnBack btn">Về trang chủ</button>
+    </a>
+  </div>
 </ng-template>

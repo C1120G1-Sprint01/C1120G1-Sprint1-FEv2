@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../../service/service-post/service-post.service';
 import {Router} from '@angular/router';
 import {Post} from '../../../../model/Post';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-list-detail',
@@ -10,10 +11,16 @@ import {Post} from '../../../../model/Post';
 })
 export class ListDetailComponent implements OnInit {
   postList: Post[] = [];
+  postSearch: Post;
   p: number = 1;
+  cancelId: number;
+  cancelTitle: string;
+  keySearch = "";
+  viTri = this.postList.indexOf(this.postSearch, 0);
 
   constructor(private postService: ServicePostService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -26,4 +33,18 @@ export class ListDetailComponent implements OnInit {
     });
   }
 
+  cancelSuccess() {
+    this.ngOnInit();
+  }
+
+  search() {
+    this.postService.searchByTitle(this.keySearch).subscribe(data => {
+      if (data == null) {
+        this.toastr.warning('Không tìm thấy !', 'Bài Đăng !');
+      } else {
+        this.postList = data.content;
+      }
+    });
+
+  }
 }

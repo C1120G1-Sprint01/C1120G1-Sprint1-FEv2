@@ -13,6 +13,8 @@ import {CategoryService} from "../../../service/service-customer/category.servic
   styleUrls: ['./search-post.component.css']
 })
 export class SearchPostComponent implements OnInit {
+  defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
+    + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
   listCategory: Category[] = [];
   listProvince: Province[] = [];
   keyword: string = '';
@@ -83,5 +85,4 @@ export class SearchPostComponent implements OnInit {
   clickSearch() {
     this.onList(0);
   }
-
 }

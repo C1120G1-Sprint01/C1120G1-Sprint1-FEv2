@@ -6,17 +6,19 @@ import {User} from '../../model/User';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Account} from '../../model/Account';
 import {Ward} from '../../model/Ward';
+import {Province} from "../../model/Province";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceAdminService {
 
-  API_URL_USER: string = 'http://localhost:8080/admin/userList';
+  API_URL_USER: string = 'http://localhost:8080/admin/listUser';
   API_URL_ACCOUNT: string = 'http://localhost:8080/account';
   API_URL_PROVINCE: string = 'http://localhost:8080/province';
   API_URL_DISTRICT: string = 'http://localhost:8080/district';
   API_URL_WARD: string = 'http://localhost:8080/ward';
+  API_URL_ADDRESS: string = "http://localhost:8080/api/address";
   public baseUrl = 'http://localhost:8080';
 
   httpOptions: any;
@@ -58,16 +60,15 @@ export class ServiceAdminService {
     return this.httpClient.post<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/create-child-category', childCategory);
   }
 
-  updateCategory(category): Observable<Category> {
-    return this.httpClient.put<Category>(this.baseUrl + '/main-category/category' + '/edit-category', category);
+  updateCategory(id,category): Observable<Category> {
+    return this.httpClient.put<Category>(this.baseUrl + '/main-category/category' + '/edit-category/' + id ,category);
+  }
+  updateChildCategory(id,childCategory): Observable<ChildCategory> {
+    return this.httpClient.put<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/edit-child-category/' + id, childCategory);
   }
 
-  updateChildCategory(childCategory): Observable<ChildCategory> {
-    return this.httpClient.put<ChildCategory>(this.baseUrl + '/main-category/child-category' + '/edit-child-category', childCategory);
-  }
-
-  deleteCategory(id: number) {
-    return this.httpClient.delete<Category>(this.baseUrl + '/main-category/category/delete-category/' + id);
+  deleteCategory(id: number): Observable<Category> {
+    return this.httpClient.get<Category>(this.baseUrl + '/main-category/category/delete-category/' + id);
   }
 
   deleteChildCategory(id: number): Observable<ChildCategory> {
@@ -91,18 +92,41 @@ export class ServiceAdminService {
   getAllWard(): Observable<Ward[]> {
     return this.httpClient.get<Ward[]>(this.API_URL_WARD);
   }
-
-  getUserById(id: number): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.API_URL_USER + '/' + id);
+  getAllUsers(page: number, size: number, onSorting: boolean, textSorting: string): Observable<any> {
+    return this.httpClient.get(this.API_URL_USER + '?page=' + page + '&size=' + size + '&textSorting=' + textSorting +'&onSorting=' + onSorting);
+    console.log(page, size);
   }
 
-  editUser(user: User, id: number): Observable<User[]> {
-    return this.httpClient.put<User[]>(this.API_URL_USER + '/edit/' + id, user);
+  getUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>(this.API_URL_USER + '/' + id);
   }
 
-  deleteUser(id: number): Observable<User[]> {
-    return this.httpClient.delete<User[]>(this.API_URL_USER + '/delete/' + id);
+  editUser(user: User, id: number): Observable<User> {
+    return this.httpClient.put<User>(this.API_URL_USER + '/edit/' + id, user);
+  }
+
+  deleteUser(id: number): Observable<User> {
+    return this.httpClient.delete<User>(this.API_URL_USER + '/delete/' + id);
   }
 
 
+  getAllProvince(): Observable<any> {
+    return this.httpClient.get(this.API_URL_ADDRESS + '/provinces');
+  }
+
+  getAllDistrictByProvinceId(id: number): Observable<any> {
+    return this.httpClient.get(this.API_URL_ADDRESS + '/districts/' + id);
+  }
+
+  getAllWardByDistrictId(id: number): Observable<any> {
+    return this.httpClient.get(this.API_URL_ADDRESS + '/wards/' + id);
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.httpClient.post<User>(this.API_URL_USER + '/create', user);
+  }
+
+  searchUserBySomething(keySearch: string, size: number): Observable<any> {
+    return  this.httpClient.get<any>(this.API_URL_USER + '?q=' + keySearch + '&size=' + size);
+  }
 }

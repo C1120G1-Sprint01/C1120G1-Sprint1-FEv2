@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { GetBackPasswordComponent } from './get-back-password/get-back-password.component';
 import { RegisterComponent } from './register/register.component';
 import {MainModule} from "../main/main.module";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent],
@@ -17,7 +18,8 @@ import {MainModule} from "../main/main.module";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MainModule
+    MainModule,
+    MatSelectModule
   ]
 })
 export class SecurityModule { }

@@ -26,7 +26,7 @@ export class CreateChildCategoryComponent implements OnInit {
     });
 
     this.formCreate = this.fb.group({
-      childCategoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      childCategoryName: ['', [Validators.required,Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
       // nơi chưa đối tương category cha
       category: [''],
     });
@@ -37,7 +37,7 @@ export class CreateChildCategoryComponent implements OnInit {
     //Khi a submit thì form sẽ được đưa xuống gồm name và thằng cha
     this.serviceAdminService.createChildCategory(this.formCreate.getRawValue()).subscribe(data => {
       this.toast.success('Chuyên mục đã được tạo');
-      this.router.navigateByUrl('main-category/child-category');
+      this.router.navigateByUrl('admin/categories/child-categories');
     });
   }
 }

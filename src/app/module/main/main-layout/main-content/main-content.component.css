@@ -102,7 +102,6 @@ input::-webkit-input-placeholder {
 
 .overlay .closebtn {
   position: absolute;
-  top: 20px;
   right: 45px;
   font-size: 60px;
 }
@@ -196,4 +195,7 @@ input::-webkit-input-placeholder {
   .post-item-content {
     margin-left: 50px;
   }
+}
+.col-md-2{
+  padding: 0;
 }

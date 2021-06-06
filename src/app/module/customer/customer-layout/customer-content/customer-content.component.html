@@ -1,0 +1,26 @@
+<div id="scroll-hidden">
+  <div class="row">
+    <div class="col-2 pr-0">
+      <div class="sidebar">
+        <a [routerLink]="['/customer']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"><i
+            class="fas fa-user-tie mr-2"></i>Thông tin cá nhân</a>
+        <a [routerLink]="['/customer/posts']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"><i
+            class="fas fa-file-alt mr-2"></i>Quản lý bài đăng</a>
+        <a [routerLink]="['/customer/inbox']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"><i
+            class="fas fa-comment-alt mr-2"></i>Hộp tin nhắn</a>
+        <a [routerLink]="['/customer/change-password']" [routerLinkActive]="'active'"
+          [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-key mr-2"></i>Đổi mật khẩu</a>
+      </div>
+    </div>
+
+    <div class="container col-8">
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+    <div class="col-2" style="background-color: grey;">
+      ads
+    </div>
+  </div>
+</div>
