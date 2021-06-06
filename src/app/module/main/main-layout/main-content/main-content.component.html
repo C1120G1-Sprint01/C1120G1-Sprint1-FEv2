@@ -1,0 +1,84 @@
+<div class="d-inline-flex col-12 px-0 mb-5">
+  <!-- menu left -->
+  <div class="col-md-2 px-0 border-right">
+    <!-- content menu left full-size -->
+    <div class="col-md-12 menu-left">
+      <p class="title-text">Chuyên mục</p>
+      <!--      add content of menu left inside here-->
+      <!-- category -->
+      <div *ngFor="let category of listCategory">
+        <a class="btn menu-left_item col-12 bg-light"
+           (click)="getCategoryId(category.categoryId)"
+           [attr.data-target]="'#' + category.categoryId">
+          <span>-&nbsp;</span>{{category.categoryName}}
+        </a>
+        <ul [id]="category.categoryId" class="collapse list-group list-group-flush ml-2">
+          <li *ngFor="let child of listChildCategory"
+              class="list-group-item">
+            <a [routerLink]="" style="text-decoration: none">
+              <span>+&nbsp;</span>{{child.childCategoryName}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- add content of menu left inside here-->
+    </div>
+    <!--END content menu left full-size -->
+
+    <!--CAUTION: if you don't have menu overlay, you needn't add anything in "left menu content under 768px width", and when under 768 width, your left menu will disappear.-->
+    <!-- content menu left under 768px width -->
+    <span class="open-overlay position-fixed col-1 col-sm-1 pt-1" (click)="openNav()">&#9776;</span>
+    <div id="myNav" class="overlay">
+      <a href="javascript:void(0)" class="closebtn mt-5" (click)="closeNav()">&times;</a>
+      <div class="overlay-content">
+        <!--content menu left here-->
+        <!-- category -->
+        <div>
+          <a class="btn title-text" data-toggle="collapse" data-target="#ctgy1"><span>-&nbsp;</span>Xe cộ</a>
+          <ul id="ctgy1" class="collapse list-group list-group-flush ml-2">
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Xe máy</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Ô tô</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Xe đạp</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Xe tải, xe khác</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Phụ tùng</li>
+          </ul>
+        </div>
+        <!-- END category -->
+        <!-- category -->
+        <div>
+          <a class="btn title-text" data-toggle="collapse" data-target="#ctgy3"><span>-&nbsp;</span>Đồ điện tử</a>
+          <ul id="ctgy3" class="collapse list-group list-group-flush ml-2">
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Điện thoại</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Tivi</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Máy lạnh</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Laptop</li>
+            <li class="list-group-item list-item-overlay"><span>+&nbsp;</span>Linh kiện</li>
+          </ul>
+        </div>
+        <!-- END category -->
+        <!--END content menu-->
+      </div>
+    </div>
+    <!--END content menu left under 768px -->
+    <!--END CAUTION-->
+  </div>
+  <!-- END menu left -->
+
+  <!-- main content -->
+  <div class="main-content-frame col-md-8 col-sm-10 col-10 px-0">
+    <!-- content here -->
+    <div class="main-content bg-light col-md-12 col-sm-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- END main content -->
+  <!-- menu right -->
+  <div class="col-md-2 pl-0 menu-right border-left">
+    <div class="col-2 ">
+      <!-- ads inside here-->
+      <img src="#" alt="ads">
+      <!-- END add ads inside here-->
+    </div>
+  </div>
+  <!-- END menu right -->
+</div>

@@ -20,8 +20,9 @@ export class ServiceCustomerService {
       }),
       'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      'Access-Control-Allow-Credentials': 'true'
-    };
+      'Access-Control-Allow-Headers':'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe',
+      'Access-Control-Allow-Credentials': "true"
+    }
   }
 
   findAllPostByUsername(page: number): Observable<Post[]> {
@@ -36,10 +37,13 @@ export class ServiceCustomerService {
     return this.httpClient.post<Post>(`${this.API_URL_LIST}/cus-post-edit/${id}`, post);
   }
 
-  savePost(post: Post): Observable<void> {
-    console.log('Title' + post.title);
-    console.log('Child' + post.childCategory);
-    return this.httpClient.post<void>(`${this.API_URL_LIST}/createPost`, post);
+  savePost(username: string, post: Post): Observable<any> {
+    return this.httpClient.post<any>(this.API_URL_LIST + "/createPost/" + username , post, this.httpOptions);
   }
 
+  search(keyword: string, category: string, province: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(
+      this.API_URL_LIST + "/search/" + keyword + "/" + category + "/" + province + "?page=" + page, this.httpOptions
+    );
+  }
 }

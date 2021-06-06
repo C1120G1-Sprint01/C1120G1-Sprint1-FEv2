@@ -10,7 +10,7 @@ import {TokenStorageService} from "../../../../service/security/token-storage.se
 export class MainHeaderComponent implements OnInit {
 
   roles: string[] = [];
-  username: string = 'abc';
+  username: string = '';
 
   constructor(
     private securityService: SecurityService,
@@ -25,10 +25,9 @@ export class MainHeaderComponent implements OnInit {
       this.securityService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
       this.username = this.tokenStorageService.getUser().username;
-      this.username = 'abc';
     } else {
       console.log('Reset username');
-      this.username = 'abc';
+      this.username = 'Guest';
     }
   }
 }

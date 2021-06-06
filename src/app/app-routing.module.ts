@@ -9,6 +9,8 @@ import {ListPostComponent} from './module/main/list-post/list-post.component';
 import {ViewPostComponent} from './module/main/view-post/view-post.component';
 import {MainChatComponent} from './module/main/main-chat/main-chat.component';
 import {RegisterComponent} from './module/security/register/register.component';
+import {SearchPostComponent} from "./module/main/search-post/search-post.component";
+import {CreatePostComponent} from "./module/main/create-post/create-post.component";
 
 const routes: Routes = [
 
@@ -18,7 +20,11 @@ const routes: Routes = [
     children: [
       {path: '', component: ListPostComponent},
       {path: 'chat', component: MainChatComponent},
-      {path: 'post/:id', component: ViewPostComponent}
+      {path: 'post/:id', component: ViewPostComponent},
+      {path: 'search', component: SearchPostComponent},
+      {path: 'createPost', component: CreatePostComponent},
+      {path: ':category', component: ListPostComponent},
+      {path: ':category/:childCategory', component: ListPostComponent},
     ]
   },
   {

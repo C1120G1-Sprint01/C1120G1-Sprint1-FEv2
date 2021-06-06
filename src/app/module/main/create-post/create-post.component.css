@@ -1,0 +1,42 @@
+.title-text {
+  font-size: 20px;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+/* END custom scrollbar */
+
+/*------------------- dangtin below */
+
+.asterisk-red {
+  color: red;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.custom-select-sm {
+  height: calc(1.5em + 0.75rem + 0px) !important;
+}
+.imgAdd {
+  margin-top: 3px;
+}

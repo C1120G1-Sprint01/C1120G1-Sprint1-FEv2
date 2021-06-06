@@ -78,5 +78,10 @@ export class ServicePostService {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listWait/delete/' + postId, this.httpOptions);
   }
 
+  getAllByCategoryName(category: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}?page=${page}`);
+  }
+  getAllByCategoryNameAndChildCategoryName(category: string, childCategory: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}/${childCategory}?page=${page}`);
+  }
 }
-

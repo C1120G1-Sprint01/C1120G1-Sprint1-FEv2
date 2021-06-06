@@ -1,0 +1,111 @@
+<!-- main content -->
+<div class="main-content-frame col-12 px-0">
+  <!-- content here -->
+  <div class="main-content bg-light col-md-12 col-sm-12">
+    <!-- advanced_search -->
+    <div class="advanced_search px-0 bg-light col-12 border-bottom sticky-top hide" style="z-index: 100">
+      <div class="p-2 d-flex justify-content-around">
+        <input class="form-control mr-sm-2 col-4" type="text" placeholder="Tìm kiếm theo từ khoá"
+               [(ngModel)]="keyword"/>
+        <select class="custom-select custom-select-sm col-2"
+                [(ngModel)]="category">
+          <option value="" selected disabled>Chọn loại</option>
+          <option value="">Tất cả</option>
+          <option *ngFor="let category of listCategory"
+                  value="{{category.categoryId}}">{{category.categoryName}}</option>
+        </select>
+        <select class="custom-select custom-select-sm col-2"
+                [(ngModel)]="province">
+          <option value="" selected disabled>Chọn tỉnh thành</option>
+          <option value="">Tất cả</option>
+          <option *ngFor="let province of listProvince"
+                  value="{{province.provinceId}}">{{province.provinceName}}</option>
+        </select>
+
+        <button class="btn btn-blue btn-sm text-light col-1"
+                type="button" (click)="clickSearch()">Tìm
+        </button>
+      </div>
+    </div>
+    <!-- END advanced_search -->
+    <!-- list post -->
+    <div class="list-group list-post mt-2">
+      <div href="#" class="list-group-item post-item filter-bar border-bottom">
+        <div class="d-inline-flex col-12 px-0">
+          <p class="col-6 px-0">
+            Rao vặt&nbsp;
+            <span class="text-lowercase">toàn quốc</span>
+          </p>
+          <p class="col-6 px-0 text-right">
+            <!--              <a class="col-6 filter-item">Giá rẻ trước</a>-->
+            <a class="col-6 filter-item ">Tin mới trước</a>
+          </p>
+        </div>
+      </div>
+      <h3 *ngIf="listPost == null;else elseBlock" class="text-danger text-center">Không tìm thấy kết quả</h3>
+      <!-- post -->
+      <ng-template #elseBlock>
+        <div>
+          <a class="list-group-item list-group-item-action post-item border-bottom"
+             *ngFor="let item of listPost.content, let i = index" [routerLink]="['post',item.postId]">
+            <div class="d-inline-flex col-12 pl-0">
+              <div class="col-md-2 col-sm-3 px-0">
+                <img [src]="item.imageSet[0].url" width="100" height="100"/>
+              </div>
+              <div class="px-0 col-md-10 col-sm-9 post-item-content">
+                <div><span class="font-weight-bold badge badge-info" *ngIf="item.postType == 1">Cần bán</span></div>
+                <div><span class="font-weight-bold badge badge-info" *ngIf="item.postType == 0">Cần mua</span></div>
+                <div class="d-inline-flex col-12 px-0">
+                  <section class="col-9 px-0 font-weight-bold title-text">{{item.title}}</section>
+                  <span class="col-3 px-0 text-right font-italic">{{listTime[i]}}</span>
+                </div>
+                <div class="font-italic text-danger" *ngIf="item.price, else elseBlock">
+                  {{item.price| currency: 'VND': '': '1.0'}} đ
+                </div>
+                <ng-template #elseBlock>
+                  <div class="font-italic text-danger">
+                    Giá cả liên hệ
+                  </div>
+                </ng-template>
+                <div>Ở <span class="font-italic">{{item.ward.district.province.provinceName}}</span></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </ng-template>
+
+      <!-- END post -->
+    </div>
+    <!-- END list post -->
+    <!-- pagination -->
+          <div class="load-more d-flex justify-content-center m-3" *ngIf="listPost != null">
+            <nav aria-label="Page navigation example" class="float-right">
+              <ul class="pagination">
+                <li class="page-item">
+                  <button class="page-link" [hidden]="listPost?.pageable?.pageNumber == 0"
+                          (click)="onList(listPost.pageable.pageNumber - 1)">Trước
+                  </button>
+                </li>
+                <li class="page-item">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">{{listPost?.pageable?.pageNumber + 1}}</span>
+                    </div>
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"> /{{listPost?.totalPages}}</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="page-item">
+                  <button class="page-link" [hidden]="listPost?.pageable?.pageNumber >=  listPost?.totalPages - 1"
+                          (click)="onList(listPost.pageable.pageNumber + 1)">Tiếp
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+    <!-- END pagination-->
+  </div>
+</div>
+<!-- END main content -->
