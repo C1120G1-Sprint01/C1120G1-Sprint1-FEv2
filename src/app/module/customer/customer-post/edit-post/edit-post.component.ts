@@ -41,8 +41,11 @@ export class EditPostComponent implements OnInit {
       "statusName": "Thất bại"
     }
   ];
-  images;
-  selectedImage: any = null;
+  imageList;
+
+  fileImage: any;
+  urlImage: Array<string>;
+  message: string;
 
   constructor(private _formBuilder: FormBuilder,
     private _serviceCustomer: ServiceCustomerService,
@@ -54,6 +57,8 @@ export class EditPostComponent implements OnInit {
     @Inject(AngularFireStorage) private storage: AngularFireStorage) { }
 
   ngOnInit(): void {
+    this.fileImage = [];
+    this.urlImage = [];
 
     this.formInit();
 
@@ -71,7 +76,7 @@ export class EditPostComponent implements OnInit {
       this.province = oldData.ward.district.province;
       this.district = oldData.ward.district;
       this.category = oldData.childCategory.category;
-      this.images = oldData.imageSet;
+      this.imageList = oldData.imageSet;
 
       // set default status when update post
       if (oldData.status.statusId === 1 || oldData.status.statusId === 3 || oldData.status.statusId === 6) {
@@ -115,9 +120,27 @@ export class EditPostComponent implements OnInit {
     });
   }
 
-  submitForm() {
+  // submitForm() {
+  //   if (this.refPost.valid) {
+  //     this._serviceCustomer.updatePost(this.refPost.value).subscribe(data => {
+  //       this._router.navigateByUrl("/customer/posts");
+  //       this._toastr.success("Chỉnh sửa bài đăng thành công!", "Thành công!");
+  //     }, error => {
+  //       this._toastr.error("Đã có lỗi xảy ra!", "Lỗi!");
+  //     })
+  //   }
+  // }
+
+  async submitForm() {
+    await this.addImageToFireBase();
+    console.log("save firebase");
+    let postDTO = {
+      post: this.refPost.value,
+      images: this.urlImage
+    };
+    console.log("dto", postDTO);
     if (this.refPost.valid) {
-      this._serviceCustomer.updatePost(this.refPost.value).subscribe(data => {
+      this._serviceCustomer.updatePost(postDTO).subscribe(data => {
         this._router.navigateByUrl("/customer/posts");
         this._toastr.success("Chỉnh sửa bài đăng thành công!", "Thành công!");
       }, error => {
@@ -126,34 +149,51 @@ export class EditPostComponent implements OnInit {
     }
   }
 
-  // submitForm() {
-  //   const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
-  //   const fileRef = this.storage.ref(nameImg);
-  //   this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-  //     finalize(() => {
-  //       fileRef.getDownloadURL().subscribe((url) => {
+  importImages(event) {
+    let files = event.target.files;
+    if (files) {
+      for (let file of files) {
+        const name = file.type;
+        const size = file.size;
+        if (name.match(/(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
+          if (size <= 1000000) {
+            this.message = null;
+            let reader = new FileReader();
+            reader.onload = (e: any) => {
+              this.fileImage.push({ url: e.target.result, file: file })
+            };
+            reader.readAsDataURL(file);
+          } else {
+            return this.message = "Big size!!"
+          }
+        } else {
+          return this.message = 'Not Image!!';
+        }
+      }
+    }
+  }
 
-  //         // this.refPost.patchValue({imageSet: url});
-
-
-  //         // Call API to create vaccine
-  //         if (this.refPost.valid) {
-  //           this.refPost.value.imageSet[0].url = url; 
-  //           this._serviceCustomer.updatePost(this.id, this.refPost.value).subscribe(data => {
-  //             this._router.navigateByUrl("/customer/post-list");
-  //             this._toastr.success("Chỉnh sửa bài đăng thành công!", "Thành công!");
-  //           }, error => {
-  //             this._toastr.error("Đã có lỗi xảy ra!", "Lỗi!");
-  //           })
-  //         }
-  //       });
-  //     })
-  //   ).subscribe();
-
-  // }
-
-  showPreview(event: any) {
-    this.selectedImage = event.target.files[0];
+  addImageToFireBase() {
+    this.urlImage = [];
+    return new Promise(resolve => {
+      Promise.all(this.fileImage.map(file =>
+        new Promise((resolve) => {
+          const name = file.file.name;
+          if (name.match(/.*\.(png|jpeg|jpg|PNG|JPEG|JPG)$/)) {
+            const fileRef = this.storage.ref(name);
+            this.storage.upload(name, file.file).snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL()
+                  .subscribe((url) => {
+                    this.urlImage.push(url);
+                    resolve(1);
+                  });
+              })).subscribe();
+          }
+        }))).then(() => {
+          resolve(1)
+        });
+    });
   }
 
   cancelUpdate() {

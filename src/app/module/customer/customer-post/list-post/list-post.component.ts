@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ServiceCustomerService} from '../../../../service/service-customer/service-customer.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/service/security/security.service';
+import { TokenStorageService } from 'src/app/service/security/token-storage.service';
+import { ServiceCustomerService } from '../../../../service/service-customer/service-customer.service';
 
 @Component({
   selector: 'app-list-post',
@@ -9,7 +12,7 @@ import {ServiceCustomerService} from '../../../../service/service-customer/servi
 export class ListPostComponent implements OnInit {
 
   posts: any;
-  username: string = "username";
+  username: string = "";
   status = [
     {
       "statusId": "",
@@ -43,11 +46,24 @@ export class ListPostComponent implements OnInit {
 
   statusId = "";
 
-  constructor(private serviceCustomer: ServiceCustomerService) {
+  noImage: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93";
+
+  constructor(private serviceCustomer: ServiceCustomerService,
+    private tokenStorageService: TokenStorageService,
+    private securityService: SecurityService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.onList(0, this.username);
+    if (this.tokenStorageService.getToken()) {
+      const user = this.tokenStorageService.getUser();
+      this.securityService.isLoggedIn = true;
+      this.username = user.username;
+      this.onList(0, this.username);
+    } else {
+      this.router.navigateByUrl("/login");
+    }
+
   }
 
   // onList(page: number, username: string) {

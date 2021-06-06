@@ -1,49 +1,65 @@
 <app-main-header></app-main-header>
-<div class="row">
-  <div class="col-3 float-left menu-left-admin">
-    <ul class="col-12">
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2" [routerLink]="['/admin/listUser']">
-          <i class="fas fa-user-tie mr-2 col-1"></i>Quản Lý Thành Viên
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2" routerLink="/admin/posts/list-detail">
-          <i class="fas fa-file-signature mr-2 col-1"></i>Xem tin rao vặt
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2" routerLink="/admin/posts/list-approve">
-          <i class="fas fa-file-signature mr-2 col-1"></i>Duyệt tin rao vặt
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2" routerLink="/admin/posts/list-wait">
-          <i class="fas fa-file-signature mr-2 col-1"></i>Danh sách đợi duyệt
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2">
-          <i class="fas fa-file-signature mr-2 col-1"></i>Quản Lý Chuyên Mục
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2">
-          <i class="fas fa-car mr-2 col-1"></i>Banner
-        </a>
-      </li>
-      <li class=" pt-2 pb-2 menu-var">
-        <a class="text-decoration-none text-dark  pt-2 pb-2">
-          <i class="fas fa-hand-holding-usd mr-2 col-1"></i>Quảng cáo
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div role="main" class="col-9">
-    <router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="row m-0 p-0">
+    <div class="col-md-2 float-left menu-left-admin">
+      <ul class="col-12">
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeZero}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavZero()" [routerLink]="['/admin']">
+            <i class="fas fa-home mr-2 col-1"></i><span>Trang Chủ</span>
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeOne}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavOne()" [routerLink]="['/admin/users']">
+            <i class="fas fa-user-tie mr-2 col-1"></i><span>Quản Lý Thành Viên</span>
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeTwo}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavTwo()"
+             [routerLink]="['/admin/categories']">
+            <i class="fas fa-tasks mr-2 col-1"></i><span>Quản Lý Chuyên Mục</span>
+          </a>
+        </li>
+        <li class="pt-2 pb-2 menu-var mt-3 {{activeThree}} dropdown">
+          <a class="text-decoration-none text-dark nav-link dropdown-toggle" [routerLink]="['/admin/posts']"
+             (click)="activeNavThree()" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-paste mr-2"></i><span>Quản Lí Bài Đăng</span></a>
+          <div class="dropdown-menu">
+            <a class="text-decoration-none text-dark  pt-2 pb-2 dropdown-item"
+               [routerLink]="['/admin/posts/list-detail']">
+              <i class="fas fa-sticky-note mr-3 col-1"></i>Xem Tin Rao Vặt
+            </a>
+            <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
+               [routerLink]="['/admin/posts/list-approve']">
+              <i class="fas fa-file-signature mr-3 col-1"></i>Duyệt Tin Rao Vặt
+            </a>
+            <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
+               [routerLink]="['/admin/posts/list-wait']">
+              <i class="fas fa-clipboard mr-3 col-1"></i>Danh Sách Chưa Duyệt
+            </a>
+          </div>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeFour}}">
+          <a (click)="activeNavFour()" [routerLink]="['/admin/banners']"
+             class="text-decoration-none text-dark pt-2 pb-2">
+            <i class="far fa-credit-card mr-2 col-1"></i><span>Banner Quảng Cáo</span>
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeFive}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavFive()" [routerLink]="['/admin/chat']">
+            <i class="fas fa-comment-dots mr-2 col-1"></i><span>Chat</span>
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeSix}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavSix()" [routerLink]="['/admin/chat']">
+            <i class="fas fa-mail-bulk mr-2 col-1"></i><span>Mail Server</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div role="main" class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 <app-main-footer></app-main-footer>
-
-
 

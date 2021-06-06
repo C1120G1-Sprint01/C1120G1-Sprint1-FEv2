@@ -1,0 +1,33 @@
+.image-content-1 {
+  width: 150px;
+  height: 100px;
+}
+
+.col-md-9 {
+  padding: 0;
+}
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0px !important;
+}
+.title {
+  margin-top: 5px;
+  width: 30%;
+  text-align: center;
+  font-size: 20px;
+  background-color: #343a40;
+  color: white;
+  text-transform: uppercase;
+  padding: 15px;
+}
+@media (max-width: 767px) {
+  .title{
+    padding: 5px;
+  }
+}
+

@@ -26,6 +26,10 @@ export class ServicePostService {
     return this.httpClient.get<Post[]>(`${this.API_POST_LIST_URL}?page=${page}`);
   }
 
+  /**
+   * Author: ViNTT
+   * Get data for Post Details Page
+   */
   getPostById(id: number): Observable<Post> {
     return this.httpClient.get<Post>(`${this.API_BASE_URL}/${id}`);
   }
@@ -86,5 +90,32 @@ export class ServicePostService {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listWait/delete/' + postId, this.httpOptions);
   }
 
+  /**
+   * Author: ViNTT
+   * Get data for List Post By Category Page
+   */
+  getAllByCategoryName(category: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}?page=${page}`);
+  }
+
+  /**
+   * Author: ViNTT
+   * Get data for List Post By Child Category Page
+   */
+  getAllByCategoryNameAndChildCategoryName(category: string, childCategory: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}/${childCategory}?page=${page}`);
+  }
+  getQuantityStatistic(startDate: string, endDate: string): Observable<any> {
+    console.log(startDate + endDate)
+    return this.httpClient.get(this.API_BASE_URL + '/statistic' + '?startDate=' + startDate + '&endDate=' + endDate);
+  }
+
+  findAll(page: number, size: number, onSorting: boolean, textSorting: string): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/list/' + '?page=' + page + '&size=' + size + '&onSorting=' + onSorting + '&textSorting=' + textSorting);
+  }
+
+  deleteByIdPost(deleteId: number): Observable<Post> {
+    return this.httpClient.delete<Post>(this.API_BASE_URL + '/list/' + deleteId);
+  }
 }
 

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {BannerManagementComponent} from "./banner-management/banner-management.component";
 
 
 const routes: Routes = [
-
+  {path:'',component: BannerManagementComponent},
 ];
 
 @NgModule({

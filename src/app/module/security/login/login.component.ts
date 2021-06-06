@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   form:FormGroup;
   fieldTextType: boolean = false;
   authLogin: AuthLogin;
-  roles: string[] = [];
+  role: string = '';
   username: string;
   errorMessage: string;
 
@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
-      this.roles = this.tokenStorageService.getUser().roles;
-      this.username = this.tokenStorageService.getUser().username;
+      this.role = user.authorities[0].authority;
+      this.username = user.username;
     }
   }
 
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
 
         this.securityService.isLoggedIn = true;
         this.username = this.tokenStorageService.getUser().username;
-        this.roles = this.tokenStorageService.getUser().roles;
+        this.role = this.tokenStorageService.getUser().authorities[0].authority;
         this.form.reset();
         console.log("Login Success");
         this.headerComponent.ngOnInit();
