@@ -27,7 +27,6 @@ export class CreatePostComponent implements OnInit {
   status: Status;
   imageSet: Image[] = [];
   user: User;
-
   i: number = 1;
   id: string = '';
 
@@ -98,14 +97,14 @@ export class CreatePostComponent implements OnInit {
   }
 
   submitForm(form: FormGroup) {
-    // console.log('Value : abc');
-    // this.serviceCustomer.savePost(form.value).subscribe(data => {
-    //   this.router.navigateByUrl('/');
-    //   this.toastr.success('Đăng tin thành công!', 'Thành công!');
-    // }, error => {
-    //   this.toastr.error('Đã có lỗi xảy ra!', 'Lỗi!');
-    //   console.log('Error : ' + error);
-    // });
+    console.log('Value : abc');
+    this.serviceCustomer.savePost(form.value, form.value).subscribe(data => {
+      this.router.navigateByUrl('/');
+      this.toastr.success('Đăng tin thành công!', 'Thành công!');
+    }, error => {
+      this.toastr.error('Đã có lỗi xảy ra!', 'Lỗi!');
+      console.log('Error : ' + error);
+    });
   }
 
   onChangeProvince() {
@@ -152,6 +151,11 @@ export class CreatePostComponent implements OnInit {
 
   cancelUpdate() {
     this.router.navigateByUrl("/");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.toastr.warning("Huỷ đăng tin mới thành công!", "Hủy đăng tin mới!");
+  }
+
+  showPreview($event: Event, number: number) {
+
   }
 }

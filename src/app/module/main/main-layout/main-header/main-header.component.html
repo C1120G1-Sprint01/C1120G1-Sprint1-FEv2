@@ -25,7 +25,9 @@
                 <i class="fas fa-tasks mr-2"></i>
                 <span>Quản lý tin</span>
               </a>
-              <a routerLink="/" class="ml-lg-4 ml-md-3">
+              <a routerLink="/"
+                 *ngIf="role == 'ROLE_USER'"
+                 class="ml-lg-4 ml-md-3">
                 <i class="far fa-comments mr-2"></i>
                 <span>Chat</span>
               </a>
@@ -223,7 +225,7 @@
                 </button>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                <a routerLink="/createPost">
+                <a routerLink="/post/create">
                   <button class="btn btn-primary" style="width: 8rem">
                     <i class="far fa-edit"></i>
                     <span class="text-white pl-2">

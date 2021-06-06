@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {TokenStorageService} from "./service/security/token-storage.service";
 import {ChatService} from "./service/chat-box/chat.service";
 import {Account} from "./model/Account";
-
+@Injectable({
+  providedIn:'root'
+  })
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

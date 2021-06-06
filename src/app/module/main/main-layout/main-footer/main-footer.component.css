@@ -200,6 +200,12 @@
 #email {
   color: #0b75c9;
 }
+#email a {
+  color: #0D5DB6;
+}
+#email a:hover {
+  color: #0b75c9;
+}
 #time, #gmt {
   color: #0D5DB6;
   font-size: 1rem;
