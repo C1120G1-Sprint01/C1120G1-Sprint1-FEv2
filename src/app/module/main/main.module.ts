@@ -28,19 +28,20 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [
-    MainHeaderComponent,
-    MainFooterComponent,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    EmojiModule,
-    PickerModule,
-  ],
+    exports: [
+        MainHeaderComponent,
+        MainFooterComponent,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        EmojiModule,
+        PickerModule,
+        MainChatComponent,
+    ],
 
 
 })

@@ -16,16 +16,18 @@ import {ToastrService} from "ngx-toastr";
 import { DetailApproveComponent } from './detail-approve/detail-approve.component';
 import { DetailWaitComponent } from './detail-wait/detail-wait.component';
 import { CancelApproveComponent } from './cancel-approve/cancel-approve.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [ConfirmAdminComponent, ConfirmWaitComponent, DeletePostAdminComponent, DeleteWaitComponent, DetailAdminComponent,
     ListApproveComponent, ListDetailComponent, ListWaitComponent, WaitAdminComponent, PostStatisticsComponent, DetailApproveComponent, DetailWaitComponent, CancelApproveComponent],
-  imports: [
-    CommonModule,
-    AdminPostRoutingModule,
-    NgxPaginationModule,
-  ]
+    imports: [
+        CommonModule,
+        AdminPostRoutingModule,
+        NgxPaginationModule,
+        FormsModule,
+    ]
 })
 export class AdminPostModule {
 }
