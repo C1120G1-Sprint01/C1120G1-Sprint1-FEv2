@@ -13,6 +13,7 @@ export class ListCategoryComponent implements OnInit {
   p = 1;
   deleteId: number;
   deleteName: string;
+  categoryName: string = '';
 
   constructor(private serviceAdminService: ServiceAdminService,
               private toast: ToastrService) {
@@ -24,12 +25,20 @@ export class ListCategoryComponent implements OnInit {
 
   getDataCategory() {
     this.serviceAdminService.getAllCategory().subscribe(data => {
-      if (data === null) {
-        this.toast.warning("Dữ liệu không có","Thông báo")
-      }
       this.categoryList = data;
       if (this.categoryList === null) {
         this.toast.warning('Thông tin dữ liệu hiện không có trong hệ thống ', 'Thông báo !');
+      }
+    });
+  }
+
+  getSearch() {
+    console.log(this.categoryName);
+    this.serviceAdminService.getAllCategoryByCategoryName(this.categoryName).subscribe(data => {
+      if (data === null) {
+        this.toast.warning('Thông tin bạn tìm kiếm hiện không có trong hệ thống ', 'Thông báo !');
+      } else {
+        this.categoryList = data;
       }
     });
   }

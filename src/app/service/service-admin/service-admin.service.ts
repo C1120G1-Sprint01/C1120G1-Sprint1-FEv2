@@ -76,9 +76,23 @@ export class ServiceAdminService {
   }
 
   getAllChildByChildNameAndName(childCategoryName: string, categoryName: string): Observable<ChildCategory[]> {
-
     return this.httpClient.get<ChildCategory[]>(this.baseUrl + '/main-category/child-category/search?' +
       'childCategoryName=' + childCategoryName + '&categoryName=' + categoryName);
+  }
+
+  getAllCategoryByCategoryName(categoryName: string): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.baseUrl + '/main-category/category/search?' +
+      'categoryName=' + categoryName);
+  }
+
+  searchAllCategory(categoryName: string): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.baseUrl + '/main-category/category/searchAbsolute?' +
+      'categoryName=' + categoryName);
+  }
+
+  searchAllChildCategory(childCategoryName: string, categoryId): Observable<ChildCategory[]> {
+    return this.httpClient.get<ChildCategory[]>(this.baseUrl + '/main-category/child-category/searchAbsolute?' +
+      'childCategoryName=' + childCategoryName + '&&categoryId=' + categoryId);
   }
 
   getAllUser(): Observable<User[]> {
@@ -128,4 +142,6 @@ export class ServiceAdminService {
   searchUserBySomething(keySearch: string): Observable<any> {
     return  this.httpClient.get<any>(this.API_URL_USER + '/search?q=' + keySearch);
   }
+
+
 }
