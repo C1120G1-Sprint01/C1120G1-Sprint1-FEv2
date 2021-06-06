@@ -170,30 +170,30 @@
         <!--   Ngoc - province, ward, district     -->
         <div class="item">
           <label class="col-2 float-left" style="clear: both">
-            Province (<span class="text-danger">*</span>):
+            Tỉnh/Thành phố (<span class="text-danger">*</span>):
           </label>
           <select [compareWith]="compareProvince" formControlName="province" class="col-6 form-control float-left selectoption"
                   (change)="onchangeProvince($event.target.value)">
-            <option value="" disabled selected>Select Province</option>
+            <option value="" disabled selected>Vui lòng chọn tỉnh/thành phố</option>
             <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
           </select>
         </div>
         <div class="item">
           <label class="col-2 float-left" style="clear: both">
-            District (<span class="text-danger">*</span>):
+            Quận/Huyện (<span class="text-danger">*</span>):
           </label>
           <select [compareWith]="compareDistrict" formControlName="district" class="col-6 form-control float-left selectoption"
                   (change)="onchangeDistrict($event.target.value)">
-            <option value="" selected disabled>Select District</option>
+            <option value="" selected disabled>Vui lòng chọn quận/huyện</option>
             <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
           </select>
         </div>
         <div class="item">
           <label class="col-2 float-left" style="clear: both">
-            Ward (<span class="text-danger">*</span>):
+            Xã/Phường (<span class="text-danger">*</span>):
           </label>
           <select [compareWith]="compareWard" formControlName="ward" class="col-6 form-control float-left selectoption">
-            <option value="" selected disabled>Select Ward</option>
+            <option value="" selected disabled>Vui lòng chọn xã/phường</option>
             <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
           </select>
         </div>
@@ -201,10 +201,11 @@
 
 
         <!--    ngoc - image    -->
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left">
-          </label>
-          <img class="imgs" [src]="imgSrc" width="100px" height="100px" (click)="fileUploader.click()">
+        <div class="item justify-content-center align-items-center" style="clear: both">
+          <label class="col-2 float-left"></label>
+          <img class="imgs" [src]="imgSrc" style="position: relative"
+               width="100px" height="100px"
+               (click)="fileUploader.click()">
         </div>
         <div class="item" style="clear: both">
           <label class="col-2 float-left" for="image">

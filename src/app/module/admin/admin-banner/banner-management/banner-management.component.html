@@ -17,7 +17,7 @@
       </thead>
       <tbody *ngFor="let banner of listBanner | paginate: { itemsPerPage: 4, currentPage: page },let i = index"
              [attr.data-index]="i">
-      <tr class="border-bottom border-dark">
+      <tr>
         <td>{{i + 1}}</td>
         <td>{{banner.position.positionName}}</td>
         <td>{{banner.size.sizeName}}</td>

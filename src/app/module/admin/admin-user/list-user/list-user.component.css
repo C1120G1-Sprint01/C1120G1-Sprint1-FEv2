@@ -15,8 +15,8 @@
 
 .btnSearch {
   color: #0D5DB6;
-  height: fit-content;
-  margin-top: 15px;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .theadTable {
@@ -26,18 +26,14 @@
 
 .inputSearch {
   font-size: 13px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  margin-right: 5px;
+  margin: 20px 5px 20px 10px;
 }
 
 
 .title {
-  font-size: 20px;
-  background-color: #027FFF;
+  font-size: 1.75rem;
   margin:  5px;
-  color: white;
+  color: #0D5DB6;
   text-transform: uppercase;
   padding: 10px;
 }
@@ -130,7 +126,6 @@
 }
 .modal-confirm .btn, .modal-confirm .btn:active {
   color: #fff;
-  border-radius: 4px;
   background: #60c7c1;
   text-decoration: none;
   transition: all 0.4s;
@@ -152,4 +147,7 @@
 }
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
   background: #ee3535;
+}
+#listUserId {
+  overflow-x: hidden;
 }
