@@ -11,10 +11,13 @@ import {Ward} from "../../model/Ward";
 })
 export class UserCustomerService {
 
+
   httpOptions: any;
 
   private API_URL_USER_CUSTOMER = "http://localhost:8080/user/";
   private API_UPDATE_PASSWORD = "http://localhost:8080/user/resetpassword";
+
+
   API_USER: string = "http://localhost:8080/user";
   API_URL_ADDRESS: string = "http://localhost:8080/api/address";
   // httpOptions: any;
@@ -44,6 +47,7 @@ export class UserCustomerService {
     return this.httpClient.get<Ward[]>(this.API_URL_ADDRESS + '/ward/' + id);
   }
 
+
   getUserById(username: string): Observable<any> {
     return this.httpClient.get<any>(this.API_URL_USER_CUSTOMER + username, this.httpOptions)
   };
@@ -51,6 +55,11 @@ export class UserCustomerService {
   // getUserById(id: number): Observable<User[]> {
   //   return this.httpClient.get<User[]>(this.API_URL_ADDRESS + '/' + id);
   // }
+
+  getUserByUserName(username: string): Observable<User> {
+    return this.httpClient.get<User>(this.API_URL_USER_CUSTOMER + username);
+  };
+
 
   createUser(user: User): Observable<any> {
     return this.httpClient.post(this.API_USER + '/create', user);
@@ -63,6 +72,7 @@ export class UserCustomerService {
   setNewPassword(username: string, newPassword: string): Observable<void> {
     return this.httpClient.post<void>(this.API_USER + '/setPass/' + username + '/' + newPassword, this.httpOptions);
   }
+
 }
 
 

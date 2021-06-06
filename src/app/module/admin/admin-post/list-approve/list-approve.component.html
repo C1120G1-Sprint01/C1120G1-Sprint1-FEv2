@@ -44,7 +44,7 @@
   </table>
   <div *ngIf="postList.length == 0"><h2 style="color: red" class="text-center">----------Không có dữ liệu----------</h2></div>
   <div>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" nextLabel="Sau" previousLabel="Trước"></pagination-controls>
   </div>
 </div>
 

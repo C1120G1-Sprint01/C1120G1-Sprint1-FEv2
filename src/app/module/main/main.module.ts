@@ -16,24 +16,20 @@ import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {MainContentComponent} from './main-layout/main-content/main-content.component';
+import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
 import {CreatePostComponent} from "./create-post/create-post.component";
 
 
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent, CreatePostComponent,
     ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent],
+
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    MainHeaderComponent,
-    MainFooterComponent,
-    MainChatComponent,
-    HttpClientModule,
     ReactiveFormsModule,
+
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -42,8 +38,27 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     EmojiModule,
     PickerModule,
 
-    MainChatComponent
+    // MainChatComponent,
+    AdminBannerModule
   ],
+
+  schemas: [
+  CUSTOM_ELEMENTS_SCHEMA
+],
+  exports: [
+  MainHeaderComponent,
+  MainFooterComponent,
+  HttpClientModule,
+  ReactiveFormsModule,
+  FormsModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule,
+  EmojiModule,
+  PickerModule,
+  MainChatComponent,
+],
 })
 export class MainModule {
 }

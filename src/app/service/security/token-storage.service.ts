@@ -12,6 +12,11 @@ export class TokenStorageService {
   constructor() {
   }
 
+  /**
+   * Author: HoangTQ
+   * all function
+   */
+
   signOut() {
     window.localStorage.clear();
     window.sessionStorage.clear();
