@@ -43,7 +43,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
