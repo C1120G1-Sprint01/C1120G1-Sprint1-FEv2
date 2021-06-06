@@ -5,6 +5,7 @@ import {TokenStorageService} from "../../../service/security/token-storage.servi
 import {Router} from "@angular/router";
 import {AuthLogin} from "../../../model/AuthLogin";
 import {MainHeaderComponent} from "../../main/main-layout/main-header/main-header.component";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   form:FormGroup;
   fieldTextType: boolean = false;
   authLogin: AuthLogin;
-  roles: string[] = [];
+  role: string = '';
   username: string;
   errorMessage: string;
 
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
               private securityService:SecurityService,
               private tokenStorageService:TokenStorageService,
               private router:Router,
-              private headerComponent:MainHeaderComponent)
+              private headerComponent:MainHeaderComponent,
+              private appComponent:AppComponent)
   { }
 
   ngOnInit(): void {
@@ -40,8 +42,8 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
-      this.roles = this.tokenStorageService.getUser().roles;
-      this.username = this.tokenStorageService.getUser().username;
+      this.role = user.authorities[0].authority;
+      this.username = user.username;
     }
   }
 
@@ -70,9 +72,10 @@ export class LoginComponent implements OnInit {
 
         this.securityService.isLoggedIn = true;
         this.username = this.tokenStorageService.getUser().username;
-        this.roles = this.tokenStorageService.getUser().roles;
+        this.role = this.tokenStorageService.getUser().authorities[0].authority;
         this.form.reset();
         console.log("Login Success");
+        this.appComponent.ngOnInit().then();
         this.headerComponent.ngOnInit();
         this.router.navigateByUrl("/"); //index
 

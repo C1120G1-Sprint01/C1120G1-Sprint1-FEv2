@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {MainContentComponent} from './main-layout/main-content/main-content.component';
+import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
 import {CreatePostComponent} from "./create-post/create-post.component";
 
 
@@ -26,7 +27,8 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AdminBannerModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -34,7 +36,6 @@ import {CreatePostComponent} from "./create-post/create-post.component";
   exports: [
     MainHeaderComponent,
     MainFooterComponent,
-    MainChatComponent,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -45,8 +46,8 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     EmojiModule,
     PickerModule,
     MainChatComponent,
-  ]
-
+  ],
 })
+
 export class MainModule {
 }

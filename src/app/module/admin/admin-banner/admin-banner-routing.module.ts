@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {BannerManagementComponent} from "./banner-management/banner-management.component";
 
 
 const routes: Routes = [
-  {path:'',component: BannerManagementComponent},
+  {path: '', component: BannerManagementComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminBannerRoutingModule { }
+export class AdminBannerRoutingModule {
+}

@@ -13,6 +13,7 @@ import {PostStatisticsComponent} from './post-statistics/post-statistics.compone
 import {DetailApproveComponent} from "./detail-approve/detail-approve.component";
 import {DetailWaitComponent} from "./detail-wait/detail-wait.component";
 import {CancelApproveComponent} from "./cancel-approve/cancel-approve.component";
+import {PostListAdminComponent} from "./post-list-admin/post-list-admin.component";
 
 const routes: Routes = [
   {path: 'list-detail', component: ListDetailComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'list-wait/approve/:postId', component: ConfirmWaitComponent},
   {path: 'list-wait/delete/:postId', component: DeleteWaitComponent},
   {path: 'statistics', component: PostStatisticsComponent},
+  {path: 'list-delete', component: PostListAdminComponent},
   {path: '', redirectTo: 'list-detail', pathMatch: 'full'},
   {path: '**', redirectTo: 'list-detail', pathMatch: 'full'}
 ];
@@ -36,4 +38,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminPostRoutingModule {}
+export class AdminPostRoutingModule {
+}

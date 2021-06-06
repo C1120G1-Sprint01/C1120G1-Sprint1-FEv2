@@ -8,16 +8,19 @@ import { LogoutComponent } from './logout/logout.component';
 import { GetBackPasswordComponent } from './get-back-password/get-back-password.component';
 import { RegisterComponent } from './register/register.component';
 import {MainModule} from "../main/main.module";
+import {MatSelectModule} from "@angular/material/select";
+import { LoginGoogleComponent } from './login-google/login-google.component';
 
 @NgModule({
-  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent],
+  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent, LoginGoogleComponent],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MainModule
+    MainModule,
+    MatSelectModule
   ]
 })
 export class SecurityModule { }

@@ -1,12 +1,12 @@
 <div class="container-fluid">
-  <h1 class="text-center mt-2" style="font-size: 40px">Quản Lí Banner</h1>
-  <button (click)="openFormAddBanner()" class="btn btn-success mb-2 ml-1"><i style="color: white" class="fa fa-plus"></i>
+  <p class="title mt-3">Quản Lí Chức Năng Banner</p>
+  <button (click)="openFormAddBanner()" class="btn btn-success mt-2 mb-2"><i style="color: white" class="fa fa-plus"></i>
     Thêm Mới Banner
   </button>
   <div class="table-responsive">
-    <table class="table table-striped border border-dark">
-      <thead class="thead-dark">
-      <tr class="text-center">
+    <table class="table text-center">
+      <thead>
+      <tr>
         <th scope="col">STT</th>
         <th scope="col">Vị trí</th>
         <th scope="col">Kích Thước</th>
@@ -17,7 +17,7 @@
       </thead>
       <tbody *ngFor="let banner of listBanner | paginate: { itemsPerPage: 4, currentPage: page },let i = index"
              [attr.data-index]="i">
-      <tr class="text-center">
+      <tr class="border-bottom border-dark">
         <td>{{i + 1}}</td>
         <td>{{banner.position.positionName}}</td>
         <td>{{banner.size.sizeName}}</td>
@@ -36,29 +36,29 @@
       </tr>
       </tbody>
     </table>
-    <pagination-controls *ngIf="lengthListBanner !== 0" maxSize="3" nextLabel="Sau" previousLabel="Trước"
-                         (pageChange)="page = $event"></pagination-controls>
-    <div *ngIf="lengthListBanner === 0">
-      <p class="text-center" style="color: red; height: 500px">Hiện tại không có banner để hiển thị</p>
-    </div>
-    <ng-template #content let-modal>
-      <div class="modal-header" style="background-color: #1a1a1a">
-        <h1 class="modal-title" style="color: white; font-weight: 600">Xác Nhận Xóa Banner</h1>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true" style="color: white">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h2>Bạn sẽ xóa banner này mặc dù vẫn kết thúc thời hạn của banner?</h2>
-        <img class="border border-dark" [src]="banner.image" style="width: 250px; height: 200px">
-        <p class="mt-2">Thời hạn: <span style="color: red">{{banner.duration|date: 'dd/MM/yyyy'}}</span></p>
-        <p>Vị trí: <span style="color: red">{{banner.position.positionName}}</span></p>
-        <p>Kích thước: <span style="color: red">{{banner.size.sizeName}}</span></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="deleteBanner(banner.bannerId);">Có</button>
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Không</button>
-      </div>
-    </ng-template>
   </div>
+  <pagination-controls *ngIf="lengthListBanner !== 0" maxSize="3" nextLabel="Sau" previousLabel="Trước"
+                       (pageChange)="page = $event"></pagination-controls>
+  <div *ngIf="lengthListBanner === 0">
+    <p class="text-center" style="color: red; height: 500px">Hiện tại không có banner để hiển thị</p>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header" style="background-color: #B4D5FA">
+      <h1 class="modal-title" style=" color: #0D5DB6;font-weight: 600">Xác Nhận Xóa Banner</h1>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" style="color: white">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>Bạn sẽ xóa banner này mặc dù vẫn kết thúc thời hạn của banner?</h2>
+      <img class="border border-dark" [src]="banner.image" style="width: 250px; height: 200px">
+      <p class="mt-2">Thời hạn: <span style="color: red">{{banner.duration|date: 'dd/MM/yyyy'}}</span></p>
+      <p>Vị trí: <span style="color: red">{{banner.position.positionName}}</span></p>
+      <p>Kích thước: <span style="color: red">{{banner.size.sizeName}}</span></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="deleteBanner(banner.bannerId);">Có</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Không</button>
+    </div>
+  </ng-template>
 </div>

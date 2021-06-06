@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Post} from 'src/app/model/Post';
+import { PostDTO } from 'src/app/model/PostDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,6 @@ export class ServiceCustomerService {
     };
   }
 
-  // findAllPostByUsername(page: number, username: string): Observable<Post[]> {
-  //   return this.httpClient.get<Post[]>(`${this.API_URL_LIST}/cus-post-list?page=${page}&&username=${username}`);
-  // }
-
   findAllPostByUsername(page: number, username: string, statusId): Observable<Post[]> {
     return this.httpClient.get<Post[]>(`${this.API_URL_LIST}/cus-post-list?page=${page}&&username=${username}&&statusId=${statusId}`);
   }
@@ -36,9 +33,8 @@ export class ServiceCustomerService {
     return this.httpClient.get<Post>(`${this.API_URL_LIST}/cus-post/${id}`);
   }
 
-  updatePost(post: Post): Observable<Post> {
-    console.log(post);
-    return this.httpClient.post<Post>(`${this.API_URL_LIST}/cus-post-edit`, post);
+  updatePost(postDTO: PostDTO): Observable<PostDTO> {
+    return this.httpClient.post<PostDTO>(`${this.API_URL_LIST}/cus-post-edit`, postDTO);
   }
 
   /**

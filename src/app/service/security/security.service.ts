@@ -24,6 +24,11 @@ export class SecurityService {
     }
   }
 
+  /**
+   * Author: HoangTQ
+   * login, checkEmail, saveNewPw
+   */
+
   login(authLogin: AuthLogin): Observable<any> {
     return this.http.post<any>(API_URL + 'login', authLogin, this.httpOptions);
   }
@@ -36,5 +41,9 @@ export class SecurityService {
   saveNewPw(newPw: string, email: string): Observable<void> {
     console.log("New pw : " + newPw);
     return this.http.get<void>(API_URL + 'setNewPw/' + email + '/' + newPw);
+  }
+
+  loginGoogle():Observable<any> {
+    return this.http.get<any>(API_URL + 'loginGoogle');
   }
 }
