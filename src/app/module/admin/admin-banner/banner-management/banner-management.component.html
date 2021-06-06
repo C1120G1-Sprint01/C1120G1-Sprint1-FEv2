@@ -17,7 +17,7 @@
       </thead>
       <tbody *ngFor="let banner of listBanner | paginate: { itemsPerPage: 4, currentPage: page },let i = index"
              [attr.data-index]="i">
-      <tr>
+      <tr class="border-bottom border-dark">
         <td>{{i + 1}}</td>
         <td>{{banner.position.positionName}}</td>
         <td>{{banner.size.sizeName}}</td>
@@ -43,8 +43,8 @@
     <p class="text-center" style="color: red; height: 500px">Hiện tại không có banner để hiển thị</p>
   </div>
   <ng-template #content let-modal>
-    <div class="modal-header" style="background-color: #1a1a1a">
-      <h1 class="modal-title" style="color: white; font-weight: 600">Xác Nhận Xóa Banner</h1>
+    <div class="modal-header" style="background-color: #B4D5FA">
+      <h1 class="modal-title" style=" color: #0D5DB6;font-weight: 600">Xác Nhận Xóa Banner</h1>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true" style="color: white">&times;</span>
       </button>

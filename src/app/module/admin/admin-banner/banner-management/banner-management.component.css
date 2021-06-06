@@ -13,7 +13,7 @@
 }
 
 ::ng-deep.mat-dialog-container {
-  padding: 0px !important;
+  padding: 0 !important;
 }
 .title {
   text-align: center;
