@@ -8,6 +8,7 @@ import {CreatePostComponent} from './customer-post/create-post/create-post.compo
 import {ListPostComponent} from './customer-post/list-post/list-post.component';
 import {EditPostComponent} from './customer-post/edit-post/edit-post.component';
 import {DeletePostComponent} from './customer-post/delete-post/delete-post.component';
+import { InboxComponent } from './customer-manager/inbox/inbox.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
     children: [
       {path: '', component: ShowInfoComponent},
       {path: 'edit', component: EditInfoComponent},
-      {path: 'inbox', component: ChangePasswordComponent},
+      {path: 'inbox', component: InboxComponent},
       {path: 'change-password', component: ChangePasswordComponent},
       {path: 'posts', component: ListPostComponent},
       {path: 'posts/create', component: CreatePostComponent},

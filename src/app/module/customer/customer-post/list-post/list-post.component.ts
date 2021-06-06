@@ -63,7 +63,7 @@ export class ListPostComponent implements OnInit {
     } else {
       this.router.navigateByUrl("/login");
     }
-    
+
   }
 
   // onList(page: number, username: string) {

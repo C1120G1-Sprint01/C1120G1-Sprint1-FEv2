@@ -16,7 +16,7 @@ import {CustomerRoutingModule} from "./customer-routing.module";
 import {MainModule} from "../main/main.module";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireStorageModule} from "@angular/fire/storage";
-import {environment} from "../../../environments/environment";
+import {environment} from "./customer-post/environments/environment";
 import { CustomerContentComponent } from './customer-layout/customer-content/customer-content.component';
 import {ToastrModule} from "ngx-toastr";
 @NgModule({

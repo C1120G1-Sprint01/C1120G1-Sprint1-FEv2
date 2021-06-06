@@ -44,9 +44,6 @@ import {MainContentComponent} from './main-layout/main-content/main-content.comp
     PickerModule,
     MainChatComponent,
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
 })
 export class MainModule {
 }
