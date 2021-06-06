@@ -20,7 +20,8 @@ const routes: Routes = [
       {path: 'posts', component: ListPostComponent},
       {path: 'posts/edit/:id', component: EditPostComponent},
       {path: 'posts/delete/:id', component: DeletePostComponent},
-      {path: '**', redirectTo: '', pathMatch: 'full'}
+      {path: '**', redirectTo: 'show-info', pathMatch: 'full'},
+      {path: '/', redirectTo: 'show-info', pathMatch: 'full'}
     ]
   }
 ];
