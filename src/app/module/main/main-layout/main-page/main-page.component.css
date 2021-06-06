@@ -1,0 +1,7 @@
+app-main-content {
+  flex: 1 0 auto;
+}
+
+app-main-footer {
+  flex-shrink: 0;
+}

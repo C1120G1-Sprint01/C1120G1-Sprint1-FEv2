@@ -1,7 +1,7 @@
 <div class="header sticky-top sticky">
   <nav class="navbar navbar-expand-lg"
        style="background-color: #027FFF; font-family: 'Roboto Light',sans-serif; font-size: 25px; height: 10vh">
-    <a routerLink="homepage">
+    <a routerLink="/">
       <img class="navbar brand" src="../../../../../assets/img/logoChat.png" alt="logo" style="max-height: 10vh">
 
       </a>
@@ -19,8 +19,6 @@
             <button class="btn btn-outline-light my-2 my-sm-0" [disabled]="!searchInput.valid" type="submit">Tìm kiếm</button>
           </form>
         </li>
-
-
         <li class="nav-item-lg" *ngIf="username">
           <a class="nav-link" (click)="logout()"
              style="color: white; padding-right: 20px">
@@ -30,7 +28,7 @@
         </li>
         <li class="nav-item-lg">
           <a class="nav-link" *ngIf="!username"
-             routerLink="login" style="color: white">
+             routerLink="/login" style="color: white">
             <span class="fas fa-user"></span>
             ĐĂNG NHẬP
           </a>

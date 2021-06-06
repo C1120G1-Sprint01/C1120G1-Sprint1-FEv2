@@ -37,17 +37,22 @@ export class ServiceCustomerService {
   }
 
   updatePost(post: Post): Observable<Post> {
+    console.log(post);
     return this.httpClient.post<Post>(`${this.API_URL_LIST}/cus-post-edit`, post);
   }
 
-  savePost(post: Post): Observable<void> {
-    console.log('Title' + post.title);
-    console.log('Child' + post.childCategory);
-    return this.httpClient.post<void>(`${this.API_URL_LIST}/createPost`, post);
+  /**
+   * Author: ThuanNN, ViNTT
+   * Save a new post
+   */
+  savePost(post: Post, username: string): Observable<void> {
+    console.log(post);
+    console.log(username);
+    return this.httpClient.post<void>(`${this.API_URL_LIST}/createPost`, {post, username});
   }
 
   public searchPostByName(posterName: string): Observable<any> {
-    return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName );
+    return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName);
   }
 
 }

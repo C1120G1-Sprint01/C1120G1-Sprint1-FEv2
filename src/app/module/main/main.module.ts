@@ -28,6 +28,9 @@ import {CreatePostComponent} from "./create-post/create-post.component";
     FormsModule,
     ReactiveFormsModule
   ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   exports: [
     MainHeaderComponent,
     MainFooterComponent,

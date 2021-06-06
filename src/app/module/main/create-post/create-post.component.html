@@ -1,21 +1,20 @@
 <!-- main content -->
 <div class="d-flex justify-content-center col-12 col-sm-12 col-md-12">
   <!-- content here -->
-  <div class="d-flex justify-content-center col-12 mt-5 pt-3">
+  <div class="d-flex justify-content-center col-12 pt-3">
     <div class="col-sm-12 col-md-9">
       <p class="title-text text-uppercase">Đăng tin</p>
-      <!--      <form>-->
       <form [formGroup]="form" (ngSubmit)=submitForm(form)>
-        <table class="table">
+        <table class="table table-hover table-borderless">
           <tbody>
           <tr>
-            <td>
+            <td class="col-4">
               <label for="name">
                 Tên
                 <span class="asterisk-red">*</span>
               </label>
             </td>
-            <td>
+            <td class="col-8">
               <input type="text" class="form-control" placeholder="Nhập vào tên của bạn" id="name"
                      formControlName="posterName"/>
               <p class="invalid-feedback" *ngIf="form.controls.posterName.touched">
@@ -73,20 +72,20 @@
             </td>
             <td>
             <span>
-                <select class="custom-select custom-select-sm mb-1" [(ngModel)]="province" (change)="onChangeProvince()"
-                        [ngModelOptions]="{standalone: true}">
-                    <option selected disabled>Chọn tỉnh thành</option>
+                <select class="custom-select custom-select-sm mb-1" formControlName="province"
+                        (change)="onChangeProvince()">
+                    <option value="" selected disabled>Chọn tỉnh thành</option>
                     <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
                 </select>
                 <br/>
-                <select class="custom-select custom-select-sm mb-1" [(ngModel)]="district" (change)="onChangeDistrict()"
-                        [ngModelOptions]="{standalone: true}">
-                    <option selected disabled>Chọn quận/huyện</option>
+                <select class="custom-select custom-select-sm mb-1" formControlName="district"
+                        (change)="onChangeDistrict()">
+                    <option value="" selected disabled>Chọn quận/huyện</option>
                     <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
                 </select>
                 <br/>
                 <select class="custom-select custom-select-sm mb-1" formControlName="ward">
-                    <option selected disabled>Chọn xã/phường</option>
+                    <option value="" selected disabled>Chọn xã/phường</option>
                     <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
                 </select>
             </span>
@@ -105,10 +104,8 @@
               </label>
             </td>
             <td>
-              <select class="form-control" id="category" [(ngModel)]="category"
-                      [ngModelOptions]="{standalone: true}"
-                      (change)="onChangeCategory()">
-                <option selected disabled>Chọn chuyên mục</option>
+              <select class="form-control" id="category" formControlName="category" (change)="onChangeCategory()">
+                <option value="" selected disabled>Chọn chuyên mục</option>
                 <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}</option>
               </select>
             </td>
@@ -122,7 +119,7 @@
             </td>
             <td>
               <select class="form-control" id="child_category" formControlName="childCategory">
-                <option selected disabled>Chọn chuyên mục</option>
+                <option value="" disabled>Chọn chuyên mục con</option>
                 <option *ngFor="let childCategory of childCategories" [ngValue]="childCategory">
                   {{childCategory.childCategoryName}}</option>
               </select>
@@ -203,7 +200,7 @@
               </label>
             </td>
             <td>
-              <input type="number" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
+              <input type="text" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
                      formControlName="price"/>
               <p class="invalid-feedback" *ngIf="form.controls.price.touched">
                 <span *ngIf="form.controls.price.errors?.pattern">Giá không hợp lệ.</span>
@@ -218,52 +215,20 @@
               </label>
             </td>
             <td>
-              <button class="btn btn-success" (click)="addImage()" type="button">
-                <i class="fas fa-folder-plus"></i>
-              </button>
-              <section class="d-block">
-                <section style="display: none" id="addImg1">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg1')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg2">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg2')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg3">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg3')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-                <section style="display: none" id="addImg4">
-                  <section class="d-inline-flex imgAdd">
-                    <input class="form-control col-md-10" type="file" accept="image/*"/>
-                    <button class="btn btn-danger ml-2" type="button" (click)="removeImg('addImg4')">
-                      <i class="fas fa-folder-minus"></i>
-                    </button>
-                  </section>
-                </section>
-              </section>
+              <input class="form-control" type="file" accept="image/*" formControlName="file"
+                     multiple="" (change)="onFileSelected($event)"/><br>
+              <div *ngFor='let url of imagesSource; let i = index' class="imgPreview">
+                <img [src]="url" alt>
+                <div class="close" (click)="removeImg(i)">X</div>
+              </div>
             </td>
           </tr>
           <tr>
             <td>
-              <a class="btn btn-danger col-md-6" (click)="cancelUpdate()">Huỷ</a>
+              <a class="btn btn-danger col-md-6" (click)="cancelCreate()">Huỷ</a>
             </td>
             <td class="d-flex justify-content-center">
               <button type="submit" class="btn btn-success col-md-6" [disabled]="form.invalid">Đăng tin</button>
-              <!--              <button type="submit" class="btn btn-success col-md-6">Đăng tin</button>-->
             </td>
           </tr>
           </tbody>
@@ -273,6 +238,7 @@
   </div>
 </div>
 <!-- END main content -->
+
 <a href="#notificationModal" data-toggle="modal" style="display: none"></a>
 <!-- Modal notification -->
 <div id="notificationModal" class="modal fade">

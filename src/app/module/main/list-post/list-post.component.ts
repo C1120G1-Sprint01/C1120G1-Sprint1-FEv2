@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../service/service-post/service-post.service';
 import {ActivatedRoute} from "@angular/router";
 import {DateUtilService} from "../../../service/date-util/date-util.service";
+import {Post} from "../../../model/Post";
 
 @Component({
   selector: 'app-list-post',
@@ -14,6 +15,7 @@ export class ListPostComponent implements OnInit {
     + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
 
   posts: any;
+  postList: Post[] = [];
   listTime: string[] = [];
 
   constructor(private postService: ServicePostService,
@@ -54,7 +56,8 @@ export class ListPostComponent implements OnInit {
 
   initData(data: any) {
     this.posts = data;
-    for (let post of this.posts.content) {
+    this.postList = data.content;
+    for (let post of this.postList) {
       this.listTime.push(this.dateUtilService.getDiffToNow(post.postDateTime));
     }
     console.log(this.listTime);

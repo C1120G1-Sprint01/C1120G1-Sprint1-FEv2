@@ -15,12 +15,12 @@
   <!--        <h3 class="text-danger text-center">Không tìm thấy kết quả</h3>-->
   <!-- post -->
   <a class="list-group-item list-group-item-action post-item border-bottom"
-     *ngFor="let item of posts.content, let i = index" [routerLink]="['post',item.postId]">
+     *ngFor="let item of postList, let i = index" [routerLink]="['post',item.postId]">
     <div class="d-inline-flex col-12 pl-0">
       <div class="col-md-2 col-sm-3 px-0">
-        <img [src]="item.imageSet[0].url" width="100" height="100" *ngIf="item.imageSet.length > 0, else noPic"/>
+        <img [src]="item.imageSet[0].url" width="100" height="100" *ngIf="item.imageSet.length > 0, else noPic" alt/>
         <ng-template #noPic>
-          <img [src]="defaultImgUrl" width="100" height="100"/>
+          <img [src]="defaultImgUrl" width="100" height="100" alt/>
         </ng-template>
       </div>
       <div class="px-0 col-md-10 col-sm-9 post-item-content">
@@ -57,10 +57,10 @@
       <li class="page-item">
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">{{posts?.pageable?.pageNumber + 1}}</span>
+            <span class="input-group-text">{{posts?.pageable?.pageNumber + 1}}</span>
           </div>
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> /{{posts?.totalPages}}</span>
+            <span class="input-group-text"> /{{posts?.totalPages}}</span>
           </div>
         </div>
       </li>
