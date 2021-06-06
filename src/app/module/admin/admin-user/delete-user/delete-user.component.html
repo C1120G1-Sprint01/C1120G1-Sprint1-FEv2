@@ -1,9 +1,11 @@
-<h3 style="color: red">Xác Nhận Xóa !</h3>
-<hr>
-<h5>Bạn Có Chắc Muốn Xóa Thành Viên <label style="color: red"> {{deleteName}}</label> Không ?</h5>
-<p style="color: red">Hành động này không thể được hoàn tác !</p>
-<div class="row d-flex justify-content-end">
-  <button class="btn btn-success" style="width: 100px;margin-right: 20px" data-dismiss="modal" id="closeModal">Huỷ
+
+<p>Bạn có chắc muốn xóa thành viên <label style="color: red"> {{deleteName}}</label> không ? Hành động này không thể được hoàn tác !</p>
+<div class="modal-footer row d-flex justify-content-end">
+  <button class="btn btn-secondary" style="width: 100px;margin-right: 20px" data-dismiss="modal" id="closeModal">Huỷ
   </button>
   <button class="btn btn-danger mr-3" style="width: 100px" (click)="deletePatient()" data-dismiss="modal">Xóa</button>
 </div>
+
+
+
+

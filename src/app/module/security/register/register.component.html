@@ -1,214 +1,177 @@
-<div class="content row">
-  <div class="col-1">
-  </div>
-  <div class="col-10 float-right mt-3">
-    <form [formGroup]="formAddNewCustomer" (ngSubmit)="addNewCustomer(formAddNewCustomer.value)">
-      <h3>Thêm mới Khách hàng</h3>
-      <hr/>
-      <legend>Thêm mới tài khoản</legend>
 
-      <div class="item">
-        <label class="col-2 float-left " for="account">
-          Tài khoản <span class="red_asterisk">*</span>:
-        </label>
-        <input id="account" class="col-6 form-control float-left" type="text" formControlName="account">
-      </div>
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left ">
-        </label>
-        <p *ngIf="formAddNewCustomer.get('account').hasError('required') && formAddNewCustomer.get('account').touched"
-           class="text-danger">Vui lòng nhập tài khoản</p>
-        <p *ngIf="formAddNewCustomer.get('account').hasError('pattern') && formAddNewCustomer.get('account').touched"
-           class="text-danger">Tài khoản tối thiểu 8 kí tự gồm cả chữ và số</p>
-      </div>
+<app-main-header></app-main-header>
+<div class="wrapper wrapper--w790 mt-3">
+  <div class="card card-5">
+    <div class="card-heading">
+      <h2 class="title">Thêm Mới Thông Tin Đăng Kí Khách Hàng</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formAddNewCustomer" (ngSubmit)="addNewCustomer(formAddNewCustomer.value)">
+        <label class="label">--Đăng Kí Tài Khoản--</label>
+        <div class="form-row mt-2">
+          <div class="name">Tài Khoản<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="text" formControlName="username">
+            </div>
+          </div>
+          <p
+            *ngIf="formAddNewCustomer.get('username').hasError('required') && formAddNewCustomer.get('username').touched"
+            class="text-error">Vui lòng nhập tài khoản !</p>
+          <p
+            *ngIf="formAddNewCustomer.get('username').hasError('pattern') && formAddNewCustomer.get('username').touched"
+            class="text-error">Tài khoản tối thiểu 6 kí tự gồm cả chữ và số và không nhập kí tự đặc biệt !</p>
 
-
-      <div style="clear: both">
-        <div class="item">
-          <label class="col-2 float-left" for="password">
-            Mật khẩu <span class="red_asterisk">*</span>:
-          </label>
-          <input id="password" type="password" class="col-6 form-control float-left" formControlName="password">
+          <p class="text-error">{{listError.existAccount}}</p>
         </div>
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left">
-          </label>
+
+        <div class="form-row">
+          <div class="name">Mật khẩu<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="password" formControlName="password">
+            </div>
+          </div>
           <p
             *ngIf="formAddNewCustomer.get('password').hasError('required') && formAddNewCustomer.get('password').touched"
-            class="text-danger">Vui lòng nhập mật khẩu</p>
+            class="text-error">Vui lòng nhập mật khẩu !</p>
           <p
             *ngIf="formAddNewCustomer.get('password').hasError('pattern') && formAddNewCustomer.get('password').touched"
-            class="text-danger">Mật khẩu tối thiểu 8 kí tự gồm cả chữ và số</p>
+            class="text-error">Mật khẩu tối thiểu 6 kí tự gồm cả chữ và số !</p>
         </div>
 
-
-        <div class="item">
-          <label class="col-2 float-left" for="newPassword" style="clear: both">
-            Xác nhận <span class="red_asterisk">*</span>:
-          </label>
-          <input class="col-6 form-control float-left" id="newPassword" type="password"
-                 formControlName="confirmPassword">
-        </div>
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left">
-          </label>
-          <p class="text-danger " *ngIf="isMessage">Tài khoản đã tồn tài hoặc mật khẩu nhập sai</p>
-        </div>
-
-      </div>
-      <legend>Thêm mới thông tin</legend>
-
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left" for="name">
-          Họ Tên <span class="red_asterisk">*</span>
-        </label>
-        <input name="name" id="name" class="col-6 form-control float-left" type="text"
-               formControlName="name">
-      </div>
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left">
-        </label>
-        <p *ngIf="formAddNewCustomer.get('name').hasError('required') && formAddNewCustomer.get('name').touched"
-           class="text-danger">Vui lòng nhập tên</p>
-        <p *ngIf="formAddNewCustomer.get('name').hasError('pattern') && formAddNewCustomer.get('name').touched"
-           class="text-danger">Vui lòng nhập đúng tên</p>
-      </div>
-
-      <div class="item">
-        <label class="col-2 float-left" for="phone" style="clear: both">
-          Điện thoại <span class="red_asterisk">*</span>:
-        </label>
-        <input id="phone" class="col-6 form-control float-left" type="text" formControlName="phone">
-      </div>
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left">
-        </label>
-        <p *ngIf="formAddNewCustomer.get('phone').hasError('required') && formAddNewCustomer.get('phone').touched"
-           class="text-danger">Vui lòng nhập số điện thoại</p>
-        <p *ngIf="formAddNewCustomer.get('phone').hasError('pattern')&& formAddNewCustomer.get('phone').touched"
-           class="text-danger">Số điện thoại không đúng định dạng</p>
-      </div>
-
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left ">
-        </label>
-        <p class="text-danger">
-          {{listError.existPhone}}
-        </p>
-      </div>
-
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left ">
-        </label>
-        <p *ngIf="isMessage3" class="text-danger">
-          Điện thoại đã được đăng ký
-        </p>
-      </div>
-
-      <div class="item">
-        <label class="col-2 float-left" for="email" style="clear: both">
-          Email <span class="red_asterisk">*</span>:
-        </label>
-        <input id="email" class="col-6 form-control float-left" type="text" formControlName="email">
-      </div>
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left">
-        </label>
-        <p *ngIf="formAddNewCustomer.get('email').hasError('required') && formAddNewCustomer.get('email').touched"
-           class="text-danger">Vui lòng nhập email</p>
-        <p *ngIf="formAddNewCustomer.get('email').hasError('pattern')&& formAddNewCustomer.get('email').touched"
-           class="text-danger">Email không đúng định dạng</p>
-      </div>
-
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left ">
-        </label>
-        <p class="text-danger">
-          {{listError.existEmail}}
-        </p>
-      </div>
-      <div class="item" style="clear: both">
-        <label class="col-2 float-left ">
-        </label>
-        <p *ngIf="isMessage1" class="text-danger">
-          Email đã được đăng ký
-        </p>
-      </div>
-      <div class="item">
-        <label class="col-2 float-left" for="ward" style="clear: both">
-          Địa Chỉ <span class="red_asterisk">*</span>:
-        </label>
-        <div class="cols-sm-10">
-          <div class="input-group">
-            <div class="row-cols-sm-10">
-              <select class="form-control" formControlName="province" id="province" class="form-control">
-                <option value="" disabled>Select a province</option>
-                <option *ngFor="let province of provinces"
-                        [value]="province"
-                        style="color: blue">
-                  {{province.provinceName}}
-                </option>
-              </select>
+        <div class="form-row">
+          <div class="name">Xác Nhận<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="password" formControlName="confirmPassword">
             </div>
-            <div class="row-cols-sm-10">
-              <select class="form-control" formControlName="district" id="district" class="form-control">
-                <option value="" disabled>Select a District</option>
-                <option *ngFor="let district of districts"
-                        [value]="district"
-                        style="color: blue">
-                  {{district.districtName}}
-                </option>
-              </select>
+          </div>
+          <p class="text-error " *ngIf="isMessage">Mật khẩu không trùng khớp !</p>
+        </div>
+        <label class="label">--Thêm Mới Thông Tin--</label>
+        <div class="form-row mt-2">
+          <div class="name">Họ Tên<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="text" formControlName="name">
             </div>
-            <div class="row-cols-sm-10">
-              <select class="form-control" formControlName="ward" id="ward" class="form-control">
-                <option value="" disabled>Select Ward</option>
-                <option *ngFor="let ward of wards"
-                        [value]="ward"
-                        style="color: blue">
-                  {{ward.wardName}}
-                </option>
-              </select>
+          </div>
+          <p *ngIf="formAddNewCustomer.get('name').hasError('required') && formAddNewCustomer.get('name').touched"
+             class="text-error">Vui lòng nhập họ và tên !</p>
+          <p *ngIf="formAddNewCustomer.get('name').hasError('pattern') && formAddNewCustomer.get('name').touched"
+             class="text-error"> Họ và tên không nhập kí tự đặc biệt , số . Vui lòng nhập lại !</p>
+          <p *ngIf="formAddNewCustomer.get('name').hasError('minlength') && formAddNewCustomer.get('name').touched
+           && !formAddNewCustomer.get('name').hasError('pattern')"
+             class="text-error"> Họ và tên tối thiểu 6 kí tự  !</p>
+          <p *ngIf="formAddNewCustomer.get('name').hasError('maxlength') && formAddNewCustomer.get('name').touched
+          && !formAddNewCustomer.get('name').hasError('pattern')"
+             class="text-error"> Họ và tên tối đa 45 kí tự  !</p>
+        </div>
+        <div class="form-row">
+          <div class="name">Điện Thoại<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="text" formControlName="phone">
+            </div>
+          </div>
+          <p
+            *ngIf="formAddNewCustomer.get('phone').hasError('required') && formAddNewCustomer.get('phone').touched"
+            class="text-error">Vui lòng nhập số điện thoại !</p>
+          <p
+            *ngIf="formAddNewCustomer.get('phone').hasError('pattern') && formAddNewCustomer.get('phone').touched"
+            class="text-error">Sai định dạng (số điện toại phải từ 10 đến 11 số), vui lòng nhập lại !</p>
+        </div>
+        <div class="form-row">
+          <div class="name">Email<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <input class="input--style-5" type="email" formControlName="email">
+            </div>
+          </div>
+          <p *ngIf="formAddNewCustomer.get('email').hasError('required') && formAddNewCustomer.get('email').touched"
+             class="text-error">Vui lòng nhập email !</p>
+          <p *ngIf="formAddNewCustomer.get('email').hasError('pattern')&& formAddNewCustomer.get('email').touched"
+             class="text-error">Email không đúng định dạng , abc@acb.com!</p>
+
+          <p class="text-error" *ngIf="listError.existEmail">
+            {{listError.existEmail}}
+          </p>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Hình ảnh:</div>
+          <label id="input-image" *ngIf="imgSrc === null">
+            <i style="font-size: 26px" class="fa fa-image"></i>
+            <input type="file" name="myfile" accept="*.png.jpg" (change)="showPreview($event)" style="display:none">
+          </label>
+          <p style="color:red; font-size: 11px" class="ml-2">{{messageImageError}}</p>
+          <div *ngIf="imgSrc !== null">
+            <img class="border border-dark" [src]="imgSrc" style="width: 174px; height: 110px">
+            <div class="icon-hide">
+              <i (click)="removeImage()" class="fa fa-times-circle"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="name">Tỉnh(TP)<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <mat-form-field class="form-select" appearance="fill">
+                <mat-label>Chọn Tỉnh(TP)</mat-label>
+                <mat-select [compareWith]="compareProvince" formControlName="province">
+                  <mat-option (click)="onchangeProvince(province.provinceId)" *ngFor="let province of provinces"
+                              [value]="province">{{province.provinceName}}</mat-option>
+                </mat-select>
+                <span
+                  *ngIf="formAddNewCustomer.get('province').hasError('required') && formAddNewCustomer.get('province').touched"
+                  class="text-select-error">Vui lòng chọn tỉnh hoặc thành phố !</span>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="name">Huyện(Quận)<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <mat-form-field class="form-select" appearance="fill">
+                <mat-label>Chọn Huyện(Quận)</mat-label>
+                <mat-select [compareWith]="compareDistrict" formControlName="district"
+                            [disabled]="formAddNewCustomer.value.province === ''">
+                  <mat-option (click)="onchangeDistrict(district.districtId)" *ngFor="let district of districts"
+                              [value]="district">{{district.districtName}}</mat-option>
+                </mat-select>
+                <span
+                  *ngIf="formAddNewCustomer.get('district').hasError('required') && formAddNewCustomer.get('district').touched"
+                  class="text-select-error">Vui lòng chọn quận hoặc huyện !</span>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="name">Xã(Phường)<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group">
+              <mat-form-field class="form-select" appearance="fill">
+                <mat-label>Chọn Xã(Phường)</mat-label>
+                <mat-select [compareWith]="compareWard" formControlName="ward"
+                            [disabled]="formAddNewCustomer.value.district === ''">
+                  <mat-option *ngFor="let ward of wards" [value]="ward">{{ward.wardName}}</mat-option>
+                </mat-select>
+                <span
+                  *ngIf="formAddNewCustomer.get('ward').hasError('required') && formAddNewCustomer.get('ward').touched "
+                  class="text-select-error">Vui lòng chọn xã hoặc phường !</span>
+              </mat-form-field>
             </div>
           </div>
         </div>
         <div>
-          <!--                <p *ngIf="formAddNewCustomer.get('ward').hasError('required') && formAddNewCustomer.get('ward').touched"-->
-          <!--                   class="text-danger">Vui lòng nhập Phường</p>-->
-          <!--                <p *ngIf="formAddNewCustomer.get('district').hasError('required') && formAddNewCustomer.get('district').touched"-->
-          <!--                   class="text-danger">Vui lòng nhập Quận</p>-->
-          <!--                <p *ngIf="formAddNewCustomer.get('province').hasError('required') && formAddNewCustomer.get('province').touched"-->
-          <!--                   class="text-danger">Vui lòng nhập Thành phố / Tỉnh</p>-->
-          <!--              </div>-->
+          <button class="btn btn-success ml-5 mb-1 mt-3" type="submit">Đăng kí</button>
+          <button class="btn btn-secondary ml-5 mt-3" type="button" routerLink="/">Huỷ</button>
         </div>
-
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left">
-          </label>
-          <img [src]="imgSrc" width="100px" height="100px" (click)="fileUploader.click()">
-        </div>
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left" for="image">
-            Ảnh Cá Nhân <span class="red_asterisk">*</span>:
-          </label>
-          <input class="col-6 form-control float-left" type="file" accept="image/*" #fileUploader
-                 id="avatarUrl" formControlName="img" (change)="showPreview($event)">
-          <input class="col-6 form-control float-left" type="file" accept="image/*" #fileUploader
-                 id="image" formControlName="avatarUrl">
-        </div>
-
-        <div class="item" style="clear: both">
-          <label class="col-2 float-left">
-          </label>
-          <p
-            *ngIf="formAddNewCustomer.get('img').hasError('required') && formAddNewCustomer.get('img').touched"
-            class="text-danger">Vui lòng chọn hình ảnh</p>
-        </div>
-        <div class="btn-block">
-          <button type="submit" class="btn btn-warning" [disabled]="formAddNewCustomer.invalid">Lưu</button>
-          <button type="button" (click)="onReset()" class="btn btn-danger ml-3">Nhập lại</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
+

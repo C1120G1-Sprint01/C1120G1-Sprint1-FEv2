@@ -9,8 +9,10 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {environment} from '../environments/environment';
 import {MainModule} from './module/main/main.module';
 import {SecurityModule} from './module/security/security.module';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AdminModule} from "./module/admin/admin.module";
 import {DatePipe} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -35,8 +37,10 @@ import {ChartsModule} from "ng2-charts";
     HttpClientModule,
     MainModule,
     SecurityModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    NgbModule,
+    AdminModule,
     RouterModule,
     MatDialogModule,
     MatFormFieldModule,
