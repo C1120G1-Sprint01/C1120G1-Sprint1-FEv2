@@ -34,21 +34,20 @@ import {CreatePostComponent} from "./create-post/create-post.component";
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  exports: [
-    MainHeaderComponent,
-    MainFooterComponent,
-    MainChatComponent,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    EmojiModule,
-    PickerModule,
-    MainChatComponent,
-  ],
+    exports: [
+        MainHeaderComponent,
+        MainFooterComponent,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        EmojiModule,
+        PickerModule,
+        MainChatComponent,
+    ],
 })
 export class MainModule {
 }

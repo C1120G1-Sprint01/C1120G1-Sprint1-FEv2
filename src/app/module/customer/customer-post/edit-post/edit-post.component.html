@@ -214,8 +214,8 @@
                 <td>Ảnh</td>
                 <td>
                   <div class="custom-file">
-                    <input type="file" class="form-control-file pb-1" (change)="showPreview($event)">
-                    <img *ngFor="let img of images" src="{{img.url}}" width="50px" height="50px"
+                    <input type="file" class="form-control-file pb-1" (change)="importImages($event)" multiple>
+                    <img *ngFor="let img of imageList" src="{{img.url}}" width="50px" height="50px"
                       class="img-thumbnail rounded mr-1" alt="..." (click)="openImage(img.url)">
                   </div>
                 </td>

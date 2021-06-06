@@ -50,6 +50,10 @@ export class ServicePostService {
     return this.httpClient.get<any>(this.API_BASE_URL + '/listDetail/' + postId, this.httpOptions);
   }
 
+  searchByTitle(titles: string): Observable<any> {
+    return this.httpClient.get<any>(this.API_BASE_URL + '/listDetail/searchByTitle?title=' + titles, this.httpOptions);
+  }
+
   getPostApproveByIndex(postId: number): Observable<any> {
     return this.httpClient.get<any>(this.API_BASE_URL + '/listApprove/' + postId, this.httpOptions);
   }
