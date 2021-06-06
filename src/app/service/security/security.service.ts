@@ -42,4 +42,8 @@ export class SecurityService {
     console.log("New pw : " + newPw);
     return this.http.get<void>(API_URL + 'setNewPw/' + email + '/' + newPw);
   }
+
+  loginGoogle():Observable<any> {
+    return this.http.get<any>(API_URL + 'loginGoogle');
+  }
 }

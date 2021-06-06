@@ -5,6 +5,7 @@ import {TokenStorageService} from "../../../service/security/token-storage.servi
 import {Router} from "@angular/router";
 import {AuthLogin} from "../../../model/AuthLogin";
 import {MainHeaderComponent} from "../../main/main-layout/main-header/main-header.component";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
               private securityService:SecurityService,
               private tokenStorageService:TokenStorageService,
               private router:Router,
-              private headerComponent:MainHeaderComponent)
+              private headerComponent:MainHeaderComponent,
+              private appComponent:AppComponent)
   { }
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
         this.role = this.tokenStorageService.getUser().authorities[0].authority;
         this.form.reset();
         console.log("Login Success");
+        this.appComponent.ngOnInit().then();
         this.headerComponent.ngOnInit();
         this.router.navigateByUrl("/"); //index
 
