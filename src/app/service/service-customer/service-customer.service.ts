@@ -51,4 +51,11 @@ export class ServiceCustomerService {
   public searchPostByName(posterName: string): Observable<any> {
     return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName );
   }
+
+
+  getUserStatistic(startDate: string, endDate: string): Observable<any> {
+    console.log(startDate + endDate);
+    return this.httpClient.get(this.API_URL + 'statistic' + '?startDate=' + startDate + '&endDate=' + endDate);
+  }
+
 }
