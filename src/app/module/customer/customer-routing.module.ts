@@ -17,12 +17,13 @@ const routes: Routes = [
       {path: 'show-info', component: ShowInfoComponent},
       {path: 'edit', component: EditInfoComponent},
       {path: 'inbox', component: InboxComponent},
+      {path: 'inbox/:id', component: InboxComponent},
       {path: 'change-password', component: ChangePasswordComponent},
       {path: 'posts', component: ListPostComponent},
       {path: 'posts/edit/:id', component: EditPostComponent},
       {path: 'posts/delete/:id', component: DeletePostComponent},
       {path: '**', redirectTo: 'show-info', pathMatch: 'full'},
-      {path: '/', redirectTo: 'show-info', pathMatch: 'full'}
+      {path: '', redirectTo: 'show-info', pathMatch: 'full'}
     ]
   }
 ];

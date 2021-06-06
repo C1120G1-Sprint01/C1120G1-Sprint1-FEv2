@@ -1,107 +1,99 @@
-<div>
-    <div style="margin: 26px; width: 100%">
-      <div class="table-header">
-        <p class="title">Danh Sách Thành Viên Trong Hệ Thống</p>
+<div id="listUserId">
+  <div style="width: 100%">
+    <div class="table-header">
+      <p class="text-center text-uppercase title">Danh Sách Thành Viên Trong Hệ Thống</p>
+    </div>
+    <div class="row p-0 m-0">
+      <div class="col-3">
+        <a href="" class="btn btn-success addUser" [routerLink]="['/admin/users/create']">
+          <i class="fas fa-plus"></i>
+          <span>Thêm mới thành viên</span>
+        </a>
       </div>
-      <div class="row">
-        <div class="col-3">
-          <a href="" class="btn btn-success addUser" [routerLink]="['/admin/users/create']">
-            <i class="fas fa-plus"></i>
-            <span>Thêm mới thành viên</span>
+      <div class="col-5"></div>
+      <div class="col-4 float-right d-inline-flex">
+        <input type="text" [(ngModel)]="keySearch"
+               (keyup.enter)="searchEnter()"
+               placeholder="Nhập thông tin mà bạn muốn tìm kiếm "
+               class="form-control rounded-pill inputSearch" style="width: 80%">
+        <button class="btn btnSearch"
+                (click)="search()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <table class="table table-hover" matSort (matSortChange)="sortData($event)">
+      <thead class="theadTable">
+      <th>#</th>
+      <th mat-sort-header="name">
+        Tên Thành Viên&nbsp;
+        <i class="fas fa-sort-alpha-up"></i>
+      </th>
+<!--      <th mat-sort-header="username">-->
+<!--        Tên Đăng Nhập-->
+<!--        <i class="fas fa-sort-alpha-up"></i>-->
+<!--      </th>-->
+      <th mat-sort-header="email">Email&nbsp;
+        <i class="fas fa-sort-alpha-up"></i>
+      </th>
+      <th mat-sort-header="phone">Phone&nbsp;
+        <i class="fas fa-sort-numeric-up"></i>
+      </th>
+      <th mat-sort-header="address">Địa chỉ&nbsp;
+        <i class="fas fa-sort-alpha-up"></i>
+      </th>
+      <th>Các Tuỳ Chọn</th>
+      </thead>
+      <tbody>
+      <tr class="inputTable"
+          *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{user.name}}</td>
+<!--        <td>{{user.account.username}}</td>-->
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>
+          <span>{{user.ward.wardName}}</span>,
+          <span>{{user.ward.district.districtName}}</span>,
+          <span>{{user.ward.district.province.provinceName}}</span>
+        </td>
+        <td>
+          <a [routerLink]="['edit', user.userId]">
+            <button class="editButton btn btn-warning"><i class="far fa-edit"></i></button>
           </a>
-        </div>
-        <div class="col-6"></div>
-        <div class="col-3 float-right d-inline-flex">
-          <input type="text" [(ngModel)]="keySearch"   placeholder="Input Name or Id User To Find" class="form-control rounded-pill inputSearch" style="width: 80%">
-          <button class="btn btnSearch" (keydown)="onKeyDown($event)" (click)="search(0)" ><i class="fas fa-search"></i></button>
-        </div>
-      </div>
-      <table class="table table-hover">
-        <thead class="theadTable">
-        <th>#</th>
-        <th>Id</th>
-        <th>
-          <i class="fas fa-sort" (click)="onSortingChange('name')"></i>
-          Tên Thành Viên
-        </th>
-        <th (click)="onSortingChange('username')">Tên Đăng Nhập</th>
-        <th (click)="onSortingChange('email')">Email</th>
-        <th (click)="onSortingChange('phone')">Phone</th>
-        <th>Các Tuỳ Chọn</th>
-        </thead>
-        <tbody>
-        <tr class="inputTable" *ngFor="let user of users; let i = index">
-          <td>{{ i+1 }}</td>
-          <td>{{user.userId}}</td>
-          <td>{{user.name}}</td>
-          <td>{{user.account.username}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.phone}}</td>
-          <td>
-            <a [routerLink]="['edit', user.userId]">
-              <button class="editButton btn btn-warning"><i class="far fa-edit"></i></button>
-            </a>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="deleteId = user.userId; deleteName = user.name"><i class="far fa-trash-alt"></i></button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header flex-column">
-              <div class="icon-box">
-              </div>
-              <h4 class="modal-title w-100">Are you sure?</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#exampleModal"
+                  (click)="deleteId = user.userId; deleteName = user.name"><i class="far fa-trash-alt"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header flex-column">
+            <div class="icon-box">
             </div>
-            <div class="modal-body">
-              <app-delete-user [deleteId]="deleteId" [deleteName]="deleteName" (deleteComplete)="deleteSuccess()"></app-delete-user>
-            </div>
+            <h4 class="modal-title w-100">Are you sure?</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <app-delete-user [deleteId]="deleteId" [deleteName]="deleteName"
+                             (deleteComplete)="deleteSuccess()"></app-delete-user>
           </div>
         </div>
       </div>
-      <!-- End modal -->
-      <!-- pagination -->
-<!--      <div>-->
-<!--        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
-<!--      </div>-->
-      <div class="col-12">
-        <nav aria-label="Page navigation example" class="float-right">
-          <ul class="pagination">
-            <li class="page-item" (click)="onFirst()" [ngClass]="pageClicked==0?'disabled':''">
-              <a class="page-link">Đầu</a>
-            </li>
-            <li class="page-item" (click)="onPrevious()" [ngClass]="pageClicked==0?'disabled':''">
-              <a class="page-link">Sau</a>
-            </li>
-            <li *ngIf="pageClicked != 0" class="page-item" (click)="onSubmit(pages[pageClicked-1])">
-              <a class="page-link">{{pageClicked}}</a>
-            </li>
-            <li [ngClass]="(pageClicked == pages[pageClicked]) ? 'active' : ''" class="page-item"
-                (click)="onSubmit(pages[pageClicked])">
-              <a class="page-link">{{pageClicked + 1}}</a>
-            </li>
-            <li *ngIf="pageClicked < pages.length -1" class="page-item" (click)="onSubmit(pages[pageClicked+1])">
-              <a class="page-link">{{pageClicked + 2}}</a>
-            </li>
-            <li *ngIf="pageClicked < pages.length -2" class="page-item">
-              <a class="page-link">...</a>
-            </li>
-            <li *ngIf="pageClicked < pages.length-2" class="page-item" (click)="onLast()">
-              <a class="page-link">{{pages[pages.length - 1] + 1}}</a>
-            </li>
-            <li class="page-item" (click)="onNext()" [ngClass]="pageClicked==totalPages-1?'disabled':''">
-              <a class="page-link">Trước</a>
-            </li>
-            <li class="page-item" (click)="onLast()" [ngClass]="pageClicked==totalPages-1?'disabled':''"><a
-              class="page-link">Cuối</a></li>
-          </ul>
-        </nav>
-      </div>
-      <!-- end pagination -->
     </div>
+    <!-- End modal -->
+    <!-- pagination -->
+
+
+    <!--      *ngIf="lengthListBanner !== 0"-->
+
+    <pagination-controls maxSize="3" nextLabel="Sau" previousLabel="Trước"
+                         (pageChange)="page = $event"></pagination-controls>
+
+
+
   </div>
-
-
+</div>
