@@ -117,4 +117,8 @@ export class ServicePostService {
   deleteByIdPost(deleteId: number): Observable<Post> {
     return this.httpClient.delete<Post>(this.API_BASE_URL + '/list/' + deleteId);
   }
+
+  searchPostByTitle(title: string): Observable<Post> {
+    return this.httpClient.get<Post>(this.API_BASE_URL+ "/search/title?" + 'keySearch=' + title)
+  }
 }

@@ -22,7 +22,7 @@ import {MainModule} from "../../main/main.module";
 import { PostListAdminComponent } from './post-list-admin/post-list-admin.component';
 import { PostDeleteAdminComponent } from './post-delete-admin/post-delete-admin.component';
 import {HttpClientModule} from "@angular/common/http";
-import {IvyCarouselModule} from "angular-responsive-carousel";
+// import {IvyCarouselModule} from "angular-responsive-carousel";
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import {IvyCarouselModule} from "angular-responsive-carousel";
     RouterModule,
     ReactiveFormsModule,
     MainModule,
-    IvyCarouselModule,
+    // IvyCarouselModule,
   ]
 })
 export class AdminPostModule {
