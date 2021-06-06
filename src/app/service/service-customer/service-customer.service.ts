@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Post} from 'src/app/model/Post';
-import { PostDTO } from 'src/app/model/PostDTO';
+import {PostDTO} from 'src/app/model/PostDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,9 @@ export class ServiceCustomerService {
       }),
       'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      'Access-Control-Allow-Credentials': 'true'
-    };
+      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe',
+      'Access-Control-Allow-Credentials': "true"
+    }
   }
 
   findAllPostByUsername(page: number, username: string, statusId): Observable<Post[]> {
@@ -47,8 +48,23 @@ export class ServiceCustomerService {
     return this.httpClient.post<void>(`${this.API_URL_LIST}/createPost`, {post, username});
   }
 
-  public searchPostByName(posterName: string): Observable<any> {
+  // savePost(username: string, post: Post): Observable<any> {
+  //   return this.httpClient.post<any>(this.API_URL_LIST + "/createPost/" + username , post, this.httpOptions);
+  // }
+
+  search(keyword: string, category: string, province: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(
+      this.API_URL_LIST + "/search/" + keyword + "/" + category + "/" + province + "?page=" + page, this.httpOptions
+    );
+  }
+
+  searchPostByName(posterName: string): Observable<any> {
     return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName);
+  }
+
+  getUserStatistic(startDate: string, endDate: string): Observable<any> {
+    console.log(startDate + endDate);
+    return this.httpClient.get(this.API_URL + 'statistic' + '?startDate=' + startDate + '&endDate=' + endDate);
   }
 
 }

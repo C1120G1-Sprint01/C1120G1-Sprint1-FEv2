@@ -21,7 +21,6 @@ import {CommonUtilService} from "../../../service/common-util/common-util.servic
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
-
   form: FormGroup;
   provinces: Province[] = [];
   districts: District[] = [];
@@ -63,22 +62,52 @@ export class CreatePostComponent implements OnInit {
 
   formInit() {
     this.form = this.formBuilder.group({
-      posterName: ["Hoang Tran", [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
-      phone: ["0123456789", [Validators.required, Validators.pattern('^[\\d]{10,11}$')]],
-      email: ["hoang@gmail.com", [Validators.required, Validators.pattern('^([a-zA-Z0-9]+-*_*.*)+\\@(gmail|yahoo)\\.com$')]],
+      posterName: ["", [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(45)]],
+      phone: ["", [Validators.required, Validators.pattern('^0[\\d]{9,10}$')]],
+      email: ["", [Validators.required,
+        Validators.pattern('^([a-zA-Z0-9]+-*_*.*)+\\@(gmail|yahoo)\\.com$'),
+        Validators.maxLength(253)
+      ]],
       ward: ["", [Validators.required]],
       district: [""],
       province: [""],
       category: [""],
       childCategory: ["", [Validators.required]],
       postType: ["true", [Validators.required]],
-      title: ["Bán xe", [Validators.required]],
-      description: ["Bán xe", [Validators.required]],
-      price: [10000000, [Validators.pattern('^[\\d]+$')]],
+      title: ["", [Validators.required, Validators.maxLength(80)]],
+      description: ["", [Validators.required, Validators.maxLength(500)]],
+      price: ["", [Validators.pattern('^[\\d]+$'), Validators.maxLength(12)]],
       file: [""],
       imageSet: [""]
     });
   }
+
+  /** ThuanNN */
+  // formInit() {
+  //   this.form = this.formBuilder.group({
+  //     postId: [''],
+  //     posterName: ["", [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(45)]],
+  //     phone: ["", [Validators.required, Validators.pattern('^0[\\d]{9,10}$')]],
+  //     email: ["", [Validators.required,
+  //       Validators.pattern('^([a-zA-Z0-9]+-*_*.*)+\\@(gmail|yahoo)\\.com$'),
+  //       Validators.maxLength(253)
+  //     ]],
+  //     ward: ["", [Validators.required]],
+  //     district: [""],
+  //     province: [""],
+  //     category: [""],
+  //     childCategory: ["", [Validators.required]],
+  //     postType: [true, [Validators.required]],
+  //     title: ["", [Validators.required, Validators.maxLength(80)]],
+  //     description: ["", [Validators.required, Validators.maxLength(500)]],
+  //     postDateTime: [""],
+  //     price: ["", [Validators.pattern('^[\\d]+$'), Validators.maxLength(12)]],
+  //     enabled: [true],
+  //     status: [this.status],
+  //     user: [this.user],
+  //     imageSet: [this.imageSet]
+  //   });
+  // }
 
   onFileSelected(event: any) {
     if (event.target.files && event.target.files[0]) {

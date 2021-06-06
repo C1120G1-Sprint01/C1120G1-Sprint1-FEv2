@@ -126,4 +126,3 @@ export class ServicePostService {
     return this.httpClient.delete<Post>(this.API_BASE_URL + '/list/' + deleteId);
   }
 }
-

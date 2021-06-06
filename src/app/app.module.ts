@@ -20,11 +20,14 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonModule} from "@angular/material/button";
+import {StatisticsCustomerComponent} from "./module/customer/customer-manager/statistics-customer/statistics-customer.component";
+import {ChartsModule} from "ng2-charts";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+    declarations: [
+        AppComponent,
+        StatisticsCustomerComponent,
+    ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
@@ -44,6 +47,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatButtonModule,
     MatInputModule,
     MatSnackBarModule,
+    ChartsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
