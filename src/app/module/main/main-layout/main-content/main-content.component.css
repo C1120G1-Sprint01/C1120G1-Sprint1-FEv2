@@ -197,3 +197,6 @@ input::-webkit-input-placeholder {
     margin-left: 50px;
   }
 }
+.col-md-2{
+  padding: 0;
+}

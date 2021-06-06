@@ -47,9 +47,12 @@ export class EditChildCategoryComponent implements OnInit {
     this.active.paramMap.subscribe((data: ParamMap) => {
       this.childCategoryId = data.get('id');
       this.serviceAdminService.getChildCategoryById(this.childCategoryId).subscribe((data: ChildCategory) => {
-        this.childCategoryEdit = data;
-        console.log(data);
-        this.formEdit.patchValue(this.childCategoryEdit);
+        if (data === null) {
+          this.toast.warning("Dữ liệu không có","Thông báo")
+        } else {
+          this.childCategoryEdit = data;
+          this.formEdit.patchValue(this.childCategoryEdit);
+        }
       });
     });
   }
