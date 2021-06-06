@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../service/service-post/service-post.service';
+import {MainContentComponent} from "../main-layout/main-content/main-content.component";
 import {ActivatedRoute} from "@angular/router";
 import {DateUtilService} from "../../../service/date-util/date-util.service";
+import {Post} from "../../../model/Post";
 
 @Component({
   selector: 'app-list-post',
@@ -9,20 +11,32 @@ import {DateUtilService} from "../../../service/date-util/date-util.service";
   styleUrls: ['./list-post.component.css']
 })
 export class ListPostComponent implements OnInit {
-
+  listPost: any;
+  listTime: string[] = [];
+  listPostData: Post[] = [];
   defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
     + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
 
-  posts: any;
-  listTime: string[] = [];
-
-  constructor(private postService: ServicePostService,
-              private activatedRoute: ActivatedRoute,
-              private dateUtilService: DateUtilService) {
+  constructor(
+    private postService: ServicePostService,
+    private activatedRoute: ActivatedRoute,
+    private mainContentComponent: MainContentComponent,
+    private dateUtilService: DateUtilService
+  ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.onList(0);
+    this.mainContentComponent.ngOnInit();
+  }
+
+  initData(data: any) {
+    this.listPost = data.content;
+    for (let post of this.listPost) {
+      this.listTime.push(this.dateUtilService.getDiffToNow(post.postDateTime));
+    }
+    // console.log(this.listTime);
+    this.listPostData = this.listPost;
   }
 
   onList(page: number) {
@@ -51,13 +65,4 @@ export class ListPostComponent implements OnInit {
       });
     }
   }
-
-  initData(data: any) {
-    this.posts = data;
-    for (let post of this.posts.content) {
-      this.listTime.push(this.dateUtilService.getDiffToNow(post.postDateTime));
-    }
-    console.log(this.listTime);
-  }
-
 }

@@ -15,7 +15,6 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
-
   form: FormGroup;
   province;
   district;
@@ -75,16 +74,22 @@ export class CreatePostComponent implements OnInit {
   formInit() {
     this.form = this.formBuilder.group({
       postId: [''],
-      posterName: ['Thuan', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$')]],
-      phone: ['0905366554', [Validators.required, Validators.pattern('^[\\d]{10,11}$')]],
-      email: ['hoang@gmail.com', [Validators.required, Validators.pattern('^([a-zA-Z0-9]+-*_*)+\\@(gmail|yahoo)\\.com$')]],
-      ward: ['', [Validators.required]],
-      childCategory: ['', [Validators.required]],
+      posterName: ["", [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(45)]],
+      phone: ["", [Validators.required, Validators.pattern('^0[\\d]{9,10}$')]],
+      email: ["", [Validators.required,
+        Validators.pattern('^([a-zA-Z0-9]+-*_*.*)+\\@(gmail|yahoo)\\.com$'),
+        Validators.maxLength(253)
+      ]],
+      ward: ["", [Validators.required]],
+      district: [""],
+      province: [""],
+      category: [""],
+      childCategory: ["", [Validators.required]],
       postType: [true, [Validators.required]],
-      title: ['Mua xe', [Validators.required]],
-      description: ['Mua 5 cai xe ok?', [Validators.required]],
-      postDateTime: [''],
-      price: [16000, [Validators.pattern('^[\\d]+$')]],
+      title: ["", [Validators.required, Validators.maxLength(80)]],
+      description: ["", [Validators.required, Validators.maxLength(500)]],
+      postDateTime: [""],
+      price: ["", [Validators.pattern('^[\\d]+$'), Validators.maxLength(12)]],
       enabled: [true],
       status: [this.status],
       user: [this.user],
@@ -93,19 +98,14 @@ export class CreatePostComponent implements OnInit {
   }
 
   submitForm(form: FormGroup) {
-    console.log('Value : abc');
-    this.serviceCustomer.savePost(form.value).subscribe(data => {
-      this.router.navigateByUrl('/');
-      this.toastr.success('Đăng tin thành công!', 'Thành công!');
-    }, error => {
-      this.toastr.error('Đã có lỗi xảy ra!', 'Lỗi!');
-      console.log('Error : ' + error);
-    });
-  }
-
-  cancelUpdate() {
-    this.router.navigateByUrl('/homepage');
-    this.toastr.warning('Huỷ đăng tin mới thành công!', 'Hủy đăng tin mới!');
+    // console.log('Value : abc');
+    // this.serviceCustomer.savePost(form.value).subscribe(data => {
+    //   this.router.navigateByUrl('/');
+    //   this.toastr.success('Đăng tin thành công!', 'Thành công!');
+    // }, error => {
+    //   this.toastr.error('Đã có lỗi xảy ra!', 'Lỗi!');
+    //   console.log('Error : ' + error);
+    // });
   }
 
   onChangeProvince() {
@@ -150,4 +150,8 @@ export class CreatePostComponent implements OnInit {
     console.log('I remove : ' + this.i);
   }
 
+  cancelUpdate() {
+    this.router.navigateByUrl("/");
+    this.toastr.warning("Huỷ đăng tin mới thành công!", "Hủy đăng tin mới!");
+  }
 }
