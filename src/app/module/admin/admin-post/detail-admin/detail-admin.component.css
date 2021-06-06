@@ -8,3 +8,11 @@ body{
 .blue{
   color: #027FFF;
 }
+
+.carousel-item {
+  background: grey;
+}
+.carousel-item img {
+  max-height: 600px;
+  object-fit: contain;
+}
