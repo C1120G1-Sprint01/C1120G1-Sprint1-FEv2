@@ -15449,7 +15449,6 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .wrapper {
-  position: relative;
   top: 0;
   height: 100%;
 }

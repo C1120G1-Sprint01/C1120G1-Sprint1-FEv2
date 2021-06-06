@@ -1,10 +1,90 @@
-.nav-item-lg {
+@media screen and (max-width: 767px){
+  #navBtn, #logBtn {
+    display: none;
+  }
+}
+@media screen and (max-width: 832px){
+  .icon-user {
+    display: none;
+  }
+}
+.header {
+  background-color: #b4d5fa;
+  color: black;
+}
+.header a {
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}
+#posterName {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+#posterName:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+#posterName:-moz-focusring {
+  color: transparent;
+  border: none;
+  text-shadow: 0 0 0;
+}
+input::-webkit-input-placeholder {
+  font-size: 15px;
+}
+.dropdown {
   cursor: pointer;
+  transition: all 0.5s ease-in;
 }
-.showUsername {
-  color: white;
-  padding-top: 7px;
+.dropdown:hover {
+   transition: all 0.5s ease-out;
 }
-.nav-link {
-  color: white;
+.dropdown-menu ul {
+  width: 12.5rem;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dropdown-menu ul li {
+  line-height: 2.4rem;
+  padding-left: 0.6rem;
+}
+.dropdown-menu ul li:first-child, li:last-child {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.dropdown-menu ul li:hover {
+  background-color: #f0f0f0;
+}
+.dropdown-menu ul li:first-child:hover {
+  background-color: white;
+}
+#profile {
+  border-radius: 2px;
+  margin-top: 1.5rem;
+  transition: all 0.5s ease-in-out;
+}
+.name-acc {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #0D5DB6;
+}
+.col-lg-6 .btn:focus {
+  box-shadow: none;
+}
+.circle-acc, .icon-user {
+  border-radius: 50%;
+}
+.icon-user {
+  margin-bottom: 0.5rem;
+  margin-top: -0.5rem;
+}
+.btnAcc {
+  cursor: none;
+}
+.sticky-top {
+  z-index: 100;
 }

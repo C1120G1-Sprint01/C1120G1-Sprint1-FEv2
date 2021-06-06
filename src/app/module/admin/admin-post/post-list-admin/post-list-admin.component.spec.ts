@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditBannerManagerComponent } from './edit-banner-manager.component';
+import { PostListAdminComponent } from './post-list-admin.component';
 
-describe('EditBannerManagerComponent', () => {
-  let component: EditBannerManagerComponent;
-  let fixture: ComponentFixture<EditBannerManagerComponent>;
+describe('PostListAdminComponent', () => {
+  let component: PostListAdminComponent;
+  let fixture: ComponentFixture<PostListAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditBannerManagerComponent ]
+      declarations: [ PostListAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditBannerManagerComponent);
+    fixture = TestBed.createComponent(PostListAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

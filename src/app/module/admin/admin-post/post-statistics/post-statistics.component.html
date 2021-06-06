@@ -1,1 +1,45 @@
-<p>post-statistics works!</p>
+
+<div class="container">
+  <br>
+  <h2 style="text-align: center">QUẢN LÝ BÀI ĐĂNG </h2>
+  <br>
+  <div class="row">
+    <div class="row">
+      <table class="table table-light">
+        <thead>
+        <tr>
+          <th>Ngày Bắt Đầu</th>
+          <th>Ngày Kết Thúc</th>
+          <th>Chức Năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+<!--          <input type="date" data-date="" data-date-format="dd/MM/yyyy" value="12/12/2021" class="form-control" [(ngModel)]="startDate">-->
+          <td><input type="date" placeholder="dd/MM/yyyy" class="form-control" [(ngModel)]="startDate"></td>
+          <td><input type="date" class="form-control" [(ngModel)]="endDate">
+          <td>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Thống Kê</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-10 text-center">
+      <h2 class="text-center">Biểu Đồ Thống Kê Số Lượng Bài Đăng</h2>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [colors]="barChartColors"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+
+
+

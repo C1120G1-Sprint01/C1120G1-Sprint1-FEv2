@@ -24,34 +24,35 @@ export class RegisterComponent implements OnInit {
   isMessage2: any;
   isMessage3: any;
   isMessage1: any;
-  imgSrc: any;
+  imgSrc: null;
   public user: User[];
   public wards: Ward[];
   public provinces: Province[];
   public districts: District[];
   id: number = 0;
   loading = false;
+  messageImageError: string = "";
 
 
   constructor(private userCustomerService: UserCustomerService,
               private router: Router,
               private storage: AngularFireStorage,
               private formBuilder: FormBuilder,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.userCustomerService.getAllProvince().subscribe(data => {
       this.provinces = data;
-      console.log(data);
-    })
-
+    });
     this.formAddNewCustomer = this.formBuilder.group({
-      name: ['', [Validators.required,Validators.pattern('^[A-Za-z\\s]{6,}$')]],
+      name: ['', [Validators.required, Validators.pattern(/^(\s*)([\p{Lu}]|[\p{Ll}]){2,}((\s*)(([\p{Lu}]|[\p{Ll}]){2,}))+(\s*)$/u),
+                  Validators.minLength(6), Validators.maxLength(45)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^\\d{10,11}$')]],
-      ward: [''],
-      province: [''],
-      district: [''],
+      ward: ['', [Validators.required]],
+      province: ['', [Validators.required]],
+      district: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
       confirmPassword: ['', [Validators.required]],
@@ -68,24 +69,21 @@ export class RegisterComponent implements OnInit {
     this.isMessage3 = false;
     if (this.formAddNewCustomer.valid) {
       if (this.formAddNewCustomer.value.password === this.formAddNewCustomer.value.confirmPassword) {
-        const  filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
+        const filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
         const fileRef = this.storage.ref(filePath);
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               formRegister.img = url;
-              console.log(url);
-              console.log(this.formAddNewCustomer);
               this.userCustomerService.createUser(formRegister).subscribe(data => {
                 this.router.navigateByUrl('');
-                this.toastr.success( "Them moi thanh cong", "Notification",{
+                this.toastr.success("Them moi thanh cong", "Notification", {
                   timeOut: 1000,
                   progressBar: true,
                   progressAnimation: 'increasing'
                 });
               }, error => {
                 if (error.status === 400) {
-                  console.log(error.error);
                   this.listError = error.error;
                 } else if (error.status === 404) {
                   this.isMessage = true;
@@ -120,17 +118,39 @@ export class RegisterComponent implements OnInit {
   }
 
   //    upload anh fire base
-  showPreview(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => this.imgSrc = e.target.result;
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImg = event.target.files[0];
+  showPreview(image: any) {
+    // if (event.target.files && event.target.files[0]) {
+    //   const reader = new FileReader();
+    //   reader.onload = (e: any) => this.imgSrc = e.target.result;
+    //   reader.readAsDataURL(event.target.files[0]);
+    //   this.selectedImg = event.target.files[0];
+    // } else {
+    //   this.imgSrc = 'src/assets/img/avatar-2.png';
+    //   this.selectedImg = null;
+    // }
+
+    if (image.target.files && image.target.files[0]) {
+      const file = image.target.files[0].name;
+      const path = file.substring(file.length - 3).toLowerCase();
+      const path1 = file.substring(file.length - 4).toLowerCase();
+      if (path === 'png' || path === 'jpg' || path1 === 'jpeg') {
+        const reader = new FileReader();
+        reader.onload = (e: any) => this.imgSrc = e.target.result;
+        reader.readAsDataURL(image.target.files[0]);
+        this.selectedImg = image.target.files[0];
+        this.messageImageError = '';
+      } else {
+        this.imgSrc = null;
+        this.messageImageError = '*Tệp ảnh bạn chọn không hợp lệ!';
+        this.selectedImg = null;
+      }
     } else {
-      this.imgSrc = 'src/assets/img/avatar-2.png';
+      this.imgSrc = null;
       this.selectedImg = null;
     }
   }
+
+
   compareProvince(province1: Province, province2: Province): boolean {
     return province1 && province2 ? province1.provinceId === province2.provinceId : province1 === province2
   }
@@ -143,13 +163,10 @@ export class RegisterComponent implements OnInit {
     return ward1 && ward2 ? ward1.wardId === ward2.wardId : ward1 === ward2
   }
 
-  onchangeProvince(event) {
-    let userProfile = this.formAddNewCustomer.controls['province'].value;
-    const provinceId = userProfile.provinceId;
+  onchangeProvince(provinceId) {
     if (provinceId) {
       this.userCustomerService.getAllDistrictByProvinceId(provinceId).subscribe(data => {
         this.districts = data;
-        console.log(data);
         this.wards = null;
       })
     } else {
@@ -158,17 +175,18 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onchangeDistrict(event) {
-    let userInfo = this.formAddNewCustomer.controls['district'].value;
-    const districtId = userInfo.districtId;
+  onchangeDistrict(districtId) {
     if (districtId) {
       this.userCustomerService.getAllWardByDistrictId(districtId).subscribe(data => {
         this.wards = data;
-        console.log(data);
       })
     } else {
       this.wards = null;
     }
   }
 
+  removeImage() {
+    this.imgSrc = null;
+    this.selectedImg = null;
+  }
 }
