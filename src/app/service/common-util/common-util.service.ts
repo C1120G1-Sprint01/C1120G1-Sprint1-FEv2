@@ -8,6 +8,11 @@ export class CommonUtilService {
   constructor() {
   }
 
+  /**
+   * Author: ViNTT
+   * Convert a string to slug format
+   * Example: Đồ điện tử => do-dien-tu
+   */
   convertToSlug(str: string) {
     // New way use String.prototype.normalize() of ES6+
     // Convert all to lowercase and remove spaces at beginning and end of string
@@ -48,6 +53,14 @@ export class CommonUtilService {
     str = str.replace(/đ/g, 'd');
     str = str.replace(/\s+/g, '-');
     return str; */
+  }
+
+  /**
+   * Author: ViNTT
+   * Validate if file is image type
+   */
+  validateImageFile(file: File): boolean {
+    return !!file.type.match("^image/");
   }
 
 }

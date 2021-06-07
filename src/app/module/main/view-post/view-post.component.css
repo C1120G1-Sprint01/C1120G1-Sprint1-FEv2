@@ -47,6 +47,30 @@
   padding-left: 30px;
 }
 
+.carousel-item {
+  background: grey;
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* 8:5 Aspect Ratio */
+}
+
+.carousel-item img {
+  position:  absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+  filter: invert(100%);
+}
+
 .carousel-caption {
   left: 0;
   right: 0;

@@ -2,17 +2,29 @@
   <div class="card">
     <div class="card-body">
       <p class="title mt-4">Quản lý chuyên mục cha</p>
+      <div class="search row d-flex justify-content-xl-end justify-content-center mb-4 text-center">
+        <div class="col-xl-5 col-md-3">
+          <label>Tên chuyên mục cha</label>
+          <input [(ngModel)]="categoryName" class="form-control" type="text"
+                 placeholder="Tên chuyên mục cha">
+        </div>
+        <div class="col-xl-2 col-4 mt-xl-4 mt-md-3 mt-2 d-xl-flex justify-content-xl-end">
+          <button (click)="getSearch()" class="btn mt-2" style="background-color: #0D5DB6; color: white"><i
+            class="fa fa-search"></i> Tìm kiếm
+          </button>
+        </div>
+      </div>
       <a href="" class="btn btn-success btn-rounded mb-4" routerLink="create" data-toggle="modal"
-         data-target="#modalCreateFatherCategories">Thêm chuyên mục cha <i
-        class="fas fa-plus"></i></a>
+         data-target="#modalCreateFatherCategories"><i
+        class="fas fa-plus"></i> Thêm chuyên mục cha </a>
       <table [hidden]="categoryList === null" class="table table-hover">
         <tr>
-          <th>#</th>
+          <th>STT</th>
           <th>Tên chuyên mục cha</th>
           <th colspan="2" style="text-align: center">Thao tác</th>
         </tr>
-        <tr *ngFor="let item of categoryList| paginate:{ itemsPerPage: 5, currentPage: p } ">
-          <td>{{item.categoryId}}</td>
+        <tr *ngFor="let item of categoryList| paginate:{ itemsPerPage: 5, currentPage: p } ;let i = index">
+          <td>{{i+1}}</td>
           <td>{{item.categoryName}}</td>
           <td style="text-align: center">
             <a [routerLink]="['edit',item.categoryId]"

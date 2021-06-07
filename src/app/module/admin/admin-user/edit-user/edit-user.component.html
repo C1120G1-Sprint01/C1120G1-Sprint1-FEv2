@@ -1,16 +1,21 @@
 <div class="row">
   <div class="col-12 float-right mt-3">
     <div class="table-header">
-      <p class="title">Chỉnh sửa thông tin thành viên</p>
+      <p class="text-center text-uppercase title">Chỉnh sửa thông tin thành viên</p>
     </div>
     <button class="btn btn-success btnback" (click)="backToUserList()">Back To List User</button>
-    <div class="col-12">
+    <div class="col-12 justify-content-center align-items-center">
       <form [formGroup]="rfEditForm" (ngSubmit)="onSubmit()">
         <table class="table table-hover col-8">
           <tbody>
           <tr>
-            <th>Tên Người Dùng <span style="color:red">*</span></th>
-            <td><input type="text" formControlName="name" placeholder="Nhập tên người sử dụng"
+            <th style="width: 40%">
+              <label for="nameUser">Tên Người Dùng&nbsp;</label>
+              <span style="color:red">*</span>
+            </th>
+            <td>
+              <input type="text" formControlName="name" id="nameUser"
+                       placeholder="Nhập tên người sử dụng"
                        class="form-control inputText">
               <p class="errorText" *ngIf="rfEditForm.controls.name.touched && rfEditForm.controls.name.errors?.pattern">
                 Tên người dùng không chứa kí tự đặc biệt</p>
