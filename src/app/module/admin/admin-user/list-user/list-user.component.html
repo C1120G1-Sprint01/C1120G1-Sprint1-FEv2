@@ -46,7 +46,7 @@
       </thead>
       <tbody>
       <tr class="inputTable"
-          *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+          *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{user.name}}</td>
 <!--        <td>{{user.account.username}}</td>-->

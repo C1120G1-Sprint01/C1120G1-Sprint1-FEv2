@@ -16,6 +16,7 @@ export class AdminPageComponent implements OnInit {
   public activeFour = '';
   public activeFive = '';
   public activeSix = '';
+  public activeSeven = '';
 
   ngOnInit(): void {
   }
@@ -27,6 +28,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
+    this.activeSeven = '';
   }
   activeNavOne() {
     this.activeZero = '';
@@ -36,6 +38,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
+    this.activeSeven = '';
   }
   activeNavTwo() {
     this.activeZero = '';
@@ -45,6 +48,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
+    this.activeSeven = '';
   }
   activeNavThree() {
     this.activeZero = '';
@@ -54,6 +58,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = '';
+    this.activeSeven = '';
   }
   activeNavFour() {
     this.activeZero = '';
@@ -63,6 +68,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = 'bg-lightgray';
     this.activeFive = '';
     this.activeSix = '';
+    this.activeSeven = '';
   }activeNavFive() {
     this.activeZero = '';
     this.activeOne = '';
@@ -71,6 +77,7 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = 'bg-lightgray';
     this.activeSix = '';
+    this.activeSeven = '';
   }
   activeNavSix() {
     this.activeZero = '';
@@ -80,5 +87,16 @@ export class AdminPageComponent implements OnInit {
     this.activeFour = '';
     this.activeFive = '';
     this.activeSix = 'bg-lightgray';
+    this.activeSeven = '';
+  }
+  activeNavSeven() {
+    this.activeZero = '';
+    this.activeOne = '';
+    this.activeTwo = '';
+    this.activeThree = '';
+    this.activeFour = '';
+    this.activeFive = '';
+    this.activeSix = '';
+    this.activeSeven = 'bg-lightgray';
   }
 }
