@@ -23,7 +23,7 @@ export class CreateUserComponent implements OnInit {
   isMessage2: any;
   isMessage3: any;
   isMessage1: any;
-  imgSrc: any;
+  imgSrc: string = '../assets/img/avatar-1.png';
   public user: User[];
   public wards: Ward[];
   public provinces: Province[];
@@ -45,7 +45,7 @@ export class CreateUserComponent implements OnInit {
     this.formAddNewCustomer = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\\\{}\\[\\]:;"\'<>,.?\/]+$')]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern("(^(090)\\d{7}$)|(^(091)\\d{7}$)|(^(\\+\\(84\\) 90)\\d{7}$)|(^(\\+\\(84\\) 91)\\d{7}$)")]],
+      phone: ['', [Validators.required, Validators.pattern("^(09)[\\d]{8}$")]],
       ward: ['', [Validators.required]],
       registerDate: [''],
       province: ['', [Validators.required]],
@@ -53,7 +53,7 @@ export class CreateUserComponent implements OnInit {
       username: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/), Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required]],
-      avatarUrl: ['']
+      avatarUrl: ['', [Validators.required]]
     })
   }
 
@@ -71,12 +71,12 @@ export class CreateUserComponent implements OnInit {
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
-              formRegister.img = url;
+              formRegister.avatarUrl = url;
               console.log(url);
               console.log(this.formAddNewCustomer);
               this.serviceAdmin.createUser(formRegister).subscribe(data => {
                 this.router.navigateByUrl('/admin/users');
-                this.toastr.success("Them moi thanh cong", "Thong bao", {
+                this.toastr.success("Thêm mới thành công", "Thông báo", {
                   timeOut: 1000,
                   progressBar: true,
                   progressAnimation: 'increasing'
@@ -99,7 +99,7 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.serviceAdmin.createUser(formRegister).subscribe(data => {
         this.router.navigateByUrl('/admin/users');
-        this.toastr.success("Them moi thanh cong", "Thong Bao", {
+        this.toastr.success("Thêm mới thành công", "Thông báo", {
           timeOut: 1000,
           progressBar: true,
           progressAnimation: 'increasing'
@@ -108,6 +108,7 @@ export class CreateUserComponent implements OnInit {
         if (error.status === 400) {
           console.log(error.error);
           this.listError = error.error;
+          this.toastr.error("Xảy ra lỗi trong quá trình tạo mới!", "Thông báo")
         } else if (error.status === 404) {
           this.isMessage = true;
         }
@@ -117,7 +118,7 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-  //    upload anh fire base
+  //    xem truoc anh fire base
   showPreview(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -125,7 +126,7 @@ export class CreateUserComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImg = event.target.files[0];
     } else {
-      this.imgSrc = 'src/assets/img/avatar-2.png';
+      this.imgSrc = '../assets/img/avatar-1.png';
       this.selectedImg = null;
     }
   }

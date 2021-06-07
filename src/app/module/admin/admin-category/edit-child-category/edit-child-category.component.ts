@@ -38,7 +38,7 @@ export class EditChildCategoryComponent implements OnInit {
 
     this.formEdit = this.fb.group({
       childCategoryId: [''],
-      childCategoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZÁàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      childCategoryName: ['', [Validators.required, Validators.pattern(/^([\p{Lu}]|[\p{Ll}])+(\s([\p{Lu}]|[\p{Ll}])+)*$/u)]],
       // nơi chưa đối tương category cha
       category: [''],
     });
@@ -48,7 +48,7 @@ export class EditChildCategoryComponent implements OnInit {
       this.childCategoryId = data.get('id');
       this.serviceAdminService.getChildCategoryById(this.childCategoryId).subscribe((data: ChildCategory) => {
         if (data === null) {
-          this.toast.warning("Dữ liệu không có","Thông báo")
+          this.toast.warning("Dữ liệu không có", "Thông báo")
         } else {
           this.childCategoryEdit = data;
           this.formEdit.patchValue(this.childCategoryEdit);
@@ -62,11 +62,12 @@ export class EditChildCategoryComponent implements OnInit {
   }
 
   save() {
-    console.log(this.formEdit.getRawValue());
-    //Khi submit thì form sẽ được đưa xuống gồm child_name và thằng category
-    this.serviceAdminService.updateChildCategory(this.childCategoryEdit.childCategoryId,this.formEdit.getRawValue()).subscribe(data => {
+    this.serviceAdminService.updateChildCategory(this.childCategoryEdit.childCategoryId, this.formEdit.getRawValue()).subscribe(data => {
       this.toast.success("Chuyên mục đã được chỉnh sửa");
-      this.router.navigateByUrl('admin/categories/child-categories')
+      this.router.navigateByUrl('admin/categories/child-categories');
+      if (this.childCategoryEdit.childCategoryId === null) {
+        this.toast.warning("Chuyên mục này không có", "Thông báo")
+      }
     })
 
   }

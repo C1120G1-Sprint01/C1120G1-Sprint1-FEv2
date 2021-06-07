@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   isMessage2: any;
   isMessage3: any;
   isMessage1: any;
-  imgSrc: null;
+  imgSrc: string = '../assets/img/avatar-1.png';
   public user: User[];
   public wards: Ward[];
   public provinces: Province[];
@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
   id: number = 0;
   loading = false;
   messageImageError: string = "";
+  checkAccept : boolean =false;
 
 
   constructor(private userCustomerService: UserCustomerService,
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
     });
     this.formAddNewCustomer = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^(\s*)([\p{Lu}]|[\p{Ll}]){2,}((\s*)(([\p{Lu}]|[\p{Ll}]){2,}))+(\s*)$/u),
-                  Validators.minLength(6), Validators.maxLength(45)]],
+        Validators.minLength(6), Validators.maxLength(45)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^\\d{10,11}$')]],
       ward: ['', [Validators.required]],
@@ -119,15 +120,6 @@ export class RegisterComponent implements OnInit {
 
   //    upload anh fire base
   showPreview(image: any) {
-    // if (event.target.files && event.target.files[0]) {
-    //   const reader = new FileReader();
-    //   reader.onload = (e: any) => this.imgSrc = e.target.result;
-    //   reader.readAsDataURL(event.target.files[0]);
-    //   this.selectedImg = event.target.files[0];
-    // } else {
-    //   this.imgSrc = 'src/assets/img/avatar-2.png';
-    //   this.selectedImg = null;
-    // }
 
     if (image.target.files && image.target.files[0]) {
       const file = image.target.files[0].name;
@@ -145,7 +137,7 @@ export class RegisterComponent implements OnInit {
         this.selectedImg = null;
       }
     } else {
-      this.imgSrc = null;
+      this.imgSrc = '../assets/img/avatar-1.png';
       this.selectedImg = null;
     }
   }
@@ -188,5 +180,9 @@ export class RegisterComponent implements OnInit {
   removeImage() {
     this.imgSrc = null;
     this.selectedImg = null;
+  }
+
+  changeAccept() {
+    this.checkAccept = true;
   }
 }

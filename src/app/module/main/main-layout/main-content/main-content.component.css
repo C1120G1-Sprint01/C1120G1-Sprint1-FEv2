@@ -40,6 +40,7 @@ input::-webkit-input-placeholder {
 .menu-left_item:hover {
   border-bottom: #095484 solid 3px;
   transition: 0.3s;
+  background-color: whitesmoke;
 }
 
 .list-group-item:hover {
@@ -53,6 +54,9 @@ input::-webkit-input-placeholder {
 
 .title-text {
   font-size: 20px;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  color: #0D5DB6;
 }
 
 .form-control {
@@ -102,7 +106,6 @@ input::-webkit-input-placeholder {
 
 .overlay .closebtn {
   position: absolute;
-  top: 20px;
   right: 45px;
   font-size: 60px;
 }

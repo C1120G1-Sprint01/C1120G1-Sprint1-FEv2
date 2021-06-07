@@ -1,21 +1,20 @@
 <div class="header sticky-top" id="header">
-<!--  logo + navBtn-->
+  <!--  logo + navBtn-->
   <div class="row m-0 pt-2">
     <div class="col-lg-1"></div>
     <div class="col-lg-10 col-md-12 col-sm-12 col-12">
       <div class="d-block">
         <div class="row m-0 w-100">
-
-<!--          logo-->
+          <!--          logo-->
           <div class="col-lg-2 col-md-3 col-sm-12 col-12 text-center">
-            <a href="http://localhost:4200/">
-              <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2FlogoWeb.png?alt=media&token=0a978d63-e82e-4a0f-920d-67f79f3b9d2b"
-                   alt="logo"
-                   style="max-height: 8vh">
+            <a routerLink="/">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2FlogoWeb.png?alt=media&token=0a978d63-e82e-4a0f-920d-67f79f3b9d2b"
+                alt="logo"
+                style="max-height: 8vh">
             </a>
           </div>
-
-<!--          navBtn-->
+          <!--          navBtn-->
           <div class="col-lg-10 col-md-9 d-inline-flex justify-content-end align-items-center">
             <div id="navBtn">
               <a routerLink="/" class="ml-lg-4 ml-md-3">
@@ -50,44 +49,51 @@
                     <hr style="padding: 0; margin: auto 0">
                     <li>
                       <a routerLink="/customer/show-info">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
-                             width="30" height="30" alt="profile">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
+                          width="30" height="30" alt="profile">
                         <span class="ml-3">Hồ sơ của tôi</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/customer/posts">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpostbox.png?alt=media&token=1899f4ef-789c-4a47-9d26-fef15563ddea"
-                             width="30" height="30" alt="post">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpostbox.png?alt=media&token=1899f4ef-789c-4a47-9d26-fef15563ddea"
+                          width="30" height="30" alt="post">
                         <span class="ml-3">Bài đăng của tôi</span>
                       </a>
                     </li>
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ftransaction-offer.png?alt=media&token=5e106bf1-2bf0-408b-934d-eb8b63fcf18f"
-                           width="30" height="30" alt="transaction">
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ftransaction-offer.png?alt=media&token=5e106bf1-2bf0-408b-934d-eb8b63fcf18f"
+                        width="30" height="30" alt="transaction">
                       <span class="ml-3">Giao dịch của tôi</span>
                     </li>
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Frating.png?alt=media&token=f3f498be-3101-40cc-96dd-e17cb0271fc8"
-                           width="30" height="30" alt="rating">
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Frating.png?alt=media&token=f3f498be-3101-40cc-96dd-e17cb0271fc8"
+                        width="30" height="30" alt="rating">
                       <span class="ml-3">Đánh giá</span>
                     </li>
                     <li>
                       <a routerLink="/customer/change-password">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fshield.png?alt=media&token=18e2435b-9d23-4460-b112-240921416078"
-                             width="30" height="30" alt="password">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fshield.png?alt=media&token=18e2435b-9d23-4460-b112-240921416078"
+                          width="30" height="30" alt="password">
                         <span class="ml-3">Thay đổi mật khẩu</span>
                       </a>
                     </li>
                     <li>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fhelp.png?alt=media&token=c3b56dbd-a9cc-43f2-8de7-0e2d786be99b"
-                           width="30" height="30" alt="help">
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fhelp.png?alt=media&token=c3b56dbd-a9cc-43f2-8de7-0e2d786be99b"
+                        width="30" height="30" alt="help">
                       <span class="ml-3">Trợ giúp</span>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
                     <li (click)="logout()">
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Flog-out.png?alt=media&token=ba90a9c3-b548-4d37-a21b-261a27f459dd"
-                           width="30" height="30" alt="sign-out">
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Flog-out.png?alt=media&token=ba90a9c3-b548-4d37-a21b-261a27f459dd"
+                        width="30" height="30" alt="sign-out">
                       <span class="ml-3">Đăng xuất</span>
                     </li>
                   </ul>
@@ -102,57 +108,65 @@
                     <hr style="padding: 0; margin: auto 0">
                     <li>
                       <a routerLink="/customer/show-info">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
-                             width="30" height="30" alt="profile">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-information.png?alt=media&token=aa0e017d-1080-4eba-ab8f-b4d8f81e6b13"
+                          width="30" height="30" alt="profile">
                         <span class="ml-3">Hồ sơ Admin</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/posts/list-detail">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-manager.png?alt=media&token=d211d001-e087-401e-9106-72754d91c395"
-                             width="30" height="30" alt="post">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-manager.png?alt=media&token=d211d001-e087-401e-9106-72754d91c395"
+                          width="30" height="30" alt="post">
                         <span class="ml-3">Quản lý bài đăng</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/users">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-management.png?alt=media&token=6c32ce9f-5678-4908-a91f-f3520f476760"
-                             width="30" height="30" alt="user">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-management.png?alt=media&token=6c32ce9f-5678-4908-a91f-f3520f476760"
+                          width="30" height="30" alt="user">
                         <span class="ml-3">Quản lý user</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/banners">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fclover-banner.png?alt=media&token=81abcc2e-4660-4593-9b0e-84ed7ffffbd6"
-                             width="30" height="30" alt="banner">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fclover-banner.png?alt=media&token=81abcc2e-4660-4593-9b0e-84ed7ffffbd6"
+                          width="30" height="30" alt="banner">
                         <span class="ml-3">Quản lý banner</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/categories">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fcategory.png?alt=media&token=03707aa2-780b-4577-a14d-448bbd9abedb"
-                             width="30" height="30" alt="category">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fcategory.png?alt=media&token=03707aa2-780b-4577-a14d-448bbd9abedb"
+                          width="30" height="30" alt="category">
                         <span class="ml-3">Quản lý chuyên mục</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/posts/statistics">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-chart.png?alt=media&token=61592866-af5f-4bc9-9e79-499ad75d7008"
-                             width="30" height="30" alt="analytic">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fpost-chart.png?alt=media&token=61592866-af5f-4bc9-9e79-499ad75d7008"
+                          width="30" height="30" alt="analytic">
                         <span class="ml-3">Thống kê bài đăng</span>
                       </a>
                     </li>
                     <li>
                       <a routerLink="/admin/users/statistics">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-chart.png?alt=media&token=5998ce36-c4da-405f-8173-9d1ef4efb280"
-                             width="30" height="30" alt="analytic">
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser-chart.png?alt=media&token=5998ce36-c4da-405f-8173-9d1ef4efb280"
+                          width="30" height="30" alt="analytic">
                         <span class="ml-3">Thống kê user</span>
                       </a>
                     </li>
                     <hr style="padding: 0; margin: auto 0">
                     <li (click)="logout()">
-                      <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Flog-out.png?alt=media&token=ba90a9c3-b548-4d37-a21b-261a27f459dd"
-                           width="30" height="30" alt="sign-out">
+                      <img
+                        src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Flog-out.png?alt=media&token=ba90a9c3-b548-4d37-a21b-261a27f459dd"
+                        width="30" height="30" alt="sign-out">
                       <span class="ml-3">Đăng xuất</span>
                     </li>
                   </ul>
@@ -170,7 +184,7 @@
     </div>
     <div class="col-lg-1"></div>
   </div>
-<!--  search + login + post-->
+  <!--  search + login + post-->
   <div class="row m-0 pb-2">
     <div class="col-lg-1"></div>
     <div class="col-lg-10 col-md-12 col-sm-12 col-12">
@@ -183,7 +197,7 @@
                      placeholder="Tìm kiếm trên Ad web"
                      style="border-right: none"
                      id="posterName" formControlName="posterName">
-<!--              (click) here-->
+              <!--              (click) here-->
               <div class="input-group-append" style="cursor: pointer"
                    title="Tìm kiếm">
                 <span class="input-group-text bg-white">

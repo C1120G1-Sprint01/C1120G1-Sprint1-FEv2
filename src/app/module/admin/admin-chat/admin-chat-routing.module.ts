@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {AdminChatComponent} from "./admin-chat/admin-chat.component";
 
 
@@ -11,4 +11,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminChatRoutingModule { }
+export class AdminChatRoutingModule {
+}
