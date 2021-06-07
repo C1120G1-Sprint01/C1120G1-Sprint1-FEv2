@@ -85,6 +85,7 @@ export class EditBannerManagerComponent implements OnInit {
     this.bannerManagementService.showAllSize().subscribe((data) => {
       this.listSize = data;
     });
+
   }
 
   editBanner() {
@@ -110,6 +111,7 @@ export class EditBannerManagerComponent implements OnInit {
     if (this.dayTime !== 0) {
       const milliseconds = new Date().getTime() + this.dayTime * 60 * 60 * 24 * 1000;
       this.formEditBanner.value.duration = new Date(milliseconds);
+      this.formEditBanner.value.sizeId = this.sizeAuto;
     }
     if (this.formEditBanner.valid && this.selectedImage !== null && this.imageBanner !== null && this.checkPositionBanner(this.formEditBanner.value.positionId) === true) {
       const name = this.selectedImage.name;
