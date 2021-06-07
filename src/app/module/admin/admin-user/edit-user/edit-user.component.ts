@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Province} from "../../../../model/Province";
 import {District} from "../../../../model/District";
 import {ToastrService} from "ngx-toastr";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-user',
@@ -25,12 +27,15 @@ export class EditUserComponent implements OnInit {
   id: number = 0;
   public selectedImg: any;
   public imgSrc: string = '../../../../assets/img/avatar-1.png';
+  listError: any = "";
+  isCheck;
 
   constructor(private serviceAdminService: ServiceAdminService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private storage: AngularFireStorage) {
   }
 
   ngOnInit(): void {
@@ -42,7 +47,8 @@ export class EditUserComponent implements OnInit {
     console.log('id edit ' + this.id);
     this.serviceAdminService.getUserById(this.id).subscribe(data => {
       console.log('Data ' + JSON.stringify(data));
-      this.rfEditForm.patchValue(data);
+      this.imgSrc = data.avatarUrl;
+      // this.rfEditForm.patchValue(data);
       this.serviceAdminService.getAllDistrictByProvinceId(data.ward.district.province.provinceId).subscribe(dataDistr => {
         this.districts = dataDistr;
       })
@@ -52,8 +58,12 @@ export class EditUserComponent implements OnInit {
       this.users = data;
 
       this.rfEditForm.patchValue({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
         district: data.ward.district,
         province: data.ward.district.province,
+        ward: data.ward,
         avatarUrl: data.avatarUrl
       })
 
@@ -62,10 +72,10 @@ export class EditUserComponent implements OnInit {
     this.rfEditForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\\\{}\\[\\]:;"\'<>,.?\/]+$')]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern("(^(090)\\d{7}$)|(^(091)\\d{7}$)|(^(\\+\\(84\\) 90)\\d{7}$)|(^(\\+\\(84\\) 91)\\d{7}$)")]],
+      phone: ['', [Validators.required, Validators.pattern("^(09)[\\d]{8}$")]],
       ward: ['', [Validators.required]],
-      district: [''],
-      province: [''],
+      district: ['', [Validators.required]],
+      province: ['', [Validators.required]],
       avatarUrl: ['']
     })
 
@@ -79,12 +89,13 @@ export class EditUserComponent implements OnInit {
     this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(data => {
       this.users = data;
       this.router.navigateByUrl('/admin/users');
-      this.toastr.info("Chinh sua thong tin thanh cong !", "Thong ", {
+      this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
         timeOut: 1000,
         progressBar: true,
         progressAnimation: 'increasing'
       });
     })
+
   }
 
 
@@ -149,6 +160,23 @@ export class EditUserComponent implements OnInit {
     } else {
       this.imgSrc = '../../../../assets/img/avatar-1.png';
       this.selectedImg = null;
+    }
+  }
+  checkInput(item) {
+    this.isCheck = false;
+    if (this.listError !== "") {
+      switch (item) {
+        case "phone":
+          this.listError.phone = "";
+          this.listError.existPhone = "";
+          this.isCheck = true;
+          break;
+        case "email":
+          this.listError.email = "";
+          this.listError.existEmail = "";
+          this.isCheck = true;
+          break;
+      }
     }
   }
 }
