@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AdminChatRoutingModule } from './admin-chat-routing.module';
-import { ZoomComponent } from './zoom/zoom.component';
-import { AdminChatComponent } from './admin-chat/admin-chat.component';
-import { ChatRoomAdminComponent } from './chat-room-admin/chat-room-admin.component';
+import {AdminChatRoutingModule} from './admin-chat-routing.module';
+import {ZoomComponent} from './zoom/zoom.component';
+import {AdminChatComponent} from './admin-chat/admin-chat.component';
+import {ChatRoomAdminComponent} from './chat-room-admin/chat-room-admin.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -33,4 +33,5 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule
   ]
 })
-export class AdminChatModule { }
+export class AdminChatModule {
+}

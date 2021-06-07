@@ -25,22 +25,26 @@ export class EditCategoryComponent implements OnInit {
     let id = this.active.snapshot.params['id'];
     this.formEdit = this.fb.group({
       categoryId: [''],
-      categoryName: ['', [Validators.required, Validators.pattern(/^[0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ\s]*$/)]],
+      categoryName: ['', [Validators.required, Validators.pattern(/^([\p{Lu}]|[\p{Ll}])+(\s([\p{Lu}]|[\p{Ll}])+)*$/u)]],
     });
 
     this.serviceAdminService.getCategoryById(id).subscribe((data: Category) => {
-      this.categoryEdit = data;
-      this.formEdit.patchValue(this.categoryEdit);
+      if (data === null) {
+        this.toast.warning("Dữ liệu không có", "Thông báo")
+      } else {
+        this.categoryEdit = data;
+        this.formEdit.patchValue(this.categoryEdit);
+      }
     });
 
   }
 
   save() {
-    this.serviceAdminService.updateCategory(this.categoryEdit.categoryId,this.formEdit.getRawValue()).subscribe(data => {
+    this.serviceAdminService.updateCategory(this.categoryEdit.categoryId, this.formEdit.getRawValue()).subscribe(data => {
       this.toast.success("Chuyên mục cha đã được chỉnh sửa");
       this.router.navigateByUrl('admin/categories/categories');
       if (this.categoryEdit.categoryId === null) {
-        this.toast.warning("Chuyên mục này không có","Thông báo")
+        this.toast.warning("Chuyên mục này không có", "Thông báo")
       }
     })
   }

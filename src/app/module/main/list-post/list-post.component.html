@@ -36,9 +36,9 @@
               <i class="fas fa-ad"></i>&bull;
               <span>{{listTime[i]}}</span>&bull;
               <span>{{item.ward.district.province.provinceName}}</span>
-            </p>
-          </div>
-        </a>
+          </p>
+        </div>
+      </a>
       <!--END item-->
     </div>
     <ng-template #noPostData class="d-flex justify-content-center mt-2">
@@ -52,43 +52,3 @@
   </div>
   <!--  END btn load more-->
 </div>
-
-<!-- END list post -->
-<!-- pagination -->
-<!--<div class="load-more d-flex justify-content-center m-3">-->
-<!--  <nav aria-label="Page navigation example" class="float-right">-->
-<!--    <ul class="pagination">-->
-<!--      <li class="page-item">-->
-<!--        <button class="page-link"-->
-<!--                (click)="onList(listPost.pageable.pageNumber = 0)">Đầu-->
-<!--        </button>-->
-<!--      </li>-->
-<!--      <li class="page-item">-->
-<!--        <button class="page-link" [disabled]="listPost?.pageable?.pageNumber == 0"-->
-<!--                (click)="onList(listPost.pageable.pageNumber - 1)">-->
-<!--          <i class="fas fa-backward"></i>-->
-<!--        </button>-->
-<!--      </li>-->
-<!--      <li class="page-item">-->
-<!--        <div class="input-group">-->
-<!--          <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" id="basic-addon1">{{listPost?.pageable?.pageNumber + 1}}</span>-->
-<!--          </div>-->
-<!--          <div class="input-group-prepend">-->
-<!--            <span class="input-group-text" id="basic-addon"> /{{listPost?.totalPages}}</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li class="page-item">-->
-<!--        <button class="page-link" [disabled]="listPost?.pageable?.pageNumber >= listPost?.totalPages - 1"-->
-<!--                (click)="onList(listPost.pageable.pageNumber + 1)">-->
-<!--          <i class="fas fa-forward"></i>-->
-<!--        </button>-->
-<!--      </li>-->
-<!--      <li class="page-item">-->
-<!--        <button class="page-link" (click)="onList(listPost.pageable.pageNumber = listPost?.totalPages - 1)">Cuối</button>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </nav>-->
-<!--</div>-->
-<!-- END pagination-->

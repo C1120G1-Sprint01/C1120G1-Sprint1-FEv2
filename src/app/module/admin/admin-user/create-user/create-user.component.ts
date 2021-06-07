@@ -71,12 +71,12 @@ export class CreateUserComponent implements OnInit {
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
-              formRegister.img = url;
+              formRegister.avatarUrl = url;
               console.log(url);
               console.log(this.formAddNewCustomer);
               this.serviceAdmin.createUser(formRegister).subscribe(data => {
                 this.router.navigateByUrl('/admin/users');
-                this.toastr.success("Them moi thanh cong", "Thong bao", {
+                this.toastr.success("Thêm mới thành công", "Thông báo", {
                   timeOut: 1000,
                   progressBar: true,
                   progressAnimation: 'increasing'
@@ -99,7 +99,7 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.serviceAdmin.createUser(formRegister).subscribe(data => {
         this.router.navigateByUrl('/admin/users');
-        this.toastr.success("Them moi thanh cong", "Thong Bao", {
+        this.toastr.success("Thêm mới thành công", "Thông báo", {
           timeOut: 1000,
           progressBar: true,
           progressAnimation: 'increasing'
@@ -108,6 +108,7 @@ export class CreateUserComponent implements OnInit {
         if (error.status === 400) {
           console.log(error.error);
           this.listError = error.error;
+          this.toastr.error("Xảy ra lỗi trong quá trình tạo mới!", "Thông báo")
         } else if (error.status === 404) {
           this.isMessage = true;
         }
