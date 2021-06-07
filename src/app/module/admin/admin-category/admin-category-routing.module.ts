@@ -11,15 +11,15 @@ import {DeleteChildCategoryComponent} from './delete-child-category/delete-child
 import {MainCategoryComponent} from './main-category/main-category.component';
 
 const routes: Routes = [
-  {path: '', component: ListCategoryComponent},
-  {path: 'create', component: CreateCategoryComponent},
-  {path: 'edit/:id', component: EditCategoryComponent},
-  {path: 'delete/:id', component: DeleteCategoryComponent},
+  {path: '', component: MainCategoryComponent},
+  {path: 'categories', component: ListCategoryComponent},
+  {path: 'categories/create', component: CreateCategoryComponent},
+  {path: 'categories/edit/:id', component: EditCategoryComponent},
+  {path: 'categories/delete/:id', component: DeleteCategoryComponent},
   {path: 'child-categories', component: ListChildCategoryComponent},
   {path: 'child-categories/create', component: CreateChildCategoryComponent},
   {path: 'child-categories/edit/:id', component: EditChildCategoryComponent},
   {path: 'child-categories/delete/:id', component: DeleteChildCategoryComponent},
-  {path: 'main', component: MainCategoryComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 

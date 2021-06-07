@@ -1,1 +1,44 @@
-<p>user-statistics works!</p>
+<div class="container">
+  <br>
+  <h2 class="title">THỐNG KÊ NGƯỜI DÙNG</h2>
+  <br>
+  <div class="row">
+    <div class="row">
+      <table class="table table-light">
+        <thead>
+        <tr>
+          <th>Ngày Bắt Đầu</th>
+          <th>Ngày Kết Thúc</th>
+          <th>Chức Năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <!--          <input type="date" data-date="" data-date-format="dd/MM/yyyy" value="12/12/2021" class="form-control" [(ngModel)]="startDate">-->
+          <td><input [(ngModel)]="startDate" class="form-control" placeholder="dd/MM/yyyy" type="date"></td>
+          <td><input [(ngModel)]="endDate" class="form-control" type="date">
+          <td>
+            <button (click)="onSubmit()" class="btn btn-primary" type="submit">Thống Kê</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-10 text-center">
+      <h2 class="text-center">Biểu Đồ Thống Kê Số Lượng Thành Viên Mới Theo Ngày</h2>
+      <canvas [chartType]="barChartType"
+              [colors]="barChartColors"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [legend]="barChartLegend"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+              baseChart>
+      </canvas>
+    </div>
+  </div>
+</div>
+
+

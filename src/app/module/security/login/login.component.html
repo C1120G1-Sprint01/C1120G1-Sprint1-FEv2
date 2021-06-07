@@ -1,114 +1,136 @@
-<div class="form-body container-fluid justify-content-center align-items-center">
-  <div class="row align-items-center">
-    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
-    <div class="form-login col-lg-4 col-md-6 col-sm-8 col-xs-10">
-      <div class="text-center">
-        <p class="title">Đăng nhập</p>
-      </div>
-      <form [formGroup]="form" (ngSubmit)="submitForm()"
-            class="form-container p-3 px-5
+<div id="full">
+  <div class="form-body container-fluid justify-content-center align-items-center">
+    <div class="row align-items-center">
+      <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+      <div class="form-login col-lg-4 col-md-6 col-sm-8 col-xs-10">
+        <div class="text-center">
+          <p class="title">Đăng nhập</p>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="submitForm()"
+              class="form-container p-3 px-5
                    align-items-center">
 
-        <!--                username-->
-        <div class="form-group">
-          <label for="inputEmail">
-            <strong>Tên đăng nhập
-              <!--              (<span class="red-star">&nbsp;*&nbsp;</span>)-->
-            </strong>
-          </label>
-          <input type="text" class="form-control" formControlName="username"
-                 id="inputEmail" required>
-          <!--          error Msg-->
-          <!--          <div *ngIf="form.controls.username.touched" class="errMsg">-->
-          <!--            <p *ngIf="form.controls.username.error?.required">-->
-          <!--              Bạn phải nhập dữ liệu vào trường bắt buộc-->
-          <!--            </p>-->
-          <!--            <p *ngIf="form.controls.username.error?.pattern">-->
-          <!--              Tên đăng nhập không hợp lệ. Yêu cầu nhập lại-->
-          <!--            </p>-->
-          <!--          </div>-->
-        </div>
+          <!--                username-->
+          <div class="form-group">
+            <label for="inputEmail">
+              <strong>Tên đăng nhập
+                <!--              (<span class="red-star">&nbsp;*&nbsp;</span>)-->
+              </strong>
+            </label>
+            <input type="text" class="form-control" formControlName="username"
+                   id="inputEmail" required>
+            <!--          error Msg-->
+            <div *ngIf="form.controls.username.touched" class="errMsg">
+              <p *ngIf="form.controls.username.errors?.required">
+                Tên đăng nhập không được để trống. Vui lòng nhập lại.
+              </p>
+              <p *ngIf="form.controls.username.errors?.pattern">
+                Tên đăng nhập có chứa kí tự không hợp lệ. Vui lòng nhập lại.
+              </p>
+              <p *ngIf="form.controls.username.errors?.minlength">
+                Tên đăng nhập phải ít nhất 6 kí tự. Yêu cầu nhập lại.
+              </p>
+              <p *ngIf="form.controls.username.errors?.maxlength">
+                Tên đăng nhập quá dài. Yêu cầu nhập lại.
+              </p>
+            </div>
+          </div>
 
-        <!--                password-->
-        <div class="form-group mt-2 mb-2">
-          <label for="inputPassword">
-            <strong>Mật khẩu
-              <!--              (<span class="red-star">&nbsp;*&nbsp;</span>)-->
-            </strong>
-          </label>
-          <div class="input-group ">
-            <input [type]="fieldTextType === true ? 'text' : 'password'"
-                   class="form-control" id="inputPassword"
-                   formControlName="password">
-            <div class="input-group-append" title="Hiện mật khẩu" id="btnShowPw">
+          <!--                password-->
+          <div class="form-group mt-2 mb-2">
+            <label for="inputPassword">
+              <strong>Mật khẩu
+                <!--              (<span class="red-star">&nbsp;*&nbsp;</span>)-->
+              </strong>
+            </label>
+            <div class="input-group ">
+              <input [type]="fieldTextType === true ? 'text' : 'password'"
+                     class="form-control" id="inputPassword"
+                     formControlName="password">
+              <div class="input-group-append" (click)="toggleFieldTextType()"
+                   title="Hiện mật khẩu" id="btnShowPw">
               <span class="input-group-text">
-                <i class="far fa-eye" (click)="toggleFieldTextType()"></i>
+                <i class="far fa-eye"></i>
               </span>
-            </div>
-          </div>
-          <!-- error Msg-->
-          <!--          <div *ngIf="form.controls.password.touched" class="errMsg">-->
-          <!--            <p *ngIf="form.controls.password.error?.required">-->
-          <!--              Mật khẩu không được để trống-->
-          <!--            </p>-->
-          <!--            <p *ngIf="form.controls.password.error?.wrongPassword">-->
-          <!--              Mật khẩu không chính xác.Vui lòng nhập lại.-->
-          <!--            </p>-->
-          <!--          </div>-->
-        </div>
-
-        <!--                remember me-->
-        <div class="my-2 check-box">
-          <label>
-            <input type="checkbox" formControlName="remember_me">&nbsp;&nbsp;Ghi nhớ tài khoản
-          </label>
-        </div>
-
-        <!--                submit button-->
-        <div class="mt-2 mb-3">
-          <button class="btn" id="btnSubmit" title="Đăng nhập" type="submit" [disabled]="form.invalid">
-            Đăng nhập
-          </button>
-        </div>
-        <div>
-          <a routerLink="getBackPw">Quên mật khẩu?</a>
-        </div>
-
-        <!--                login via-->
-        <div class="mt-2 mb-1 text-center">
-          <label>Đăng nhập qua</label>
-        </div>
-        <!--                via-->
-        <div class="row">
-          <div class="col-3"></div>
-          <div class="col-6">
-            <div class="form-group row" style="color: white">
-              <div class="col-4 btnVia align-items-center" title="Facebook">
-                <a routerLink="">
-                  <img src="../../../../assets/img/facebook-logo.png" alt="google-plus" width="40" height="40">
-                </a>
-              </div>
-              <div class="col-4 btnVia align-items-center" title="Google +">
-                <a routerLink="">
-                  <img src="../../../../assets/img/google-plus.png" alt="google-plus" width="40" height="40">
-                </a>
-              </div>
-              <div class="col-4 btnVia align-items-center" title="Twitter">
-                <a routerLink="">
-                  <img src="../../../../assets/img/twitter.png" alt="google-plus" width="40" height="40">
-                </a>
               </div>
             </div>
+            <!-- error Msg-->
+            <div *ngIf="form.controls.password.touched" class="errMsg">
+              <p *ngIf="form.controls.password.errors?.required">
+                Mật khẩu không được để trống. Vui lòng nhập lại.
+              </p>
+              <p *ngIf="form.controls.password.errors?.minlength">
+                Mật khẩu phải ít nhất 6 kí tự. Vui lòng nhập lại.
+              </p>
+              <p *ngIf="form.controls.password.errors?.maxlength">
+                Mật khẩu quá dài. Vui lòng nhập lại.
+              </p>
+            </div>
+            <p *ngIf="errorMessage != ''" class="errMsg">
+              {{errorMessage}}
+            </p>
           </div>
-          <div class="col-3"></div>
-        </div>
 
-        <div class="row justify-content-center">
-          <p>Bạn chưa có tài khoản?&nbsp;&nbsp;</p>
-          <a routerLink="/user/create">Đăng kí ngay</a>
-        </div>
-      </form>
+          <!--                remember me-->
+          <div class="my-2 check-box">
+            <label>
+              <input type="checkbox" formControlName="remember_me">&nbsp;&nbsp;Ghi nhớ tài khoản
+            </label>
+          </div>
+
+          <!--                submit button-->
+          <div class="mt-2 mb-3">
+            <button class="btn" id="btnSubmit" title="Đăng nhập" type="submit" [disabled]="form.invalid">
+              Đăng nhập
+            </button>
+          </div>
+          <div>
+            <a routerLink="getBackPw">Quên mật khẩu?</a>
+          </div>
+
+          <!--                login via-->
+          <div class="mt-2 mb-1 text-center">
+            <label>Đăng nhập qua</label>
+          </div>
+          <!--                via-->
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div class="form-group row" style="color: white">
+                <div class="col-4 btnVia align-items-center" title="Facebook">
+                  <a>
+                    <img width="40" height="40"
+                         src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ffacebook-logo.png?alt=media&token=ed6ec75c-0025-44c7-8cf2-3fa4fed9230d"
+                         alt="facebook">
+                  </a>
+                </div>
+                <div class="col-4 btnVia align-items-center" title="Google +">
+                  <a routerLink="/login/google">
+                    <img width="40" height="40"
+                         src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fgoogle-plus.png?alt=media&token=7a795f8f-b1cb-4378-aa00-fa173dabb8a1"
+                         alt="google-plus">
+                  </a>
+                </div>
+                <div class="col-4 btnVia align-items-center" title="Twitter">
+                  <a>
+                    <img width="40" height="40"
+                         src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ftwitter.png?alt=media&token=33417068-ddb2-4607-a9b1-918adf4a4535"
+                         alt="twitter">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-3"></div>
+          </div>
+
+          <div class="row justify-content-center">
+            <p>Bạn chưa có tài khoản?&nbsp;&nbsp;</p>
+            <a routerLink="/register">Đăng kí ngay</a>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
     </div>
-    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
   </div>
 </div>
+

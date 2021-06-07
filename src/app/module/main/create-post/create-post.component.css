@@ -14,14 +14,16 @@ input::-webkit-input-placeholder {
 .bg-blue {
   background-color: #027fff; /*navbar background*/
 }
+
 .btn-blue {
   background-color: #0d5db6; /*button*/
 }
+
 .btn-blue:hover {
   background-color: #688cff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .menu-left {
     display: none;
   }
@@ -29,12 +31,6 @@ input::-webkit-input-placeholder {
   .menu-right {
     display: none;
   }
-}
-
-.menu-left {
-  height: 80%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .menu-left_item {
@@ -55,12 +51,6 @@ input::-webkit-input-placeholder {
   cursor: pointer;
 }
 
-.menu-right {
-  height: 80%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
 .title-text {
   font-size: 20px;
 }
@@ -69,7 +59,7 @@ input::-webkit-input-placeholder {
   font-size: 14px !important;
 }
 
-/*Overlay: content menu left under 768px*/
+/*Overlay: content menu left under 769px*/
 .overlay {
   height: 100%;
   width: 0;
@@ -121,6 +111,7 @@ input::-webkit-input-placeholder {
   .overlay a {
     font-size: 20px;
   }
+
   .overlay .closebtn {
     top: 15px;
     right: 35px;
@@ -131,7 +122,7 @@ input::-webkit-input-placeholder {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .open-overlay {
     display: block;
     font-size: 30px;
@@ -163,6 +154,7 @@ input::-webkit-input-placeholder {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+
 /* END custom scrollbar */
 
 /*------------------- dangtin below */
@@ -179,6 +171,84 @@ input::-webkit-input-placeholder {
 .custom-select-sm {
   height: calc(1.5em + 0.75rem + 0px) !important;
 }
+
 .imgAdd {
   margin-top: 3px;
+}
+
+/* ViNTT */
+.imgPreview {
+  position: relative;
+  margin: 3px 10px 10px;
+  display: inline-block;
+  box-shadow: 5px 5px 2px gainsboro;
+}
+
+/* ViNTT */
+.imgPreview .close {
+  position: absolute;
+  background: red;
+  color: white;
+  top: -10px;
+  right: -10px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px 0 #000;
+}
+
+/* ViNTT */
+.imgPreview img {
+  max-height: 80px;
+  max-width: 200px;
+  border: gainsboro 1px solid;
+}
+
+/* END custom scrollbar */
+
+/* -------------------- custom content */
+
+.list-post {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.post-item {
+  border: none;
+}
+
+.d-inline-flex > p {
+  margin-bottom: 0;
+}
+
+.filter-bar {
+  cursor: context-menu;
+}
+
+.filter-bar:hover {
+  border: none;
+}
+
+.filter-item {
+  color: black;
+}
+
+.filter-item:hover {
+  text-decoration: none;
+}
+
+.post-item-content > div {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 1075px) {
+  .post-item-content {
+    margin-left: 50px;
+  }
 }

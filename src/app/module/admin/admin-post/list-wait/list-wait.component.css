@@ -8,3 +8,12 @@ body{
 .blue{
   color: #027FFF;
 }
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.75rem;
+  color: #0D5DB6;
+  padding: 1rem 0;
+}
+

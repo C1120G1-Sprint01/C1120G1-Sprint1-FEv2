@@ -1,0 +1,54 @@
+body {
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+#scroll-hidden {
+  overflow-x: hidden;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+textarea::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.tablecustom th,
+.tablecustom td {
+  vertical-align: inherit;
+}
+
+.borderless td,
+.borderless th {
+  border: none;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  background-color: #F7F7F7;
+  height: 100%;
+  overflow: auto;
+  border: #000;
+}
+
+.sidebar a {
+  display: block;
+  color: #8A8A8A;
+  padding: 16px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.sidebar a.active {
+  background-color: #53C8ED;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #8A8A8A;
+  color: white;
+}

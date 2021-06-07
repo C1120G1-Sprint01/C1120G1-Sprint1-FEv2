@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Category} from '../../../../model/Category';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ServiceAdminService} from '../../../../service/service-admin/service-admin.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from "ngx-toastr";
+import {ChildCategory} from "../../../../model/ChildCategory";
 
 @Component({
   selector: 'app-delete-category',
@@ -9,26 +10,35 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./delete-category.component.css']
 })
 export class DeleteCategoryComponent implements OnInit {
-  categoryDelete: Category;
+
+  @Input()
+  deleteId: number;
+  @Input()
+  deleteName: string;
+
+  @Output()
+  deleteComplete = new EventEmitter<boolean>();
+  public listChildCategory: ChildCategory[];
+  public lengthChildList: number;
 
   constructor(public serviceAdminService: ServiceAdminService,
               private active: ActivatedRoute,
-              private router: Router) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    let id = this.active.snapshot.params['id'];
-
-    this.serviceAdminService.getCategoryById(id).subscribe((data: Category) => {
-
-      this.categoryDelete = data;
-    });
+    this.serviceAdminService.getAllChildCategory().subscribe((data) => {
+      this.listChildCategory = data;
+      this.lengthChildList = this.listChildCategory.length;
+    })
   }
 
-  deleteCategory(id: number) {
-    this.serviceAdminService.deleteCategory(id).subscribe(data => {
-      this.router.navigateByUrl('main-category/category');
-      console.log('xóa thành công!');
+  deleteCategory() {
+    this.serviceAdminService.deleteCategory(this.deleteId).subscribe(data => {
+      document.getElementById('closeModal').click();
+      this.deleteComplete.emit(true);
     });
+    this.toastr.success('Xóa Thành Công !', 'Chuyên mục !');
   }
+
 }

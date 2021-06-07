@@ -6,8 +6,19 @@
 .content {
   padding: 0;
   /*margin: 0;*/
+  background: white;
   font-size: 14px;
   font-family: "Roboto", "Helvetica", sans-serif;
+}
+
+.notFound img {
+  width: 200px;
+  margin: 3rem 0 0;
+}
+
+.btnBack {
+  background: #0D5DB6;
+  color: white;
 }
 
 .breadcrumb {
@@ -36,6 +47,30 @@
   padding-left: 30px;
 }
 
+.carousel-item {
+  background: grey;
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* 8:5 Aspect Ratio */
+}
+
+.carousel-item img {
+  position:  absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+  filter: invert(100%);
+}
+
 .carousel-caption {
   left: 0;
   right: 0;
@@ -48,7 +83,7 @@
 .carousel-caption p {
   float: right;
   margin: 0;
-  padding: 5px 10px;
+  padding: 10px 10px;
   color: white;
 }
 
@@ -95,6 +130,7 @@ i {
   .contact-panel {
     display: none;
   }
+
   .contact-panel-2 {
     display: block;
   }
@@ -105,6 +141,7 @@ i {
   .contact-panel {
     display: none;
   }
+
   .contact-panel-2 {
     display: block;
   }
@@ -116,6 +153,7 @@ i {
   .contact-panel {
     display: table-cell;
   }
+
   .contact-panel-2 {
     display: none;
   }

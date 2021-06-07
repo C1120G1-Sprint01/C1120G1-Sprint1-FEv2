@@ -1,98 +1,126 @@
 <div class="row">
-  <div class="menu">
-    <div class=".logo col-2 text-center float-left">
-      <a>
-        <div class="row">
-          <h4 class="text-light mt-2 pt-1 ml-5">C1120G1</h4>
-          <img
-            src=""
-            width="50px" class="mt-1">
-        </div>
-      </a>
-    </div>
-
-    <div class="col-2 float-right mt-2">
-      <a class="float-left text-light mr-1 mt-2">Ngọc</a>
-      <a role="button" class="float-left btn btn-light mt-1" (click)="logout()">Đăng xuất</a>
-    </div>
-  </div>
-  <div class="col-2 float-left menu-left-admin">
-    <div class="row">
-      <ul class="col-12">
-
-        <li class=" pt-2 pb-2 menu-var">
-          <a class="text-decoration-none text-dark  pt-2 pb-2">
-            <i class="fas fa-user-tie mr-2 col-1"></i>Quản Lý Thành Viên
-          </a>
-        </li>
-        <li class=" pt-2 pb-2 menu-var">
-          <a class="text-decoration-none text-dark  pt-2 pb-2">
-            <i class="fas fa-file-signature mr-2 col-1"></i>Quản Lý Chuyên Mục
-          </a>
-        </li>
-
-        <li class=" pt-2 pb-2 menu-var">
-          <a class="text-decoration-none text-dark  pt-2 pb-2">
-            <i class="fas fa-car mr-2 col-1"></i>Banner
-          </a>
-        </li>
-
-        <li class=" pt-2 pb-2 menu-var">
-          <a class="text-decoration-none text-dark  pt-2 pb-2">
-            <i class="fas fa-hand-holding-usd mr-2 col-1"></i>Quảng cáo
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-9">
+  <div class="col-12 float-right mt-3">
     <div class="table-header">
-      <p class="title">Chỉnh sửa thông tin thành viên</p>
+      <p class="text-center text-uppercase title">Chỉnh sửa thông tin thành viên</p>
     </div>
-    <button class="btn btn-success btnback" (click)="backToUserList()">Back To List User</button>
-    <form [formGroup]="rfEditForm" (ngSubmit)="onSubmit()">
-      <table class="table table-hover col-8 align-item-center">
-        <tbody>
-        <tr>
-          <th>Tên Người Dùng <span style="color:red">*</span></th>
-          <td><input type="text" formControlName="name" placeholder="Nhập tên người sử dụng" class="form-control inputText" >
-            <p class="errorText" *ngIf="rfEditForm.controls.name.touched && rfEditForm.controls.name.errors?.pattern">Tên người dùng không chứa kí tự đặc biệt</p>
-            <p class="errorText" *ngIf="rfEditForm.controls.name.touched && rfEditForm.controls.name.errors?.required">Tên người dùng đang bỏ trống</p>
-          </td>
-        </tr>
-        <tr>
-          <th>Email <span style="color:red">*</span></th>
-          <td><input type="text" formControlName="email" placeholder="Nhập địa chỉ" class="form-control inputText">
-            <p class="errorText" *ngIf="rfEditForm.controls.email.touched && rfEditForm.controls.email.errors?.email">Email không đúng định dạng VD: abc@abc.com</p>
-            <p class="errorText" *ngIf="rfEditForm.controls.email.touched && rfEditForm.controls.email.errors?.required">Email người dùng đang bỏ trống</p>
-          </td>
+    <button class="btn btn-success btnback" (click)="backToUserList()">Quay Lại</button>
+    <div class="col-12 justify-content-center align-items-center">
+      <form [formGroup]="rfEditForm" (ngSubmit)="onSubmit()">
+        <table class="table table-hover col-8">
+          <tbody>
+          <tr>
+            <th style="width: 40%">
+              <label for="nameUser">Tên Người Dùng&nbsp;</label>
+              <span style="color:red">*</span>
+            </th>
+            <td>
+              <input type="text" formControlName="name" id="nameUser"
+                       placeholder="Nhập tên người sử dụng"
+                       class="form-control inputText">
+              <p class="errorText" *ngIf="rfEditForm.controls.name.touched && rfEditForm.controls.name.errors?.pattern">
+                Tên người dùng không chứa kí tự đặc biệt</p>
+              <p class="errorText" *ngIf="rfEditForm.controls.name.dirty && rfEditForm.controls.name.errors?.required">
+                Tên người dùng đang bỏ trống</p>
+            </td>
+          </tr>
+          <tr>
+            <th>Email <span style="color:red">*</span></th>
+            <td><input type="text" formControlName="email" (input)="checkInput('email')" placeholder="Nhập địa chỉ" class="form-control inputText">
+              <p class="errorText" *ngIf="rfEditForm.controls.email.touched && rfEditForm.controls.email.errors?.email">
+                Email không đúng định dạng VD: abc@abc.com</p>
+              <p class="errorText"
+                 *ngIf="rfEditForm.controls.email.dirty && rfEditForm.controls.email.errors?.required">Email người dùng
+                đang bỏ trống</p>
+              <p class="errorText" *ngIf="!isCheck">{{listError.existEmail}}</p>
+            </td>
+          </tr>
+          <tr>
 
-        </tr>
-        <tr>
-          <th>Địa chỉ <span style="color:red">*</span></th>
-          <td><input type="text" formControlName="ward" placeholder="Nhập địa chỉ" class="form-control inputText">
-            <p class="errorText" *ngIf="rfEditForm.controls.ward.dirty && rfEditForm.controls.ward.errors?.required">Địa chỉ người dùng đang bỏ trống</p>
-          </td>
+            <th>Tỉnh/ Thành Phố<span style="color:red">*</span></th>
+            <td>
+              <select [compareWith]="compareProvince" (change)="onChangeProvince($event.target.value)"
+                      formControlName="province" class="form-control selectoption">
+                <option value="" disabled selected>Vui lòng chọn Tỉnh/ Thành Phố</option>
+                <option *ngFor="let province of provinces" [ngValue]="province" style="color: blue">
+                  {{province.provinceName}}
+                </option>
+              </select>
+              <p class="errorText"
+                 *ngIf="rfEditForm.controls.province.touched && rfEditForm.controls.province.errors?.required">Địa chỉ
+                người dùng đang bỏ trống</p>
+            </td>
+          </tr>
+          <tr>
+            <th>Quận/ Huyện<span style="color:red">*</span></th>
+            <td>
+              <select [compareWith]="compareDistrict" formControlName="district"
+                      (change)="onChangeDistrict($event.target.value)" class="form-control selectoption">
+                <option value="" disabled selected>Vui lòng chọn Quận/ Huyện</option>
+                <option *ngFor="let district of districts"
+                        [ngValue]="district"
+                        style="color: blue">
+                  {{district.districtName}}
+                </option>
+              </select>
+              <p class="errorText"
+                 *ngIf="rfEditForm.controls.ward.touched && rfEditForm.controls.ward.errors?.required">Địa chỉ người
+                dùng đang bỏ trống</p>
+            </td>
+          </tr>
+          <tr>
+            <th>Xã/ Phường<span style="color:red">*</span></th>
+            <td>
+              <select [compareWith]="compareWard" formControlName="ward" class="form-control selectoption">
+                <option value="" disabled selected>Vui lòng chọn Xã/ Phường</option>
+                <option *ngFor="let ward of wards"
+                        [ngValue]="ward"
+                        style="color: blue">
+                  {{ward.wardName}}
+                </option>
+              </select>
+              <p class="errorText"
+                 *ngIf="rfEditForm.controls.ward.touched && rfEditForm.controls.ward.errors?.required">Địa chỉ người
+                dùng đang bỏ trống</p>
+            </td>
+          </tr>
+          <tr>
+            <th>Số điện thoại <span style="color:red">*</span></th>
+            <td><input type="text" formControlName="phone" (input)="checkInput('phone')" placeholder="Nhập số điện thoại người sử dụng"
+                       class="form-control inputText">
+              <p class="errorText" *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.pattern">
+                Số điện thoại không đúng định dạng VD : (+84) 0918870.XXX</p>
+              <p class="errorText"
+                 *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.required">Số điện thoại
+                người dùng đang bỏ trống</p>
+              <p class="errorText" *ngIf="!isCheck">{{listError.existPhone}}</p>
+            </td>
+          </tr>
 
-        </tr>
-        <tr>
-          <th>Số điện thoại <span style="color:red">*</span></th>
-          <td><input type="text" formControlName="phone" placeholder="Nhập số điện thoại người sử dụng" class="form-control inputText">
-            <p class="errorText" *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.pattern">Số điện thoại không đúng định dạng VD : (+84) 0918870.XXX</p>
-            <p class="errorText" *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.required">Số điện thoại người dùng đang bỏ trống</p>
-          </td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <button class="btn updateBtn" [disabled]="rfEditForm.invalid">Cập Nhật</button>
-            &nbsp;
-            <button class="btn btn-warning">Nhập Lại</button>
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-    </form>
+          <!--          image -->
+          <tr>
+            <th>Ảnh đại diện:</th>
+            <td>
+              <input hidden type="file" class="form-control" formControlName="avatarUrl" accept="image/*" #fileUploader
+                     (change)="showPreview($event)">
+              <div class="container pointer" (click)="fileUploader.click()">
+                <img [src]="imgSrc" alt="Avatar" class="image">
+                <div class="middle">
+                  <div class="text">Cập nhật ảnh</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <button class="btn updateBtn" [disabled]="rfEditForm.invalid">Cập Nhật</button>
+              &nbsp;
+              <button class="btn btn-warning">Nhập Lại</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
   </div>
 </div>

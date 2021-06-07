@@ -1,0 +1,76 @@
+<div class="d-inline-flex col-12 px-0" id="page-content">
+  <!-- menu left -->
+  <div class="col-md-2 px-0 border-right">
+    <!-- content menu left full-size -->
+    <div class="col-md-12 menu-left">
+      <p class="title-text">Chuyên mục</p>
+      <!-- add content of menu left inside here-->
+      <!-- category -->
+      <div *ngFor="let category of listCategory">
+        <a class="btn menu-left_item col-12 bg-white"
+           (click)="getCategoryId(category.categoryId)"
+           [attr.data-target]="'#' + category.categoryId">
+          <span>-&nbsp;</span>{{category.categoryName}}
+        </a>
+        <ul [id]="category.categoryId" class="collapse list-group list-group-flush ml-2">
+          <li *ngFor="let child of listChildCategory"
+              class="list-group-item">
+            <a [routerLink]="" style="text-decoration: none">
+              <span>+&nbsp;</span>{{child.childCategoryName}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- add content of menu left inside here-->
+    </div>
+    <!--END content menu left full-size -->
+
+    <!--CAUTION: if you don't have menu overlay, you needn't add anything in "left menu content under 768px width", and when under 768 width, your left menu will disappear.-->
+    <!-- content menu left under 768px width -->
+    <span class="open-overlay position-fixed col-1 col-sm-1 pt-1" (click)="openNav()">&#9776;</span>
+    <div id="myNav" class="overlay">
+      <div class="overlay-content">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <!--content menu left here-->
+        <!-- category -->
+        <div class="px-0 mt-5 pt-5">
+          <div *ngFor="let category of listCategory">
+            <a class="btn menu-left_item col-12 list-item-overlay"
+               (click)="getCategoryId(category.categoryId)"
+               [attr.data-target]="'#' + category.categoryId">
+              <span>-&nbsp;</span>{{category.categoryName}}
+            </a>
+            <ul [id]="category.categoryId" class="collapse list-group list-group-flush ml-2">
+              <li *ngFor="let child of listChildCategory"
+                  class="list-group-item">
+                <a [routerLink]="" style="text-decoration: none">
+                  <span>+&nbsp;</span>{{child.childCategoryName}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- END category -->
+        <!--END content menu-->
+      </div>
+    </div>
+    <!--END content menu left under 768px -->
+    <!--END CAUTION-->
+  </div>
+  <!-- END menu left -->
+  <!-- main content -->
+  <div class="main-content-frame col-md-8 col-sm-10 col-10 px-0">
+    <!-- content here -->
+    <app-display-banner-top></app-display-banner-top>
+    <div class="main-content bg-light col-md-12 col-sm-12">
+      <router-outlet></router-outlet>
+    </div>
+    <app-display-banner-bot></app-display-banner-bot>
+  </div>
+  <!-- END main content -->
+  <!-- menu right -->
+  <div class="col-md-2 px-1 menu-right border-left">
+    <app-display-banner-right></app-display-banner-right>
+  </div>
+  <!-- END menu right -->
+</div>

@@ -1,79 +1,43 @@
-<div class="container body">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Quản lý thành viên</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link bg-light" routerLink="/main-category">Quản lý chuyên mục</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Banner</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Mail Server</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <br>
-      <form class="form-inline">
-
+  <div class="container body">
+  <div class="card">
+    <div class="card-body">
+      <p class="title">Thêm mới chuyên mục</p>
+      <form [formGroup]="formCreate" (ngSubmit)="save()">
+        <table class="table table-striped">
+          <tr>
+            <td>Tên chuyên mục cha</td>
+            <td>
+              <select formControlName="category" class="form-control">
+                <option value="" disabled>Chọn chuyên mục</option>
+                <option *ngFor="let item of categoryList"
+                        [ngValue]="item"
+                        style="color: blue">
+                  {{item.categoryName}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Tên chuyên mục</td>
+            <td>
+              <input type="text" formControlName="childCategoryName" maxlength="30" class="form-control">
+              <div class="error mt-2" role="alert"
+                   *ngIf="formCreate.get('childCategoryName').invalid && formCreate.get('childCategoryName').dirty">
+                <span *ngIf="formCreate.get('childCategoryName').hasError('required')">Tên chuyên mục không được để trống.</span>
+                <span *ngIf="formCreate.get('childCategoryName').hasError('pattern')">Tên chuyên mục không được có kí tự đặc biệt</span>
+                <span *ngIf="formCreate.get('childCategoryName').hasError('maxLength')">Tên chuyên mục không được quá 20 kí tự</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" class="btn btn-success" value="Lưu">
+              <a routerLink="/admin/categories/child-categories" class="btn btn-secondary ml-2">Hủy</a>
+            </td>
+          </tr>
+        </table>
       </form>
-      <div class="card">
-        <div class="card-body">
-
-          <p class="title">Thêm mới chuyên mục</p>
-          <form [formGroup]="formCreate" (ngSubmit)="save()">
-            <table class="table table-striped">
-              <tr>
-                <td>Tên chuyên mục cha</td>
-                <td>
-<!--                  chỗ này khai báo thêm cái formcontrolname để lấy giá trị khi input có thay dổi giá trị
-                     và nó sẽ lấy giá trị trong ngValue -->
-                  <select formControlName="category" class="form-control">
-                    <option value="" disabled>Chọn chuyên mục</option>
-                    <option *ngFor="let item of categoryList"
-                            [ngValue]="item"
-                            style="color: blue">
-                      {{item.categoryName}}
-                    </option>
-                  </select>
-
-                </td>
-              </tr>
-              <tr>
-                <td>Tên chuyên mục</td>
-                <td>
-                  <input type="text" formControlName="childCategoryName" class="form-control">
-                  <div class="error alert alert-danger" role="alert"
-                       *ngIf="formCreate.get('childCategoryName').invalid && formCreate.get('childCategoryName').dirty">
-                    <span *ngIf="formCreate.get('childCategoryName').hasError('required')">Tên chuyên mục không được để trống.</span>
-                    <span *ngIf="formCreate.get('childCategoryName').hasError('pattern')">Tên chuyên mục không được có kí tự đặc biệt</span>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td style="text-align: center">
-                  <input type="submit" class="btn btn-success" [disabled]="formCreate.invalid" value="Lưu">
-                </td>
-                <td style="text-align: center">
-                  <a routerLink="/main-category/child-category" class="btn btn-secondary">Hủy</a>
-                </td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </div>

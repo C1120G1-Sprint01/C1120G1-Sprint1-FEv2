@@ -1,190 +1,225 @@
-<div class="row">
-  <div class="col-2 pr-0" style="background-color: grey;">
-    <div class="sidebar">
-      <a href="#">Thông tin cá nhân</a>
-      <a class="active" href="#">Quản lý bài đăng</a>
-      <a href="#">Hộp tin nhắn</a>
-      <a href="#about">Đổi mật khẩu</a>
-    </div>
-  </div>
-
-  <div class="container col-8">
-
-    <h3 class="my-3">Chỉnh sửa bài đăng</h3>
+    <p class="title">Chỉnh sửa bài đăng</p>
 
     <div class="card mb-3">
 
       <div class="card-body">
         <form [formGroup]="refPost" (ngSubmit)="submitForm()">
-          <table class="table borderless" style="width: 100%">
+          <table class="table table-borderless" style="width: 100%">
             <tbody>
-            <tr>
-              <td>
-                <label for="name">Họ tên</label>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Nhập họ tên" formControlName="posterName">
-                  <span class="small text-danger mt-1"
-                        *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.required">
+              <tr>
+                <td>
+                  <label for="name">Họ tên</label>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập họ tên" formControlName="posterName">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.required">
                       Họ tên không được để trống
                     </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Số điện thoại</td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Nhập số điện thoại" formControlName="phone">
-                  <span class="small text-danger mt-1"
-                        *ngIf="refPost.get('phone').touched && refPost.controls.phone.errors?.required">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.pattern">
+                      Họ tên không được chứa số và ký tự đặc biệt
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('posterName').touched && refPost.controls.posterName.errors?.maxlength">
+                      Họ tên không được vượt quá 50 ký tự
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Số điện thoại</td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập số điện thoại" formControlName="phone">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('phone').touched && refPost.controls.phone.errors?.required">
                       Số điện thoại không được để trống
                     </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Email</td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Nhập email" formControlName="email">
-                  <!-- <p class="small text-danger mt-1">Email có dạng somebody@gmail.com,
-                                      somebody@yahoo.com</p>
-                                  <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Địa chỉ</td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="province" [ngModelOptions]="{standalone: true}"
-                          [compareWith]="compareProvinces" (change)="onChangeProvince()">
-                    <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
-                  </select>
-                </div>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('phone').touched && refPost.controls.phone.errors?.pattern">
+                      Số điện thoại phải gồm 10-11 số
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập email" formControlName="email">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('email').touched && refPost.controls.email.errors?.required">
+                      Email không được để trống
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('email').touched && refPost.controls.email.errors?.email">
+                      Email không hợp lệ, ví dụ: abc@abc.abc
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('email').touched && refPost.controls.email.errors?.maxlength">
+                      Email không được vượt quá 50 ký tự
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Địa chỉ</td>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="province" [ngModelOptions]="{standalone: true}"
+                      [compareWith]="compareProvinces" (change)="onChangeProvince()">
+                      <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
+                    </select>
+                  </div>
 
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="district" [ngModelOptions]="{standalone: true}"
-                          [compareWith]="compareDistricts" (change)="onChangeDistrict()">
-                    <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
-                  </select>
-                </div>
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="district" [ngModelOptions]="{standalone: true}"
+                      [compareWith]="compareDistricts" (change)="onChangeDistrict()">
+                      <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
+                    </select>
+                  </div>
 
-                <div class="form-group">
-                  <select class="form-control" formControlName="ward" [compareWith]="compareWards">
-                    <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
-                  </select>
-                  <span class="small text-danger mt-1"
-                        *ngIf="refPost.get('ward').touched && refPost.controls.ward.errors?.required">Địa
+                  <div class="form-group">
+                    <select class="form-control" formControlName="ward" [compareWith]="compareWards">
+                      <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
+                    </select>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('ward').touched && refPost.controls.ward.errors?.required">Địa
                       chỉ không được để trống</span>
-                </div>
+                  </div>
 
-              </td>
-            </tr>
-            <tr>
-              <td>Chuyên mục cha</td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="category" [ngModelOptions]="{standalone: true}"
-                          [compareWith]="compareCategories" (change)="onChangeCategory()">
-                    <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}
-                    </option>
-                  </select>
-                  <!-- <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Chuyên mục con</td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" formControlName="childCategory" [compareWith]="compareChildCategories">
-                    <option *ngFor="let childCategory of childCategories" [ngValue]="childCategory">
-                      {{childCategory.childCategoryName}}</option>
-                  </select>
-                  <!-- <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Bạn đăng tin</td>
-              <td>
-                <!-- <div class="form-group"> -->
-                <div class="form-check-inline">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="postType" [value]="true"
-                           formControlName="postType" />Cần
-                    bán
-                  </label>
-                </div>
-                <div class="form-check-inline">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="postType" [value]="false"
-                           formControlName="postType" />Cần
-                    mua
-                  </label>
-                </div>
-                <!-- <p class="small text-danger mt-1">Bạn chưa chọn mục cần bán hay mua. Vui lòng chọn
-                                  mục.</p> -->
-                <!-- </div> -->
-              </td>
-            </tr>
-            <tr>
-              <td>Tiêu đề</td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Nhập tiêu đề" formControlName="title">
-                  <!-- <p class="small text-danger mt-1">Vui lòng nhập tiêu đề bài viết.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Nội dung tin</td>
-              <td>
-                <div class="form-group">
+                </td>
+              </tr>
+              <tr>
+                <td>Chuyên mục cha</td>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="category" [ngModelOptions]="{standalone: true}"
+                      [compareWith]="compareCategories" (change)="onChangeCategory()">
+                      <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Chuyên mục con</td>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control" formControlName="childCategory" [compareWith]="compareChildCategories">
+                      <option *ngFor="let childCategory of childCategories" [ngValue]="childCategory">
+                        {{childCategory.childCategoryName}}</option>
+                    </select>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('childCategory').touched && refPost.controls.childCategory.errors?.required">
+                      Chuyên mục không được để trống
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Bạn đăng tin</td>
+                <td>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="postType" [value]="true"
+                        formControlName="postType" />Cần
+                      bán
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="postType" [value]="false"
+                        formControlName="postType" />Cần
+                      mua
+                    </label>
+                  </div>
+                  <span class="small text-danger mt-1"
+                    *ngIf="refPost.get('postType').touched && refPost.controls.postType.errors?.required">
+                    Vui lòng chọn tin bán hay tin mua
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td>Tiêu đề</td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nhập tiêu đề" formControlName="title">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('title').touched && refPost.controls.title.errors?.required">
+                      Tiêu đề không được để trống
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('title').touched && refPost.controls.title.errors?.maxlength">
+                      Tiêu đề không được vượt quá 50 kí tự
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Nội dung tin</td>
+                <td>
+                  <div class="form-group">
                     <textarea class="form-control" rows="3" placeholder="Nhập nội dung tin"
-                              formControlName="description"></textarea>
-                  <!-- <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Giá</td>
-              <td>
-                <div class="form-group">
-                  <input type="number" class="form-control" placeholder="Nhập giá" formControlName="price">
-                  <!-- <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Trạng thái</td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" formControlName="status" [compareWith]="compareStatus">
-                    <!-- <option
-                      [disabled]="statusItem.statusId === 1 || statusItem.statusId === 3 || statusItem.statusId === 6"
-                      *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
-                    </option> -->
-                    <option *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
-                    </option>
-                  </select>
-                  <!-- <p class="small text-danger mt-1">Hãy nhập dữ liệu vào trường bắt buộc.</p> -->
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Ảnh</td>
-              <td>
-                <div class="custom-file">
-                  <input type="file" class="form-control-file pb-1">
-                  <img *ngFor="let img of images" src="{{img.url}}" width="50px" height="50px"
-                       class="img-thumbnail rounded float-left mr-1" alt="...">
-                </div>
-              </td>
-            </tr>
+                      formControlName="description"></textarea>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('description').touched && refPost.controls.description.errors?.required">
+                      Nội dung tin không được để trống
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Giá</td>
+                <td>
+                  <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Nhập giá" formControlName="price">
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('price').touched && refPost.controls.price.errors?.required">
+                      Giá không được để trống
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('price').touched && refPost.controls.price.errors?.min">
+                      Giá phải lớn hơn bằng 0 và bé hơn 2.000.000.000
+                    </span>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('price').touched && refPost.controls.price.errors?.max">
+                      Giá phải lớn hơn bằng 0 và bé hơn 2.000.000.000
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Trạng thái</td>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control" formControlName="status" [compareWith]="compareStatus">
+                      <!-- <option
+                        [disabled]="statusItem.statusId === 1 || statusItem.statusId === 3 || statusItem.statusId === 6"
+                        *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
+                      </option> -->
+                      <option *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
+                      </option>
+                    </select>
+                    <span class="small text-danger mt-1"
+                      *ngIf="refPost.get('status').touched && refPost.controls.status.errors?.required">
+                      Trạng thái không được để trống
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Ảnh</td>
+                <td>
+                  <div class="custom-file">
+                    <input type="file" class="form-control-file pb-1" (change)="importImages($event)" multiple>
+                    <img *ngFor="let img of imageList" src="{{img.url}}" width="50px" height="50px"
+                      class="img-thumbnail rounded mr-1" alt="..." (click)="openImage(img.url)">
+                  </div>
+                </td>
+              </tr>
             </tbody>
 
           </table>
@@ -193,14 +228,3 @@
         </form>
       </div>
     </div>
-
-  </div>
-
-  <div class="col-2" style="background-color: grey;">
-    ads
-  </div>
-</div>
-
-<div style="background-color: yellowgreen; height: 100px;">
-  footer
-</div>
