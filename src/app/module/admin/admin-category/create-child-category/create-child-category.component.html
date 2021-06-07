@@ -25,7 +25,6 @@
                    *ngIf="formCreate.get('childCategoryName').invalid && formCreate.get('childCategoryName').dirty">
                 <span *ngIf="formCreate.get('childCategoryName').hasError('required')">Tên chuyên mục không được để trống.</span>
                 <span *ngIf="formCreate.get('childCategoryName').hasError('pattern')">Tên chuyên mục không được có kí tự đặc biệt</span>
-                <span *ngIf="formCreate.get('childCategoryName').hasError('maxLength')">Tên chuyên mục không được quá 20 kí tự</span>
               </div>
             </td>
           </tr>
