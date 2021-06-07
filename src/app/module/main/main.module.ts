@@ -24,7 +24,6 @@ import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent, CreatePostComponent,
     ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent, SearchPostComponent],
-
   imports: [
     CommonModule,
     RouterModule,
@@ -50,5 +49,6 @@ import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
     MainChatComponent,
   ],
 })
+
 export class MainModule {
 }

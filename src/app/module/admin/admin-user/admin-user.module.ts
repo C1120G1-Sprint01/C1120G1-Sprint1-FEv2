@@ -9,6 +9,8 @@ import {CreateUserComponent} from './create-user/create-user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import {MatSortModule} from "@angular/material/sort";
+import {ChartsModule} from "ng2-charts";
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import {NgxPaginationModule} from "ngx-pagination";
         AdminUserRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        MatSortModule,
+        ChartsModule
     ]
 })
 export class AdminUserModule {

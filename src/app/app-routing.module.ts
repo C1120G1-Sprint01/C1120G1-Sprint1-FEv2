@@ -47,11 +47,11 @@ const routes: Routes = [
     component: MainPageComponent,
     children: [
       {path: '', component: ListPostComponent},
+      {path: 'search', component: SearchPostComponent},
+      {path: 'post/create', component: CreatePostComponent},
       {path: 'post/:id', component: ViewPostComponent},
       {path: ':category', component: ListPostComponent},
       {path: ':category/:childCategory', component: ListPostComponent},
-      {path: 'search', component: SearchPostComponent},
-      {path: 'createPost', component: CreatePostComponent},
     ]
   }
 ];

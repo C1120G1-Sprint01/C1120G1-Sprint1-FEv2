@@ -222,7 +222,7 @@
               </label>
             </td>
             <td>
-              <input type="number" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
+              <input type="text" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
                      formControlName="price"/>
               <p class="invalid-feedback" *ngIf="form.controls.price.touched">
                 <span *ngIf="form.controls.price.errors?.pattern">Giá tiền không hợp lệ.</span>
@@ -238,9 +238,15 @@
               </label>
             </td>
             <td>
-              <button class="btn btn-success" (click)="addImage()" type="button">
-                <i class="fas fa-folder-plus"></i>
-              </button>
+              <input class="form-control" type="file" accept="image/*" formControlName="file"
+                     multiple="" (change)="onFileSelected($event)"/><br>
+              <div *ngFor='let url of imagesSource; let i = index' class="imgPreview">
+                <img [src]="url" alt>
+                <div class="close" (click)="removeImg(i)">X</div>
+              </div>
+              <!--              <button class="btn btn-success" (click)="addImage()" type="button">-->
+              <!--                <i class="fas fa-folder-plus"></i>-->
+              <!--              </button>-->
               <!--              <section class="d-block">-->
               <!--                <section style="display: none" id="addImg1">-->
               <!--                  <section class="d-inline-flex imgAdd">-->
@@ -283,7 +289,7 @@
           </tr>
           <tr>
             <td>
-              <a class="btn btn-danger col-md-6" (click)="cancelUpdate()">Huỷ</a>
+              <a class="btn btn-danger col-md-6" (click)="cancelCreate()">Huỷ</a>
             </td>
             <td class="d-flex justify-content-center">
               <button type="submit" class="btn btn-success col-md-6" [disabled]="form.invalid">Đăng tin</button>

@@ -154,6 +154,7 @@ input::-webkit-input-placeholder {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+
 /* END custom scrollbar */
 
 /*------------------- dangtin below */
@@ -170,8 +171,43 @@ input::-webkit-input-placeholder {
 .custom-select-sm {
   height: calc(1.5em + 0.75rem + 0px) !important;
 }
+
 .imgAdd {
   margin-top: 3px;
+}
+
+/* ViNTT */
+.imgPreview {
+  position: relative;
+  margin: 3px 10px 10px;
+  display: inline-block;
+  box-shadow: 5px 5px 2px gainsboro;
+}
+
+/* ViNTT */
+.imgPreview .close {
+  position: absolute;
+  background: red;
+  color: white;
+  top: -10px;
+  right: -10px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px 0 #000;
+}
+
+/* ViNTT */
+.imgPreview img {
+  max-height: 80px;
+  max-width: 200px;
+  border: gainsboro 1px solid;
 }
 
 /* END custom scrollbar */
