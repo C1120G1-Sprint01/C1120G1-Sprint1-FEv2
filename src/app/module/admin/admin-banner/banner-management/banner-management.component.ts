@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServiceBannerService} from "../../../../service/service-banner/service-banner.service";
 import {Banner} from "../../../../model/Banner";
 import {interval} from "rxjs";
@@ -33,7 +33,10 @@ export class BannerManagementComponent implements OnInit {
       this.listBanner = data;
       this.lengthListBanner = this.listBanner.length;
       if (this.lengthListBanner === 0) {
-        this.toastr.warning('Hiện tại không có dữ liệu hiển thị', 'Thông báo!', {timeOut: 3000, progressAnimation: 'decreasing'});
+        this.toastr.warning('Hiện tại không có dữ liệu hiển thị', 'Thông báo!', {
+          timeOut: 3000,
+          progressAnimation: 'decreasing'
+        });
       }
     });
     const changeBySecond = interval(60000).subscribe(() => {
@@ -95,14 +98,6 @@ export class BannerManagementComponent implements OnInit {
     this.modalService.open(content, {windowClass: 'dark-modal'});
   }
 
-  openLoading() {
-    const dialogRef = this.dialog.open(LoadingComponent, {
-      width: '500px',
-      height: '200px',
-      disableClose: true
-    });
-  }
-
   deleteBanner(bannerId: number) {
     this.bannerManagementService.findBannerById(bannerId).subscribe((data) => {
       this.bannerCheck = data;
@@ -110,13 +105,9 @@ export class BannerManagementComponent implements OnInit {
         this.toastr.error('Hiện Tại Banner Này Đã Bị Xóa Rồi !', 'Thông Báo!')
       } else {
         this.modalService.dismissAll();
-        this.openLoading();
-        setTimeout(() => {
-          this.bannerManagementService.deleteAdvertiseBanner(bannerId).subscribe((data1) => {
-            this.ngOnInit();
-            this.dialog.closeAll();
-            this.toastr.success('Xóa Banner Thành Công', 'Thông Báo!');
-          });
+        this.bannerManagementService.deleteAdvertiseBanner(bannerId).subscribe((data1) => {
+          this.ngOnInit();
+          this.toastr.success('Xóa Banner Thành Công', 'Thông Báo!');
         });
       }
     });

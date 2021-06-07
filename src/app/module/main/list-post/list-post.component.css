@@ -1,3 +1,21 @@
 .title-text {
   font-size: 20px;
 }
+
+a.item_ad {
+  text-decoration: none;
+  color: black;
+}
+
+a.item_ad:hover{
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+  transition: 0.3s;
+}
+
+.btn-load-more{
+  border-radius: 30px;
+}
+
+.btn-load-more:hover{
+  transition: 0.5s;
+}

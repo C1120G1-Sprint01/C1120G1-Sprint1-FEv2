@@ -16,10 +16,9 @@ form {
   font-size: 13px;
 }
 .title {
-  font-size: 20px;
-  background-color: #027FFF;
+  font-size: 1.75rem;
   margin:  5px;
-  color: white;
+  color: #0D5DB6;
   text-transform: uppercase;
   padding: 10px;
 }
@@ -27,7 +26,6 @@ form {
   background-color: #0D5DB6;
 }
 .table-header {
-  background-color: #027FFF;
   border-radius: 3px 3px 0 0;
   margin-bottom: 10px;
 }
@@ -49,7 +47,7 @@ form {
 
 }
 .btnback {
-  margin-bottom: 7px;
+  margin-bottom: 1rem;
 }
 .menu-left-admin {
   border-right: solid #095484 1px;

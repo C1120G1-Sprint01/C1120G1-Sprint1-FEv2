@@ -16,7 +16,7 @@ import {MainModule} from "../main/main.module";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {environment} from "./customer-post/environments/environment";
-import { CustomerContentComponent } from './customer-layout/customer-content/customer-content.component';
+import {CustomerContentComponent} from './customer-layout/customer-content/customer-content.component';
 import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
@@ -29,14 +29,8 @@ import {ToastrModule} from "ngx-toastr";
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     RouterModule,
+    CustomerRoutingModule,
     MainModule,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CustomerRoutingModule,
-    RouterModule,
-    CustomerRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ]

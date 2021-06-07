@@ -2,74 +2,53 @@
 <div class="list-group list-post mt-2">
   <div href="#" class="list-group-item post-item filter-bar border-bottom">
     <div class="d-inline-flex col-12 px-0">
-      <p class="col-6 px-0">
-        Rao vặt&nbsp;
-        <span class="text-lowercase">toàn quốc</span>
-      </p>
-      <p class="col-6 px-0 text-right">
-        <!--              <a class="col-6 filter-item">Giá rẻ trước</a>-->
-        <span class="col-6 filter-item ">Tin mới trước</span>
+      <p class="col-6 px-0 title-text">
+        Tin bài mới
       </p>
     </div>
   </div>
-  <!--        <h3 class="text-danger text-center">Không tìm thấy kết quả</h3>-->
-  <!-- post -->
-  <a class="list-group-item list-group-item-action post-item border-bottom"
-     *ngFor="let item of posts.content, let i = index" [routerLink]="['post',item.postId]">
-    <div class="d-inline-flex col-12 pl-0">
-      <div class="col-md-2 col-sm-3 px-0">
-        <img [src]="item.imageSet[0].url" width="100" height="100" *ngIf="item.imageSet.length > 0, else noPic"/>
-        <ng-template #noPic>
-          <img [src]="defaultImgUrl" width="100" height="100"/>
-        </ng-template>
-      </div>
-      <div class="px-0 col-md-10 col-sm-9 post-item-content">
-        <div><span class="font-weight-bold badge badge-info" *ngIf="item.postType == 1">Cần bán</span></div>
-        <div><span class="font-weight-bold badge badge-info" *ngIf="item.postType == 0">Cần mua</span></div>
-        <div class="d-inline-flex col-12 px-0">
-          <section class="col-9 px-0 font-weight-bold title-text">{{item.title}}</section>
-          <span class="col-3 px-0 text-right font-italic">{{listTime[i]}}</span>
+  <!--  GRID ad-->
+  <div class="bg-light">
+    <div class="mx-0 row" *ngIf="listPostData; else noPostData">
+      <!--item-->
+        <a class="col-md-3 col-sm-4 col-6 mx-0 border item_ad"
+           *ngFor="let item of listPostData, let i = index" [routerLink]="['post',item.postId]">
+          <div class="mx-0 py-2">
+            <div class="thumbnail-ad px-0 mx-0">
+              <img [src]="item.imageSet[0].url" width="100%" height="200px" alt="image"
+                   *ngIf="item.imageSet.length > 0, else noPic"/>
+              <ng-template #noPic>
+                <img [src]="defaultImgUrl" width="100%" height="200" alt="default image"/>
+              </ng-template>
+            </div>
+            <div class="caption-ad mt-1">
+              <span class="badge badge-success mr-1" *ngIf="item.postType == 1">Cần bán</span>
+              <span class="badge badge-danger mr-1" *ngIf="item.postType == 0">Cần mua</span>
+              <section>{{item.title}}</section>
+              <p class="text-danger font-weight-bold">
+              <span *ngIf="item.price, else elsePrice">
+                {{item.price | currency: 'VND': '': '1.0'}} đ
+              </span>
+                <ng-template #elsePrice>Giá cả liên hệ</ng-template>
+              </p>
+            </div>
+            <p class="d-inlex-inline">
+              <i class="fas fa-ad"></i>&bull;
+              <span>{{listTime[i]}}</span>&bull;
+              <span>{{item.ward.district.province.provinceName}}</span>
+          </p>
         </div>
-        <div class="font-italic text-danger" *ngIf="item.price, else elseBlock">
-          {{item.price| currency: 'VND': '': '1.0'}} đ
-        </div>
-        <ng-template #elseBlock>
-          <div class="font-italic text-danger">
-            Giá cả liên hệ
-          </div>
-        </ng-template>
-        <div>Ở <span class="font-italic">{{item.ward.district.province.provinceName}}</span></div>
-      </div>
+      </a>
+      <!--END item-->
     </div>
-  </a>
-  <!-- END post -->
+    <ng-template #noPostData class="d-flex justify-content-center mt-2">
+      <h3 class="title-text text-danger font-weight-bold">Không tìm thấy bài viết nào</h3>
+    </ng-template>
+  </div>
+  <!--  END GRID ad-->
+  <!--  btn load more-->
+  <div class="d-flex justify-content-center col-12 my-3">
+    <button class="btn btn-outline-primary col-6 btn-load-more" (click)="loadMore()">Xem thêm</button>
+  </div>
+  <!--  END btn load more-->
 </div>
-<!-- END list post -->
-<!-- pagination -->
-<div class="load-more d-flex justify-content-center m-3">
-  <nav aria-label="Page navigation example" class="float-right">
-    <ul class="pagination">
-      <li class="page-item">
-        <button class="page-link" [hidden]="posts?.pageable?.pageNumber == 0"
-                (click)="onList(posts.pageable.pageNumber - 1)">Trước
-        </button>
-      </li>
-      <li class="page-item">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">{{posts?.pageable?.pageNumber + 1}}</span>
-          </div>
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> /{{posts?.totalPages}}</span>
-          </div>
-        </div>
-      </li>
-      <li class="page-item">
-        <button class="page-link" [hidden]="posts?.pageable?.pageNumber >=  posts?.totalPages - 1"
-                (click)="onList(posts.pageable.pageNumber + 1)">Tiếp
-        </button>
-      </li>
-    </ul>
-  </nav>
-</div>
-<!-- END pagination-->
