@@ -9,9 +9,10 @@ import { GetBackPasswordComponent } from './get-back-password/get-back-password.
 import { RegisterComponent } from './register/register.component';
 import {MainModule} from "../main/main.module";
 import {MatSelectModule} from "@angular/material/select";
+import { LoginGoogleComponent } from './login-google/login-google.component';
 
 @NgModule({
-  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent],
+  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent, LoginGoogleComponent],
   imports: [
     CommonModule,
     RouterModule,

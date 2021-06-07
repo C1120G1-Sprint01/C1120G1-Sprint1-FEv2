@@ -76,9 +76,23 @@ export class ServiceAdminService {
   }
 
   getAllChildByChildNameAndName(childCategoryName: string, categoryName: string): Observable<ChildCategory[]> {
-
     return this.httpClient.get<ChildCategory[]>(this.baseUrl + '/main-category/child-category/search?' +
       'childCategoryName=' + childCategoryName + '&categoryName=' + categoryName);
+  }
+
+  getAllCategoryByCategoryName(categoryName: string): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.baseUrl + '/main-category/category/search?' +
+      'categoryName=' + categoryName);
+  }
+
+  searchAllCategory(categoryName: string): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.baseUrl + '/main-category/category/searchAbsolute?' +
+      'categoryName=' + categoryName);
+  }
+
+  searchAllChildCategory(childCategoryName: string, categoryId): Observable<ChildCategory[]> {
+    return this.httpClient.get<ChildCategory[]>(this.baseUrl + '/main-category/child-category/searchAbsolute?' +
+      'childCategoryName=' + childCategoryName + '&&categoryId=' + categoryId);
   }
 
   getAllUser(): Observable<User[]> {
@@ -92,9 +106,8 @@ export class ServiceAdminService {
   getAllWard(): Observable<Ward[]> {
     return this.httpClient.get<Ward[]>(this.API_URL_WARD);
   }
-  getAllUsers(page: number, size: number, onSorting: boolean, textSorting: string): Observable<any> {
-    return this.httpClient.get(this.API_URL_USER + '?page=' + page + '&size=' + size + '&textSorting=' + textSorting +'&onSorting=' + onSorting);
-    console.log(page, size);
+  getAllUsers(): Observable<any> {
+    return this.httpClient.get(this.API_URL_USER);
   }
 
   getUserById(id: number): Observable<User> {
@@ -126,7 +139,9 @@ export class ServiceAdminService {
     return this.httpClient.post<User>(this.API_URL_USER + '/create', user);
   }
 
-  searchUserBySomething(keySearch: string, size: number): Observable<any> {
-    return  this.httpClient.get<any>(this.API_URL_USER + '?q=' + keySearch + '&size=' + size);
+  searchUserBySomething(keySearch: string): Observable<any> {
+    return  this.httpClient.get<any>(this.API_URL_USER + '/search?q=' + keySearch);
   }
+
+
 }

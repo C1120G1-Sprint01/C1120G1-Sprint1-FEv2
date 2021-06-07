@@ -20,16 +20,16 @@
         </div>
       </div>
       <a href="" class="btn btn-success btn-rounded mb-4" routerLink="create" data-toggle="modal"
-         data-target="#modalCreateCategories">Thêm chuyên mục <i class="fas fa-plus"></i></a><br>
+         data-target="#modalCreateCategories"><i class="fas fa-plus"></i> Thêm chuyên mục</a><br>
       <table [hidden]="childCategoryList === null" class="table table-hover">
         <tr>
-          <th>#</th>
+          <th>STT</th>
           <th>Tên chuyên mục</th>
           <th>Tên chuyên mục cha</th>
           <th colspan="2" style="text-align: center">Thao tác</th>
         </tr>
-        <tr *ngFor="let item of childCategoryList| paginate:{ itemsPerPage: 5, currentPage: p }">
-          <td>{{item.childCategoryId}}</td>
+        <tr *ngFor="let item of childCategoryList | paginate:{ itemsPerPage: 5, currentPage: p } ; let i = index">
+          <td>{{i+1}}</td>
           <td>{{item.childCategoryName}}</td>
           <td>{{item.category.categoryName}}</td>
           <td style="text-align: center">

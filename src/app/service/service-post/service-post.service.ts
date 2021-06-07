@@ -28,10 +28,18 @@ export class ServicePostService {
 
   /**
    * Author: ViNTT
-   * Get data for Post Details Page
+   * Get post detail
    */
   getPostById(id: number): Observable<Post> {
     return this.httpClient.get<Post>(`${this.API_BASE_URL}/${id}`);
+  }
+
+  /**
+   * Author: ViNTT
+   * Get data for Post Details Page
+   */
+  getActivePostById(id: number): Observable<Post> {
+    return this.httpClient.get<Post>(`${this.API_BASE_URL}/${id}/active`);
   }
 
   getAdminPage(): Observable<any> {
@@ -117,5 +125,8 @@ export class ServicePostService {
   deleteByIdPost(deleteId: number): Observable<Post> {
     return this.httpClient.delete<Post>(this.API_BASE_URL + '/list/' + deleteId);
   }
-}
 
+  searchPostByTitle(title: string): Observable<Post> {
+    return this.httpClient.get<Post>(this.API_BASE_URL+ "/search/title?" + 'keySearch=' + title)
+  }
+}
