@@ -176,6 +176,9 @@
                 <td>
                   <div class="form-group">
                     <input type="number" class="form-control" placeholder="Nhập giá" formControlName="price">
+                    <span class="font-italic text-danger" *ngIf="refPost.value.price">
+                      {{refPost.value.price| currency: 'VND': '': '1.0'}} đ
+                    </span><br>
                     <span class="small text-danger mt-1"
                       *ngIf="refPost.get('price').touched && refPost.controls.price.errors?.required">
                       Giá không được để trống
@@ -195,12 +198,12 @@
                 <td>Trạng thái</td>
                 <td>
                   <div class="form-group">
-                    <select class="form-control" formControlName="status" [compareWith]="compareStatus">
-                      <!-- <option
-                        [disabled]="statusItem.statusId === 1 || statusItem.statusId === 3 || statusItem.statusId === 6"
-                        *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
-                      </option> -->
+                    <select class="form-control" formControlName="status" [compareWith]="compareStatus" *ngIf="currentStatus === 1">
                       <option *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
+                      </option>
+                    </select>
+                    <select class="form-control" formControlName="status" [compareWith]="compareStatus" *ngIf="currentStatus !== 1">
+                      <option *ngFor="let statusItem of tempStatus" [ngValue]="statusItem">{{statusItem.statusName}}
                       </option>
                     </select>
                     <span class="small text-danger mt-1"
