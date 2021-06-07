@@ -1,62 +1,96 @@
 <app-main-header></app-main-header>
 <div class="container-fluid">
   <div class="row m-0 p-0">
-    <div class="col-md-2 float-left menu-left-admin">
+    <div class="col-lg-2 col-md-1 float-left menu-left-admin">
+      <div class="col-sm-1" id="btnDot" style="display: none">
+        <button class="btn btn-secondary">
+          Show
+        </button>
+      </div>
       <ul class="col-12">
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeZero}}">
           <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavZero()" [routerLink]="['/admin']">
-            <i class="fas fa-home mr-2 col-1"></i><span>Trang Chủ</span>
+            <i class="fas fa-home"></i><span class="sideBarTitle">Trang Chủ</span>
           </a>
         </li>
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeOne}}">
           <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavOne()" [routerLink]="['/admin/users']">
-            <i class="fas fa-user-tie mr-2 col-1"></i><span>Quản Lý Thành Viên</span>
+            <i class="fas fa-user-tie"></i><span  class="sideBarTitle">Quản Lý Thành Viên</span>
+          </a>
+        </li>
+        <li class=" pt-2 pb-2 menu-var mt-3 {{activeSeven}}">
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavSeven()" [routerLink]="['/admin/users/statistics']">
+            <i class="fas fa-chart-line"></i><span  class="sideBarTitle">Thống Kê Người Dùng</span>
+
           </a>
         </li>
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeTwo}}">
           <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavTwo()"
              [routerLink]="['/admin/categories']">
-            <i class="fas fa-tasks mr-2 col-1"></i><span>Quản Lý Chuyên Mục</span>
+            <i class="fas fa-tasks"></i><span  class="sideBarTitle">Quản Lý Chuyên Mục</span>
           </a>
         </li>
         <li class="pt-2 pb-2 menu-var mt-3 {{activeThree}} dropdown">
-          <a class="text-decoration-none text-dark nav-link dropdown-toggle" [routerLink]="['/admin/posts']"
-             (click)="activeNavThree()" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-paste mr-2"></i><span>Quản Lí Bài Đăng</span></a>
+          <a class="text-decoration-none text-dark nav-link dropdown-toggle"
+             [routerLink]="['/admin/posts']"
+             (click)="activeNavThree()"
+             data-toggle="dropdown" role="button"
+             aria-haspopup="true" aria-expanded="false">
+
+            <i class="fa fa-paste"></i>
+            <span class="sideBarTitle" id="postMana">Quản Lí Bài Đăng</span>
+          </a>
           <div class="dropdown-menu">
             <a class="text-decoration-none text-dark  pt-2 pb-2 dropdown-item"
                [routerLink]="['/admin/posts/list-detail']">
-              <i class="fas fa-sticky-note mr-3 col-1"></i>Xem Tin Rao Vặt
+              <i class="fas fa-sticky-note"></i>
+              <span class="sideBarTitle">Xem Tin Rao Vặt</span>
             </a>
             <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
                [routerLink]="['/admin/posts/list-approve']">
-              <i class="fas fa-file-signature mr-3 col-1"></i>Duyệt Tin Rao Vặt
+              <i class="fas fa-file-signature"></i>
+              <span class="sideBarTitle">Duyệt Tin Rao Vặt</span>
+
             </a>
             <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
                [routerLink]="['/admin/posts/list-wait']">
-              <i class="fas fa-clipboard mr-3 col-1"></i>Danh Sách Chưa Duyệt
+              <i class="fas fa-clipboard"></i>
+              <span class="sideBarTitle">Danh Sách Chưa Duyệt</span>
+
+            </a>
+            <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
+               [routerLink]="['/admin/posts/list-delete']">
+              <i class="fas fa-ban"></i>
+              <span class="sideBarTitle">Xoá Tin Rao Vặt</span>
+
+            </a>
+            <a class="text-decoration-none text-dark pt-2 pb-2 dropdown-item"
+               [routerLink]="['/admin/posts/statistics']">
+              <i class="fas fa-chart-bar"></i>
+              <span class="sideBarTitle">Thống Kê Bài Đăng</span>
+
             </a>
           </div>
         </li>
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeFour}}">
           <a (click)="activeNavFour()" [routerLink]="['/admin/banners']"
              class="text-decoration-none text-dark pt-2 pb-2">
-            <i class="far fa-credit-card mr-2 col-1"></i><span>Banner Quảng Cáo</span>
+            <i class="far fa-credit-card"></i><span  class="sideBarTitle">Banner Quảng Cáo</span>
           </a>
         </li>
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeFive}}">
           <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavFive()" [routerLink]="['/admin/chat']">
-            <i class="fas fa-comment-dots mr-2 col-1"></i><span>Chat</span>
+            <i class="fas fa-comment-dots"></i><span  class="sideBarTitle">Chat</span>
           </a>
         </li>
         <li class=" pt-2 pb-2 menu-var mt-3 {{activeSix}}">
-          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavSix()" [routerLink]="['/admin/chat']">
-            <i class="fas fa-mail-bulk mr-2 col-1"></i><span>Mail Server</span>
+          <a class="text-decoration-none text-dark  pt-2 pb-2" (click)="activeNavSix()" [routerLink]="['/admin/mail']">
+            <i class="fas fa-mail-bulk"></i><span  class="sideBarTitle">Mail Server</span>
           </a>
         </li>
       </ul>
     </div>
-    <div role="main" class="col-md-10">
+    <div role="main" class="col-lg-10 col-md-11 col-sm-11 col-12">
       <router-outlet></router-outlet>
     </div>
   </div>
