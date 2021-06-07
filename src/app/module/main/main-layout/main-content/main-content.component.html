@@ -7,7 +7,7 @@
       <!-- add content of menu left inside here-->
       <!-- category -->
       <div *ngFor="let category of listCategory">
-        <a class="btn menu-left_item col-12 bg-light"
+        <a class="btn menu-left_item col-12 bg-white"
            (click)="getCategoryId(category.categoryId)"
            [attr.data-target]="'#' + category.categoryId">
           <span>-&nbsp;</span>{{category.categoryName}}
