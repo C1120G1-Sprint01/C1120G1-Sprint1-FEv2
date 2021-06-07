@@ -1,4 +1,3 @@
-
 <app-main-header></app-main-header>
 <div class="wrapper wrapper--w790 mt-3">
   <div class="card card-5">
@@ -63,10 +62,10 @@
              class="text-error"> Họ và tên không nhập kí tự đặc biệt , số . Vui lòng nhập lại !</p>
           <p *ngIf="formAddNewCustomer.get('name').hasError('minlength') && formAddNewCustomer.get('name').touched
            && !formAddNewCustomer.get('name').hasError('pattern')"
-             class="text-error"> Họ và tên tối thiểu 6 kí tự  !</p>
+             class="text-error"> Họ và tên tối thiểu 6 kí tự !</p>
           <p *ngIf="formAddNewCustomer.get('name').hasError('maxlength') && formAddNewCustomer.get('name').touched
           && !formAddNewCustomer.get('name').hasError('pattern')"
-             class="text-error"> Họ và tên tối đa 45 kí tự  !</p>
+             class="text-error"> Họ và tên tối đa 45 kí tự !</p>
         </div>
         <div class="form-row">
           <div class="name">Điện Thoại<span class="text-red"> (*)</span>:</div>
@@ -103,7 +102,7 @@
           <div class="name">Hình ảnh:</div>
           <label id="input-image" *ngIf="imgSrc === null">
             <i style="font-size: 26px" class="fa fa-image"></i>
-            <input type="file" name="myfile" accept="*.png.jpg" (change)="showPreview($event)" style="display:none">
+            <input type="file" accept="*.png.jpg" (change)="showPreview($event)" style="display:none">
           </label>
           <p style="color:red; font-size: 11px" class="ml-2">{{messageImageError}}</p>
           <div *ngIf="imgSrc !== null">
@@ -166,8 +165,25 @@
             </div>
           </div>
         </div>
+        <div class="form-row">
+          <div class="name">Điều khoản<span class="text-red"> (*)</span>:</div>
+          <div class="value">
+            <div class="input-group mb-3  ">
+              <select multiple class="form-control" id="exampleFormControlSelect2">
+                <option class="dk">1. Nghiêm cấm đăng bài liên quan chính trị, tôn giáo .</option>
+                <option class="dk">2. Nghiêm cấm đăng bài xúc phạm người khác.</option>
+                <option class="dk">3. Nghiêm cấm đăng bài đồi truỵ, hình ảnh mang tính nhạy cảm.</option>
+                <option class="dk">4. Nghiêm cấm mọi hình thức lừa đảo liên quan đến bài đăng.</option>
+                <option class="dk">5. Không cung cấp thông tin không chính xác.</option>
+              </select>
+            </div>
+            <mat-radio-group [ngModel]="checkAccept">
+              <mat-radio-button value="1" color="primary" (click)="changeAccept()">Tôi đồng ý</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
         <div>
-          <button class="btn btn-success ml-5 mb-1 mt-3" type="submit">Đăng kí</button>
+          <button class="btn btn-success ml-5 mb-1 mt-3" type="submit" [disabled]="checkAccept === false">Đăng kí</button>
           <button class="btn btn-secondary ml-5 mt-3" type="button" routerLink="/">Huỷ</button>
         </div>
       </form>
