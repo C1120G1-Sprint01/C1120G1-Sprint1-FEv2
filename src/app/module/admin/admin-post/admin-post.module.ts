@@ -22,14 +22,17 @@ import {MainModule} from "../../main/main.module";
 import {PostListAdminComponent} from './post-list-admin/post-list-admin.component';
 import {PostDeleteAdminComponent} from './post-delete-admin/post-delete-admin.component';
 import {HttpClientModule} from "@angular/common/http";
-// import {IvyCarouselModule} from "angular-responsive-carousel";
+import {IvyCarouselModule} from "angular-responsive-carousel";
+import { PhoneFormatPipe } from './detail-admin/phone-format.pipe';
+
+
 
 
 @NgModule({
   declarations: [ConfirmAdminComponent, ConfirmWaitComponent, DeletePostAdminComponent,
     DeleteWaitComponent, DetailAdminComponent, ListApproveComponent, ListDetailComponent,
     ListWaitComponent, WaitAdminComponent, PostStatisticsComponent, DetailApproveComponent,
-    DetailWaitComponent, CancelApproveComponent, PostListAdminComponent, PostDeleteAdminComponent],
+    DetailWaitComponent, CancelApproveComponent, PostListAdminComponent, PostDeleteAdminComponent, PhoneFormatPipe],
   imports: [
     CommonModule,
     AdminPostRoutingModule,
