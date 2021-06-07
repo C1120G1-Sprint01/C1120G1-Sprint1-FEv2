@@ -85,3 +85,6 @@ input::-webkit-input-placeholder {
 .btnAcc {
   cursor: none;
 }
+.sticky-top {
+  z-index: 100;
+}
