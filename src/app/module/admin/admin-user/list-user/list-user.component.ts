@@ -30,7 +30,7 @@ export class ListUserComponent implements OnInit {
     this.serviceAdminService.getAllUsers().subscribe(data => {
       this.users = data;
       if (data === null) {
-        this.toastr.warning("Khong tim thay du lieu", "Thong Bao", {
+        this.toastr.warning("Không tìm thấy dữ liệu", "Thông báo", {
           timeOut : 5000,
           progressAnimation: "increasing"
         });
@@ -45,10 +45,10 @@ export class ListUserComponent implements OnInit {
   search(){
     this.serviceAdminService.searchUserBySomething(this.keySearch).subscribe(data => {
       if (data === null) {
-        this.toastr.warning("Thong tin ban tim khong thay trong he thong", "Thong bao");
+        this.toastr.warning("Thông tin bạn tìm không tìm thấy trong hệ thống", "Thông báo");
       } else {
         this.users = data;
-        this.toastr.success("Tim thay thong tin ban muon tim", "Thong Bao");
+        this.toastr.success("Tìm thấy thông tin bạn muốn tìm", "Thông báo");
       }
     });
   }
@@ -56,7 +56,7 @@ export class ListUserComponent implements OnInit {
 
   deleteSuccess() {
     this.ngOnInit();
-    this.toastr.success("Xoa thanh cong", "Thong Bao");
+    this.toastr.success("Xóa thành công", "Thông báo");
   }
 
   sortData(sort: Sort) {
@@ -82,7 +82,7 @@ export class ListUserComponent implements OnInit {
     this.serviceAdminService.searchUserBySomething(this.keySearch).subscribe(data => {
       this.users = data;
       if (data === null) {
-        this.toastr.warning("Khong tim thay du lieu", "Thong Bao", {
+        this.toastr.warning("Không tìm thấy dữ liệu", "Thông báo", {
           timeOut : 5000,
           progressAnimation: "increasing"
         });

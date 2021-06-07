@@ -16,10 +16,17 @@ body{
   max-height: 600px;
   object-fit: contain;
 }
+
 .title {
   text-transform: uppercase;
   text-align: center;
   font-size: 1.75rem;
   color: #0D5DB6;
   padding: 1rem 0;
+}
+
+.layout-builder td {
+  max-width:80px;
+  overflow-wrap:break-word;
+>>>>>>> a536f89702072cd907bab2fabc0431a4b4089b31
 }

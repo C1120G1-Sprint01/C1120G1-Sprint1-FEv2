@@ -22,8 +22,8 @@ export class ServicePostService {
     };
   }
 
-  getListPost(page: number): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${this.API_POST_LIST_URL}?page=${page}`);
+  getListPost(count: number): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(`${this.API_POST_LIST_URL}/${count}`);
   }
 
   /**
@@ -113,6 +113,23 @@ export class ServicePostService {
   getAllByCategoryNameAndChildCategoryName(category: string, childCategory: string, page: number): Observable<any> {
     return this.httpClient.get<any>(`${this.API_BASE_URL}/category/${category}/${childCategory}?page=${page}`);
   }
+
+  /**
+   * Author: ThuanNN
+   * Get data for List Post By Category Load More style
+   */
+  getAllPostByCategoryName(category: string, count: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/categories/${category}/${count}`);
+  }
+
+  /**
+   * Author: ThuanNN
+   * Get data for List Post By Child Category Load More style
+   */
+  getAllPostByCategoryNameAndChildCategoryName(category: string, childCategory: string, count: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_BASE_URL}/categories/${category}/${childCategory}/${count}`);
+  }
+
   getQuantityStatistic(startDate: string, endDate: string): Observable<any> {
     console.log(startDate + endDate)
     return this.httpClient.get(this.API_BASE_URL + '/statistic' + '?startDate=' + startDate + '&endDate=' + endDate);

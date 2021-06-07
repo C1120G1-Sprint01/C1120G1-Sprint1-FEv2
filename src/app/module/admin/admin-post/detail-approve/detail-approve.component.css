@@ -5,3 +5,16 @@
   max-height: 600px;
   object-fit: contain;
 }
+
+.carousel-item {
+  background: grey;
+}
+.carousel-item img {
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.layout-builder td {
+  max-width:80px;
+  overflow-wrap:break-word;
+}

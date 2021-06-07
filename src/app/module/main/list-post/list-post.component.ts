@@ -5,6 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {DateUtilService} from "../../../service/date-util/date-util.service";
 import {Post} from "../../../model/Post";
 
+const defaultNum: number = 4;
+
 @Component({
   selector: 'app-list-post',
   templateUrl: './list-post.component.html',
@@ -14,10 +16,10 @@ export class ListPostComponent implements OnInit {
 
   defaultImgUrl: string = 'https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/post%2Fnoimage-icon.jpg?'
     + 'alt=media&token=05c794cb-44e7-4705-8369-cb36fe0ece93';
-
   listPost: any;
   listTime: string[] = [];
   listPostData: Post[] = [];
+  public count: number = defaultNum;
 
   constructor(
     private postService: ServicePostService,
@@ -27,7 +29,7 @@ export class ListPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onList(0);
+    this.onList(this.count);
     this.mainContentComponent.ngOnInit();
   }
 
@@ -40,26 +42,26 @@ export class ListPostComponent implements OnInit {
     // console.log(this.listTime);
   }
 
-  onList(page: number) {
+  onList(count: number) {
     let category = this.activatedRoute.snapshot.params['category'];
     let childCategory = this.activatedRoute.snapshot.params['childCategory'];
 
     if (category) {
       if (childCategory) {
-        this.postService.getAllByCategoryNameAndChildCategoryName(category, childCategory, page).subscribe(data => {
+        this.postService.getAllPostByCategoryNameAndChildCategoryName(category, childCategory, count).subscribe(data => {
           this.initData(data);
         }, error => {
           console.log('error: ' + error);
         });
       } else {
-        this.postService.getAllByCategoryName(category, page).subscribe(data => {
+        this.postService.getAllPostByCategoryName(category, count).subscribe(data => {
           this.initData(data);
         }, error => {
           console.log('error: ' + error);
         });
       }
     } else {
-      this.postService.getListPost(page).subscribe(data => {
+      this.postService.getListPost(count).subscribe(data => {
         this.initData(data);
       }, error => {
         console.log('error: ' + error);
@@ -67,4 +69,8 @@ export class ListPostComponent implements OnInit {
     }
   }
 
+  loadMore() {
+    this.count += defaultNum;
+    this.onList(this.count);
+  }
 }

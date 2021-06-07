@@ -11,19 +11,19 @@
       <th>Mã sản phẩm</th>
       <td>{{postDetail.postId}}</td>
     </tr>
-    <tr>
+    <tr class="layout-builder">
       <th>Tên</th>
       <td>{{postDetail.posterName}}</td>
     </tr>
     <tr>
       <th>SĐT</th>
-      <td>{{postDetail.phone}}</td>
+      <td>{{postDetail.phone | phoneFormat}}</td>
     </tr>
     <tr>
       <th>Email</th>
       <td>{{postDetail.email}}</td>
     </tr>
-    <tr>
+    <tr class="layout-builder">
       <th>Địa chỉ</th>
       <td>{{postDetail.ward.wardName}}</td>
     </tr>
@@ -36,7 +36,7 @@
       <th>Tiêu đề</th>
       <td>{{postDetail.title}}</td>
     </tr>
-    <tr>
+    <tr class="layout-builder">
       <th>Nội dung</th>
       <td>{{postDetail.description}}</td>
     </tr>
