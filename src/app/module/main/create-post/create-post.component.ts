@@ -175,6 +175,7 @@ export class CreatePostComponent implements OnInit {
         });
       }, error => {
         this.toastr.error("Đã có lỗi xảy ra!", "Lỗi!");
+        window.scrollTo({top: 0, behavior: 'smooth'});
         console.log("error is: " + error);
       });
 
@@ -184,6 +185,7 @@ export class CreatePostComponent implements OnInit {
 
   cancelCreate() {
     this.router.navigateByUrl("/");
+    window.scrollTo({top: 0, behavior: 'smooth'});
     this.toastr.warning("Huỷ đăng tin mới thành công!", "Hủy đăng tin mới!");
   }
 
@@ -214,5 +216,4 @@ export class CreatePostComponent implements OnInit {
         console.log("get " + error + " on onChangeCategory");
       })
   }
-
 }
