@@ -10,6 +10,8 @@ import {District} from "../../../../model/District";
 import {ToastrService} from "ngx-toastr";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
+import {MainLoadingComponent} from "../../../main/main-layout/main-loading/main-loading.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-user',
@@ -36,19 +38,18 @@ export class EditUserComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.selectedImg = null;
     this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
       this.provinces = dataProvince;
-      console.log(dataProvince);
     });
     this.id = this.activatedRoute.snapshot.params['id'];
-    console.log('id edit ' + this.id);
     this.serviceAdminService.getUserById(this.id).subscribe(data => {
-      console.log('Data ' + JSON.stringify(data));
+      // console.log('Data ' + JSON.stringify(data));
       this.imgSrc = data.avatarUrl;
       // this.rfEditForm.patchValue(data);
       this.serviceAdminService.getAllDistrictByProvinceId(data.ward.district.province.provinceId).subscribe(dataDistr => {
@@ -68,8 +69,9 @@ export class EditUserComponent implements OnInit {
         district: data.ward.district,
         province: data.ward.district.province,
         ward: data.ward,
+        // avatarUrl: data.avatarUrl
       })
-      console.log(this.rfEditForm.value);
+
     })
     this.rfEditForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\\\{}\\[\\]:;"\'<>,.?\/]+$')]],
@@ -102,15 +104,17 @@ export class EditUserComponent implements OnInit {
   }
   createFireBase() {
     if (this.rfEditForm.valid) {
-      if (this.rfEditForm.value.avatarUrl != this.imgSrc) {
+      if (this.users.avatarUrl !== this.imgSrc) {
         const filePath = `imgChange/${this.selectedImg.name}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(filePath);
+        this.openLoading();
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(avatarUrl => {
               this.rfEditForm.value.avatarUrl = avatarUrl;
               console.log(avatarUrl);
               this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
+                this.dialog.closeAll();
                 this.router.navigateByUrl('/admin/users');
                   this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
                     timeOut: 5000,
@@ -125,6 +129,7 @@ export class EditUserComponent implements OnInit {
         ).subscribe();
       } else {
         this.rfEditForm.value.avatarUrl = this.imgSrc;
+        console.log(this.imgSrc);
         this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
           this.router.navigateByUrl('/admin/users');
             this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
@@ -139,6 +144,14 @@ export class EditUserComponent implements OnInit {
     } else {
       this.toastr.warning("Dữ liệu chỉnh sửa chưa hợp lệ, mời bạn nhập lại !", "Lỗi !");
     }
+  }
+
+  openLoading() {
+    const dialogRef = this.dialog.open(MainLoadingComponent, {
+      width: '500px',
+      height: '200px',
+      disableClose: true
+    });
   }
 
 

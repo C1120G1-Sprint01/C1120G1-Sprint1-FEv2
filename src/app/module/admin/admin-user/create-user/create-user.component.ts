@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ToastrService} from "ngx-toastr";
 import {finalize} from "rxjs/operators";
+import {MainLoadingComponent} from "../../../main/main-layout/main-loading/main-loading.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-user',
@@ -34,7 +36,8 @@ export class CreateUserComponent implements OnInit {
               private router: Router,
               private storage: AngularFireStorage,
               private formBuilder: FormBuilder,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.serviceAdmin.getAllProvince().subscribe(data => {
@@ -68,6 +71,7 @@ export class CreateUserComponent implements OnInit {
       if (this.formAddNewCustomer.value.password === this.formAddNewCustomer.value.confirmPassword) {
         const  filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
         const fileRef = this.storage.ref(filePath);
+        this.openLoading();
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
@@ -75,6 +79,7 @@ export class CreateUserComponent implements OnInit {
               console.log(url);
               console.log(this.formAddNewCustomer);
               this.serviceAdmin.createUser(formRegister).subscribe(data => {
+                this.dialog.closeAll();
                 this.router.navigateByUrl('/admin/users');
                 this.toastr.success("Thêm mới thành công", "Thông báo", {
                   timeOut: 1000,
@@ -129,6 +134,13 @@ export class CreateUserComponent implements OnInit {
       this.imgSrc = '../assets/img/avatar-1.png';
       this.selectedImg = null;
     }
+  }
+  openLoading() {
+    const dialogRef = this.dialog.open(MainLoadingComponent, {
+      width: '500px',
+      height: '200px',
+      disableClose: true
+    });
   }
   compareProvince(province1: Province, province2: Province): boolean {
     return province1 && province2 ? province1.provinceId === province2.provinceId : province1 === province2
