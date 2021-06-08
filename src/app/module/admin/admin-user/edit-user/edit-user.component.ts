@@ -25,10 +25,11 @@ export class EditUserComponent implements OnInit {
   public provinces: Province[]
   public districts: District[];
   id: number = 0;
-  public selectedImg: any;
+  selectedImg: any;
   public imgSrc: string = '../../../../assets/img/avatar-1.png';
   listError: any = "";
   isCheck;
+
 
   constructor(private serviceAdminService: ServiceAdminService,
               private router: Router,
@@ -39,6 +40,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedImg = null;
     this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
       this.provinces = dataProvince;
       console.log(dataProvince);
@@ -64,7 +66,6 @@ export class EditUserComponent implements OnInit {
         district: data.ward.district,
         province: data.ward.district.province,
         ward: data.ward,
-        avatarUrl: data.avatarUrl
       })
 
       console.log(this.rfEditForm.value);
@@ -100,13 +101,14 @@ export class EditUserComponent implements OnInit {
   }
   createFireBase() {
     if (this.rfEditForm.valid) {
-      if (this.rfEditForm.controls.avatarUrl.value != this.imgSrc) {
+      if (this.rfEditForm.value.avatarUrl != this.imgSrc) {
         const filePath = `imgChange/${this.selectedImg.name}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(filePath);
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {
-            fileRef.getDownloadURL().subscribe(img => {
-              this.rfEditForm.controls.avatarUrl.setValue(img);
+            fileRef.getDownloadURL().subscribe(avatarUrl => {
+              this.rfEditForm.value.avatarUrl = avatarUrl;
+              console.log(avatarUrl);
               this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
                 this.router.navigateByUrl('/admin/users');
                   this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
@@ -121,7 +123,7 @@ export class EditUserComponent implements OnInit {
           })
         ).subscribe();
       } else {
-        this.rfEditForm.controls.avatarUrl.setValue(this.imgSrc);
+        this.rfEditForm.value.avatarUrl = this.imgSrc;
         this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
           this.router.navigateByUrl('/admin/users');
             this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
