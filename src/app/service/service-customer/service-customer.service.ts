@@ -52,16 +52,6 @@ export class ServiceCustomerService {
   //   return this.httpClient.post<any>(this.API_URL_LIST + "/createPost/" + username , post, this.httpOptions);
   // }
 
-  search(keyword: string, category: string, province: string, page: number): Observable<any> {
-    return this.httpClient.get<any>(
-      this.API_URL_LIST + "/search/" + keyword + "/" + category + "/" + province + "?page=" + page, this.httpOptions
-    );
-  }
-
-  searchPostByName(posterName: string): Observable<any> {
-    return this.httpClient.get(this.API_URL_LIST + '/search/' + posterName);
-  }
-
   getUserStatistic(startDate: string, endDate: string): Observable<any> {
     console.log(startDate + endDate);
     return this.httpClient.get(this.API_URL + 'statistic' + '?startDate=' + startDate + '&endDate=' + endDate);

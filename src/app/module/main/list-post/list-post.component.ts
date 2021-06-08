@@ -31,6 +31,7 @@ export class ListPostComponent implements OnInit {
   }
 
   ngOnInit() {
+    (<HTMLInputElement>document.getElementById("search-input")).value = '';
     this.onList(this.count);
     this.mainContentComponent.ngOnInit();
   }

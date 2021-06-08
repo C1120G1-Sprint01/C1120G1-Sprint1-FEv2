@@ -54,9 +54,12 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    (<HTMLInputElement>document.getElementById("search-input")).value = '';
+
     this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
       this.provinces = dataProvince;
     });
+
     this.formInit();
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
