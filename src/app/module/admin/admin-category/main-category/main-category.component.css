@@ -1,7 +1,9 @@
-.title{
-  font-size: 20px;
-  font-weight: bold;
+.title {
+  text-transform: uppercase;
   text-align: center;
+  font-size: 1.75rem;
+  color: #0D5DB6;
+  padding: 1rem 0;
 }
 .body{
   width: 100%;

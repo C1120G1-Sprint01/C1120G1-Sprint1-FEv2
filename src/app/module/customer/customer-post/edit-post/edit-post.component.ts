@@ -41,6 +41,13 @@ export class EditPostComponent implements OnInit {
       "statusName": "Thất bại"
     }
   ];
+  tempStatus = [
+    {
+      "statusId": 2,
+      "statusName": "Đợi duyệt"
+    }
+  ];
+  currentStatus: number;
   imageList;
 
   fileImage: any;
@@ -77,11 +84,12 @@ export class EditPostComponent implements OnInit {
       this.district = oldData.ward.district;
       this.category = oldData.childCategory.category;
       this.imageList = oldData.imageSet;
+      this.currentStatus = oldData.status.statusId;
 
       // set default status when update post
-      if (oldData.status.statusId === 1 || oldData.status.statusId === 3 || oldData.status.statusId === 6) {
+      // if (oldData.status.statusId === 1 || oldData.status.statusId === 3 || oldData.status.statusId === 6) {
         oldData.status = this.status[0];
-      }
+      // }
 
       this.refPost.patchValue(oldData);
 
