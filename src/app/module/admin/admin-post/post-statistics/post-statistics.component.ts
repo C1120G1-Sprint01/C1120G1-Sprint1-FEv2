@@ -31,10 +31,28 @@ export class PostStatisticsComponent implements OnInit {
   title = 'bar-chart';
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          min: 0,
+          max: 20,
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 20,
+        }
+      }]
+    }
   };
-  // @ts-ignore
+  public barChartColors: Color[] = [
+    {backgroundColor: 'rgba(190,255,72,0.75)'},
+    {backgroundColor: 'rgba(255,165,113,0.75)'},
+  ];
+
   barChartLabels: Label[] = [];
-  // @ts-ignore
+
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins: any = {
@@ -46,11 +64,6 @@ export class PostStatisticsComponent implements OnInit {
       '#36A2EB'
     ]
   };
-  // @ts-ignore
-  public barChartColors: Color[] = [
-    {backgroundColor: 'blue'},
-    {backgroundColor: 'red'},
-  ];
 
   barChartData: ChartDataSets[] = [
     {data: [], label: 'Bài Đăng Thành Công '},
@@ -63,7 +76,7 @@ export class PostStatisticsComponent implements OnInit {
     }else if(this.startDate == this.endDate){
       this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau');
     }else
-      this.toastr.success('Chúc vui vẻ')
+      this.toastr.success('Thống kê thành công', "Thông báo");
     this._postService.getQuantityStatistic(this.startDate, this.endDate).subscribe(response => {
       console.log(response);
       this.barChartLabels = [];
