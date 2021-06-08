@@ -26,19 +26,19 @@ export class ListWaitComponent implements OnInit {
 
   getListPostListWait() {
     this.postService.getAllPostListWait().subscribe(data => {
-      console.log('Get success' + JSON.stringify(data));
-      console.log(data.content);
-      this.postList = data.content;
-    }, error => {
-      console.log('get ' + error + ' on MainAdminComponent at getListPostDetail');
+      if(data == null) {
+        this.postList = [];
+      } else {
+        this.postList = data.content;
+      }
     });
   }
 
   deleteSuccess() {
-    this.ngOnInit();
+    this.getListPostListWait();
   }
 
   approveSuccess() {
-    this.ngOnInit();
+    this.getListPostListWait();
   }
 }

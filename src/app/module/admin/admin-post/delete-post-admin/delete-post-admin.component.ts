@@ -42,4 +42,9 @@ export class DeletePostAdminComponent implements OnInit {
     });
     this.toastr.success('Xóa Thành Công !', 'Bài Đăng !');
   }
+
+  sendEmail() {
+    this._postService.sendEmailDelete(this.deleteId).subscribe(data => {
+    });
+  }
 }

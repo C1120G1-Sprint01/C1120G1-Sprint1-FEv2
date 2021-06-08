@@ -29,12 +29,16 @@ export class ListDetailComponent implements OnInit {
 
   getListPostListDetail() {
     this.postService.getAllPostListDetail().subscribe(data => {
-      this.postList = data.content;
+      if(data == null) {
+        this.postList = [];
+      } else {
+        this.postList = data.content;
+      }
     });
   }
 
   cancelSuccess() {
-    this.ngOnInit();
+    this.getListPostListDetail();
   }
 
   search() {

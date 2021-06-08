@@ -34,4 +34,9 @@ export class ConfirmWaitComponent implements OnInit {
     });
     this.toastr.success('Duyệt Thành Công !', 'Bài Đăng !');
   }
+
+  sendEmail() {
+    this.postService.sendEmailApproveWait(this.approveId).subscribe(data => {
+    });
+  }
 }
