@@ -1,11 +1,14 @@
 <div class="table-responsive" id="abc">
-  <h2 style="color: #027FFF">Xem tin rao vặt</h2>
+  <p class="title">Xem tin rao vặt</p>
   <div class="input-group col-5 my-3">
     <input type="search" class="form-control" placeholder="Tiêu đề..." aria-label="Search"
            aria-describedby="search-addon" [(ngModel)]="keySearch">
     <button type="button" class="btn btn-outline-primary mx-2" (click)="search()">Tìm kiếm</button>
-<!--    <div *ngIf="postList.length == 0"><h2 style="color: red" class="text-center">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Không có dữ liệu&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</h2></div>-->
   </div>
+<!--  <div class="col-3 float-left d-inline-flex my-2">-->
+<!--    <input type="text" [(ngModel)]="keySearch"   placeholder="Input Name or Id User To Find" class="form-control rounded-pill inputSearch" style="width: 80%">-->
+<!--    <button class="btn btnSearch" (click)="search()"><i class="fas fa-search"></i></button>-->
+<!--  </div>-->
   <table class="table table-striped table-sm">
     <thead>
     <tr>

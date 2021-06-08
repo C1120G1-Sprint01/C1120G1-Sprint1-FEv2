@@ -74,10 +74,11 @@ form {
 
 .image {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 120px;
+  height: 130px;
   transition: .5s ease;
   backface-visibility: hidden;
+
 }
 
 .middle {

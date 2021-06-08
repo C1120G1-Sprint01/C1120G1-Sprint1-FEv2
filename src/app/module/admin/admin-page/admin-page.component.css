@@ -8,9 +8,45 @@
 /*.blue {*/
 /*  color: #027FFF;*/
 /*}*/
+@media (max-width: 1024px) {
+  .menu-var a span {
+    font-size: 0 !important;
+  }
+  .menu-var.responsive {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .menu-var a {
+    font-size: 30px;
+  }
+  .menu-var {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+  .menu-left-admin ul {
+    width: 5rem;
+  }
+  .sideBarTitle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .menu-left-admin {
+    display: none;
+  }
+  #btnDot {
+    display: block;
+    z-index: 200;
+  }
+}
+
 .menu-left-admin {
   border-right: solid #095484 1px;
-  height: 700px;
+  height: 100%;
   padding: 10px;
 }
 
@@ -30,20 +66,18 @@
 }
 
 .bg-lightgray {
-  background-color: lightgray;
+  border-bottom: 1px solid #0b75c9;
 }
-
-@media (max-width: 1024px) {
-  .menu-var a span {
-    font-size: 0 !important;
-  }
-
-  .menu-var a {
-    font-size: 30px;
-  }
-
-  .menu-var {
-    text-align: center;
-  }
+.sideBarTitle {
+  padding-left: 0.5rem;
 }
-
+.nav-link {
+  padding-left: 0;
+}
+#postMana {
+  padding-right: -0.5rem;
+}
+i {
+  max-width: 100%;
+  max-height: 100%;
+}

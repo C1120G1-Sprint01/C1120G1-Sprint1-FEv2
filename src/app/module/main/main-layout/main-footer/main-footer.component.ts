@@ -17,13 +17,13 @@ export class MainFooterComponent implements OnInit {
   }
 
   backTop() {
-    document.documentElement.scrollTop = 0;
+    window.scroll({top: 0, behavior: 'smooth'});
   }
 
   showBtnOnscroll() {
     let backToTopBtn = document.getElementById('backToTopBtn')
     if (document.documentElement.scrollTop > 300) {
-      backToTopBtn.style.display = 'block'
+      backToTopBtn.style.display = 'block';
     } else {
       backToTopBtn.style.display = 'none'
     }
