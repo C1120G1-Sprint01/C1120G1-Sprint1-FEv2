@@ -11,6 +11,7 @@ import {RegisterComponent} from './module/security/register/register.component';
 import {LoginGoogleComponent} from "./module/security/login-google/login-google.component";
 import {SearchPostComponent} from "./module/main/search-post/search-post.component";
 import {CreatePostComponent} from "./module/main/create-post/create-post.component";
+import {RegisterEmailComponent} from "./module/security/register-email/register-email.component";
 
 const routes: Routes = [
 
@@ -53,6 +54,10 @@ const routes: Routes = [
       {path: ':category', component: ListPostComponent},
       {path: ':category/:childCategory', component: ListPostComponent},
     ]
+  },
+  {
+    path: 'register/email',
+    component: RegisterEmailComponent
   }
 ];
 

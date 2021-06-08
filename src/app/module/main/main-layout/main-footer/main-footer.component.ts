@@ -43,8 +43,8 @@ export class MainFooterComponent implements OnInit {
     let minuteStr = (minutes < 10) ? '0'+minutes : minutes;
     let secondStr = (seconds < 10) ? '0'+seconds : seconds;
 
-    document.getElementById("time").innerHTML = hourStr+':'+minuteStr+':'+secondStr;
-    document.getElementById("gmt").innerHTML = " GMT+7 Asia/Hà Nội";
+    // document.getElementById("time").innerHTML = hourStr+':'+minuteStr+':'+secondStr;
+    // document.getElementById("gmt").innerHTML = " GMT+7 Asia/Hà Nội";
   }
 
 }

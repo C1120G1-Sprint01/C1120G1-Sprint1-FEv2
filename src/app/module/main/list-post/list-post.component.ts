@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../service/service-post/service-post.service';
 import {MainContentComponent} from "../main-layout/main-content/main-content.component";
 import {ActivatedRoute} from "@angular/router";
@@ -6,7 +6,9 @@ import {DateUtilService} from "../../../service/date-util/date-util.service";
 import {Post} from "../../../model/Post";
 
 const defaultNum: number = 4;
-
+@Injectable({
+  providedIn:'root'
+})
 @Component({
   selector: 'app-list-post',
   templateUrl: './list-post.component.html',

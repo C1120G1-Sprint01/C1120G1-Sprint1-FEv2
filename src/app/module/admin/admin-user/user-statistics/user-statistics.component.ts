@@ -31,6 +31,14 @@ export class UserStatisticsComponent implements OnInit {
   title = 'bar-chart';
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 10
+        }
+      }]
+    }
   };
 
   barChartLabels: Label[] = [];

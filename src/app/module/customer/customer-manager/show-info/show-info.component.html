@@ -26,7 +26,8 @@
       </tr>
       <tr>
         <td><label>Địa chỉ: </label></td>
-        <td>
+        <td></td>
+        <td *ngIf="user.ward != null">
           <span>{{user.ward.wardName}}</span>,
           <span>{{user.ward.district.districtName}}</span>,
           <span>{{user.ward.district.province.provinceName}}</span>

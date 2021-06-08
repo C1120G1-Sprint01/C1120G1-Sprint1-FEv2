@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SecurityService} from "../../../service/security/security.service";
 
 @Component({
@@ -8,10 +8,12 @@ import {SecurityService} from "../../../service/security/security.service";
 })
 export class LoginGoogleComponent implements OnInit {
 
+  @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
+
   constructor(private securityService: SecurityService) { }
 
   ngOnInit(): void {
-     this.securityService.loginGoogle();
+
   }
 
 }
