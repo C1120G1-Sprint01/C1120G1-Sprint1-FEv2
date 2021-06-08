@@ -3,7 +3,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 832px){
+@media screen and (max-width: 1130px){
   .icon-user {
     display: none;
   }

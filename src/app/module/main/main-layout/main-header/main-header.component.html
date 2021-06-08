@@ -195,8 +195,8 @@
               <label for="posterName"></label>
               <input type="text" class="form-control bg-white"
                      placeholder="Tìm kiếm trên Ad web"
-                     style="border-right: none"
-                     id="posterName" formControlName="posterName">
+                     style="border-right: none" maxlength="50"
+                     id="posterName" [(ngModel)]="searchInput">
               <!--              (click) here-->
               <div class="input-group-append" style="cursor: pointer"
                    title="Tìm kiếm">

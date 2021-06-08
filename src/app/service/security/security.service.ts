@@ -2,8 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthLogin} from "../../model/AuthLogin";
+import {User} from "../../model/User";
+import {UserGoogle} from "../../model/UserGoogle";
 
 const API_URL: string = 'http://localhost:8080/api/';
+const API_URL_GOOGLE: string = 'http://localhost:8080/api/login/google'
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +46,8 @@ export class SecurityService {
     return this.http.get<void>(API_URL + 'setNewPw/' + email + '/' + newPw);
   }
 
-  loginGoogle():Observable<any> {
-    return this.http.get<any>(API_URL + 'loginGoogle');
+  createUserGoogle(user: UserGoogle): Observable<any> {
+    return this.http.post<any>(API_URL_GOOGLE, user, this.httpOptions);
   }
 
   registerEmail(email: string):Observable<string>{

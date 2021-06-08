@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {ServicePostService} from "../../../../service/service-post/service-post.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Color, Label} from "ng2-charts";
 
@@ -45,9 +45,8 @@ export class PostStatisticsComponent implements OnInit {
     }
   };
 
-  // @ts-ignore
   barChartLabels: Label[] = [];
-  // @ts-ignore
+
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins: any = {
@@ -59,6 +58,7 @@ export class PostStatisticsComponent implements OnInit {
       '#36A2EB'
     ]
   };
+
   // @ts-ignore
   public barChartColors: Color[] = [
     {backgroundColor: 'rgba(190,255,72,0.75)'},
@@ -71,12 +71,14 @@ export class PostStatisticsComponent implements OnInit {
   ];
 
   onSubmit() {
-    if(this.endDate<this.startDate){
-      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc','Bài Đăng');
-    }else if(this.startDate == this.endDate){
-      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau','Bài Đăng');
-    }else
-      this.toastr.success('Thống Kê Thành Công','Bài Đăng')
+    if (this.endDate < this.startDate) {
+      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc', 'Bài Đăng');
+    } else if (this.startDate == this.endDate) {
+      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau', 'Bài Đăng');
+    } else
+
+    this.toastr.success('Thống kê thành công', "Thông báo");
+
     this._postService.getQuantityStatistic(this.startDate, this.endDate).subscribe(response => {
       console.log(response);
       this.barChartLabels = [];
