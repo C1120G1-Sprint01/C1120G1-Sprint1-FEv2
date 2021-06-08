@@ -11,9 +11,10 @@ import {MainModule} from "../main/main.module";
 import {MatSelectModule} from "@angular/material/select";
 import { LoginGoogleComponent } from './login-google/login-google.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { RegisterEmailComponent } from './register-email/register-email.component';
 
 @NgModule({
-  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent, LoginGoogleComponent],
+  declarations: [LoginComponent, LogoutComponent, GetBackPasswordComponent, RegisterComponent, LoginGoogleComponent, RegisterEmailComponent],
     imports: [
         CommonModule,
         RouterModule,

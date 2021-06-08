@@ -46,4 +46,8 @@ export class SecurityService {
   loginGoogle():Observable<any> {
     return this.http.get<any>(API_URL + 'loginGoogle');
   }
+
+  registerEmail(email: string):Observable<string>{
+    return this.http.get<string>(API_URL + 'registerEmail/' + email)
+  }
 }
