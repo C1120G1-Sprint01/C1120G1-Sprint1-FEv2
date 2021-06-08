@@ -30,10 +30,11 @@ export class ListApproveComponent implements OnInit {
 
   getListPostListApprove() {
     this.postService.getAllPostListApprove().subscribe(data => {
-      console.log('Get success' + JSON.stringify(data));
-      this.postList = data.content;
-    }, error => {
-      console.log('get ' + error + ' on MainAdminComponent at getListPostApprove');
+      if(data == null) {
+        this.postList = [];
+      } else {
+        this.postList = data.content;
+      }
     });
   }
 
