@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {ServicePostService} from "../../../../service/service-post/service-post.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Color, Label} from "ng2-charts";
 
@@ -15,8 +15,6 @@ export class PostStatisticsComponent implements OnInit {
 
   public endDate = '';
   public startDate = '';
-
-
 
   constructor(private _postService: ServicePostService,
               private _router: Router,
@@ -46,10 +44,6 @@ export class PostStatisticsComponent implements OnInit {
       }]
     }
   };
-  public barChartColors: Color[] = [
-    {backgroundColor: 'rgba(190,255,72,0.75)'},
-    {backgroundColor: 'rgba(255,165,113,0.75)'},
-  ];
 
   barChartLabels: Label[] = [];
 
@@ -65,18 +59,26 @@ export class PostStatisticsComponent implements OnInit {
     ]
   };
 
+  // @ts-ignore
+  public barChartColors: Color[] = [
+    {backgroundColor: 'rgba(190,255,72,0.75)'},
+    {backgroundColor: 'rgba(255,165,113,0.75)'},
+  ];
+
   barChartData: ChartDataSets[] = [
     {data: [], label: 'Bài Đăng Thành Công '},
     {data: [], label: 'Bài Đăng Thất Bại '}
   ];
 
   onSubmit() {
-    if(this.endDate<this.startDate){
-      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc');
-    }else if(this.startDate == this.endDate){
-      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau');
-    }else
-      this.toastr.success('Thống kê thành công', "Thông báo");
+    if (this.endDate < this.startDate) {
+      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc', 'Bài Đăng');
+    } else if (this.startDate == this.endDate) {
+      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau', 'Bài Đăng');
+    } else
+
+    this.toastr.success('Thống kê thành công', "Thông báo");
+
     this._postService.getQuantityStatistic(this.startDate, this.endDate).subscribe(response => {
       console.log(response);
       this.barChartLabels = [];
@@ -90,6 +92,7 @@ export class PostStatisticsComponent implements OnInit {
       }
       this.barChartData.push(successfulStatus);
       this.barChartData.push(failureStatus);
+
     }, error => {
       console.log(error);
     });

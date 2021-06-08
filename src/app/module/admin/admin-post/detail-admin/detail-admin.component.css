@@ -9,12 +9,31 @@ body{
   color: #027FFF;
 }
 
+.layout-builder td {
+  max-width:80px;
+  overflow-wrap:break-word;
+}
+
 .carousel-item {
   background: grey;
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* 8:5 Aspect Ratio */
 }
 .carousel-item img {
-  max-height: 600px;
+  position:  absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.carousel-inner {
+  max-width: 600px;
 }
 
 .title {
@@ -25,8 +44,3 @@ body{
   padding: 1rem 0;
 }
 
-.layout-builder td {
-  max-width:80px;
-  overflow-wrap:break-word;
-
-}
