@@ -3,6 +3,7 @@ import {ServicePostService} from '../../../../service/service-post/service-post.
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Post} from '../../../../model/Post';
+import {ListWaitComponent} from "../list-wait/list-wait.component";
 
 @Component({
   selector: 'app-confirm-wait',
@@ -21,7 +22,8 @@ export class ConfirmWaitComponent implements OnInit {
   constructor(private postService: ServicePostService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private listWaitComponent:ListWaitComponent) {
   }
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class ConfirmWaitComponent implements OnInit {
     this.postService.approveWait(this.approveId).subscribe(data => {
       document.getElementById('closeModal').click();
       this.approveComplete.emit(true);
+      this.listWaitComponent.ngOnInit();
     });
     this.toastr.success('Duyệt Thành Công !', 'Bài Đăng !');
   }

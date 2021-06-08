@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ServicePostService} from '../../../../service/service-post/service-post.service';
 import {Router} from '@angular/router';
 import {Post} from '../../../../model/Post';
 
+@Injectable({
+  providedIn:'root'
+})
 @Component({
   selector: 'app-list-wait',
   templateUrl: './list-wait.component.html',

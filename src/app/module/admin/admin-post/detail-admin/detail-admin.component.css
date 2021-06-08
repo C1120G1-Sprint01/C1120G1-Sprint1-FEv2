@@ -31,6 +31,16 @@ body{
   max-width: 100%;
   margin: auto;
 }
+
 .carousel-inner {
   max-width: 600px;
 }
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.75rem;
+  color: #0D5DB6;
+  padding: 1rem 0;
+}
+

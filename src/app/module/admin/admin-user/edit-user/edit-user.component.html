@@ -3,7 +3,7 @@
     <div class="table-header">
       <p class="text-center text-uppercase title">Chỉnh sửa thông tin thành viên</p>
     </div>
-    <button class="btn btn-success btnback" (click)="backToUserList()">Back To List User</button>
+    <button class="btn btn-success btnback" (click)="backToUserList()">Quay Lại</button>
     <div class="col-12 justify-content-center align-items-center">
       <form [formGroup]="rfEditForm" (ngSubmit)="onSubmit()">
         <table class="table table-hover col-8">
@@ -25,21 +25,22 @@
           </tr>
           <tr>
             <th>Email <span style="color:red">*</span></th>
-            <td><input type="text" formControlName="email" placeholder="Nhập địa chỉ" class="form-control inputText">
+            <td><input type="text" formControlName="email" (input)="checkInput('email')" placeholder="Nhập địa chỉ" class="form-control inputText">
               <p class="errorText" *ngIf="rfEditForm.controls.email.touched && rfEditForm.controls.email.errors?.email">
                 Email không đúng định dạng VD: abc@abc.com</p>
               <p class="errorText"
                  *ngIf="rfEditForm.controls.email.dirty && rfEditForm.controls.email.errors?.required">Email người dùng
                 đang bỏ trống</p>
+              <p class="errorText" *ngIf="!isCheck">{{listError.existEmail}}</p>
             </td>
           </tr>
           <tr>
 
-            <th>Province<span style="color:red">*</span></th>
+            <th>Tỉnh/ Thành Phố<span style="color:red">*</span></th>
             <td>
-              <select [compareWith]="compareProvince" (change)="onChangeProvince($event.target)"
+              <select [compareWith]="compareProvince" (change)="onChangeProvince($event.target.value)"
                       formControlName="province" class="form-control selectoption">
-                <option value="" disabled selected>Select a Province</option>
+                <option value="" disabled selected>Vui lòng chọn Tỉnh/ Thành Phố</option>
                 <option *ngFor="let province of provinces" [ngValue]="province" style="color: blue">
                   {{province.provinceName}}
                 </option>
@@ -50,11 +51,11 @@
             </td>
           </tr>
           <tr>
-            <th>District<span style="color:red">*</span></th>
+            <th>Quận/ Huyện<span style="color:red">*</span></th>
             <td>
               <select [compareWith]="compareDistrict" formControlName="district"
-                      (change)="onChangeDistrict($event.target)" class="form-control selectoption">
-                <option value="" disabled selected>Select a District</option>
+                      (change)="onChangeDistrict($event.target.value)" class="form-control selectoption">
+                <option value="" disabled selected>Vui lòng chọn Quận/ Huyện</option>
                 <option *ngFor="let district of districts"
                         [ngValue]="district"
                         style="color: blue">
@@ -67,10 +68,10 @@
             </td>
           </tr>
           <tr>
-            <th>Ward<span style="color:red">*</span></th>
+            <th>Xã/ Phường<span style="color:red">*</span></th>
             <td>
               <select [compareWith]="compareWard" formControlName="ward" class="form-control selectoption">
-                <option value="" disabled selected>Select a Ward</option>
+                <option value="" disabled selected>Vui lòng chọn Xã/ Phường</option>
                 <option *ngFor="let ward of wards"
                         [ngValue]="ward"
                         style="color: blue">
@@ -84,13 +85,14 @@
           </tr>
           <tr>
             <th>Số điện thoại <span style="color:red">*</span></th>
-            <td><input type="text" formControlName="phone" placeholder="Nhập số điện thoại người sử dụng"
+            <td><input type="text" formControlName="phone" (input)="checkInput('phone')" placeholder="Nhập số điện thoại người sử dụng"
                        class="form-control inputText">
               <p class="errorText" *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.pattern">
                 Số điện thoại không đúng định dạng VD : (+84) 0918870.XXX</p>
               <p class="errorText"
                  *ngIf="rfEditForm.controls.phone.dirty && rfEditForm.controls.phone.errors?.required">Số điện thoại
                 người dùng đang bỏ trống</p>
+              <p class="errorText" *ngIf="!isCheck">{{listError.existPhone}}</p>
             </td>
           </tr>
 
@@ -101,7 +103,7 @@
               <input hidden type="file" class="form-control" formControlName="avatarUrl" accept="image/*" #fileUploader
                      (change)="showPreview($event)">
               <div class="container pointer" (click)="fileUploader.click()">
-                <img src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/user%2Favatar-6_1622693116921?alt=media&token=0977b316-c819-4cdc-8240-c1dcefaba8e6" alt="Avatar" class="image">
+                <img [src]="imgSrc" alt="Avatar" class="image">
                 <div class="middle">
                   <div class="text">Cập nhật ảnh</div>
                 </div>

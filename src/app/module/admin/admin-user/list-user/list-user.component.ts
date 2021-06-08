@@ -86,6 +86,9 @@ export class ListUserComponent implements OnInit {
           timeOut : 5000,
           progressAnimation: "increasing"
         });
+      } else {
+        this.users = data;
+        this.toastr.success("Tìm thấy thông tin bạn muốn tìm", "Thông báo");
       }
     })
   }
