@@ -34,4 +34,9 @@ export class ConfirmAdminComponent implements OnInit {
     });
     this.toastr.success('Duyệt Thành Công !', 'Bài Đăng !');
   }
+
+  sendEmail() {
+    this._postService.sendEmailApprove(this.approveId).subscribe(data => {
+    });
+  }
 }
