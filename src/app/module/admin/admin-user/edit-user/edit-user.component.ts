@@ -25,10 +25,11 @@ export class EditUserComponent implements OnInit {
   public provinces: Province[]
   public districts: District[];
   id: number = 0;
-  public selectedImg: any;
+  selectedImg: any;
   public imgSrc: string = '../../../../assets/img/avatar-1.png';
   listError: any = "";
   isCheck;
+
 
   constructor(private serviceAdminService: ServiceAdminService,
               private router: Router,
@@ -39,6 +40,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedImg = null;
     this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
       this.provinces = dataProvince;
       console.log(dataProvince);
@@ -66,11 +68,9 @@ export class EditUserComponent implements OnInit {
         district: data.ward.district,
         province: data.ward.district.province,
         ward: data.ward,
-        avatarUrl: data.avatarUrl
-      });
-
+      })
       console.log(this.rfEditForm.value);
-    });
+    })
     this.rfEditForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[^\\d`~!@#$%^&*()_\\-+=|\\\\{}\\[\\]:;"\'<>,.?\/]+$')]],
       email: ['', [Validators.required, Validators.email]],
@@ -85,19 +85,60 @@ export class EditUserComponent implements OnInit {
 
   // Ngoc - submit
   onSubmit() {
-    console.log(this.rfEditForm.value);
-    this.users = this.rfEditForm.value;
-    console.log(this.users);
-    this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(data => {
-      this.users = data;
-      this.router.navigateByUrl('/admin/users');
-      this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
-        timeOut: 1000,
-        progressBar: true,
-        progressAnimation: 'increasing'
-      });
-    })
+    // console.log(this.rfEditForm.value);
+    // this.users = this.rfEditForm.value;
+    // console.log(this.users);
+    // this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(data => {
+    //   this.users = data;
+    //   this.router.navigateByUrl('/admin/users');
+    //   this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+    //     timeOut: 1000,
+    //     progressBar: true,
+    //     progressAnimation: 'increasing'
+    //   });
+    // })
+    this.createFireBase();
 
+  }
+  createFireBase() {
+    if (this.rfEditForm.valid) {
+      if (this.rfEditForm.value.avatarUrl != this.imgSrc) {
+        const filePath = `imgChange/${this.selectedImg.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(avatarUrl => {
+              this.rfEditForm.value.avatarUrl = avatarUrl;
+              console.log(avatarUrl);
+              this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
+                this.router.navigateByUrl('/admin/users');
+                  this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+                    timeOut: 5000,
+                    progressBar: true,
+                    progressAnimation: 'increasing'
+                  });
+              }, error => {
+                this.listError = error.error;
+              });
+            })
+          })
+        ).subscribe();
+      } else {
+        this.rfEditForm.value.avatarUrl = this.imgSrc;
+        this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
+          this.router.navigateByUrl('/admin/users');
+            this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+              timeOut: 5000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            });
+        }, error => {
+          this.listError = error.error;
+        });
+      }
+    } else {
+      this.toastr.warning("Dữ liệu chỉnh sửa chưa hợp lệ, mời bạn nhập lại !", "Lỗi !");
+    }
   }
 
 
