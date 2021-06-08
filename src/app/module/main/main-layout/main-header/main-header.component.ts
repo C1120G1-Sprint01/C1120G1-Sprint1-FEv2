@@ -1,7 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {SecurityService} from "../../../../service/security/security.service";
 import {TokenStorageService} from "../../../../service/security/token-storage.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ServiceCustomerService} from "../../../../service/service-customer/service-customer.service";
 import {Router} from "@angular/router";
 import {UserCustomerService} from "../../../../service/service-customer/user-customer.service";
@@ -19,10 +18,9 @@ import {User} from "../../../../model/User";
 
 export class MainHeaderComponent implements OnInit {
 
-  public searchInput: FormGroup;
   username: any = '';
-  role:string = '';
-  user:User;
+  role: string = '';
+  user: User;
   avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.jpg?alt=media&token=d3149a38-f6f3-42d2-b8bf-b79d78049b89";
 
   constructor(
@@ -30,22 +28,18 @@ export class MainHeaderComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private headerService: ServiceCustomerService,
     private router: Router,
-    private userCustomerService:UserCustomerService
+    private userCustomerService: UserCustomerService
   ) {
   }
 
   ngOnInit(): void {
-
-    this.searchInput = new FormGroup({
-      posterName: new FormControl('', [Validators.required])
-    });
 
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
       this.role = user.authorities[0].authority;
       this.username = user.username;
-      console.log("Getting username... : "+this.username);
+      console.log("Getting username... : " + this.username);
       this.getAvatarUrl(this.username);
     } else {
       console.log('Not log in yet');
@@ -54,12 +48,6 @@ export class MainHeaderComponent implements OnInit {
     window.onscroll = (x => {
       this.hideHeaderOnscroll();
     })
-  }
-
-  submit() {
-    this.headerService.searchPostByName(this.searchInput.controls['posterName'].value).subscribe(data => {
-      console.log(data)
-    });
   }
 
   logout() {
@@ -84,13 +72,18 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  getAvatarUrl(username:string) {
+  getAvatarUrl(username: string) {
     this.userCustomerService.getUserByUserName(username).subscribe(data => {
       this.user = data;
       this.avatarUrl = this.user.avatarUrl;
-      console.log("URL : "+this.avatarUrl)
+      console.log("URL : " + this.avatarUrl)
     }, error => {
-      console.log("get "+error+" at getAvatarUrl()");
+      console.log("get " + error + " at getAvatarUrl()");
     })
+  }
+
+  search(keySearch) {
+    this.router.navigate(["/search"], {queryParams: {key: keySearch}});
+    console.log(keySearch);
   }
 }

@@ -46,6 +46,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    (<HTMLInputElement>document.getElementById("search-input")).value = '';
     this.formInit();
 
     this.addressService.findAllProvince().subscribe(data => {

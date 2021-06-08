@@ -2,6 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Post} from '../../model/Post';
+import {ChildCategory} from "../../model/ChildCategory";
+import {Province} from "../../model/Province";
+import {District} from "../../model/District";
+import {Category} from "../../model/Category";
 
 @Injectable({
   providedIn: 'root'
@@ -143,7 +147,18 @@ export class ServicePostService {
     return this.httpClient.delete<Post>(this.API_BASE_URL + '/list/' + deleteId);
   }
 
-  searchPostByTitle(title: string): Observable<Post> {
-    return this.httpClient.get<Post>(this.API_BASE_URL+ "/search/title?" + 'keySearch=' + title)
+  searchPostByTitleContaining(keyword: string): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(`${this.API_BASE_URL}/search?key=${keyword}`);
   }
+
+  searchAdvance(keyword: string, category: string, province: string): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(
+      this.API_BASE_URL + "/search-advance?key=" + keyword
+      + "&category=" + category + "&province=" + province);
+  }
+
+  searchPostByName(posterName: string): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/search/' + posterName);
+  }
+
 }
