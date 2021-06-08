@@ -83,19 +83,59 @@ export class EditUserComponent implements OnInit {
 
   // Ngoc - submit
   onSubmit() {
-    console.log(this.rfEditForm.value);
-    this.users = this.rfEditForm.value;
-    console.log(this.users);
-    this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(data => {
-      this.users = data;
-      this.router.navigateByUrl('/admin/users');
-      this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
-        timeOut: 1000,
-        progressBar: true,
-        progressAnimation: 'increasing'
-      });
-    })
+    // console.log(this.rfEditForm.value);
+    // this.users = this.rfEditForm.value;
+    // console.log(this.users);
+    // this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(data => {
+    //   this.users = data;
+    //   this.router.navigateByUrl('/admin/users');
+    //   this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+    //     timeOut: 1000,
+    //     progressBar: true,
+    //     progressAnimation: 'increasing'
+    //   });
+    // })
+    this.createFireBase();
 
+  }
+  createFireBase() {
+    if (this.rfEditForm.valid) {
+      if (this.rfEditForm.controls.avatarUrl.value != this.imgSrc) {
+        const filePath = `imgChange/${this.selectedImg.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(img => {
+              this.rfEditForm.controls.avatarUrl.setValue(img);
+              this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
+                this.router.navigateByUrl('/admin/users');
+                  this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+                    timeOut: 5000,
+                    progressBar: true,
+                    progressAnimation: 'increasing'
+                  });
+              }, error => {
+                this.listError = error.error;
+              });
+            })
+          })
+        ).subscribe();
+      } else {
+        this.rfEditForm.controls.avatarUrl.setValue(this.imgSrc);
+        this.serviceAdminService.editUser(this.rfEditForm.value, this.id).subscribe(() => {
+          this.router.navigateByUrl('/admin/users');
+            this.toastr.info("Chỉnh sửa thông tin thành công ! !", "Thông báo ! ", {
+              timeOut: 5000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            });
+        }, error => {
+          this.listError = error.error;
+        });
+      }
+    } else {
+      this.toastr.warning("Dữ liệu chỉnh sửa chưa hợp lệ, mời bạn nhập lại !", "Lỗi !");
+    }
   }
 
 
