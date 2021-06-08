@@ -44,7 +44,7 @@ export class EditUserComponent implements OnInit {
     this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
       this.provinces = dataProvince;
       console.log(dataProvince);
-    })
+    });
     this.id = this.activatedRoute.snapshot.params['id'];
     console.log('id edit ' + this.id);
     this.serviceAdminService.getUserById(this.id).subscribe(data => {
@@ -53,12 +53,14 @@ export class EditUserComponent implements OnInit {
       // this.rfEditForm.patchValue(data);
       this.serviceAdminService.getAllDistrictByProvinceId(data.ward.district.province.provinceId).subscribe(dataDistr => {
         this.districts = dataDistr;
-      })
+      });
       this.serviceAdminService.getAllWardByDistrictId(data.ward.district.districtId).subscribe(dataWard => {
         this.wards = dataWard;
-      })
+      });
       this.users = data;
-
+      console.log(data.ward);
+      console.log(data.ward.district);
+      console.log(data.ward.district.province);
       this.rfEditForm.patchValue({
         name: data.name,
         email: data.email,
@@ -67,7 +69,6 @@ export class EditUserComponent implements OnInit {
         province: data.ward.district.province,
         ward: data.ward,
       })
-
       console.log(this.rfEditForm.value);
     })
     this.rfEditForm = this.formBuilder.group({
@@ -177,7 +178,7 @@ export class EditUserComponent implements OnInit {
 
   onChangeDistrict(event) {
     let userInfo = this.rfEditForm.controls['district'].value;
-    const districtId = userInfo.districtId
+    const districtId = userInfo.districtId;
     if (districtId) {
       this.serviceAdminService.getAllWardByDistrictId(districtId).subscribe(data => {
         this.wards = data;

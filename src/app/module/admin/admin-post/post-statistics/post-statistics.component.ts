@@ -16,8 +16,6 @@ export class PostStatisticsComponent implements OnInit {
   public endDate = '';
   public startDate = '';
 
-
-
   constructor(private _postService: ServicePostService,
               private _router: Router,
               private _activatedRoute: ActivatedRoute,
@@ -31,7 +29,22 @@ export class PostStatisticsComponent implements OnInit {
   title = 'bar-chart';
   barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          min: 0,
+          max: 20,
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 20,
+        }
+      }]
+    }
   };
+
   // @ts-ignore
   barChartLabels: Label[] = [];
   // @ts-ignore
@@ -48,8 +61,8 @@ export class PostStatisticsComponent implements OnInit {
   };
   // @ts-ignore
   public barChartColors: Color[] = [
-    {backgroundColor: 'blue'},
-    {backgroundColor: 'red'},
+    {backgroundColor: 'rgba(190,255,72,0.75)'},
+    {backgroundColor: 'rgba(255,165,113,0.75)'},
   ];
 
   barChartData: ChartDataSets[] = [
@@ -59,11 +72,11 @@ export class PostStatisticsComponent implements OnInit {
 
   onSubmit() {
     if(this.endDate<this.startDate){
-      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc');
+      this.toastr.error('Ngày bắt đầu phải nhỏ hơn ngày kết thúc','Bài Đăng');
     }else if(this.startDate == this.endDate){
-      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau');
+      this.toastr.error('Ngày bắt đầu và  ngày kết thúc không được trùng nhau','Bài Đăng');
     }else
-      this.toastr.success('Chúc vui vẻ')
+      this.toastr.success('Thống Kê Thành Công','Bài Đăng')
     this._postService.getQuantityStatistic(this.startDate, this.endDate).subscribe(response => {
       console.log(response);
       this.barChartLabels = [];
@@ -77,6 +90,7 @@ export class PostStatisticsComponent implements OnInit {
       }
       this.barChartData.push(successfulStatus);
       this.barChartData.push(failureStatus);
+
     }, error => {
       console.log(error);
     });

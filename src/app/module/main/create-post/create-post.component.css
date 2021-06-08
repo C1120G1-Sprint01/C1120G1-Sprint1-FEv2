@@ -168,6 +168,12 @@ input::-webkit-input-placeholder {
   margin-bottom: 0.25rem;
 }
 
+.valid-feedback {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 100%;
+}
+
 .custom-select-sm {
   height: calc(1.5em + 0.75rem + 0px) !important;
 }

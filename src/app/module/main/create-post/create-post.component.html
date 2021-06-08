@@ -3,18 +3,26 @@
   <!-- content here -->
   <div class="d-flex justify-content-center col-12 pt-3">
     <div class="col-sm-12 col-md-9">
-      <p class="title-text text-uppercase">Đăng tin</p>
+      <p class="title-text text-uppercase">Đăng tin
+        <button [hidden]="checkFormUser === true" (click)="changeForm()" class="btn btn-primary"
+                style="margin-left: 10rem!important;">Đăng Tin Cho Mình
+        </button>
+        <button [hidden]="checkFormUser === false" (click)="changeForm()" class="btn btn-primary"
+                style="margin-left: 10rem!important;"
+        >Đăng Tin Cho Người Khác
+        </button>
+      </p>
       <form [formGroup]="form" (ngSubmit)=submitForm(form)>
         <table class="table table-hover table-borderless">
           <tbody>
           <tr>
-            <td class="col-4">
+            <td>
               <label for="name">
                 Tên người bán
                 <span class="asterisk-red">*</span>
               </label>
             </td>
-            <td class="col-8">
+            <td>
               <input type="text" class="form-control" placeholder="Nhập vào tên người bán" id="name"
                      formControlName="posterName"/>
               <p class="invalid-feedback" *ngIf="form.controls.posterName.touched">
@@ -76,19 +84,21 @@
             </td>
             <td>
             <span>
-                <select class="custom-select custom-select-sm mb-1" formControlName="province"
-                        (change)="onChangeProvince()">
+                <select [compareWith]="compareProvince" class="custom-select custom-select-sm mb-1"
+                        formControlName="province"
+                        (change)="onChangeProvince($event.target.value)">
                     <option value="" selected disabled>Chọn tỉnh thành</option>
                     <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
                 </select>
                 <br/>
-                <select class="custom-select custom-select-sm mb-1" formControlName="district"
-                        (change)="onChangeDistrict()">
+                <select [compareWith]="compareDistrict" class="custom-select custom-select-sm mb-1"
+                        formControlName="district"
+                        (change)="onChangeDistrict($event.target.value)">
                     <option value="" selected disabled>Chọn quận/huyện</option>
                     <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
                 </select>
                 <br/>
-                <select class="custom-select custom-select-sm mb-1" formControlName="ward">
+                <select [compareWith]="compareWard" class="custom-select custom-select-sm mb-1" formControlName="ward">
                     <option value="" selected disabled>Chọn xã/phường</option>
                     <option *ngFor="let ward of wards" [ngValue]="ward">{{ward.wardName}}</option>
                 </select>
@@ -223,8 +233,12 @@
             </td>
             <td>
               <input type="text" class="form-control" placeholder="Nhập vào giá sản phẩm" id="price" min="0"
-                     formControlName="price"/>
-              <p class="invalid-feedback" *ngIf="form.controls.price.touched">
+                     formControlName="price" [(ngModel)]="resultCash"/>
+              <p class="valid-feedback mt-2" *ngIf="!resultCash; else showCash">Bạn chưa nhập tiền</p>
+              <ng-template #showCash>
+                <p class="valid-feedback mt-2">Bạn đã nhập:&nbsp;<span>{{formatCash(resultCash)}}</span></p>
+              </ng-template>
+              <p class="invalid-feedback" *ngIf="form.controls.price.dirty">
                 <span *ngIf="form.controls.price.errors?.pattern">Giá tiền không hợp lệ.</span>
                 <span *ngIf="form.controls.price.errors?.maxlength">Giá tiền quá lớn.</span>
               </p>
