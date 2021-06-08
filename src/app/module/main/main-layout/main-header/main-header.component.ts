@@ -5,6 +5,7 @@ import {ServiceCustomerService} from "../../../../service/service-customer/servi
 import {Router} from "@angular/router";
 import {UserCustomerService} from "../../../../service/service-customer/user-customer.service";
 import {User} from "../../../../model/User";
+import {ListPostComponent} from "../../list-post/list-post.component";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class MainHeaderComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private headerService: ServiceCustomerService,
     private router: Router,
-    private userCustomerService: UserCustomerService
+    private userCustomerService:UserCustomerService,
+    private listPostComponent:ListPostComponent
   ) {
   }
 
@@ -39,8 +41,17 @@ export class MainHeaderComponent implements OnInit {
       this.securityService.isLoggedIn = true;
       this.role = user.authorities[0].authority;
       this.username = user.username;
+
       console.log("Getting username... : " + this.username);
+
       this.getAvatarUrl(this.username);
+
+      if (this.username.includes("@gmail.com")){
+        let i = this.username.indexOf("@gmail.com");
+        this.username = this.username.slice(0, i);
+        console.log(this.username);
+      }
+
     } else {
       console.log('Not log in yet');
     }

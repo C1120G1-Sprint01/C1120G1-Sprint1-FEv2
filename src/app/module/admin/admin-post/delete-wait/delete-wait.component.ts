@@ -34,4 +34,9 @@ export class DeleteWaitComponent implements OnInit {
     });
     this.toastr.success('Xóa Thành Công !', 'Bài Đăng !');
   }
+
+  sendEmail() {
+    this.postService.sendEmailDeleteWait(this.deleteId).subscribe(data => {
+    });
+  }
 }

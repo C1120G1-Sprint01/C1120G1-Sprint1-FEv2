@@ -78,12 +78,20 @@ export class ServicePostService {
     return this.httpClient.put(this.API_BASE_URL + '/listApprove/approve/' + postId, this.httpOptions);
   }
 
+  sendEmailApprove(postId: number): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/listApprove/sendEmailApprove/' + postId, this.httpOptions);
+  }
+
   cancelApprovePost(postId: number): Observable<any> {
     return this.httpClient.put(this.API_BASE_URL + '/listDetail/cancelApprove/' + postId, this.httpOptions);
   }
 
   deletePost(postId: number): Observable<any> {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listApprove/delete/' + postId, this.httpOptions);
+  }
+
+  sendEmailDelete(postId: number): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/listApprove/sendEmailDelete/' + postId, this.httpOptions);
   }
 
   waitPost(postId: number): Observable<any> {
@@ -98,8 +106,16 @@ export class ServicePostService {
     return this.httpClient.put(this.API_BASE_URL + '/listWait/approve/' + postId, this.httpOptions);
   }
 
+  sendEmailApproveWait(postId: number): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/listWait/sendEmailApprove/' + postId, this.httpOptions);
+  }
+
   deleteWait(postId: number): Observable<any> {
     return this.httpClient.delete<any>(this.API_BASE_URL + '/listWait/delete/' + postId, this.httpOptions);
+  }
+
+  sendEmailDeleteWait(postId: number): Observable<any> {
+    return this.httpClient.get(this.API_BASE_URL + '/listWait/sendEmailDelete/' + postId, this.httpOptions);
   }
 
   /**
