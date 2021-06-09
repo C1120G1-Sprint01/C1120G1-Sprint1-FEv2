@@ -202,7 +202,7 @@
                       <option *ngFor="let statusItem of status" [ngValue]="statusItem">{{statusItem.statusName}}
                       </option>
                     </select>
-                    <select class="form-control" formControlName="status" [compareWith]="compareStatus" *ngIf="currentStatus !== 1">
+                    <select class="form-control" formControlName="status" [compareWith]="compareStatus" *ngIf="currentStatus !== 1" disabled>
                       <option *ngFor="let statusItem of tempStatus" [ngValue]="statusItem">{{statusItem.statusName}}
                       </option>
                     </select>

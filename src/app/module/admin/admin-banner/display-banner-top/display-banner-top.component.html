@@ -1,7 +1,9 @@
 <ngb-carousel *ngIf="listBanner" [interval]="4500" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
   <ng-template ngbSlide *ngFor="let banner of listBanner">
-    <div class="picsum-img-wrapper text-center">
-      <img class="img-fluid border border-secondary" [src]="banner.image" alt="Random slide" style="width: 740px; height: 200px">
+    <div class="picsum-img-wrapper text-center" style="border: none">
+      <img class="img-fluid" [src]="banner.image"
+           alt="Random slide"
+           style="width: 100%; height: 300px; margin: 0; border: none">
     </div>
   </ng-template>
 </ngb-carousel>
