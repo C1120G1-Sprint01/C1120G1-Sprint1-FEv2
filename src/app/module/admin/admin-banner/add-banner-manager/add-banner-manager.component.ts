@@ -4,11 +4,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {ServiceBannerService} from '../../../../service/service-banner/service-banner.service';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {LoadingComponent} from '../loading/loading.component';
 import {Size} from "../../../../model/Size";
 import {Position} from "../../../../model/Position";
 import {Banner} from "../../../../model/Banner";
 import {ToastrService} from "ngx-toastr";
+import {MainLoadingComponent} from "../../../main/main-layout/main-loading/main-loading.component";
 
 @Component({
   selector: 'app-add-banner-manager',
@@ -141,7 +141,7 @@ export class AddBannerManagerComponent implements OnInit {
   }
 
   openLoading() {
-    const dialogRef = this.dialog.open(LoadingComponent, {
+    const dialogRef = this.dialog.open(MainLoadingComponent, {
       width: '500px',
       height: '200px',
       disableClose: true

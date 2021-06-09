@@ -1,13 +1,11 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {SecurityService} from "../../../../service/security/security.service";
 import {TokenStorageService} from "../../../../service/security/token-storage.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ServiceCustomerService} from "../../../../service/service-customer/service-customer.service";
 import {Router} from "@angular/router";
 import {UserCustomerService} from "../../../../service/service-customer/user-customer.service";
 import {User} from "../../../../model/User";
 import {ListPostComponent} from "../../list-post/list-post.component";
-import {LoginComponent} from "../../../security/login/login.component";
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +19,9 @@ import {LoginComponent} from "../../../security/login/login.component";
 
 export class MainHeaderComponent implements OnInit {
 
-  public searchInput: string;
   username: any = '';
-  role:string = '';
-  user:User;
+  role: string = '';
+  user: User;
   avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.jpg?alt=media&token=d3149a38-f6f3-42d2-b8bf-b79d78049b89";
 
   constructor(
@@ -45,7 +42,8 @@ export class MainHeaderComponent implements OnInit {
       this.role = user.authorities[0].authority;
       this.username = user.username;
 
-      console.log("Getting username... : "+this.username);
+      console.log("Getting username... : " + this.username);
+
       this.getAvatarUrl(this.username);
 
       if (this.username.includes("@gmail.com")){
@@ -58,13 +56,6 @@ export class MainHeaderComponent implements OnInit {
       console.log('Not log in yet');
     }
 
-  }
-
-  submit() {
-    this.headerService.searchPostByName(this.searchInput).subscribe(data => {
-      console.log(data);
-      this.listPostComponent.initData(data.content);
-    });
   }
 
   logout() {
@@ -81,13 +72,18 @@ export class MainHeaderComponent implements OnInit {
     document.getElementById("profile").style.display = 'none';
   }
 
-  getAvatarUrl(username:string) {
+  getAvatarUrl(username: string) {
     this.userCustomerService.getUserByUserName(username).subscribe(data => {
       this.user = data;
       this.avatarUrl = this.user.avatarUrl;
-      console.log("URL : "+this.avatarUrl)
+      console.log("URL : " + this.avatarUrl)
     }, error => {
-      console.log("get "+error+" at getAvatarUrl()");
+      console.log("get " + error + " at getAvatarUrl()");
     })
+  }
+
+  search(keySearch) {
+    this.router.navigate(["/search"], {queryParams: {key: keySearch}});
+    console.log(keySearch);
   }
 }

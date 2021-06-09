@@ -1,5 +1,7 @@
 .btn {
   font-size: 14px;
+  width: 100px;
+  border: 1px solid darkgray;
 }
 
 .bg-blue {
@@ -14,8 +16,8 @@
   background-color: #688cff;
 }
 
-.title-text {
-  font-size: 20px;
+.price {
+  font-size: 16px;
 }
 
 a.item_ad {
@@ -26,4 +28,17 @@ a.item_ad {
 a.item_ad:hover{
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
   transition: 0.3s;
+}
+
+.badge {
+  font-size: 13px;
+}
+
+.caption-ad {
+  position: relative;
+}
+
+.caption-ad .ad {
+  position: absolute;
+  bottom: 0;
 }

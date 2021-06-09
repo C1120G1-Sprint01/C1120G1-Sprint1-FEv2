@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AdminBannerRoutingModule } from './admin-banner-routing.module';
 import { BannerManagementComponent } from './banner-management/banner-management.component';
-import {LoadingComponent} from "./loading/loading.component";
 import {DisplayBannerTopComponent} from "./display-banner-top/display-banner-top.component";
 import {DisplayBannerBotComponent} from "./display-banner-bot/display-banner-bot.component";
 import {DisplayBannerLeftComponent} from "./display-banner-left/display-banner-left.component";
@@ -20,7 +19,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
-    declarations: [BannerManagementComponent, EditBannerManagerComponent, AddBannerManagerComponent, LoadingComponent, DisplayBannerTopComponent, DisplayBannerBotComponent, DisplayBannerLeftComponent, DisplayBannerRightComponent],
+    declarations: [BannerManagementComponent, EditBannerManagerComponent, AddBannerManagerComponent, DisplayBannerTopComponent, DisplayBannerBotComponent, DisplayBannerLeftComponent, DisplayBannerRightComponent],
     exports: [
         DisplayBannerRightComponent,
         DisplayBannerTopComponent,

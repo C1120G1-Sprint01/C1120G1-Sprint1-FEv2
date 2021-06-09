@@ -4,11 +4,11 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
-import {LoadingComponent} from '../loading/loading.component';
 import {Size} from "../../../../model/Size";
 import {Banner} from "../../../../model/Banner";
 import {Position} from "../../../../model/Position";
 import {ToastrService} from "ngx-toastr";
+import {MainLoadingComponent} from "../../../main/main-layout/main-loading/main-loading.component";
 
 @Component({
   selector: 'app-edit-banner-manager',
@@ -153,7 +153,7 @@ export class EditBannerManagerComponent implements OnInit {
   }
 
   openLoading() {
-    const dialogRef = this.dialog.open(LoadingComponent, {
+    const dialogRef = this.dialog.open(MainLoadingComponent, {
       width: '500px',
       height: '200px',
       disableClose: true

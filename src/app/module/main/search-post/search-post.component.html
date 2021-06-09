@@ -2,79 +2,55 @@
 <div class="main-content-frame col-12 px-0">
   <!-- content here -->
   <div class="main-content bg-light col-md-12 col-sm-12">
-    <!-- advanced_search -->
-    <div class="advanced_search px-0 bg-light col-12 border-bottom sticky-top hide" style="z-index: 100">
-      <div class="p-2 d-flex justify-content-around">
-        <input class="form-control mr-sm-2 col-4" type="text" placeholder="Tìm kiếm theo từ khoá"
-               [(ngModel)]="keyword"/>
-        <select class="custom-select custom-select-sm col-2"
-                [(ngModel)]="category">
-          <option value="" selected disabled>Chọn loại</option>
-          <option value="">Tất cả</option>
-          <option *ngFor="let category of listCategory"
-                  value="{{category.categoryId}}">{{category.categoryName}}</option>
-        </select>
-        <select class="custom-select custom-select-sm col-2"
-                [(ngModel)]="province">
-          <option value="" selected disabled>Chọn tỉnh thành</option>
-          <option value="">Tất cả</option>
-          <option *ngFor="let province of listProvince"
-                  value="{{province.provinceId}}">{{province.provinceName}}</option>
-        </select>
-
-        <button class="btn btn-blue btn-sm text-light col-1"
-                type="button" (click)="clickSearch()">Tìm
-        </button>
-      </div>
-    </div>
-    <!-- END advanced_search -->
     <!-- list post -->
     <div class="list-group list-post mt-2">
       <div href="#" class="list-group-item post-item filter-bar border-bottom">
-        <div class="d-inline-flex col-12 px-0">
-          <p class="col-6 px-0">
-            Rao vặt&nbsp;
-            <span class="text-lowercase">toàn quốc</span>
-          </p>
-          <p class="col-6 px-0 text-right">
-            <!--              <a class="col-6 filter-item">Giá rẻ trước</a>-->
-            <a class="col-6 filter-item ">Tin mới trước</a>
-          </p>
-        </div>
+        <form class="d-inline-flex col-12 px-0 w-100" [formGroup]="searchForm" (ngSubmit)=submitForm()>
+          <button class="btn btn-light mr-3 mr-sm-2"><i class="fas fa-filter"></i></button>
+          <input type="text" class="form-control mr-3 mr-sm-2"
+                 placeholder="Nhập từ khóa tìm kiếm" formControlName="keySearch">
+          <select class="form-control mr-3 mr-sm-2" formControlName="category">
+            <option value="" selected>Tất cả chuyên mục</option>
+            <option *ngFor="let category of listCategory" [ngValue]="category">{{category.categoryName}}</option>
+          </select>
+          <select class="form-control mr-3 mr-sm-2" formControlName="province">
+            <option value="" selected>Tất cả tỉnh thành</option>
+            <option *ngFor="let province of listProvince" [ngValue]="province">{{province.provinceName}}</option>
+          </select>
+          <button class="btn btn-blue btn-sm text-light col-1">Tìm</button>
+        </form>
       </div>
       <!--  GRID ad-->
       <div class="bg-light">
         <div class="mx-0 row" *ngIf="listPost; else noPostData">
-          <!--item-->
-          <a class="col-md-3 col-sm-4 col-6 mx-0 border item_ad"
-             *ngFor="let item of listPost, let i = index" [routerLink]="['post',item.postId]">
-            <div class="mx-0 py-2">
-              <div class="thumbnail-ad px-0 mx-0">
-                <img [src]="item.imageSet[0].url" width="100%" height="200px" *ngIf="item.imageSet.length > 0, else noPic"/>
+          <a class="list-group-item list-group-item-action post-item border-bottom"
+             *ngFor="let item of listPost, let i = index" [routerLink]="['/post',item.postId]">
+            <div class="d-inline-flex col-12 pl-0">
+              <div class="col-md-2 col-sm-3 px-0">
+                <img [src]="item.imageSet[0].url" width="100" height="100"
+                     *ngIf="item.imageSet.length > 0, else noPic"/>
                 <ng-template #noPic>
                   <img [src]="defaultImgUrl" width="100" height="100"/>
                 </ng-template>
               </div>
-              <div class="caption-ad mt-1">
-                <span class="badge badge-success mr-1" *ngIf="item.postType == 1">Cần bán</span>
-                <span class="badge badge-danger mr-1" *ngIf="item.postType == 0">Cần mua</span>
-                <section>
-                  {{item.title}}
-                </section>
-                <p class="text-danger font-weight-bold">
-              <span *ngIf="item.price, else elsePrice">
-                {{item.price| currency: 'VND': '': '1.0'}} đ
-              </span>
+              <div class="caption-ad mt-1 w-100">
+                <span class="badge badge-success mr-1 float-right" *ngIf="item.postType == 1">Cần bán</span>
+                <span class="badge badge-danger mr-1 float-right" *ngIf="item.postType == 0">Cần mua</span>
+                <p class="mb-1">{{item.title}}</p>
+                <p class="price text-danger font-weight-bold">
+                              <span *ngIf="item.price, else elsePrice">
+                                {{item.price| currency: 'VND': '': '1.0'}} đ
+                              </span>
                   <ng-template #elsePrice>
                     Giá cả liên hệ
                   </ng-template>
                 </p>
+                <p class="ad d-inlex-inline mb-0">
+                  <i class="fas fa-ad"></i>&bull;
+                  <span>{{listTime[i]}}</span>&bull;
+                  <span>{{item.ward.district.province.provinceName}}</span>
+                </p>
               </div>
-              <p class="d-inlex-inline">
-                <i class="fas fa-ad"></i>&bull;
-                <span>{{listTime[i]}}</span>&bull;
-                <span>{{item.ward.district.province.provinceName}}</span>
-              </p>
             </div>
           </a>
           <!--END item-->
