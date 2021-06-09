@@ -1,4 +1,4 @@
-export class UserGoogle {
+export class UserSocial {
   token:string;
   name:string;
   avatarUrl:string;

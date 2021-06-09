@@ -56,13 +56,11 @@ export class MainHeaderComponent implements OnInit {
       console.log('Not log in yet');
     }
 
-    window.onscroll = (x => {
-      this.hideHeaderOnscroll();
-    })
   }
 
   logout() {
     this.tokenStorageService.signOut();
+    this.securityService.isLoggedIn = false;
     this.router.navigateByUrl("/login");
   }
 
@@ -72,15 +70,6 @@ export class MainHeaderComponent implements OnInit {
 
   hideProfile() {
     document.getElementById("profile").style.display = 'none';
-  }
-
-  hideHeaderOnscroll() {
-    let header = document.getElementById('header');
-    if (document.documentElement.scrollTop > 50) {
-      header.style.display = 'none';
-    } else {
-      header.style.display = 'block';
-    }
   }
 
   getAvatarUrl(username: string) {

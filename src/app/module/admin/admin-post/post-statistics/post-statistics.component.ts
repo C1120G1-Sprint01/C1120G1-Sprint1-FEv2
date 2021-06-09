@@ -33,13 +33,13 @@ export class PostStatisticsComponent implements OnInit {
       xAxes: [{
         ticks: {
           min: 0,
-          max: 20,
+          stepSize:1,
         }
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 20,
+          stepSize:1,
         }
       }]
     }

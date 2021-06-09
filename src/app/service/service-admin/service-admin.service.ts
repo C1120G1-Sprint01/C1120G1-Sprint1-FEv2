@@ -6,7 +6,6 @@ import {User} from '../../model/User';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Account} from '../../model/Account';
 import {Ward} from '../../model/Ward';
-import {Province} from "../../model/Province";
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +14,11 @@ export class ServiceAdminService {
 
   API_URL_USER: string = 'http://localhost:8080/admin/listUser';
   API_URL_ACCOUNT: string = 'http://localhost:8080/account';
-  API_URL_PROVINCE: string = 'http://localhost:8080/province';
-  API_URL_DISTRICT: string = 'http://localhost:8080/district';
   API_URL_WARD: string = 'http://localhost:8080/ward';
   API_URL_ADDRESS: string = "http://localhost:8080/api/address";
   public baseUrl = 'http://localhost:8080';
 
   httpOptions: any;
-
-  // private searchBaseUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.httpOptions = {
