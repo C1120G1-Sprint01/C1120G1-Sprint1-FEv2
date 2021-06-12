@@ -79,4 +79,42 @@ export class ChatService {
     this.refNoti.push().set(notification);
   }
 
+  // -------------
+
+  get refRoomsCus() {
+    return firebase.database().ref('rooms-cus/');
+  }
+
+  get refNotiCus() {
+    return firebase.database().ref('notifications-cus/');
+  }
+
+  get refChatsCus() {
+    return firebase.database().ref('chats-cus/');
+  }
+
+  getNotiOfUserCus() {
+    return this.refNotiCus.orderByChild('role').equalTo('user');
+  }
+
+  readNotiCus(key) {
+    return this.refNotiCus.child(key).child('isRead').set(true);
+  }
+
+  readNewMessCus(key) {
+    return this.refRoomsCus.child(key).child('newMess').set(0);
+  }
+
+  addNewRoomCus(room: Room) {
+    this.refRoomsCus.push().set(room);
+  }
+
+  addNewChatCus(chat: Chat) {
+    this.refChatsCus.push().set(chat);
+  }
+
+  addNewNotiCus(notification: Notification) {
+    this.refNotiCus.push().set(notification);
+  }
+
 }

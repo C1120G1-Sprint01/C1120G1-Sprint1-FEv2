@@ -5,6 +5,11 @@ import {DateUtilService} from '../../../service/date-util/date-util.service';
 import {CommonUtilService} from '../../../service/common-util/common-util.service';
 import {SecurityService} from '../../../service/security/security.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { User } from 'src/app/model/User';
+import {Account} from "../../../model/Account";
+import { Room } from 'src/app/model/room';
+import { TokenStorageService } from 'src/app/service/security/token-storage.service';
+import { ChatService } from 'src/app/service/chat-box/chat.service';
 
 @Component({
   selector: 'app-view-post',
@@ -26,13 +31,18 @@ export class ViewPostComponent implements OnInit {
   timeDiff: string = '';
   categorySlug: string = '';
   childCategorySlug: string = '';
+  account: Account;
+  user: User;
+  room: Room;
 
   constructor(private postService: ServicePostService,
               private dateUtilService: DateUtilService,
               private commonUtilService: CommonUtilService,
               private securityService: SecurityService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private tokenStorage: TokenStorageService,
+              private chatService: ChatService) {
   }
 
   ngOnInit(): void {
@@ -65,8 +75,32 @@ export class ViewPostComponent implements OnInit {
     });
   }
 
-  goToChat() {
-    this.router.navigateByUrl('/customer/inbox/' + this.post.user.userId);
+  async goToChat() {
+    let username = this.tokenStorage.getUser();
+      await new Promise((resolve) => {
+        if (username != null) {
+          this.chatService.findAccountByUserName(username.username).subscribe(data => {
+            this.account = {
+              username: data.username,
+              password: data.password,
+              registerDate: data.registerDate,
+              user: data.user
+            };
+            this.user = data.user;
+            return resolve(1);
+          });
+        }
+      });
+      if (this.account) {
+        this.chatService.refRoomsCus.orderByChild('roomName').equalTo(this.account.username).on('value', (resp: any) => {
+          if (!resp.exists()) {
+            const room = new Room(this.account.username, this.user, 0);
+            // const room = new Room("Room" + this.post.user.userId, this.user, 0);
+            this.chatService.addNewRoomCus(room);
+          }
+        });
+      }
+    this.router.navigateByUrl('/customer/inbox');
   }
 
 }
