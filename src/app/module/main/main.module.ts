@@ -19,11 +19,12 @@ import {MatInputModule} from "@angular/material/input";
 import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {AdminBannerModule} from "../admin/admin-banner/admin-banner.module";
+import { MainLoadingComponent } from './main-layout/main-loading/main-loading.component';
 
 
 @NgModule({
   declarations: [MainPageComponent, MainChatComponent, ListPostComponent, CreatePostComponent,
-    ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent, SearchPostComponent],
+    ViewPostComponent, MainHeaderComponent, MainFooterComponent, MainContentComponent, SearchPostComponent, MainLoadingComponent],
   imports: [
     CommonModule,
     RouterModule,

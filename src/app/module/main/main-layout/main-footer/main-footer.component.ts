@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorageService} from "../../../../service/security/token-storage.service";
+import {SecurityService} from "../../../../service/security/security.service";
 
 @Component({
   selector: 'app-main-footer',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tokenStorageService:TokenStorageService,
+              private securityService:SecurityService) { }
 
   ngOnInit(): void {
-    this.startToGetTime();
+    if (this.tokenStorageService.getToken() && this.securityService.isLoggedIn) {
+      document.getElementById("clock").style.display = 'block';
+      this.startToGetTime();
+    } else {
+      document.getElementById("clock").style.display = 'none';
+    }
     window.onscroll = (x => {
       this.showBtnOnscroll();
     })
@@ -43,8 +51,12 @@ export class MainFooterComponent implements OnInit {
     let minuteStr = (minutes < 10) ? '0'+minutes : minutes;
     let secondStr = (seconds < 10) ? '0'+seconds : seconds;
 
-    document.getElementById("time").innerHTML = hourStr+':'+minuteStr+':'+secondStr;
-    document.getElementById("gmt").innerHTML = " GMT+7 Asia/Hà Nội";
+    let time = document.getElementById("time");
+    let gmt = document.getElementById("gmt");
+    if(time != null && gmt != null) {
+      time.innerHTML = hourStr+':'+minuteStr+':'+secondStr;
+      gmt.innerHTML = " GMT+7 Asia/Hà Nội";
+    }
   }
 
 }

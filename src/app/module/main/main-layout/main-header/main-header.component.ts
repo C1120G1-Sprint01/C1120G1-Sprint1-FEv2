@@ -1,11 +1,11 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {SecurityService} from "../../../../service/security/security.service";
 import {TokenStorageService} from "../../../../service/security/token-storage.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ServiceCustomerService} from "../../../../service/service-customer/service-customer.service";
 import {Router} from "@angular/router";
 import {UserCustomerService} from "../../../../service/service-customer/user-customer.service";
 import {User} from "../../../../model/User";
+import {ListPostComponent} from "../../list-post/list-post.component";
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,9 @@ import {User} from "../../../../model/User";
 
 export class MainHeaderComponent implements OnInit {
 
-  public searchInput: FormGroup;
   username: any = '';
-  role:string = '';
-  user:User;
+  role: string = '';
+  user: User;
   avatarUrl: string = "https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fuser.jpg?alt=media&token=d3149a38-f6f3-42d2-b8bf-b79d78049b89";
 
   constructor(
@@ -30,40 +29,38 @@ export class MainHeaderComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private headerService: ServiceCustomerService,
     private router: Router,
-    private userCustomerService:UserCustomerService
+    private userCustomerService:UserCustomerService,
+    private listPostComponent:ListPostComponent
   ) {
   }
 
   ngOnInit(): void {
-
-    this.searchInput = new FormGroup({
-      posterName: new FormControl('', [Validators.required])
-    });
 
     if (this.tokenStorageService.getToken()) {
       const user = this.tokenStorageService.getUser();
       this.securityService.isLoggedIn = true;
       this.role = user.authorities[0].authority;
       this.username = user.username;
-      console.log("Getting username... : "+this.username);
+
+      console.log("Getting username... : " + this.username);
+
       this.getAvatarUrl(this.username);
+
+      if (this.username.includes("@gmail.com")){
+        let i = this.username.indexOf("@gmail.com");
+        this.username = this.username.slice(0, i);
+        console.log(this.username);
+      }
+
     } else {
       console.log('Not log in yet');
     }
 
-    window.onscroll = (x => {
-      this.hideHeaderOnscroll();
-    })
-  }
-
-  submit() {
-    this.headerService.searchPostByName(this.searchInput.controls['posterName'].value).subscribe(data => {
-      console.log(data)
-    });
   }
 
   logout() {
     this.tokenStorageService.signOut();
+    this.securityService.isLoggedIn = false;
     this.router.navigateByUrl("/login");
   }
 
@@ -75,22 +72,18 @@ export class MainHeaderComponent implements OnInit {
     document.getElementById("profile").style.display = 'none';
   }
 
-  hideHeaderOnscroll() {
-    let header = document.getElementById('header');
-    if (document.documentElement.scrollTop > 50) {
-      header.style.display = 'none';
-    } else {
-      header.style.display = 'block';
-    }
-  }
-
-  getAvatarUrl(username:string) {
+  getAvatarUrl(username: string) {
     this.userCustomerService.getUserByUserName(username).subscribe(data => {
       this.user = data;
       this.avatarUrl = this.user.avatarUrl;
-      console.log("URL : "+this.avatarUrl)
+      console.log("URL : " + this.avatarUrl)
     }, error => {
-      console.log("get "+error+" at getAvatarUrl()");
+      console.log("get " + error + " at getAvatarUrl()");
     })
+  }
+
+  search(keySearch) {
+    this.router.navigate(["/search"], {queryParams: {key: keySearch}});
+    console.log(keySearch);
   }
 }

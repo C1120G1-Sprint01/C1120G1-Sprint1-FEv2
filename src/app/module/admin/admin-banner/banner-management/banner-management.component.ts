@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ServiceBannerService} from "../../../../service/service-banner/service-banner.service";
 import {Banner} from "../../../../model/Banner";
 import {interval} from "rxjs";
-import {LoadingComponent} from "../loading/loading.component";
 import {MatDialog} from '@angular/material/dialog';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBannerManagerComponent} from "../add-banner-manager/add-banner-manager.component";

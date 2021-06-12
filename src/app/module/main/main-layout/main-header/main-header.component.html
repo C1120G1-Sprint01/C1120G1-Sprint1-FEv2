@@ -192,14 +192,14 @@
         <div class="row m-0 w-100 text-right">
           <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="input-group">
-              <label for="posterName"></label>
+              <label for="search-input"></label>
               <input type="text" class="form-control bg-white"
                      placeholder="Tìm kiếm trên Ad web"
-                     style="border-right: none"
-                     id="posterName" formControlName="posterName">
+                     style="border-right: none" #keySearch id="search-input"
+                     (keyup.enter)="search(keySearch.value)">
               <!--              (click) here-->
               <div class="input-group-append" style="cursor: pointer"
-                   title="Tìm kiếm">
+                   title="Tìm kiếm" (click)="search(keySearch.value)">
                 <span class="input-group-text bg-white">
                   <i class="fas fa-search" style="color: #0c7cd5"></i>
                 </span>

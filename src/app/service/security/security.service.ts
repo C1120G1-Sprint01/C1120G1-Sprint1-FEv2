@@ -2,8 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthLogin} from "../../model/AuthLogin";
+import {UserSocial} from "../../model/UserSocial";
 
 const API_URL: string = 'http://localhost:8080/api/';
+const API_URL_GOOGLE: string = 'http://localhost:8080/api/login/google';
+const API_URL_FACEBOOK: string = 'http://localhost:8080/api/login/facebook';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +29,7 @@ export class SecurityService {
 
   /**
    * Author: HoangTQ
-   * login, checkEmail, saveNewPw
+   * login, checkEmail, saveNewPw, createUserGoogle, createUserFacebook
    */
 
   login(authLogin: AuthLogin): Observable<any> {
@@ -43,7 +46,17 @@ export class SecurityService {
     return this.http.get<void>(API_URL + 'setNewPw/' + email + '/' + newPw);
   }
 
-  loginGoogle():Observable<any> {
-    return this.http.get<any>(API_URL + 'loginGoogle');
+  createUserGoogle(user: UserSocial): Observable<any> {
+    return this.http.post<any>(API_URL_GOOGLE, user, this.httpOptions);
+  }
+
+  createUserFacebook(user: UserSocial): Observable<any> {
+    console.log("User in Service")
+    console.log(user)
+    return this.http.post<any>(API_URL_FACEBOOK, user, this.httpOptions);
+  }
+
+  registerEmail(email: string):Observable<string>{
+    return this.http.get<string>(API_URL + 'registerEmail/' + email)
   }
 }

@@ -3,7 +3,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 832px){
+@media screen and (max-width: 1130px){
   .icon-user {
     display: none;
   }
@@ -42,7 +42,7 @@ input::-webkit-input-placeholder {
    transition: all 0.5s ease-out;
 }
 .dropdown-menu ul {
-  width: 12.5rem;
+  width: 17rem;
   height: 100%;
   list-style: none;
   margin: 0;

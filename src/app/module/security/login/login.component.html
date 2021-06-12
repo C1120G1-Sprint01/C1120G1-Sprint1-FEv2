@@ -97,19 +97,15 @@
             <div class="col-3"></div>
             <div class="col-6">
               <div class="form-group row" style="color: white">
-                <div class="col-4 btnVia align-items-center" title="Facebook">
-                  <a>
-                    <img width="40" height="40"
-                         src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ffacebook-logo.png?alt=media&token=ed6ec75c-0025-44c7-8cf2-3fa4fed9230d"
-                         alt="facebook">
-                  </a>
+                <div class="col-4 btnVia align-items-center" title="Facebook" (click)="loginFacebook()">
+                  <img width="40" height="40"
+                       src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Ffacebook-logo.png?alt=media&token=ed6ec75c-0025-44c7-8cf2-3fa4fed9230d"
+                       alt="facebook">
                 </div>
-                <div class="col-4 btnVia align-items-center" title="Google +">
-                  <a routerLink="/login/google">
-                    <img width="40" height="40"
-                         src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fgoogle-plus.png?alt=media&token=7a795f8f-b1cb-4378-aa00-fa173dabb8a1"
-                         alt="google-plus">
-                  </a>
+                <div class="col-4 btnVia align-items-center" title="Google +" #loginRef>
+                  <img width="40" height="40"
+                       src="https://firebasestorage.googleapis.com/v0/b/c1120g1.appspot.com/o/login%2Fgoogle-plus.png?alt=media&token=7a795f8f-b1cb-4378-aa00-fa173dabb8a1"
+                       alt="google-plus">
                 </div>
                 <div class="col-4 btnVia align-items-center" title="Twitter">
                   <a>

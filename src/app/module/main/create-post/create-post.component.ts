@@ -14,6 +14,9 @@ import {Ward} from "../../../model/Ward";
 import {Category} from "../../../model/Category";
 import {ChildCategory} from "../../../model/ChildCategory";
 import {CommonUtilService} from "../../../service/common-util/common-util.service";
+import {User} from "../../../model/User";
+import {UserCustomerService} from "../../../service/service-customer/user-customer.service";
+import {ServiceAdminService} from "../../../service/service-admin/service-admin.service";
 
 @Component({
   selector: 'app-create-post',
@@ -31,10 +34,15 @@ export class CreatePostComponent implements OnInit {
   images: File[] = [];
   imageSet: any[] = [];
   username: string = '';
+  user: User;
+  checkFormUser = true;
+  resultCash: String;
 
   constructor(
     private formBuilder: FormBuilder,
     private serviceCustomer: ServiceCustomerService,
+    private userCustomerService: UserCustomerService,
+    private serviceAdminService: ServiceAdminService,
     private commonUtilService: CommonUtilService,
     private router: Router,
     private addressService: AddressService,
@@ -46,18 +54,58 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formInit();
+    (<HTMLInputElement>document.getElementById("search-input")).value = '';
 
+    this.serviceAdminService.getAllProvince().subscribe(dataProvince => {
+      this.provinces = dataProvince;
+    });
+
+    this.formInit();
+    if (this.tokenStorageService.getToken()) {
+      const user = this.tokenStorageService.getUser();
+      this.userCustomerService.getUserByUserName(user.username).subscribe((data)=>{
+        this.user = data;
+        this.serviceAdminService.getAllDistrictByProvinceId(data.ward.district.province.provinceId).subscribe(dataDistr => {
+          this.districts = dataDistr;
+        });
+        this.serviceAdminService.getAllWardByDistrictId(data.ward.district.districtId).subscribe(dataWard => {
+          this.wards = dataWard;
+        });
+        if (this.checkFormUser === true) {
+          this.form.patchValue({
+            posterName: this.user.name,
+            email: this.user.email,
+            phone: this.user.phone,
+            province: this.user.ward.district.province,
+            district: this.user.ward.district,
+            ward: this.user.ward,
+          })
+        }
+      })
+    } else {
+      this.router.navigateByUrl('login')
+    }
     this.addressService.findAllProvince().subscribe(data => {
       this.provinces = data;
     });
 
     this.categoryService.findAllCategory().subscribe(data => {
-      console.log(data);
       this.categories = data;
     }, error => {
       console.log("Error at findAllCategory(): " + error);
     });
+
+  }
+  compareProvince(province1: Province, province2: Province): boolean {
+    return province1 && province2 ? province1.provinceId === province2.provinceId : province1 === province2
+  }
+
+  compareDistrict(district1: District, district2: District): boolean {
+    return district1 && district2 ? district1.districtId === district2.districtId : district1 === district2
+  }
+
+  compareWard(ward1: Ward, ward2: Ward): boolean {
+    return ward1 && ward2 ? ward1.wardId === ward2.wardId : ward1 === ward2
   }
 
   formInit() {
@@ -82,7 +130,7 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  /** ThuanNN */
+  // /** ThuanNN */
   // formInit() {
   //   this.form = this.formBuilder.group({
   //     postId: [''],
@@ -188,32 +236,50 @@ export class CreatePostComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
     this.toastr.warning("Huỷ đăng tin mới thành công!", "Hủy đăng tin mới!");
   }
-
-  onChangeProvince() {
-    this.addressService.findAllDistrictByProvinceId(this.form.controls['province'].value.provinceId).subscribe(data => {
-      this.districts = data;
-      console.log(data);
-      this.form.controls['ward'].reset('');
-      this.form.controls['district'].reset('');
-    })
+  onChangeProvince(event) {
+    let userProfile = this.form.controls['province'].value;
+    const provinceId = userProfile.provinceId;
+    if (provinceId) {
+      this.serviceAdminService.getAllDistrictByProvinceId(provinceId).subscribe(data => {
+        this.districts = data;
+        console.log(data);
+        this.wards = null;
+      })
+    } else {
+      this.districts = null;
+      this.wards = null;
+    }
   }
 
-  onChangeDistrict() {
-    this.addressService.findAllWardByDistrictId(this.form.controls['district'].value.districtId).subscribe(data => {
-      this.wards = data;
-      this.form.controls['ward'].reset('');
-      console.log(data);
-    })
+  onChangeDistrict(event) {
+    let userInfo = this.form.controls['district'].value;
+    const districtId = userInfo.districtId;
+    if (districtId) {
+      this.serviceAdminService.getAllWardByDistrictId(districtId).subscribe(data => {
+        this.wards = data;
+      })
+    } else {
+      this.wards = null;
+    }
   }
 
   onChangeCategory() {
     this.categoryService.findAllChildCategoryByCategoryId(this.form.controls['category'].value.categoryId).subscribe(
       data => {
-        console.log("Data : " + data);
         this.childCategories = data;
         this.form.value.childCategory = this.childCategories[0];
       }, error => {
-        console.log("get " + error + " on onChangeCategory");
       })
+  }
+
+  changeForm() {
+    this.checkFormUser = this.checkFormUser !== true;
+    this.ngOnInit();
+  }
+
+  formatCash(resultCash) {
+    return resultCash.split('').reverse().reduce((prev, next, index) => {
+      return ((index % 3) ? next : (next + '.')) + prev;
+    });
   }
 }
