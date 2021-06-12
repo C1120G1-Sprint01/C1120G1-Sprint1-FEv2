@@ -6,7 +6,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {environment} from '../environments/environment';
+import { environment } from 'src/environments/environment';
 import {MainModule} from './module/main/main.module';
 import {SecurityModule} from './module/security/security.module';
 import {ToastrModule} from "ngx-toastr";

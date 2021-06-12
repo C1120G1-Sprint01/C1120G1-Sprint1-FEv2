@@ -1,7 +1,7 @@
 <h3 class="my-3">Hộp tin nhắn</h3>
 
 <div class="card mb-3">
-  <div class="row g-0">
+  <div class="row">
     <div class="col-12 col-lg-5 col-xl-3 border-right">
 
       <div class="px-4 d-none d-md-block">
@@ -12,147 +12,29 @@
         </div>
       </div>
 
-      <a href="#" class="list-group-item list-group-item-action border-0">
+      <div class="list-group-item list-group-item-action border-0" *ngFor="let room of rooms"
+        (click)="enterChatRoom(room)" [ngClass]="{'active': room.active}">
+        <div class="badge bg-success float-right" *ngIf="room.newMess != 0">{{room.newMess}}</div>
         <div class="d-flex align-items-start">
-          <!-- <img src="images/mario.png" class="rounded-circle mr-1" alt="Nguyen Huu Nghia"
-                                    width="40" height="40"> -->
-          <div class="flex-grow-1 ml-3">
-            Nguyen Huu Nghia
+          <img *ngIf="room.user" src="{{room.user.avatarUrl}}" alt="avatar" class="rounded-circle mr-1" alt="avatar"
+            width="40" height="40">
+          <div class="flex-grow-1 ml-3" *ngIf="room.user" class="name">
+            {{room.roomName}}
+            <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+          </div>
+          <div class="flex-grow-1 ml-3" *ngIf="!room.user" class="name">
+            {{room.roomName}}
             <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
           </div>
         </div>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action border-0">
-        <div class="badge bg-success float-right">2</div>
-        <div class="d-flex align-items-start">
-          <!-- <img src="images/avatar04.png" class="rounded-circle mr-1" alt="P sa Van A" width="40"
-                                    height="40"> -->
-          <div class="flex-grow-1 ml-3">
-            Pham Van A
-            <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action border-0">
-        <div class="badge bg-success float-right">5</div>
-        <div class="d-flex align-items-start">
-          <!-- <img src="images/avatar5.png" class="rounded-circle mr-1" alt="Tran Van B" width="40"
-                                    height="40"> -->
-          <div class="flex-grow-1 ml-3">
-            Tran Van B
-            <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-          </div>
-        </div>
-      </a>
+      </div>
+      <h3 class="name" style="text-align: center; color: red" *ngIf="rooms.length == 0 && isLoadingResults == false">
+        Không tìm thấy thành viên nào </h3>
 
       <hr class="d-block d-lg-none mt-1 mb-0">
     </div>
-    <div class="col-12 col-lg-7 col-xl-9">
-      <div class="py-2 px-4 border-bottom d-none d-lg-block">
-        <div class="d-flex align-items-center py-1">
-          <div class="flex-grow-1">
-            <span>Gửi: </span><strong>Nguyen Huu Nghia</strong>
-          </div>
-        </div>
-      </div>
 
-      <div class="position-relative">
-        <div class="chat-messages p-4">
+    <app-chat-room class="col-12 col-lg-7 col-xl-9" [roomName]="roomName"></app-chat-room>
 
-          <div class="chat-message-right pb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 ngày</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-1">
-              <div class="font-weight-bold mb-1">Bạn</div>
-              Now, on your computer go to my computer
-            </div>
-          </div>
-
-          <div class="chat-message-left pb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 ngày</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-1">
-              <div class="font-weight-bold mb-1">Nguyen Huu Nghia</div>
-              Where is your computer?
-            </div>
-          </div>
-
-          <div class="chat-message-right mb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 ngày</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-1">
-              <div class="font-weight-bold mb-1">Bạn</div>
-              I mean the folder is in my computer in your computer?
-            </div>
-          </div>
-
-          <div class="chat-message-left pb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 ngày</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-1">
-              <div class="font-weight-bold mb-1">Nguyen Huu Nghia</div>
-              How did your computer get into my computer?
-            </div>
-          </div>
-
-          <div class="text-muted small text-nowrap my-2 d-flex justify-content-center">20/05/2021</div>
-
-          <div class="chat-message-left pb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 phút</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-1">
-              <div class="font-weight-bold mb-1">Nguyen Huu Nghia</div>
-              I can only see mine
-            </div>
-          </div>
-
-          <div class="chat-message-right mb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 phút</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-1">
-              <div class="font-weight-bold mb-1">Bạn</div>
-              I mean the name of the folder is my computer in your computer.
-              When you open you computer you will see my computer.
-            </div>
-          </div>
-
-          <div class="chat-message-left pb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 phút</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-1">
-              <div class="font-weight-bold mb-1">Nguyen Huu Nghia</div>
-              How can I see your computer inside my computer?
-            </div>
-          </div>
-
-          <div class="chat-message-right mb-4">
-            <div>
-              <div class="text-muted small text-nowrap mt-2">1 phút</div>
-            </div>
-            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-1">
-              <div class="font-weight-bold mb-1">Bạn</div>
-              Idiot
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="flex-grow-0 py-3 px-4 border-top">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Nhập tin nhắn">
-          <button class="btn btn-warning ml-1"><i class="far fa-smile"></i></button>
-          <button class="btn btn-primary ml-1">Gửi</button>
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>

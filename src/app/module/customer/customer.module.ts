@@ -15,14 +15,17 @@ import {CustomerRoutingModule} from "./customer-routing.module";
 import {MainModule} from "../main/main.module";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireStorageModule} from "@angular/fire/storage";
-import {environment} from "./customer-post/environments/environment";
+import {environment} from "./environments/environment";
 import {CustomerContentComponent} from './customer-layout/customer-content/customer-content.component';
 import {ToastrModule} from "ngx-toastr";
+import { ChatRoomComponent } from './customer-manager/chat-room/chat-room.component';
 
 @NgModule({
   declarations: [CustomerPageComponent, ShowInfoComponent, EditInfoComponent, ChangePasswordComponent,
-    InboxComponent, DeletePostComponent, EditPostComponent, ListPostComponent, CustomerContentComponent],
+    InboxComponent, DeletePostComponent, EditPostComponent, ListPostComponent, CustomerContentComponent, ChatRoomComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
@@ -30,9 +33,7 @@ import {ToastrModule} from "ngx-toastr";
     ToastrModule.forRoot(),
     RouterModule,
     CustomerRoutingModule,
-    MainModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    MainModule
   ]
 })
 export class CustomerModule {
