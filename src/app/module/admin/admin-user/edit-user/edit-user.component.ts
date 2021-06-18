@@ -22,7 +22,7 @@ export class EditUserComponent implements OnInit {
   public users: User;
   public accounts: Account[];
   public wards: Ward[];
-  public provinces: Province[]
+  public provinces: Province[];
   public districts: District[];
   id: number = 0;
   public selectedImg: any;

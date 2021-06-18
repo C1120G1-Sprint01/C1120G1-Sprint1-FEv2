@@ -6,7 +6,6 @@ import {User} from '../../model/User';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Account} from '../../model/Account';
 import {Ward} from '../../model/Ward';
-import {Province} from "../../model/Province";
 
 @Injectable({
   providedIn: 'root'

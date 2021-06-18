@@ -66,7 +66,7 @@ export class CreateUserComponent implements OnInit {
     this.isMessage3 = false;
     if (this.formAddNewCustomer.valid) {
       if (this.formAddNewCustomer.value.password === this.formAddNewCustomer.value.confirmPassword) {
-        const  filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
+        const  filePath = `user/${this.selectedImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(filePath);
         this.storage.upload(filePath, this.selectedImg).snapshotChanges().pipe(
           finalize(() => {

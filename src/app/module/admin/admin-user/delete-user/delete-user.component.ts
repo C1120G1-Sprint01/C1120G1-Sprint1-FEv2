@@ -29,7 +29,5 @@ export class DeleteUserComponent implements OnInit {
       this.deleteComplete.emit(true);
       console.log(data);
     });
-
   }
-
 }

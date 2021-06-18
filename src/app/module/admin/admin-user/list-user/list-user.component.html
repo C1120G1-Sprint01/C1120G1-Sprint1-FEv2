@@ -5,7 +5,7 @@
     </div>
     <div class="row p-0 m-0">
       <div class="col-3">
-        <a href="" class="btn btn-success addUser" [routerLink]="['/admin/users/create']">
+        <a href="" class="btn btn-success addUser" [routerLink]="['/employee/create']">
           <i class="fas fa-plus"></i>
           <span>Thêm mới thành viên</span>
         </a>
@@ -67,6 +67,8 @@
       </tr>
       </tbody>
     </table>
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -75,7 +77,7 @@
             <div class="icon-box">
             </div>
             <h4 class="modal-title w-100">Are you sure?</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <button type="button" class="close" id="closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
             <app-delete-user [deleteId]="deleteId" [deleteName]="deleteName"
@@ -92,7 +94,6 @@
 
     <pagination-controls maxSize="3" nextLabel="Sau" previousLabel="Trước"
                          (pageChange)="page = $event"></pagination-controls>
-
 
 
   </div>

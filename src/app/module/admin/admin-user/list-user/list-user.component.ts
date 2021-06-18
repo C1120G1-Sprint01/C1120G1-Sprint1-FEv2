@@ -39,8 +39,6 @@ export class ListUserComponent implements OnInit {
   }
 
 
-  // ngoc - seearch + pagination
-
 
   search(){
     this.serviceAdminService.searchUserBySomething(this.keySearch).subscribe(data => {
